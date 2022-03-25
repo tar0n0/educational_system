@@ -1,0 +1,36 @@
+$f: 'Red Green TypeFace', sans-serif;
+$fa: 'Red Green Alternative', sans-serif;
+$fb: 'Red Green Decorative', sans-serif;
+
+$mobile: 767px;
+$tablet: 960px;
+$landscapeCutSize: 540;
+$mobileHeaderSize: 52;
+$mobileFooterSize: 52;
+
+$c: (
+    b: white,
+    c: #22285C,
+    d: #4A53A1,
+    hero: #658DEA,
+    brand: #658DEA,
+    accent: mix(#48a4ff, #658DEA),
+    confirm: #A0C518,
+    danger: #F8581F,
+    pureRed: #ff3b2d,
+    lightRed: #ff3838,
+    pureOrange: #ff7300,
+    lightOrange: #ffa200,
+    pureBlue: #5487ff,
+    base: mix(#0B0E2F, #0a0b29),
+    pageBackground: mix(#0B0E2F, #0a0b29),
+);
+
+$avatarColor: (
+    #567AD0,
+    #EEA037,
+    #D2430E,
+    #96AF34,
+);
+
+@import "~clyne-scss-core/index";

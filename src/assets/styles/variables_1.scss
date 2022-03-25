@@ -1,0 +1,26 @@
+$fontSize: 14 !default;
+$lineHeight: 24 !default;
+$baseFontSize: 10 !default;
+$setColorLight: #ffffff !default;
+$setColorDark: #000000 !default;
+
+$f: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$mobile: 767px !default;
+$tablet: $mobile !default;
+
+$guide: 1240 !default;
+$contrastAmount: 50 !default;
+
+$cache: '?v=' + random(666) !default;
+$armRange: U+0530-058F !default;
+$rusRange: U+0400-04FF !default;
+
+$setColorDarkList: () !default;
+$setColorLightList: () !default;
+
+$c: (
+    b: #ffffff,
+    d: #000000,
+    pageBackground: #ffffff,
+) !default;

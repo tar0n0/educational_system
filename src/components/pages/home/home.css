@@ -1,0 +1,252 @@
+.header-home {
+    max-width: 100%;
+    height: 350px;
+    background-color: darkblue;
+    border: 1px solid darkblue;
+    position: relative;
+}
+
+.login,
+.sign-up {
+    font-size: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: aliceblue;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+.sign-up {
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.slash {
+    font-size: 30px;
+    color: aliceblue;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.auth {
+    display: inline;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+}
+
+.search {
+    width: 100%;
+    margin-top: 220px;
+    text-align: center;
+}
+
+.search-input {
+    width: 500px;
+    padding: 25px;
+    font-style: italic;
+    font-size: 25px;
+    padding-bottom: 0;
+    border-radius: 10px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    background-image: url("../../../../src/assets/search.png");
+    background-repeat: no-repeat;
+    /*background-position: center right;*/
+    border: 1px solid white;
+    background: white;
+}
+
+/*.icon-search {*/
+/*  padding: 25px;*/
+/*  font-style: italic;*/
+/*  text-align: center;*/
+/*  font-size: 25px;*/
+/*  padding-bottom: 0;*/
+/*  border-radius: 10px;*/
+/*  margin-right: 10px;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+.main-title {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 55px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.content {
+    margin-bottom: 500px;
+}
+
+.main-btn {
+    padding: 20px;
+    width: 300px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 25px;
+    border-radius: 10px;
+    background: darkblue;
+    color: aliceblue;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.extend-search {
+    width: 220px;
+    margin: 0;
+    font-style: italic;
+    font-size: 25px;
+    border-radius: 10px;
+    background: darkblue;
+    color: aliceblue;
+    border: none;
+    text-align: center;
+    padding-top: 25px;
+    box-shadow: 20px 20px 50px 15px gray;
+    cursor: pointer;
+}
+
+.span-search {
+    padding-bottom: 25px;
+}
+
+.list-btns {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    /*margin: 0 auto;*/
+    text-align: center;
+    margin-top: 35px;
+}
+
+@media only screen and (max-width: 792px) {
+    .auth > svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .search-input {
+        width: 350px;
+        padding: 15px;
+        font-style: italic;
+        font-size: 25px;
+        padding-bottom: 0;
+        border-radius: 10px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+        background-image: url("../../../../src/assets/search.png");
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+
+    .login,
+    .sign-up {
+        font-size: 25px;
+        margin-left: 3px;
+        margin-right: 3px;
+        color: aliceblue;
+        cursor: pointer;
+    }
+
+    .sign-up {
+        margin-right: 20px;
+    }
+
+    .slash {
+        font-size: 25px;
+        color: aliceblue;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .extend-search {
+        max-width: 150px;
+        margin: 0;
+        font-style: italic;
+        font-size: 17px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        padding-top: 18px;
+    }
+}
+
+@media only screen and (max-width: 552px) {
+    .search-input {
+        width: 250px;
+        padding: 10px;
+        font-style: italic;
+        font-size: 20px;
+        padding-bottom: 0;
+        border-radius: 10px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+        background-image: url("../../../../src/assets/search.png");
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+
+    .extend-search {
+        max-width: 100px;
+        margin: 0;
+        font-style: italic;
+        font-size: 13px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        padding-top: 19px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .search-input {
+        width: 200px;
+        padding: 8px;
+        font-style: italic;
+        font-size: 20px;
+        padding-bottom: 0;
+        border-radius: 10px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+        background-image: url("../../../../src/assets/search.png");
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+
+    .extend-search {
+        max-width: 70px;
+        margin: 0;
+        font-style: italic;
+        font-size: 13px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: top;
+        padding-top: 13px;
+    }
+
+    .main-btn {
+        padding: 15px;
+        width: 200px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 25px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+}

@@ -1,0 +1,173 @@
+.header-user, .header-company, .header-university {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    padding: 50px 75px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background: darkblue;
+    position: relative;
+}
+
+.context-user, .context-company, .context-university {
+    color: aliceblue;
+    font-family: "Arial Armenian";
+    font-style: italic;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 50px;
+}
+
+.back-user, .back-company, .back-university {
+    font-size: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.logo-for-p-user, .logo-for-p-company, .logo-for-p-university {
+    background-image: url("../../../assets/icons8-home-64.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 45px 40px;
+    background-position: left top;
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.context {
+    color: aliceblue;
+    font-family: "Arial Armenian";
+    font-style: italic;
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0;
+    margin-left: 55px;
+}
+
+.back-to-home-user, .back-to-home-company, .back-to-home-university {
+    font-size: 30px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.avatar {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+}
+
+.profils-btns {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.materials-btn {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.profile-btn {
+    padding: 20px;
+    width: 300px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 25px;
+    border-radius: 10px;
+    background: darkblue;
+    color: aliceblue;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.material-btn {
+    padding: 15px;
+    width: 300px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    font-style: italic;
+    border-radius: 10px;
+    background: darkblue;
+    color: aliceblue;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.active-profile-btn {
+    padding: 20px;
+    width: 300px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 25px;
+    border-radius: 10px;
+    background: #6FA5E3;
+    color: aliceblue;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.active-material-btn {
+    padding: 15px;
+    width: 300px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    font-style: italic;
+    border-radius: 10px;
+    background: #6FA5E3;
+    color: aliceblue;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 400px) {
+    .profile-btn {
+        padding: 15px;
+        width: 200px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 25px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .active-profile-btn {
+        padding: 15px;
+        width: 200px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 25px;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+}
+
+.profils-btns {
+    margin-top: 50px;
+}
+
+.footer-for-page {
+    margin-top: 500px;
+}

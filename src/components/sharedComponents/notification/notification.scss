@@ -1,0 +1,73 @@
+@import "src/assets/scss/variables";
+.notification-holder {
+    background: c(b);
+    width: rem(374);
+    position: relative;
+    box-shadow: 0 rem(1) rem(6) rgba(#08104d, 0.1);
+    border-radius: rem(4) rem(6) rem(6) rem(4);
+    color: sc(b);
+    padding: rem(12) rem(28);
+    min-height: rem(84);
+    &.t-success {
+        @include over(primary, confirm);
+    }
+    &.t-warning {
+        @include over(primary, accent);
+    }
+    &.t-error {
+        @include over(primary, brand);
+    }
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: rem(4);
+        background: c(primary-hover);
+        border-radius: rem(4) 0 0 rem(4);
+    }
+    > ul {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        > li {
+            flex-shrink: 0;
+            &:first-child {
+                flex: auto;
+            }
+            &:nth-child(2) {
+                margin-right: -rem(16);
+            }
+        }
+    }
+    h2 {
+        font: 500 rem(14) / rem(24) $f;
+        padding: rem(6) 0;
+        color: c(primary-hover);
+        &:first-letter {
+            text-transform: uppercase;
+        }
+    }
+    p {
+        font: 500 rem(12) / rem(22) $f;
+        margin: -rem(4) 0 0;
+        opacity: 0.8;
+    }
+}
+.notification-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: rem(12) 0 0;
+    justify-content: center;
+    color: sc(b, 0.5);
+    border-top: rem(1) dashed sc(b, 0.01);
+    margin: rem(12) 0 0;
+    > * {
+        + * {
+            margin: 0 0 0 rem(12);
+        }
+    }
+}

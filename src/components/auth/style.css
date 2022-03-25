@@ -1,0 +1,85 @@
+.dropdown-user-type {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 500px;
+}
+
+.form-container {
+    margin: 0 auto;
+    /* display: inline; */
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.form-block {
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.photo-button {
+    font-family: "Arial Armenian";
+    margin-right: 5px;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 10px;
+    margin: 32px;
+
+}
+
+.link {
+    color: black;
+    border: none;
+    font-family: "Arial Armenian";
+    text-decoration: none;
+    font-style: italic;
+}
+
+
+.login-container {
+    margin-top: 80px;
+    margin-bottom: 200px;
+}
+
+.selcet-role-type {
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-style: italic;
+    color: darkblue;
+}
+
+.link-login-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: blue;
+    border-bottom: 1px solid blue;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.login-title-in-login-page {
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-style: italic;
+    color: darkblue;
+}
+
+.dont-have-account {
+    font-style: italic;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    color: darkblue;
+    margin-right: 15px;
+}
+
+.checkbox-for-remember-me {
+    font-style: italic;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    color: darkblue;
+    margin-right: 17px;
+}

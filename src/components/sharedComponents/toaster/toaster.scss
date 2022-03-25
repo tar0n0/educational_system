@@ -1,0 +1,59 @@
+@import "src/assets/scss/variables";
+.toaster-holder {
+  position: fixed;
+  top: var(--header-height);
+  right: 0;
+  max-height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+  z-index: 2147483647;
+  padding: rem(6);
+  align-items: flex-end;
+    white-space: pre-line;
+  &:empty {
+    display: none;
+  }
+  > li {
+    padding: rem(8);
+    animation: notificationHide 1s both;
+    &.show {
+      animation: notificationShow 1s both;
+    }
+    @keyframes notificationShow {
+      from,
+      60%,
+      75%,
+      90%,
+      to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      from {
+        opacity: 0;
+        transform: translate3d(rem(3000), 0, 0);
+      }
+      60% {
+        opacity: 1;
+        transform: translate3d(-rem(25), 0, 0);
+      }
+      75% {
+        transform: translate3d(rem(10), 0, 0);
+      }
+      90% {
+        transform: translate3d(-rem(5), 0, 0);
+      }
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    @keyframes notificationHide {
+      20% {
+        opacity: 1;
+        transform: translate3d(-rem(20), 0, 0);
+      }
+      to {
+        opacity: 0;
+        transform: translate3d(rem(2000), 0, 0);
+      }
+    }
+  }
+}

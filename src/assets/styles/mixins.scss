@@ -1,0 +1,146 @@
+@mixin placeholder {
+    $prefixList: '::-webkit-input', ':-moz', '::-moz', ':-ms-input';
+    @each $prefix in $prefixList {
+        &#{$prefix}-placeholder {
+            @content;
+            opacity: 1;
+        }
+    }
+}
+@mixin retina {
+    @media(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        @content;
+    }
+}
+@mixin media-hover {
+    @media (hover: hover) {
+        @content;
+    }
+}
+@mixin hover($class: null) {
+    @media (hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+    &:active {
+        @content;
+    }
+    @if $class != null {
+        &#{$class} {
+            @content;
+        }
+    }
+}
+@mixin hover-active {
+    @media (hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+    &.active, &:active {
+        @content;
+    }
+}
+@mixin over($n1, $n2) {
+    --#{$n1}: var(--#{$n2});
+    --#{$n1}-hover: var(--#{$n2}-hover);
+    --#{$n1}-sc: var(--#{$n2}-sc);
+    --#{$n1}-rgb: var(--#{$n2}-rgb);
+    --#{$n1}-sc-rgb: var(--#{$n2}-sc-rgb);
+}
+@mixin vh100 {
+    height: 100vh;
+    height: var(--vh, 100vh);
+    height: stretch;
+}
+@mixin mobile {
+    @media screen and (max-width: $mobile) {
+        @content;
+    }
+}
+@mixin mobile-landscape {
+    @media screen and (max-width: $mobile) and (orientation: landscape) {
+        @content;
+    }
+}
+@mixin mobile-portrait {
+    @media screen and (max-width: $mobile) and (orientation: portrait) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media screen and (max-width: $tablet) {
+        @content;
+    }
+}
+@mixin tablet-landscape {
+    @media screen and (max-width: $tablet) and (orientation: landscape) {
+        @content;
+    }
+}
+@mixin tablet-portrait {
+    @media screen and (max-width: $tablet) and (orientation: portrait) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media screen and (min-width: #{$tablet + 1px}) {
+        @content;
+    }
+}
+@mixin hover-not-active($selector: null) {
+    @media (hover: hover) {
+        @if $selector != null {
+            #{$selector}:hover:not(:active) & {
+                @content;
+            }
+        } @else {
+            &:hover:not(:active) {
+                @content;
+            }
+        }
+    }
+}
+@mixin colorPalette($map: $c) {
+    @each $name, $color in $map {
+        .color-#{"" + $name + ""} {
+            color: var(--#{"" + $name + ""});
+        }
+        $map: map-merge($map, (#{$name + '-hover'}: set-lightness($color, 5)));
+        $map: map-merge($map, (#{$name + '-light'}: lighten($color, 5)));
+        $map: map-merge($map, (#{$name + '-dark'}: lighten($color, 5)));
+        $map: map-merge($map, (#{$name + '-sc'}: set-color($color)));
+        $map: map-merge($map, (#{$name + '-rgb'}: #{red($color), green($color), blue($color)}));
+        $map: map-merge($map, (#{$name + '-sc-rgb'}: #{red(set-color($color)), green(set-color($color)), blue(set-color($color))}));
+    }
+    :root {
+        @each $name, $color in $map {
+            --#{"" + $name + ""}: #{$color};
+        }
+    }
+}
+@mixin darkMode($root: null) {
+    @if $root == null {
+        [mode="dark"] & {
+            @content;
+        }
+    } @else {
+        &[mode="dark"] {
+            @content;
+        }
+    }
+}
+@mixin overrideSVG($from, $light, $dark) {
+    [style*="fill:#{"" + $from + ""}"],
+    [style*="fill: #{"" + $from + ""}"],
+    [style*="fill:rgb(#{red($from),green($from),blue($from)})"],
+    [style*="fill: rgb(#{red($from),green($from),blue($from)})"],
+    [style*="fill:rgb(#{red($from)}, #{green($from)}, #{blue($from)})"],
+    [style*="fill: rgb(#{red($from)}, #{green($from)}, #{blue($from)})"] {
+        fill: $light !important;
+        @include darkMode {
+            fill: $dark !important;
+        }
+    }
+}

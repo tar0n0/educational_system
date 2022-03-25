@@ -1,0 +1,91 @@
+.customFileInput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.customFileInput::before {
+    content: 'Select some files';
+    text-align: center;
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.customFileInput:hover::before {
+    border-color: black;
+}
+
+.customFileInput:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.customFileInput {
+    max-width: 150px;
+}
+
+
+.customLogoInput {
+    max-width: 250px;
+    composes: customFileInput;
+}
+
+.customLogoInput::before {
+    width: 100%;
+    content: 'Select logo';
+}
+
+.customFaviconInput {
+    max-width: 250px;
+    composes: customFileInput;
+}
+
+
+.customFaviconInput::before {
+    width: 100%;
+    content: 'Select favicon';
+}
+
+.pdfInput {
+    max-width: 100%;
+    margin-left: 57px;
+
+    composes: customFileInput;
+}
+
+.pdfInput::before {
+    width: 100%;
+    content: 'Select Pdf';
+    background-color: #DCE3D4;
+    border: 1px solid #DCE3D4;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 200;
+    padding: 17px;
+
+
+}
+
+.imageInput {
+    max-width: 100%;
+    margin-left: 50px;
+    composes: customFileInput;
+}
+
+.imageInput::before {
+    width: 100%;
+    content: 'Select Avatar';
+    background-color: #DCE3D4;
+    border: 1px solid #DCE3D4;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 200;
+    padding: 17px;
+}

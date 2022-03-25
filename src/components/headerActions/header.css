@@ -1,0 +1,50 @@
+.header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding: 50px 75px;
+  background: darkblue;
+}
+
+.context {
+  color: aliceblue;
+  font-family: "Arial Armenian";
+  font-style: italic;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.back {
+  font-size: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.logo-for-p {
+  background-image: url("../../assets/icons8-home-64.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 45px 40px;
+  background-position: left top;
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.context {
+  color: aliceblue;
+  font-family: "Arial Armenian";
+  font-style: italic;
+  font-weight: bold;
+  font-size: 25px;
+  margin: 0;
+  margin-left: 55px
+  ;
+}
+
+.back-to-home {
+    font-size: 30px;
+    opacity: 0;
+    cursor: pointer;
+}

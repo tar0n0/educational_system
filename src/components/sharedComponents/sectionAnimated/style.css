@@ -1,0 +1,45 @@
+.animated-section {
+  max-width: 100%;
+  text-align: center;
+  height: 450px;
+  background-color: darkblue;
+}
+
+#container {
+  position: relative;
+  right: auto;
+  left: auto;
+  top: 130px;
+}
+
+.p-section {
+  font-family: work sans;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: -50px;
+  color: white;
+}
+
+.h-section {
+  color: white;
+  font-family: "benzin";
+  font-size: 100px;
+  text-align: center;
+}
+
+#lettering {
+  text-align: center;
+  animation: bigone infinite 2s ease-out;
+}
+
+@keyframes bigone {
+  0% {
+    letter-spacing: 0px;
+  }
+  60% {
+    letter-spacing: 40px;
+  }
+  80% {
+    letter-spacing: 40px;
+  }
+}
