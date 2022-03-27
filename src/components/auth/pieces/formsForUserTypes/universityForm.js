@@ -7,19 +7,19 @@ import {
     Grid,
     Typography
 } from '@material-ui/core';
-import Header from "../../../headerActions";
-import "../../pieces/style.css";
-import TextfieldWrapperWrapper from "../../../sharedComponents/textField";
-import Checkbox from "../../../sharedComponents/checkbox";
-import Button from "../../../sharedComponents/button";
-import Select from "../../../sharedComponents/select";
-import Footer from "../../../sharedComponents/footer/footer";
-import UploadInput from "../../../sharedComponents/uploadedFile";
-import {FORM_UNIVERSITY_REGISTRATION_VALIDATOR} from "../../../../utils/validations";
-import { INITIAL_UNIVERSITY_REGISTRATION_STATE } from "../../../../constants/initialFormState.constants";
+import Header from '../../../headerActions';
+import '../../pieces/style.css';
+import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
+import Checkbox from '../../../sharedComponents/checkbox';
+import Button from '../../../sharedComponents/button';
+import Select from '../../../sharedComponents/select';
+import Footer from '../../../sharedComponents/footer/footer';
+import UploadInput from '../../../sharedComponents/uploadedFile';
+import {FORM_UNIVERSITY_REGISTRATION_VALIDATOR} from '../../../../utils/validations';
+import { INITIAL_UNIVERSITY_REGISTRATION_STATE } from '../../../../constants/initialFormState.constants';
 
 
-const label = {inputProps: {"aria-label": "Checkbox demo"}};
+const label = {inputProps: {'aria-label': 'Checkbox demo'}};
 const useStyles = makeStyles((theme) => ({
     formWrapper: {
         marginTop: theme.spacing(5),
@@ -30,9 +30,8 @@ const useStyles = makeStyles((theme) => ({
 const UniversityForm = ({isAllContent = true}) => {
     const [file, setFile] = useState();
     const classes = useStyles();
-    console.log(file, "52");
 
-    const handleSubmit = (params) => {}
+    const handleSubmit = (params) => {};
 
     return (
         <>
@@ -49,7 +48,6 @@ const UniversityForm = ({isAllContent = true}) => {
                                 }}
                                 validationSchema={FORM_UNIVERSITY_REGISTRATION_VALIDATOR}
                                 onSubmit={values => {
-                                    console.log(values);
                                 }}
                             >
                                 <Form>
@@ -109,9 +107,9 @@ const UniversityForm = ({isAllContent = true}) => {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <UploadInput
-                                                className={"pdfInput"}
+                                                className={'pdfInput'}
                                                 accept={
-                                                    "application/pdf,application/vnd.ms-excel"
+                                                    'application/pdf,application/vnd.ms-excel'
                                                 }
                                                 setFile={setFile}
                                             />
@@ -122,8 +120,8 @@ const UniversityForm = ({isAllContent = true}) => {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <UploadInput
-                                                className={"imageInput"}
-                                                accept={"image/*"}
+                                                className={'imageInput'}
+                                                accept={'image/*'}
                                                 setFile={setFile}
                                             />
                                             <Checkbox

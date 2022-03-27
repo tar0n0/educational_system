@@ -1,3 +1,4 @@
+import CheckIcon from '@mui/icons-material/Check';
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -22,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
 const INITIAL_FORM_STATE = {
     fileName: '',
     fileType: '',
-    keyword: '',
-    file: '',
     isFile: '',
 };
 
@@ -32,14 +31,12 @@ const FORM_VALIDATION = Yup.object().shape({
         .required('Username is not allowed to be empty.'),
     fileType: Yup.string()
         .required('Username is not allowed to be empty.'),
-    keyword: Yup.string()
-        .required('Username is not allowed to be empty.')
 });
 
 const Materials = () => {
     const [file, setFile] = useState();
     const classes = useStyles();
-
+    console.log(file);
     return (
         <>
             <Grid container>
@@ -53,7 +50,6 @@ const Materials = () => {
                                 }}
                                 validationSchema={FORM_VALIDATION}
                                 onSubmit={values => {
-                                    console.log(values);
                                 }}
                             >
                                 <Form>
@@ -74,27 +70,22 @@ const Materials = () => {
                                             />
 
                                         </Grid>
-
-                                        <Grid item xs={12}>
-                                            <TextfieldWrapperWrapper
-                                                name="keyword"
-                                                label="Keyword *"
-                                            />
-
-                                        </Grid>
                                         <Grid item xs={12}>
                                             <Typography>
                                                 <span className="typography-text">  Uploaded Files</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <UploadInput
-                                                className={'pdfInput'}
-                                                accept={
-                                                    'application/pdf,application/vnd.ms-excel'
-                                                }
-                                                setFile={setFile}
-                                            />
+                                            <div className="container-uploaded-file">
+                                                <UploadInput
+                                                    className={'pdfInput'}
+                                                    accept={
+                                                        'application/pdf,application/vnd.ms-excel'
+                                                    }
+                                                    setFile={setFile}
+                                                />
+                                                <span>{file && <CheckIcon color="success"/>}</span>
+                                            </div>
                                             <Checkbox
                                                 name="isFile"
                                                 label="Private File"
@@ -102,7 +93,7 @@ const Materials = () => {
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <Button>
+                                            <Button file={file} type="Material uploaded">
                                                 Submit Form
                                             </Button>
                                         </Grid>

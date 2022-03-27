@@ -1,0 +1,2 @@
+export const USER_TYPES_FOR_MODAL = 'USER_TYPES_FOR_MODAL';
+export const DELETE_EMAILS = 'DELETE_EMAILS';

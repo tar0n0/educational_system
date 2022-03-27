@@ -21,7 +21,7 @@ import ButtonWrapper from '../sharedComponents/button';
 
 const Login = () => {
     const classes = useStyles();
-    const [, setOpen] = useContext(modalContext);
+    const { setOpen } = useContext(modalContext);
 
 
     // const handelSubmit = () => {

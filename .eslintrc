@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "react-app"
+  ],
+  "rules": {
+    "import/no-anonymous-default-export": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/jsx-no-duplicate-props": [
+      1,
+      {
+        "ignoreCase": false
+      }
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1,
+        "ignoredNodes": [
+          "TemplateLiteral"
+        ]
+      }
+    ],
+    //    "linebreak-style": [
+    //      "error",
+    //      "unix"
+    //    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-debugger": "off",
+    "no-extra-boolean-cast": "off",
+    "no-prototype-builtins": "off"
+  }
+}

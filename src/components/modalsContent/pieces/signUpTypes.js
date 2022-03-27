@@ -10,6 +10,7 @@ import DataService from '../../../services/dataService';
 const UserType = ({ setOpen }) => {
     return (
         <>
+            <p className='select-user-type'>Select User Type</p>
             <Stack direction="row" spacing={2}>
                 <Button variant="contained">
                     <Link className={'link'} to={'/sign-up/university'} onClick={() => {
@@ -21,7 +22,7 @@ const UserType = ({ setOpen }) => {
                 </Button>
                 <Button variant="contained">
                     <Link className={'link'} to={'/sign-up/company'} onClick={() => {
-                        setOpen(false)
+                        setOpen(false);
                     }}>
                         <span className="link-btn" onClick={() => setOpen(false)}>Company</span>
                     </Link>

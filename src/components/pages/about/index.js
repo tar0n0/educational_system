@@ -12,7 +12,7 @@ import AuthorizationService from '../../../services/authorizationService';
 import '../home/home.css';
 
 const About = () => {
-    const [, setOpen] = useContext(modalContext);
+    const { setOpen } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
 
     useEffect(() => {
@@ -57,13 +57,14 @@ const About = () => {
                 </div>
             </div>
             <div className="content">
-                <EventAnimationSVG/>
                 <div className="list-btns">
 
                 </div>
             </div>
             <CarouselS/>
-            <Footer/>
+            <div className='about-footer'>
+                <Footer/>
+            </div>
         </>);
 };
 

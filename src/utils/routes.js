@@ -3,7 +3,7 @@ import UserForm from '../components/auth/pieces/formsForUserTypes/userForm';
 import UserPage from '../components/pages/rolePages/user';
 import CompanyPage from '../components/pages/rolePages/company';
 import UniversityPage from '../components/pages/rolePages/university';
-import SignUp from '../components/auth/signUp';
+// import SignUp from '../components/auth/signUp';
 import About from '../components/pages/about';
 import Companies from '../components/pages/companies';
 import Contact from '../components/pages/contacts';

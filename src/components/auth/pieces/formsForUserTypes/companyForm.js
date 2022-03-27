@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
-import {Formik, Form} from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
     Container,
     Grid,
     Typography
 } from '@material-ui/core';
-import Header from "../../../headerActions";
-import "../../pieces/style.css";
-import TextfieldWrapperWrapper from "../../../sharedComponents/textField";
-import Checkbox from "../../../sharedComponents/checkbox";
-import Button from "../../../sharedComponents/button";
-import Select from "../../../sharedComponents/select";
-import Footer from "../../../sharedComponents/footer/footer";
-import UploadInput from "../../../sharedComponents/uploadedFile";
-import {FORM_COMPANY_REGISTRATION_VALIDATOR} from "../../../../utils/validations";
-import { INITIAL_COMPANY_REGISTRATION_STATE } from "../../../../constants/initialFormState.constants";
+import Header from '../../../headerActions';
+import '../../pieces/style.css';
+import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
+import Checkbox from '../../../sharedComponents/checkbox';
+import Button from '../../../sharedComponents/button';
+import Select from '../../../sharedComponents/select';
+import Footer from '../../../sharedComponents/footer/footer';
+import UploadInput from '../../../sharedComponents/uploadedFile';
+import { FORM_COMPANY_REGISTRATION_VALIDATOR } from '../../../../utils/validations';
+import { INITIAL_COMPANY_REGISTRATION_STATE } from '../../../../constants/initialFormState.constants';
 
 const useStyles = makeStyles((theme) => ({
     formWrapper: {
@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CompanyForm = ({isAllContent = true}) => {
+const CompanyForm = ({ isAllContent = true }) => {
     const [file, setFile] = useState();
     const classes = useStyles();
-    console.log(file, "52");
-    const handleSubmit = (params) => {}
+    const handleSubmit = (params) => {
+    };
 
     return (
         <>
@@ -46,7 +46,6 @@ const CompanyForm = ({isAllContent = true}) => {
                                 }}
                                 validationSchema={FORM_COMPANY_REGISTRATION_VALIDATOR}
                                 onSubmit={values => {
-                                    console.log(values);
                                 }}
                             >
                                 <Form>
@@ -54,7 +53,7 @@ const CompanyForm = ({isAllContent = true}) => {
                                         <Grid item xs={12}>
                                             <Typography>
                                                 {isAllContent &&
-                                                    <span className='typography-text'>Create Account</span>}
+                                                    <span className="typography-text">Create Account</span>}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
@@ -101,14 +100,14 @@ const CompanyForm = ({isAllContent = true}) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography>
-                                                <span className='typography-text'>  Uploaded Files</span>
+                                                <span className="typography-text">  Uploaded Files</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
                                             <UploadInput
-                                                className={"pdfInput"}
+                                                className={'pdfInput'}
                                                 accept={
-                                                    "application/pdf,application/vnd.ms-excel"
+                                                    'application/pdf,application/vnd.ms-excel'
                                                 }
                                                 setFile={setFile}
                                             />
@@ -119,8 +118,8 @@ const CompanyForm = ({isAllContent = true}) => {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <UploadInput
-                                                className={"imageInput"}
-                                                accept={"image/*"}
+                                                className={'imageInput'}
+                                                accept={'image/*'}
                                                 setFile={setFile}
                                             />
                                             <Checkbox

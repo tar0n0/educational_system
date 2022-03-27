@@ -11,7 +11,7 @@ import '../home/home.css';
 import AllContacts from './contacts';
 
 const Contact = () => {
-    const [, setOpen] = useContext(modalContext);
+    const { setOpen } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
 
     useEffect(() => {
@@ -57,14 +57,16 @@ const Contact = () => {
             </div>
             <div className="content">
                 <div>
-                    <EventAnimationSVG context={'Welcome to Contact Page'}/>
                 </div>
                 <div className="list-btns">
                     <AllContacts/>
                 </div>
             </div>
             <CarouselS/>
-            <Footer/>
+            <div className="contact-footer">
+                <Footer/>
+            </div>
+
         </>);
 };
 

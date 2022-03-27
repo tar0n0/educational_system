@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
 import CarouselS from '../../sharedComponents/slideShow';
@@ -9,7 +10,7 @@ import AuthorizationService from '../../../services/authorizationService';
 import './home.css';
 
 const Home = () => {
-    const [, setOpen] = useContext(modalContext);
+    const { setOpen, setType }= useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
 
     useEffect(() => {
@@ -40,7 +41,10 @@ const Home = () => {
                                 Login
                             </Link>
                             <span className="slash">\</span>
-                            <span className="sign-up" onClick={() => setOpen(true)}>
+                            <span className="sign-up" onClick={() => {
+                                setType(USER_TYPES_FOR_MODAL);
+                                setOpen(true);
+                            }}>
                         SignUp
                             </span>
                         </>
@@ -70,8 +74,9 @@ const Home = () => {
                     </Link>
                 </div>
             </div>
-            <CarouselS/>
-            <Footer/>
+            <div className='home-footer'>
+                <Footer/>
+            </div>
         </>
     );
 };

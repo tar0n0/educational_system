@@ -5,7 +5,7 @@ import '../footer/style.css';
 import { modalContext } from '../../../context/modalContext';
 
 const Footer = () => {
-    const [, setOpen] = useContext(modalContext);
+    const { setOpen } = useContext(modalContext);
     return (
         <>
             <footer className="footer" id="footer">

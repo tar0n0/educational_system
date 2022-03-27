@@ -9,3 +9,58 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.delete-email {
+    font-weight: bold;
+    font-family: "Arial Armenian";
+    font-style: italic;
+    font-size: 22px;
+    text-align: center;
+    color: darkred;
+    margin-bottom: 20px;
+}
+
+.delete-btn-group {
+    margin-top: 25px;
+    width: 100%;
+    text-align: end;
+}
+
+.btn-delete-2 {
+    color: darkred;
+    border: 3px solid darkred;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-delete-2:hover {
+    background: darkred;
+    color: white;
+}
+
+.btn-delete-1 {
+    color: darkblue;
+    border: 3px solid darkblue;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-delete-1:hover {
+    background: darkblue;
+    color: white;
+}
+
+.select-user-type {
+    color: darkblue;
+    font-weight: bold;
+    font-size: 25px;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 25px;
+}

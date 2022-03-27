@@ -87,3 +87,8 @@
     color: darkblue;
     margin-right: 15px;
 }
+
+.container-uploaded-file {
+    display: flex;
+
+}

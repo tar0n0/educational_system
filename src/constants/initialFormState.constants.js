@@ -3,6 +3,9 @@ export const INITIAL_LOGIN_FORM_STATE = {
     UserName: '',
 };
 
+export const removeExtraPropsForCompanyForm = ['universityId', 'isUniversity', 'confirmPassword'];
+export const removeExtraPropsForUniversityForm = ['companyId', 'isCompany', 'confirmPassword'];
+
 export const INITIAL_USER_REGISTRATION_STATE = {
     name: '',
     surname: '',
@@ -14,7 +17,6 @@ export const INITIAL_USER_REGISTRATION_STATE = {
     countryId: '',
     password: '',
     confirmPassword: '',
-    login: '',
     universityId: '',
     companyId: '',
     isUniversity: false,

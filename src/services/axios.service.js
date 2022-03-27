@@ -1,5 +1,5 @@
 import axios from 'axios';
-import configs from "../configs/mainConfigs";
+import configs from '../configs/mainConfigs';
 
 class MakeRequest {
     constructor() {

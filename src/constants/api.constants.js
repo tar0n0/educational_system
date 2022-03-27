@@ -1,7 +1,9 @@
 export const LOGIN = 'LOGIN'; //POST
 export const REGISTRATION = 'REGISTRATION'; //POST
-export const CONFIRMED_UNIVERSITY_USER = 'CONFIRMED_UNIVERSITY_USER';
-export const CONFIRMED_COMPANY_USER = 'CONFIRMED_COMPANY_USER';
+export const CONFIRMED_UNIVERSITY_USER = 'CONFIRMED_UNIVERSITY_USER'; // POST
+export const CONFIRMED_COMPANY_USER = 'CONFIRMED_COMPANY_USER'; // POST
+export const DELETE_USER = 'DELETE_USER'; // POST
+export const UPLOAD_FILE = 'UPLOAD_FILE'; // POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -24,5 +26,7 @@ export const ENDPOINT_URLS = {
     [COMPANY_CONFIRM_PROFILES]: '/company/getnoneconfirmedemails',
     [UNIVERSITY_CONFIRM_PROFILES]: '/university/getnoneconfirmedemails',
     [CONFIRMED_UNIVERSITY_USER]: '/University/UpdateConfirmedEmails',
-    [CONFIRMED_COMPANY_USER]: '/company/updateconfirmedemails'
+    [CONFIRMED_COMPANY_USER]: '/company/updateconfirmedemails',
+    [DELETE_USER]: '/company/deletenoneconfirmedemails',
+    [UPLOAD_FILE]: '/fileupload/upload',
 };

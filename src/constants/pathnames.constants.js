@@ -1,0 +1,13 @@
+export const HOME = '/';
+export const LOGIN = '/login';
+export const ABOUT = '/about';
+export const UNIVERSITIES = '/universities';
+export const COMPANIES = '/companies';
+export const CONTACTS = '/contacts';
+export const SIGN_UP = '/sign-up';
+export const SIGN_UP_USER = '/sign-up/user';
+export const SIGN_UP_UNIVERSITY = '/sign-up/university';
+export const SIGN_UP_COMPANY = '/sign-up/company';
+export const USER_PAGE = '/user-page';
+export const COMPANY_PAGE = '/company-page';
+export const UNIVERSITY_PAGE = '/university-page';
