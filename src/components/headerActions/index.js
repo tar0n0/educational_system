@@ -1,14 +1,14 @@
-import React, {useLayoutEffect} from "react";
-import {Link, useLocation} from "react-router-dom";
+import React, { useLayoutEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import "./header.css";
+import './header.css';
 
 const Header = () => {
     const type = useLocation().pathname.replaceAll('/', '').replaceAll('sign-up', '').toUpperCase();
 
     useLayoutEffect(() => {
 
-    }, [])
+    }, []);
     return (
         <div className="header">
             <div className="logo-for-p">
