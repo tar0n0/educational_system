@@ -58,16 +58,27 @@ const ButtonWrapper = ({
             setStorageItem('user', val);
             AuthorizationService.isUserStatus.next(true);
             if (getStorageItem('user')) {
-                switch (getStorageItem('user')?.userType) {
-                    case 'Company':
-                        navigate(COMPANY_PAGE);
-                        break;
+                switch (getStorageItem('user')?.role) {
                     case 'User':
                         navigate(USER_PAGE);
                         break;
-                    case 'University':
-                        navigate(UNIVERSITY_PAGE);
+                    case 'Admin': {
+                        if(getStorageItem('user').userType === 'Company') {
+                            navigate(COMPANY_PAGE);
+                        }else if(getStorageItem('user').userType === 'University') {
+                            navigate(UNIVERSITY_PAGE);
+                        }
                         break;
+                    }
+                    // case 'Company':
+                    //     navigate(COMPANY_PAGE);
+                    //     break;
+                    // case 'User':
+                    //     navigate(USER_PAGE);
+                    //     break;
+                    // case 'University':
+                    //     navigate(UNIVERSITY_PAGE);
+                    //     break;
                     default:
                         navigate(HOME);
                         break;

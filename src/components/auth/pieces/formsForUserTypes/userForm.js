@@ -236,7 +236,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             />
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <div  className='container-uploaded-file'>
+                                            <div className="container-uploaded-file">
                                                 <UploadInput
                                                     className={'pdfInput'}
                                                     accept={
@@ -244,7 +244,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     }
                                                     setFile={setFile}
                                                 />
-                                                <span>{file && <CheckIcon color='success'/>}</span>
+                                                <span>{file && <CheckIcon color="success"/>}</span>
                                             </div>
                                             <Checkbox
                                                 name="isCV"
@@ -252,13 +252,13 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             />
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <div className='container-uploaded-file'>
+                                            <div className="container-uploaded-file">
                                                 <UploadInput
                                                     className={'imageInput'}
                                                     accept={'image/*'}
                                                     setFile={setImage}
                                                 />
-                                                <span>{image && <CheckIcon color='success'/>}</span>
+                                                <span>{image && <CheckIcon color="success"/>}</span>
                                             </div>
                                             <Checkbox
                                                 name="isImage"

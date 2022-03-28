@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import { COMPANY_PAGE, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
 import { getStorageItem, removeStorageItem } from '../../../storage';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
@@ -73,10 +74,24 @@ export default function AccountMenu() {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={() => {
-                    if (getStorageItem('user') && ('/' + getStorageItem('user').userType?.toLowerCase() + '-page') !== window.location.pathname) {
-                        navigate(`${getStorageItem('user').userType.toLowerCase()}-page`);
-                    } else {
-                        navigate('/');
+                    const user = getStorageItem('user');
+                    if (user) {
+                        switch (user?.role) {
+                            case 'Admin': {
+                                if (user?.userType === 'Company') {
+                                    navigate(COMPANY_PAGE);
+                                } else if (user?.userType === 'University') {
+                                    navigate(UNIVERSITY_PAGE);
+                                }
+                                break;
+                            }
+                            case 'User':
+                                navigate(USER_PAGE);
+                                break;
+                            default:
+                                navigate('/');
+                                break;
+                        }
                     }
                 }}>
                     My Page

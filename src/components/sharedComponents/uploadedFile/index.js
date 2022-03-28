@@ -10,7 +10,6 @@ const UploadInput = (props) => {
     const handleChangeImage = async (event) => {
         const target = event.target;
         const file = event.target.files[0];
-
         if (file) {
             setFile(file);
             target.value = '';
