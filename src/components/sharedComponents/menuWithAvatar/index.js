@@ -79,7 +79,7 @@ export default function AccountMenu() {
                         navigate('/');
                     }
                 }}>
-                    Profile
+                    My Page
                 </MenuItem>
                 <Divider/>
                 <MenuItem onClick={() => {
