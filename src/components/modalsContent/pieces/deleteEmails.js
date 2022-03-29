@@ -28,14 +28,13 @@ const DeleteEmails = () => {
         const emailForDelete = DataService.userForDelete.getValue();
         const { email, state } = emailForDelete || {};
         console.log(emailForDelete);
-        DataService.postJson(ENDPOINT_URLS[DELETE_USER], [email]).then(_ => {
+        DataService.postJson(ENDPOINT_URLS[DELETE_USER], email).then(_ => {
             if (pathName.includes(UNIVERSITY.toLowerCase())) {
                 DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                     const { data } = val;
                     const currentData = data.map(el => createData(el));
                     DataService.getConfirmedProfiles.next(currentData);
                     state(currentData);
-
                 });
             } else {
                 DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
