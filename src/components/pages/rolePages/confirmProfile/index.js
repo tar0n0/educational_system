@@ -41,7 +41,7 @@ function createData(email) {
 
 const ConfirmProfile = () => {
     const classes = useStyles();
-    const [data, setData] = useState(DataService.getConfirmedProfiles.getValue());
+    const [data, setData] = useState(DataService?.getConfirmedProfiles?.getValue() || []);
     const [isLoading, setIsLoading] = useState(false);
     const { setOpen, setType } = useContext(modalContext);
     const { UNIVERSITY } = USER_TYPE || {};
@@ -52,9 +52,9 @@ const ConfirmProfile = () => {
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
-                const currentData = data.map(el => createData(el));
-                DataService.getConfirmedProfiles.next(currentData);
-                setData(DataService.getConfirmedProfiles.getValue);
+                const currentData = data?.map(el => createData(el));
+                DataService?.getConfirmedProfiles?.next(currentData);
+                setData(DataService?.getConfirmedProfiles?.getValue());
             }).catch(_ => {
                 toast.error(
                     GLOBAL_ERROR, {
@@ -68,8 +68,8 @@ const ConfirmProfile = () => {
             DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
                 const companyCurrentData = data.map(el => createData(el));
-                DataService.getConfirmedProfiles.next(companyCurrentData);
-                setData(DataService.getConfirmedProfiles.getValue());
+                DataService?.getConfirmedProfiles?.next(companyCurrentData);
+                setData(DataService?.getConfirmedProfiles?.getValue());
             }).catch(_ => {
                 toast.error(
                     GLOBAL_ERROR, {
@@ -115,7 +115,7 @@ const ConfirmProfile = () => {
         setType(DELETE_EMAILS);
         setOpen(true);
     };
-
+    console.log(data, 'data');
     return (
         <>
             {!isLoading ? (

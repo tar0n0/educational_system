@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
+import { getStorageItem } from '../../../storage';
+import { parseJwt } from '../../../utils/helpers';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
-import CarouselS from '../../sharedComponents/slideShow';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
 
 import './home.css';
 
 const Home = () => {
-    const { setOpen, setType }= useContext(modalContext);
+    const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
 
     useEffect(() => {
@@ -74,7 +75,7 @@ const Home = () => {
                     </Link>
                 </div>
             </div>
-            <div className='home-footer'>
+            <div className="home-footer">
                 <Footer/>
             </div>
         </>
