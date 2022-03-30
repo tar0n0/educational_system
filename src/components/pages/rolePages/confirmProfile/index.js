@@ -25,6 +25,7 @@ import {
     COMPANY_CONFIRM_PROFILES,
     UNIVERSITY_CONFIRM_PROFILES,
     CONFIRMED_COMPANY_USER,
+    CONFIRMED_UNIVERSITY_USER,
 } from '../../../../constants/api.constants';
 import { CONFIRM_SUCCESS, ERROR_CONFIRM, GLOBAL_ERROR } from '../../../../constants/messages.constants';
 import { DELETE_EMAILS } from '../../../../constants/modals.constat';
@@ -64,7 +65,7 @@ function getSorting(order, orderBy) {
 
 const headCells = [
     {
-        id: "name",
+        id: "email",
         numeric: false,
         disablePadding: true,
         label: "Email",
@@ -253,13 +254,15 @@ export default function ConfirmProfile() {
     const { setOpen, setType } = useContext(modalContext);
     const { UNIVERSITY } = USER_TYPE || {};
     let pathName = window.location.pathname;
-    console.log(selected);
+
     const getInitialData = () => {
         setIsLoading(true);
+        console.log(pathName.includes(UNIVERSITY.toLowerCase()));
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
                 const currentData = data?.map(el => createData(el));
+                currentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(currentData);
                 setData(DataService?.getConfirmedProfiles?.getValue());
             }).catch(_ => {
@@ -275,6 +278,7 @@ export default function ConfirmProfile() {
             DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
                 const companyCurrentData = data.map(el => createData(el));
+                companyCurrentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(companyCurrentData);
                 setData(DataService?.getConfirmedProfiles?.getValue());
             }).catch(_ => {
@@ -294,25 +298,45 @@ export default function ConfirmProfile() {
     }, []);
 
     const handleConfirm = () => {
-        DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
-            toast.success(
-                CONFIRM_SUCCESS, {
-                    type: toast.TYPE.SUCCESS,
-                    icon: true,
-                    theme: 'dark'
-                });
-            getInitialData();
-            setSelected([]);
-        }).catch(_ => {
-            toast.error(
-                ERROR_CONFIRM, {
-                    type: toast.TYPE.ERROR,
-                    icon: true,
-                    theme: 'dark'
-                }
-            );
-        });
-
+        if (pathName.includes(UNIVERSITY.toLowerCase())) {
+            DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selected).then(_ => {
+                toast.success(
+                    CONFIRM_SUCCESS, {
+                        type: toast.TYPE.SUCCESS,
+                        icon: true,
+                        theme: 'dark'
+                    });
+                getInitialData();
+                setSelected([]);
+            }).catch(_ => {
+                toast.error(
+                    ERROR_CONFIRM, {
+                        type: toast.TYPE.ERROR,
+                        icon: true,
+                        theme: 'dark'
+                    }
+                );
+            });
+        } else {
+            DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
+                toast.success(
+                    CONFIRM_SUCCESS, {
+                        type: toast.TYPE.SUCCESS,
+                        icon: true,
+                        theme: 'dark',
+                    });
+                getInitialData();
+                setSelected([]);
+            }).catch(_ => {
+                toast.error(
+                    ERROR_CONFIRM, {
+                        type: toast.TYPE.ERROR,
+                        icon: true,
+                        theme: 'dark',
+                    }
+                );
+            });
+        }
     };
 
     const handleDeleteUser = () => {
@@ -326,6 +350,7 @@ export default function ConfirmProfile() {
     useEffect(() => {
         setSelected([]);
     }, [data]);
+
     const handleRequestSort = (event, property) => {
         const isDesc = orderBy === property && order === "desc";
         setOrder(isDesc ? "asc" : "desc");

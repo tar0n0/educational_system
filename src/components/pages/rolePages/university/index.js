@@ -61,7 +61,7 @@ const UniversityPage = () => {
                     <><ConfirmProfile/></>
                 ) : null}
             </div>
-            <div className={!clickType || clickType === MATERIALS ? 'footer-for-page' : ''}>
+            <div className={'footer-for-page'}>
                 <Footer/>
             </div>
         </>
