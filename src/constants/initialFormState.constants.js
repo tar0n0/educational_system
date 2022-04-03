@@ -16,6 +16,8 @@ export const INITIAL_USER_REGISTRATION_STATE = {
     image: '',
     countryId: '',
     password: '',
+    link: '',
+    isLink: false,
     confirmPassword: '',
     universityId: '',
     companyId: '',

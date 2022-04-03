@@ -13,6 +13,7 @@ export const COMPANY_NAME = 'COMPANY_NAME'; // GET
 export const UNIVERSITY_NAME = 'UNIVERSITY_NAME'; // GET
 export const COMPANY_CONFIRM_PROFILES = 'COMPANY_CONFIRM_PROFILES'; // GET
 export const UNIVERSITY_CONFIRM_PROFILES = 'UNIVERSITY_CONFIRM_PROFILES'; // GET
+export const USER_INFO = 'USER_INFO';
 
 export const ENDPOINT_URLS = {
     [LOGIN]: '/authentication/login',
@@ -29,4 +30,5 @@ export const ENDPOINT_URLS = {
     [CONFIRMED_COMPANY_USER]: '/company/updateconfirmedemails',
     [DELETE_USER]: '/company/deletenoneconfirmedemails',
     [UPLOAD_FILE]: '/fileupload/upload',
+    [USER_INFO]: '/Profile/GetUserInformations',
 };

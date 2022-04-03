@@ -32,6 +32,7 @@ import { DELETE_EMAILS } from '../../../../constants/modals.constat';
 import { USER_TYPE } from '../../../../constants/ui.constants';
 import { modalContext } from '../../../../context/modalContext';
 import DataService from '../../../../services/dataService';
+import { getStorageItem } from '../../../../storage';
 
 function createData(email,) {
     return { email };
@@ -257,7 +258,6 @@ export default function ConfirmProfile() {
 
     const getInitialData = () => {
         setIsLoading(true);
-        console.log(pathName.includes(UNIVERSITY.toLowerCase()));
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;

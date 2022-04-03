@@ -23,11 +23,9 @@ const DeleteEmails = () => {
     const { setOpen } = useContext((modalContext));
     const { UNIVERSITY } = USER_TYPE || {};
     let pathName = window.location.pathname;
-    console.log(DataService.userForDelete.getValue(), 'getValues delee');
     const handelDeleteUser = () => {
         const emailForDelete = DataService.userForDelete.getValue();
         const { email, state } = emailForDelete || {};
-        console.log(emailForDelete);
         DataService.postJson(ENDPOINT_URLS[DELETE_USER], email).then(_ => {
             if (pathName.includes(UNIVERSITY.toLowerCase())) {
                 DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {

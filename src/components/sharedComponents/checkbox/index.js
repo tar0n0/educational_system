@@ -27,6 +27,7 @@ const CheckboxWrapper = ({
 
     const configCheckbox = {
         ...field,
+        defaultChecked: field?.value,
         onChange: handleChange
     };
 

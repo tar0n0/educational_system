@@ -12,3 +12,4 @@ export const UPLOADED_FILE = 'Your File uploaded in server';
 
 // INFO
 export const WAIT_ADMIN_CONFIRM = 'You have successfully submitted a request, wait while the admin confirms';
+export const INFOR_FOR_UPLOADED = 'You can download a new file again';

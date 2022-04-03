@@ -8,6 +8,7 @@ import {
     Grid,
     Typography
 } from '@material-ui/core';
+import { ENDPOINT_URLS, UPLOAD_FILE } from '../../../constants/api.constants';
 import Checkbox from '../../sharedComponents/checkbox';
 import Button from '../../sharedComponents/button';
 import UploadInput from '../../sharedComponents/uploadedFile';
@@ -34,9 +35,9 @@ const FORM_VALIDATION = Yup.object().shape({
 });
 
 const Materials = () => {
-    const [file, setFile] = useState();
+    const [file, setFile] = useState(null);
     const classes = useStyles();
-    console.log(file);
+
     return (
         <>
             <Grid container>
@@ -93,7 +94,8 @@ const Materials = () => {
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <Button file={file} type="Material uploaded">
+                                            <Button file={file} setFile={setFile} type="Material uploaded"
+                                                url={ENDPOINT_URLS[UPLOAD_FILE]}>
                                                 Submit Form
                                             </Button>
                                         </Grid>
