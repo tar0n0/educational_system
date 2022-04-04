@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { COMPANY_PAGE, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
+import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
 import { getStorageItem, removeStorageItem } from '../../../storage';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
@@ -89,7 +89,7 @@ export default function AccountMenu() {
                                 navigate(USER_PAGE);
                                 break;
                             default:
-                                navigate('/');
+                                navigate(HOME);
                                 break;
                         }
                     }
