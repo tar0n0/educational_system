@@ -32,7 +32,6 @@ import Button from '../../../sharedComponents/button';
 import Select from '../../../sharedComponents/select';
 import Footer from '../../../sharedComponents/footer/footer';
 import UploadInput from '../../../sharedComponents/uploadedFile';
-import { INITIAL_USER_REGISTRATION_STATE } from '../../../../constants/initialFormState.constants';
 import { USER_REGISTRATION_VALIDATION } from '../../../../utils/validations';
 import { useLocation } from 'react-router-dom';
 import { USER_TYPE, useStyles } from '../../../../constants/ui.constants';
@@ -59,6 +58,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
     const [loading, setLoading] = useState(false);
     const [formValues] = useContext(formContext);
     const classes = useStyles();
+    const isToken = getStorageItem('user')?.token || '';
 
     useEffect(() => {
         if (getStorageItem('user')?.token) {
@@ -133,7 +133,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
         <>
             {loading ? (
                 <div>
-                    <CircularProgress />
+                    <CircularProgress/>
                 </div>
             ) : (
                 <>
@@ -212,6 +212,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="email"
                                                         label="Email"
                                                         autoComplete="on"
+                                                        disabled={Boolean(isToken)}
                                                     />
                                                     <Checkbox
                                                         label="Private Email"
@@ -236,6 +237,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="countryId"
                                                         label="Country"
                                                         autoComplete="on"
+                                                        disabled={Boolean(isToken)}
                                                         options={countries || []}
                                                     />
                                                     <Checkbox
@@ -248,6 +250,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="cityId"
                                                         label="City"
                                                         options={cities || []}
+                                                        disabled={Boolean(isToken)}
                                                         autoComplete="on"
                                                     />
                                                     <Checkbox
@@ -260,6 +263,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         <Select
                                                             name={dropdownName}
                                                             label={dropdownLabel}
+                                                            disabled={Boolean(isToken)}
                                                             autoComplete="on"
                                                             options={data || []}
                                                         />

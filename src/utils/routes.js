@@ -1,27 +1,29 @@
 import React from 'react';
-import { Route } from 'react-router';
 import Login from '../components/auth/login';
 import UserForm from '../components/auth/pieces/formsForUserTypes/userForm';
-import SignUp from '../components/auth/signUp';
 import ExtendedSearch from '../components/pages/extendedSearch';
 import UserPage from '../components/pages/rolePages/user';
 import CompanyPage from '../components/pages/rolePages/company';
 import UniversityPage from '../components/pages/rolePages/university';
-// import SignUp from '../components/auth/signUp';
 import About from '../components/pages/about';
 import Companies from '../components/pages/companies';
 import Contact from '../components/pages/contacts';
 import Home from '../components/pages/home';
 import Universities from '../components/pages/universities';
+import Error from '../components/sharedComponents/notFound';
 import {
     ABOUT,
-    COMPANIES, COMPANY_PAGE,
-    CONTACTS, EXTENDED_SEARCH,
+    COMPANIES,
+    COMPANY_PAGE,
+    CONTACTS,
+    EXTENDED_SEARCH,
     HOME,
     LOGIN,
-    SIGN_UP, SIGN_UP_COMPANY, SIGN_UP_UNIVERSITY,
+    SIGN_UP_COMPANY,
+    SIGN_UP_UNIVERSITY,
     SIGN_UP_USER,
-    UNIVERSITIES, UNIVERSITY_PAGE, USER_PAGE
+    UNIVERSITIES,
+    UNIVERSITY_PAGE, USER_PAGE
 } from '../constants/pathnames.constants';
 
 export const routesConfig = [
@@ -76,5 +78,9 @@ export const routesConfig = [
     {
         path: EXTENDED_SEARCH,
         element: <ExtendedSearch/>,
+    },
+    {
+        path: '*',
+        element: <Error/>,
     },
 ];
