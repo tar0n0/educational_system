@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
 import UserForm from '../../../auth/pieces/formsForUserTypes/userForm';
 import Footer from '../../../sharedComponents/footer/footer';
-import { CONTENT_TYPE, MATERIALS_TYPE } from '../../../../constants/ui.constants';
+import { CONTENT_TYPE, MATERIALS_TYPE, USER_TYPE } from '../../../../constants/ui.constants';
 import ConfirmProfile from '../confirmProfile';
 import Materials from '../materials';
 
@@ -53,7 +53,10 @@ const CompanyPage = ({ isAllContent }) => {
             <div className="btn-click-content">
                 {clickType && clickType === PROFILE ? (
                     <>
-                        <UserForm isAllContent={false} inCompany={true}/>
+                        <UserForm isAllContent={false} inCompany={true} setClickType={setClickType} editUserInfo={{
+                            name: USER_TYPE.COMPANY,
+                            isEdit: true,
+                        }}/>
                     </>
                 ) : clickType && clickType === MATERIALS ? (
                     <>

@@ -41,7 +41,7 @@ const UserPage = () => {
             <div className="btn-click-content">
                 {clickType && clickType === PROFILE ? (
                     <>
-                        <UserForm isAllContent={false}/>
+                        <UserForm isAllContent={false} setClickType={setClickType}/>
                     </>
                 ) : clickType && clickType === MATERIALS ? (
                     <>

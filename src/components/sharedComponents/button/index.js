@@ -9,8 +9,10 @@ import {
     REGISTRATION,
     LOGIN,
     UPLOAD_FILE,
+    EDIT_USER_INFO,
 } from "../../../constants/api.constants";
 import {
+    EDITED_USER_INFO,
     GLOBAL_ERROR, INFOR_FOR_UPLOADED,
     LOGIN_SUCCESS, UPLOADED_FILE,
     WAIT_ADMIN_CONFIRM,
@@ -42,6 +44,9 @@ const ButtonWrapper = ({
     file,
     setFile,
     image,
+    userInfo,
+    editUserInfo,
+    setClickType,
     ...otherProps
 }) => {
     const { values, handleReset } = useFormikContext();
@@ -97,6 +102,67 @@ const ButtonWrapper = ({
     };
 
     const handelSubmit = () => {
+        const currentParams =
+            type && type === UNIVERSITY
+                ? removeKeyFromObject(
+                    values,
+                    ...removeExtraPropsForUniversityForm
+                )
+                : removeKeyFromObject(
+                    values,
+                    ...removeExtraPropsForCompanyForm
+                );
+        const userID =
+            type === UNIVERSITY
+                ? USER_ROLES[UNIVERSITY]
+                : type === COMPANY
+                    ? USER_ROLES[COMPANY]
+                    : USER_ROLES[USER];
+
+        if (editUserInfo && Object?.keys(editUserInfo)?.length) {
+            const { name, isEdit } = editUserInfo || {};
+            if (name && name === USER_TYPE.UNIVERSITY && isEdit) {
+                const currentEditedUserInfo = {
+                    ...currentParams,
+                    cityId: userInfo?.cityId,
+                    countryId: userInfo?.countryId
+                };
+                DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
+                    ...currentEditedUserInfo,
+                    userType: userID
+                }).then(() => {
+                    toast.success(EDITED_USER_INFO, {
+                        type: toast.TYPE.SUCCESS,
+                        icon: true,
+                        theme: "dark",
+                    });
+                    setClickType((prev) => {
+                        return '';
+                    });
+                });
+            } else if (name && name === USER_TYPE?.COMPANY && isEdit) {
+                const currentEditedUserInfo = {
+                    ...currentParams,
+                    cityId: userInfo?.cityId,
+                    countryId: userInfo?.countryId
+                };
+                DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
+                    ...currentEditedUserInfo,
+                    userType: userID
+                }).then(() => {
+                    toast.success(EDITED_USER_INFO, {
+                        type: toast.TYPE.SUCCESS,
+                        icon: true,
+                        theme: "dark",
+                    });
+                    setClickType((prev) => {
+                        return '';
+                    });
+                });
+            }
+            return;
+        }
+
         if (url && url === ENDPOINT_URLS[UPLOAD_FILE] && file) {
             const formData = new FormData();
             formData.append('files', file);
@@ -120,7 +186,6 @@ const ButtonWrapper = ({
                         icon: true,
                         theme: "dark",
                     });
-
                 })
                 .catch((_) => {
                     toast.error(GLOBAL_ERROR, {
@@ -133,22 +198,6 @@ const ButtonWrapper = ({
             return;
         }
 
-        const currentParams =
-            type && type === UNIVERSITY
-                ? removeKeyFromObject(
-                    values,
-                    ...removeExtraPropsForUniversityForm
-                )
-                : removeKeyFromObject(
-                    values,
-                    ...removeExtraPropsForCompanyForm
-                );
-        const userID =
-            type === UNIVERSITY
-                ? USER_ROLES[UNIVERSITY]
-                : type === COMPANY
-                    ? USER_ROLES[COMPANY]
-                    : USER_ROLES[USER];
         setLoading(true);
         DataService.postJson(url, { ...currentParams, userType: userID })
             .then((val) => {

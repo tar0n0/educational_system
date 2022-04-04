@@ -42,7 +42,7 @@ import { CircularProgress } from '@mui/material';
 import '../../pieces/style.css';
 
 
-const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false }) => {
+const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false, editUserInfo, setClickType }) => {
     const location = useLocation();
     const isSignUpPage = location?.pathname.replaceAll('/', '').includes('sign-up');
     const type = isSignUpPage ? location.pathname.replaceAll('/', '').replaceAll('sign-up', '').toUpperCase() : '';
@@ -69,8 +69,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                         ...val?.data,
                     };
                 });
-                setLoading(false);
-            });
+            }).finally(() => setLoading(false));
         }
     }, []);
 
@@ -337,9 +336,16 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>
-                                                    <Button type={type} isLogin={false}
+                                                    <Button
+                                                        type={type}
+                                                        isLogin={false}
                                                         url={ENDPOINT_URLS[REGISTRATION]}
-                                                        file={file} image={image}>
+                                                        file={file}
+                                                        image={image}
+                                                        userInfo={userInfo}
+                                                        setClickType={setClickType}
+                                                        editUserInfo={editUserInfo}
+                                                    >
                                                         Submit Form
                                                     </Button>
                                                 </Grid>
