@@ -244,7 +244,9 @@ error404 #main-wrapper {
   fill: #2d4988;
 }
 
-.cls-8.wheel,
+.cls-8.wheel {
+      fill: #36ace0;
+}
 .cls-2 {
   fill: darkblue;
 }
