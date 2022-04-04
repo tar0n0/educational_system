@@ -11,3 +11,4 @@ export const SIGN_UP_COMPANY = '/sign-up/company';
 export const USER_PAGE = '/user-page';
 export const COMPANY_PAGE = '/company-page';
 export const UNIVERSITY_PAGE = '/university-page';
+export const EXTENDED_SEARCH = '/extended-search';

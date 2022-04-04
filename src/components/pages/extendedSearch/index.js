@@ -1,19 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AccountMenu from '../../sharedComponents/menuWithAvatar';
-import Footer from '../../sharedComponents/footer/footer';
-import { useNavigate } from 'react-router-dom';
-import CarouselS from '../../sharedComponents/slideShow';
-import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
+import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
+import AccountMenu from '../../sharedComponents/menuWithAvatar';
 
-import '../home/home.css';
-
-const Companies = () => {
-    const { setOpen } = useContext(modalContext);
+const ExtendedSearch = () => {
+    const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
@@ -43,29 +37,21 @@ const Companies = () => {
                                 Login
                             </Link>
                             <span className="slash">\</span>
-                            <span className="sign-up" onClick={() => setOpen(true)}>
+                            <span className="sign-up" onClick={() => {
+                                setType(USER_TYPES_FOR_MODAL);
+                                setOpen(true);
+                            }}>
                         SignUp
                             </span>
                         </>
                     )}
                 </div>
-                <div className="search">
-                    <input className="search-input" placeholder="Search" autoComplete="off"/>
-                    <button className="extend-search">
-                        <span className="span-search" onClick={() => navigate(EXTENDED_SEARCH)}>Extended Search</span>
-                    </button>
-                </div>
             </div>
             <div className="content">
-                <div className="list-btns">
-
-                </div>
+                <h1 className="main-title">Extended Search</h1>
             </div>
-            <CarouselS/>
-            <div className="company-footer">
-                <Footer/>
-            </div>
-        </>);
+        </>
+    );
 };
 
-export default Companies;
+export default ExtendedSearch;

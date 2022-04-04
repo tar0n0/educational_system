@@ -1,5 +1,9 @@
+import React from 'react';
+import { Route } from 'react-router';
 import Login from '../components/auth/login';
 import UserForm from '../components/auth/pieces/formsForUserTypes/userForm';
+import SignUp from '../components/auth/signUp';
+import ExtendedSearch from '../components/pages/extendedSearch';
 import UserPage from '../components/pages/rolePages/user';
 import CompanyPage from '../components/pages/rolePages/company';
 import UniversityPage from '../components/pages/rolePages/university';
@@ -9,54 +13,68 @@ import Companies from '../components/pages/companies';
 import Contact from '../components/pages/contacts';
 import Home from '../components/pages/home';
 import Universities from '../components/pages/universities';
+import {
+    ABOUT,
+    COMPANIES, COMPANY_PAGE,
+    CONTACTS, EXTENDED_SEARCH,
+    HOME,
+    LOGIN,
+    SIGN_UP, SIGN_UP_COMPANY, SIGN_UP_UNIVERSITY,
+    SIGN_UP_USER,
+    UNIVERSITIES, UNIVERSITY_PAGE, USER_PAGE
+} from '../constants/pathnames.constants';
 
 export const routesConfig = [
     {
-        path: '/',
-        element: <Home />,
+        path: HOME,
+        element: <Home/>,
     },
     {
-        path: '/about',
-        element: <About />,
+        path: ABOUT,
+        element: <About/>,
     },
     {
-        path: '/universities',
-        element: <Universities />,
+        path: UNIVERSITIES,
+        element: <Universities/>,
     },
     {
-        path: '/companies',
-        element: <Companies />,
+        path: COMPANIES,
+        element: <Companies/>,
     },
     {
-        path: 'contacts',
+        path: CONTACTS,
         element: <Contact/>,
     },
     {
-        path: '/login',
+        path: LOGIN,
         element: <Login/>,
     },
     {
-        path: '/sign-up/user',
-        element: <UserForm />
+        path: SIGN_UP_USER,
+        element: <UserForm/>
     },
     {
-        path: '/sign-up/university',
-        element: <UserForm />
+        path: SIGN_UP_UNIVERSITY,
+        element: <UserForm/>
     },
     {
-        path: '/sign-up/company',
-        element: <UserForm />
+        path: SIGN_UP_COMPANY,
+        element: <UserForm/>
     },
     {
-        path: '/user-page',
+        path: USER_PAGE,
         element: < UserPage/>
     },
     {
-        path: '/company-page',
+        path: COMPANY_PAGE,
         element: <CompanyPage/>
     },
     {
-        path: '/university-page',
+        path: UNIVERSITY_PAGE,
         element: <UniversityPage/>,
-    }
+    },
+    {
+        path: EXTENDED_SEARCH,
+        element: <ExtendedSearch/>,
+    },
 ];

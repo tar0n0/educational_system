@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
-import { getStorageItem } from '../../../storage';
-import { parseJwt } from '../../../utils/helpers';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../sharedComponents/footer/footer';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
+import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 
 import './home.css';
 
 const Home = () => {
     const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
@@ -53,7 +54,7 @@ const Home = () => {
                 </div>
                 <div className="search">
                     <input className="search-input" placeholder="Search" autoComplete="off"/>
-                    <button className="extend-search">
+                    <button className="extend-search" onClick={() => navigate(EXTENDED_SEARCH)}>
                         <span className="span-search">Extended Search</span>
                     </button>
                 </div>
