@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
-// import UniversityForm from '../../../auth/pieces/formsForUserTypes/universityForm';
 import { CONTENT_TYPE, MATERIALS_TYPE, USER_TYPE } from '../../../../constants/ui.constants';
 import '../style.css';
 import UserForm from '../../../auth/pieces/formsForUserTypes/userForm';
