@@ -1,3 +1,4 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import {
@@ -288,14 +289,17 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <div className="container-uploaded-file">
-                                                        <UploadInput
-                                                            className={'pdfInput'}
-                                                            accept={
-                                                                'application/pdf,application/vnd.ms-excel'
-                                                            }
-                                                            setFile={setFile}
-                                                        />
-                                                        <span>{file && <CheckIcon color="success"/>}</span>
+                                                        {file ? <div className='uploaded-file' title={file?.name}>{file?.name}</div> : (
+                                                            <UploadInput
+                                                                className={'pdfInput'}
+                                                                accept={
+                                                                    'application/pdf,application/vnd.ms-excel'
+                                                                }
+                                                                setFile={setFile}
+                                                            />
+                                                        )}
+                                                        <span className='uploaded-icon'>{file && <ClearIcon color="error" fontSize={"large"} onClick={() => setFile('')}/>}</span>
+
                                                     </div>
                                                     <Checkbox
                                                         name="isCV"
@@ -304,12 +308,14 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <div className="container-uploaded-file">
-                                                        <UploadInput
-                                                            className={'imageInput'}
-                                                            accept={'image/*'}
-                                                            setFile={setImage}
-                                                        />
-                                                        <span>{image && <CheckIcon color="success"/>}</span>
+                                                        {image ? <div className='uploaded-file' title={image?.name}>{image?.name}</div> : (
+                                                            <UploadInput
+                                                                className={'imageInput'}
+                                                                accept={'image/*'}
+                                                                setFile={setImage}
+                                                            />
+                                                        )}
+                                                        <span className='uploaded-icon'>{image && <ClearIcon color="error" fontSize={"large"} onClick={() => setImage('')}/>}</span>
                                                     </div>
                                                     <Checkbox
                                                         name="isImage"

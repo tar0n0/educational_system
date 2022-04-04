@@ -171,3 +171,19 @@
 .footer-for-page {
     margin-top: 500px;
 }
+
+.uploaded-file {
+    max-width: 358px;
+    overflow: hidden;
+    margin: 20px;
+    cursor: pointer;
+    border: 2px dashed darkblue;
+    padding: 10px;
+    font-size: 21px;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.uploaded-icon {
+    cursor: pointer;
+}

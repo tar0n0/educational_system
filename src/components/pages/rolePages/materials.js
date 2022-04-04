@@ -1,4 +1,5 @@
 import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -13,6 +14,7 @@ import Checkbox from '../../sharedComponents/checkbox';
 import Button from '../../sharedComponents/button';
 import UploadInput from '../../sharedComponents/uploadedFile';
 import TextfieldWrapperWrapper from '../../sharedComponents/textField';
+import './style.css';
 
 const useStyles = makeStyles((theme) => ({
     formWrapper: {
@@ -78,14 +80,16 @@ const Materials = () => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <div className="container-uploaded-file">
-                                                <UploadInput
-                                                    className={'pdfInput'}
-                                                    accept={
-                                                        'application/pdf,application/vnd.ms-excel'
-                                                    }
-                                                    setFile={setFile}
-                                                />
-                                                <span>{file && <CheckIcon color="success"/>}</span>
+                                                {file ? <div className='uploaded-file' title={file?.name}>{file?.name}</div> : (
+                                                    <UploadInput
+                                                        className={'pdfInput'}
+                                                        accept={
+                                                            'application/pdf,application/vnd.ms-excel'
+                                                        }
+                                                        setFile={setFile}
+                                                    />
+                                                )}
+                                                <span className='uploaded-icon'>{file && <ClearIcon color="error" fontSize={"large"} onClick={() => setFile('')}/>}</span>
                                             </div>
                                             <Checkbox
                                                 name="isFile"
