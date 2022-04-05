@@ -1,4 +1,3 @@
-import ClearIcon from '@mui/icons-material/Clear';
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import {
@@ -20,6 +19,7 @@ import {
 import { formContext } from '../../../../context/formContext';
 import DataService from '../../../../services/dataService';
 import { getStorageItem } from '../../../../storage';
+import { parseJwt } from '../../../../utils/helpers';
 import {
     buildCitiesData,
     buildCountriesData, buildData,
@@ -36,7 +36,7 @@ import UploadInput from '../../../sharedComponents/uploadedFile';
 import { USER_REGISTRATION_VALIDATION } from '../../../../utils/validations';
 import { useLocation } from 'react-router-dom';
 import { USER_TYPE, useStyles } from '../../../../constants/ui.constants';
-import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 import { CircularProgress } from '@mui/material';
 
 import '../../pieces/style.css';
@@ -60,6 +60,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
     const [formValues] = useContext(formContext);
     const classes = useStyles();
     const isToken = getStorageItem('user')?.token || '';
+    const userData = getStorageItem('user')?.token && parseJwt(getStorageItem('user')?.token);
 
     useEffect(() => {
         if (getStorageItem('user')?.token) {
@@ -149,7 +150,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                         initialValues={{
                                             name: userInfo?.name || '',
                                             surname: userInfo?.surname || '',
-                                            email: userInfo?.email || '',
+                                            email: userInfo?.email || userData?.Email || '',
                                             phone: userInfo?.phone || '',
                                             cityId: userInfo?.cityId || '',
                                             link: userInfo?.link || '',
@@ -289,7 +290,8 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <div className="container-uploaded-file">
-                                                        {file ? <div className='uploaded-file' title={file?.name}>{file?.name}</div> : (
+                                                        {file ? <div className="uploaded-file"
+                                                            title={file?.name}>{file?.name}</div> : (
                                                             <UploadInput
                                                                 className={'pdfInput'}
                                                                 accept={
@@ -298,7 +300,9 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                                 setFile={setFile}
                                                             />
                                                         )}
-                                                        <span className='uploaded-icon'>{file && <ClearIcon color="error" fontSize={"large"} onClick={() => setFile('')}/>}</span>
+                                                        <span className="uploaded-icon">{file &&
+                                                            <ClearIcon color="error" fontSize={"large"}
+                                                                onClick={() => setFile('')}/>}</span>
 
                                                     </div>
                                                     <Checkbox
@@ -308,14 +312,17 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <div className="container-uploaded-file">
-                                                        {image ? <div className='uploaded-file' title={image?.name}>{image?.name}</div> : (
+                                                        {image ? <div className="uploaded-file"
+                                                            title={image?.name}>{image?.name}</div> : (
                                                             <UploadInput
                                                                 className={'imageInput'}
                                                                 accept={'image/*'}
                                                                 setFile={setImage}
                                                             />
                                                         )}
-                                                        <span className='uploaded-icon'>{image && <ClearIcon color="error" fontSize={"large"} onClick={() => setImage('')}/>}</span>
+                                                        <span className="uploaded-icon">{image &&
+                                                            <ClearIcon color="error" fontSize={"large"}
+                                                                onClick={() => setImage('')}/>}</span>
                                                     </div>
                                                     <Checkbox
                                                         name="isImage"
@@ -356,7 +363,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         setClickType={setClickType}
                                                         editUserInfo={editUserInfo}
                                                     >
-                                                        Submit Form
+                                                        {window.location.pathname.split('/').includes('sign-up') ? 'Sign Up' : 'Edit Profile Info'}
                                                     </Button>
                                                 </Grid>
                                             </Grid>

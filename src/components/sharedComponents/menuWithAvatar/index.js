@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
+import DataService from '../../../services/dataService';
 import { getStorageItem, removeStorageItem } from '../../../storage';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
@@ -100,6 +101,7 @@ export default function AccountMenu() {
                 <MenuItem onClick={() => {
                     removeStorageItem('user');
                     AuthorizationService.isUserStatus.next(false);
+                    DataService.getUserInfo.next({});
                     window.location.pathname = '/';
                 }}>
                     Logout

@@ -133,6 +133,238 @@
     cursor: pointer;
 }
 
+@media only screen and (max-width: 995px) {
+    .profile-btn {
+        padding: 15px;
+        width: 190px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 25px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .active-profile-btn {
+        padding: 15px;
+        width: 190px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 25px;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .material-btn {
+        padding: 15px;
+        width: 220px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .active-material-btn {
+        padding: 15px;
+        width: 220px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .profile-btn {
+        padding: 15px;
+        width: 170px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 20px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .active-profile-btn {
+        padding: 15px;
+        width: 170px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 20px;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .material-btn {
+        padding: 15px;
+        width: 220px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .active-material-btn {
+        padding: 15px;
+        width: 220px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .profile-btn {
+        padding: 15px;
+        width: 150px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 18px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .active-profile-btn {
+        padding: 15px;
+        width: 150px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 18px;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .material-btn {
+        padding: 15px;
+        width: 200px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .active-material-btn {
+        padding: 15px;
+        width: 200px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 538px) {
+    .profile-btn {
+        padding: 15px;
+        width: 120px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 13px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .active-profile-btn {
+        padding: 15px;
+        width: 120px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 13px;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+
+    .material-btn {
+        padding: 15px;
+        width: 180px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .active-material-btn {
+        padding: 15px;
+        width: 180px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+
 
 @media only screen and (max-width: 400px) {
     .profile-btn {
@@ -161,6 +393,35 @@
         color: aliceblue;
         border: none;
         text-align: center;
+    }
+
+
+    .material-btn {
+        padding: 15px;
+        width: 220px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .active-material-btn {
+        padding: 15px;
+        width: 220px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        border-radius: 10px;
+        background: #6FA5E3;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+        cursor: pointer;
     }
 }
 

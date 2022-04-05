@@ -1,5 +1,3 @@
-import CheckIcon from '@mui/icons-material/Check';
-import ClearIcon from '@mui/icons-material/Clear';
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -14,6 +12,8 @@ import Checkbox from '../../sharedComponents/checkbox';
 import Button from '../../sharedComponents/button';
 import UploadInput from '../../sharedComponents/uploadedFile';
 import TextfieldWrapperWrapper from '../../sharedComponents/textField';
+import ClearIcon from '@mui/icons-material/Clear';
+
 import './style.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +80,8 @@ const Materials = () => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <div className="container-uploaded-file">
-                                                {file ? <div className='uploaded-file' title={file?.name}>{file?.name}</div> : (
+                                                {file ? <div className="uploaded-file"
+                                                    title={file?.name}>{file?.name}</div> : (
                                                     <UploadInput
                                                         className={'pdfInput'}
                                                         accept={
@@ -89,7 +90,9 @@ const Materials = () => {
                                                         setFile={setFile}
                                                     />
                                                 )}
-                                                <span className='uploaded-icon'>{file && <ClearIcon color="error" fontSize={"large"} onClick={() => setFile('')}/>}</span>
+                                                <span className="uploaded-icon">{file &&
+                                                    <ClearIcon color="error" fontSize={"large"}
+                                                        onClick={() => setFile('')}/>}</span>
                                             </div>
                                             <Checkbox
                                                 name="isFile"
@@ -100,7 +103,7 @@ const Materials = () => {
                                         <Grid item xs={12}>
                                             <Button file={file} setFile={setFile} type="Material uploaded"
                                                 url={ENDPOINT_URLS[UPLOAD_FILE]}>
-                                                Submit Form
+                                                Upload File
                                             </Button>
                                         </Grid>
 

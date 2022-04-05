@@ -83,7 +83,7 @@ const Login = () => {
                                                     isLogin={true}
                                                     url={ENDPOINT_URLS[LOGIN]}
                                                 >
-                                                    Submit Form
+                                                    Login
                                                 </ButtonWrapper>
                                             </Grid>
                                         </Grid>

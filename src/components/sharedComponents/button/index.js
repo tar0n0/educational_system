@@ -23,7 +23,7 @@ import { CircularProgress } from "@mui/material";
 import { getStorageItem, setStorageItem } from "../../../storage";
 import AuthorizationService from "../../../services/authorizationService";
 import { toast } from "react-toastify";
-import { removeKeyFromObject } from "../../../utils/helpers";
+import { parseJwt, removeKeyFromObject } from "../../../utils/helpers";
 import {
     COMPANY_PAGE,
     HOME,
@@ -58,6 +58,10 @@ const ButtonWrapper = ({
         if (url && url === ENDPOINT_URLS[LOGIN]) {
             setStorageItem("user", val);
             AuthorizationService.isUserStatus.next(true);
+            DataService.getUserInfo.next({
+                userData: parseJwt(val?.token),
+                refreshToken: val?.refreshToken,
+            });
             if (getStorageItem("user")) {
                 switch (getStorageItem("user")?.role) {
                     case "User":
