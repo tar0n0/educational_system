@@ -162,7 +162,7 @@
     }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 713px) {
     .main-btn {
         padding: 12px;
         width: 120px;
@@ -237,7 +237,7 @@
     }
 }
 
-@media only screen and (max-width: 582px) {
+@media only screen and (max-width: 595px) {
     /*.search-input {*/
     /*    width: 250px;*/
     /*    padding: 10px;*/
@@ -307,6 +307,47 @@
         padding-top: 19px;
     }
 }
+@media only screen and (max-width: 465px) {
+    .search-input {
+        width: 200px;
+        padding: 8px;
+        font-style: italic;
+        font-size: 20px;
+        padding-bottom: 0;
+        border-radius: 10px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+        background-image: url("../../../../src/assets/search.png");
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+
+    .extend-search {
+        margin: 0;
+        font-style: italic;
+        font-size: 13px;
+        border-radius: 10px;
+        background: #a0a0d0;
+        color: aliceblue;
+        border: none;
+        text-align: top;
+        padding-top: 13px;
+    }
+
+    .main-btn {
+        padding: 15px;
+        width: 150px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        font-style: italic;
+        font-size: 20px;
+        border-radius: 10px;
+        background: darkblue;
+        color: aliceblue;
+        border: none;
+        text-align: center;
+    }
+}
 
 @media only screen and (max-width: 400px) {
     .search-input {
@@ -324,10 +365,8 @@
     }
 
     .extend-search {
-        max-width: 70px;
         margin: 0;
         font-style: italic;
-        font-size: 13px;
         border-radius: 10px;
         background: #a0a0d0;
         color: aliceblue;
@@ -338,11 +377,11 @@
 
     .main-btn {
         padding: 15px;
-        width: 200px;
+        width: 150px;
         margin-left: 25px;
         margin-bottom: 10px;
         font-style: italic;
-        font-size: 25px;
+        font-size: 20px;
         border-radius: 10px;
         background: darkblue;
         color: aliceblue;
