@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 import { LOGIN_ERROR } from '../../constants/messages.constants';
+import { USER_TYPES_FOR_MODAL } from '../../constants/modals.constat';
 import { LOGIN_VALIDATION } from '../../utils/validations';
 import {
     Container,
@@ -21,7 +22,7 @@ import ButtonWrapper from '../sharedComponents/button';
 
 const Login = () => {
     const classes = useStyles();
-    const { setOpen } = useContext(modalContext);
+    const { setOpen, setType } = useContext(modalContext);
 
 
     // const handelSubmit = () => {
@@ -55,7 +56,10 @@ const Login = () => {
                                                 <Typography>
                                                     <span className="dont-have-account"> Don’t have an account?</span>
                                                     <span className={'link link-login-page'}
-                                                        onClick={() => setOpen(true)}>Sign
+                                                        onClick={() => {
+                                                            setType(USER_TYPES_FOR_MODAL);
+                                                            setOpen(true);
+                                                        }}>Sign
                                                     up!</span>
                                                 </Typography>
                                             </Grid>

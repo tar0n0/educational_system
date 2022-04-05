@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../footer/style.css';
+import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import { modalContext } from '../../../context/modalContext';
 
 const Footer = () => {
-    const { setOpen } = useContext(modalContext);
+    const { setOpen, setType } = useContext(modalContext);
     return (
         <>
             <footer className="footer" id="footer">
@@ -34,7 +35,10 @@ const Footer = () => {
                     <nav className="col-list">
                         <ul>
                             <li className="li-auth-footer">
-                                <span onClick={() => setOpen(true)}>Sign Up</span>
+                                <span onClick={() => {
+                                    setType(USER_TYPES_FOR_MODAL);
+                                    setOpen(true);
+                                }}>Sign Up</span>
                             </li>
                             <li className="li-auth-footer">
                                 <Link to={'/login'}>Login</Link>
