@@ -22,3 +22,11 @@ export const parseJwt = (token) => {
     })?.join(''));
     return JSON.parse(jsonPayload);
 };
+
+export const downloadCSV = (csv, fileName = 'data.csv') => {
+    const hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = fileName;
+    hiddenElement.click();
+};

@@ -9,7 +9,7 @@ import Materials from '../materials';
 
 import '../../../headerActions/header.css';
 
-const CompanyPage = ({ isAllContent }) => {
+const  CompanyPage = ({ isAllContent }) => {
     const [clickType, setClickType] = useState('');
     const [clickMaterialTYpe, setClickMaterialType] = useState('');
     const { MATERIALS, PROFILE, CONFIRM_USER } = CONTENT_TYPE;

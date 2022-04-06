@@ -31,9 +31,9 @@ const INITIAL_FORM_STATE = {
 
 const FORM_VALIDATION = Yup.object().shape({
     fileName: Yup.string()
-        .required('Username is not allowed to be empty.'),
+        .required('File name is not allowed to be empty.'),
     fileType: Yup.string()
-        .required('Username is not allowed to be empty.'),
+        .required('File TYpe is not allowed to be empty.'),
 });
 
 const Materials = () => {
@@ -62,14 +62,18 @@ const Materials = () => {
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="fileName"
-                                                label="File Name *"
+                                                label={file ? file?.name : 'File Name *'}
+                                                placeholder={file ? file?.name : ''}
+                                                disabled={file ? true : false}
                                             />
                                         </Grid>
 
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="fileType"
-                                                label="File Type *"
+                                                label={file ? file?.type : 'File Type *'}
+                                                placeholder={file ? file?.name : ''}
+                                                disabled={file ? true : false}
                                             />
 
                                         </Grid>
@@ -106,8 +110,6 @@ const Materials = () => {
                                                 Upload File
                                             </Button>
                                         </Grid>
-
-
                                     </Grid>
 
                                 </Form>

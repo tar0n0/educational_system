@@ -5,6 +5,7 @@ export const CONFIRMED_COMPANY_USER = 'CONFIRMED_COMPANY_USER'; // POST
 export const DELETE_USER = 'DELETE_USER'; // POST
 export const UPLOAD_FILE = 'UPLOAD_FILE'; // POST
 export const EDIT_USER_INFO = 'EDIT_USER_INFO'; // POST
+export const DELETE_FILE = 'DELETE_FILE'; //POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -15,6 +16,7 @@ export const UNIVERSITY_NAME = 'UNIVERSITY_NAME'; // GET
 export const COMPANY_CONFIRM_PROFILES = 'COMPANY_CONFIRM_PROFILES'; // GET
 export const UNIVERSITY_CONFIRM_PROFILES = 'UNIVERSITY_CONFIRM_PROFILES'; // GET
 export const USER_INFO = 'USER_INFO';
+export const USER_MATERIALS = 'USER_MATERIALS';
 
 export const ENDPOINT_URLS = {
     [LOGIN]: '/authentication/login',
@@ -30,7 +32,9 @@ export const ENDPOINT_URLS = {
     [CONFIRMED_UNIVERSITY_USER]: '/University/UpdateConfirmedEmails',
     [CONFIRMED_COMPANY_USER]: '/company/updateconfirmedemails',
     [DELETE_USER]: '/company/deletenoneconfirmedemails',
-    [UPLOAD_FILE]: '/fileupload/upload',
+    [UPLOAD_FILE]: '/file/upload',
     [USER_INFO]: '/Profile/GetUserInformations',
     [EDIT_USER_INFO]: '/profile/UpdateUserInformations',
+    [USER_MATERIALS]: '/File/GetUserMateriales ',
+    [DELETE_FILE]: (fileName) => `/File/DeleteFile?fileName=${fileName}`,
 };

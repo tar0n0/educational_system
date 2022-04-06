@@ -77,15 +77,6 @@ const ButtonWrapper = ({
                         }
                         break;
                     }
-                    // case 'Company':
-                    //     navigate(COMPANY_PAGE);
-                    //     break;
-                    // case 'User':
-                    //     navigate(USER_PAGE);
-                    //     break;
-                    // case 'University':
-                    //     navigate(UNIVERSITY_PAGE);
-                    //     break;
                     default:
                         navigate(HOME);
                         break;
