@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import MyFiles from '../../../myFiles';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
 import UserForm from '../../../auth/pieces/formsForUserTypes/userForm';
 import Footer from '../../../sharedComponents/footer/footer';
@@ -85,7 +86,7 @@ const  CompanyPage = ({ isAllContent }) => {
             <div className='material-content'>
                 {clickMaterialTYpe && clickMaterialTYpe === UPLOAD_FILE && clickType === MATERIALS? (
                     <Materials />
-                ) : (clickMaterialTYpe && clickMaterialTYpe === MY_FILES && clickType === MATERIALS) ? <>Materials</> : null}
+                ) : (clickMaterialTYpe && clickMaterialTYpe === MY_FILES && clickType === MATERIALS) ? <><MyFiles /></> : null}
             </div>
             <div className={!clickType || CONFIRM_USER ? 'footer-for-page' : ''}>
                 <Footer/>
