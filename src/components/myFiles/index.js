@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -12,10 +13,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import { toast } from 'react-toastify';
-import { ENDPOINT_URLS, USER_MATERIALS, DELETE_FILE } from '../../constants/api.constants';
+import { ENDPOINT_URLS, USER_MATERIALS, DELETE_FILE, DOWNLOAD_FILE } from '../../constants/api.constants';
 import { DELETE_YOUR_FILE, GLOBAL_ERROR } from '../../constants/messages.constants';
 import DataService from '../../services/dataService';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { getStorageItem } from '../../storage';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -70,9 +74,7 @@ const CustomTableCell = ({ row, name, onChange }) => {
 };
 
 const MyFiles = () => {
-    const [rows, setRows] = React.useState([
-        createData("Poxos"),
-    ]);
+    const [rows, setRows] = React.useState([]);
     const [previous, setPrevious] = React.useState({});
     const [tableData, setTableData] = useState([]);
     const classes = useStyles();
@@ -86,7 +88,6 @@ const MyFiles = () => {
                 return row;
             });
         });
-        console.log(rows);
     };
 
     const onChange = (e, row) => {
@@ -123,7 +124,11 @@ const MyFiles = () => {
     const getInitialUserFiles = () => {
         DataService.getJson(ENDPOINT_URLS[USER_MATERIALS]).then(val => {
             const { data } = val;
-            console.log(data);
+            setTableData(data);
+            setRows((_) => data.map(el => {
+                const currentName = el?.fileName?.includes('.pdf') && el?.fileName?.split('.pdf');
+                return createData(currentName[0]);
+            }));
         });
     };
 
@@ -132,7 +137,11 @@ const MyFiles = () => {
     }, []);
 
     const handelDeleteFile = (fileId = '') => {
-        DataService.postJson(ENDPOINT_URLS[DELETE_FILE](fileId)).then(_ => {
+        const file = tableData.find(el => el?.fileName === fileId);
+        DataService.postJson(ENDPOINT_URLS[DELETE_FILE], {
+            fileId: file?.fileId,
+            fileName: file?.fileName,
+        }).then(_ => {
             toast.success(DELETE_YOUR_FILE, {
                 type: toast.TYPE.SUCCESS,
                 icon: true,
@@ -147,8 +156,24 @@ const MyFiles = () => {
             });
         });
     };
+    const handelEditedUserFileName = (fileId) => {
+    };
 
-    const handelEditedUserFileName = (fileId) => {};
+
+    const downloadFile = (fileId) => {
+        const file = tableData.find(el => el?.fileName === fileId);
+        axios.get(ENDPOINT_URLS[DOWNLOAD_FILE], {
+            fileName: file?.fileName,
+            userId: file?.userId,
+        }, {
+            ...(getStorageItem('user')?.token ? { Authorization: `Bearer ${getStorageItem('user')?.token}` } : {}),
+            'Content-Type': 'application/pdf',
+            responseType: 'blob'
+        }).then(val => {
+            console.log(val, 'values');
+            getInitialUserFiles();
+        });
+    };
 
     return (
         <Paper className={classes.root}>
@@ -189,9 +214,26 @@ const MyFiles = () => {
                                         </IconButton>
                                         <IconButton
                                             aria-label="delete"
-                                            onClick={() => console.log(row.id)}
+                                            onClick={() => handelDeleteFile(row.id)}
                                         >
                                             <DeleteForeverIcon color="error"/>
+                                        </IconButton>
+                                        <IconButton
+                                            aria-label="download"
+                                            onClick={() => {
+                                                const id = row.id;
+                                                downloadFile(id);
+                                            }}
+                                        >
+                                            <DownloadForOfflineIcon color="warning"/>
+                                        </IconButton>
+                                        <IconButton
+                                            aria-label="download"
+                                            onClick={() => {
+
+                                            }}
+                                        >
+                                            <VisibilityIcon color="secondary"/>
                                         </IconButton>
                                     </>
                                 )}

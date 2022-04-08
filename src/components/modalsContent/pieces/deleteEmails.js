@@ -69,7 +69,7 @@ const DeleteEmails = () => {
                 <p className="delete-email">Do you want delete this email</p>
                 <div className="delete-btn-group">
                     <button onClick={() => setOpen(false)} className="btn-delete-1">Cancel</button>
-                    <button onClick={() => handelDeleteUser()} className="btn-delete-2">Apply</button>
+                    <button onClick={() => handelDeleteUser()} className="btn-delete-2">Delete</button>
                 </div>
             </div>
         </>

@@ -92,7 +92,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             default:
         }
     }, []);
-
+    console.log(countries, 'countries');
     useEffect(() => {
         if (formValues.countryId && countries.length) {
             switch (type) {
@@ -152,12 +152,12 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             surname: userInfo?.surname || '',
                                             email: userInfo?.email || userData?.Email || '',
                                             phone: userInfo?.phone || '',
-                                            cityId: userInfo?.cityId || '',
+                                            cityId: userInfo?.city?.cityId || '',
                                             link: userInfo?.link || '',
                                             isLink: userInfo?.isLink || false,
                                             file: '',
                                             image: '',
-                                            countryId: userInfo?.countryId || '',
+                                            countryId: userInfo?.country?.countryId || '',
                                             password: userInfo?.password || '',
                                             confirmPassword: userInfo?.confirmPassword || '',
                                             universityId: userInfo?.universityId || '',
@@ -240,7 +240,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         label="Country"
                                                         autoComplete="on"
                                                         disabled={Boolean(isToken)}
-                                                        options={countries || []}
+                                                        options={countries || [userInfo?.country] || []}
                                                     />
                                                     <Checkbox
                                                         name="isCountry"
@@ -251,7 +251,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <Select
                                                         name="cityId"
                                                         label="City"
-                                                        options={cities || []}
+                                                        options={cities || userInfo?.city || []}
                                                         disabled={Boolean(isToken)}
                                                         autoComplete="on"
                                                     />

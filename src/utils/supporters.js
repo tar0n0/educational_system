@@ -20,7 +20,7 @@ export const buildCountriesData = (val) => {
     const { data } = val;
     const currentData = [...data.map(el => ({
         name: el.countryName,
-        id: el.contryId,
+        id: el.countryId,
     }))];
     return currentData;
 };

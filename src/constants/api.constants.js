@@ -15,8 +15,9 @@ export const COMPANY_NAME = 'COMPANY_NAME'; // GET
 export const UNIVERSITY_NAME = 'UNIVERSITY_NAME'; // GET
 export const COMPANY_CONFIRM_PROFILES = 'COMPANY_CONFIRM_PROFILES'; // GET
 export const UNIVERSITY_CONFIRM_PROFILES = 'UNIVERSITY_CONFIRM_PROFILES'; // GET
-export const USER_INFO = 'USER_INFO';
-export const USER_MATERIALS = 'USER_MATERIALS';
+export const USER_INFO = 'USER_INFO'; // GET
+export const USER_MATERIALS = 'USER_MATERIALS'; // GET
+export const DOWNLOAD_FILE = 'DOWNLOAD_FILE'; // GET
 
 export const ENDPOINT_URLS = {
     [LOGIN]: '/authentication/login',
@@ -36,5 +37,6 @@ export const ENDPOINT_URLS = {
     [USER_INFO]: '/Profile/GetUserInformations',
     [EDIT_USER_INFO]: '/profile/UpdateUserInformations',
     [USER_MATERIALS]: '/File/GetUserMateriales ',
-    [DELETE_FILE]: (fileName) => `/File/DeleteFile?fileName=${fileName}`,
+    [DELETE_FILE]: '/File/DeleteFile',
+    [DOWNLOAD_FILE]: '/File/DownloadFile',
 };

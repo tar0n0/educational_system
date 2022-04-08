@@ -138,8 +138,27 @@ const ButtonWrapper = ({
             } else if (name && name === USER_TYPE?.COMPANY && isEdit) {
                 const currentEditedUserInfo = {
                     ...currentParams,
-                    cityId: userInfo?.cityId,
-                    countryId: userInfo?.countryId
+                    cityId: userInfo?.city?.cityId,
+                    countryId: userInfo?.country?.countryId
+                };
+                DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
+                    ...currentEditedUserInfo,
+                    userType: userID
+                }).then(() => {
+                    toast.success(EDITED_USER_INFO, {
+                        type: toast.TYPE.SUCCESS,
+                        icon: true,
+                        theme: "dark",
+                    });
+                    setClickType((prev) => {
+                        return '';
+                    });
+                });
+            } else if (name && name === USER_TYPE?.USER && isEdit) {
+                const currentEditedUserInfo = {
+                    ...currentParams,
+                    cityId: userInfo?.city?.cityId,
+                    countryId: userInfo?.country?.countryId
                 };
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
@@ -161,7 +180,7 @@ const ButtonWrapper = ({
         if (url && url === ENDPOINT_URLS[UPLOAD_FILE] && file) {
             const formData = new FormData();
             formData.append('files', file);
-            formData.append('name', file.name);
+            formData.append('FileVersion', 2);
             setLoading(true);
             axios.post(`${configs.connection.server_url + ENDPOINT_URLS[UPLOAD_FILE]}`, formData, {
                 headers: {
