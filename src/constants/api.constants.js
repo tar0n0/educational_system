@@ -20,10 +20,11 @@ export const USER_INFO = 'USER_INFO'; // GET
 export const USER_MATERIALS = 'USER_MATERIALS'; // GET
 export const DOWNLOAD_FILE = 'DOWNLOAD_FILE'; // GET
 export const INPUT_SEARCH = 'INPUT_SEARCH'; // GET
-export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES'; //GET
-export const GET_ALL_CITIES = 'GET_ALL_CITIES'; //GET
-export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; //GET
-export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; //GET
+export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES'; // GET
+export const GET_ALL_CITIES = 'GET_ALL_CITIES'; // GET
+export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; // GET
+export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; // GET
+export const EXTENDED_SEARCH_PATH = 'EXTENDED_SEARCH_PATH'; // GET
 
 
 export const ENDPOINT_URLS = {
@@ -52,4 +53,5 @@ export const ENDPOINT_URLS = {
     [GET_ALL_CITIES]: '/Profile/GetCities',
     [GET_ALL_COMPANIES]: '/Profile/GetCompanyNames',
     [GET_ALL_UNIVERSITIES]: '/Profile/GetUniversityNames',
+    [EXTENDED_SEARCH_PATH]: '/File/ExtendedSearch',
 };

@@ -2,18 +2,24 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ENDPOINT_URLS, LOGIN, GET_ALL_UNIVERSITIES, GET_ALL_CITIES, GET_ALL_COMPANIES, GET_ALL_COUNTRIES } from '../../../constants/api.constants';
-import { INITIAL_EXTENDED_SEARCH_STATE, INITIAL_LOGIN_FORM_STATE } from '../../../constants/initialFormState.constants';
-import { LOGIN_ERROR } from '../../../constants/messages.constants';
+import {
+    ENDPOINT_URLS,
+    GET_ALL_UNIVERSITIES,
+    GET_ALL_CITIES,
+    GET_ALL_COMPANIES,
+    GET_ALL_COUNTRIES,
+    EXTENDED_SEARCH_PATH, USER_INFO,
+} from '../../../constants/api.constants';
+import { INITIAL_EXTENDED_SEARCH_STATE } from '../../../constants/initialFormState.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
-import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import { useStyles } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
 import DataService from '../../../services/dataService';
-import { EXTENDED_SEARCH_VALIDATION, LOGIN_VALIDATION } from '../../../utils/validations';
+import { getStorageItem } from '../../../storage';
+import { buildCitiesData, buildCountriesData, buildData } from '../../../utils/supporters';
+import { EXTENDED_SEARCH_VALIDATION } from '../../../utils/validations';
 import ButtonWrapper from '../../sharedComponents/button';
-import Checkbox from '../../sharedComponents/checkbox';
 import Footer from '../../sharedComponents/footer/footer';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Select from '../../sharedComponents/select';
@@ -27,6 +33,7 @@ const ExtendedSearch = () => {
     const [cities, setCities] = useState([]);
     const [companies, setCompanies] = useState([]);
     const [universities, setUniversities] = useState([]);
+    const [userInfo, setUserInfo] = useState(null);
     const [isUser, setIsUser] = useState(false);
     const classes = useStyles();
 
@@ -36,17 +43,29 @@ const ExtendedSearch = () => {
     }, [isUser]);
 
     useEffect(() => {
+        if (getStorageItem('user')?.token) {
+            DataService.getJson(ENDPOINT_URLS[USER_INFO]).then(val => {
+                setUserInfo(() => {
+                    return {
+                        ...val?.data,
+                    };
+                });
+            });
+        }
+    }, []);
+
+    useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_ALL_COUNTRIES]).then(val => {
-            console.log(val, 'countries');
+            setCountries(buildCountriesData(val));
         });
         DataService.getJson(ENDPOINT_URLS[GET_ALL_COMPANIES]).then(val => {
-            console.log(val, 'companies');
+            setCompanies(buildData(val, true));
         });
         DataService.getJson(ENDPOINT_URLS[GET_ALL_CITIES]).then(val => {
-            console.log(val, 'cities');
+            setCities(buildCitiesData(val));
         });
         DataService.getJson(ENDPOINT_URLS[GET_ALL_UNIVERSITIES]).then(val => {
-            console.log(val, 'universities');
+            setUniversities(buildData(val));
         });
     }, []);
 
@@ -107,65 +126,63 @@ const ExtendedSearch = () => {
                                             </Grid>
                                             <Grid item xs={3}>
                                                 <Select
-                                                    name="UniversityId"
+                                                    name="universityId"
                                                     label="University"
                                                     autoComplete="on"
-                                                    options={[]}
+                                                    options={universities || []}
                                                 />
                                             </Grid>
                                             <Grid item xs={3}>
                                                 <Select
-                                                    name="CompanyId"
+                                                    name="companyId"
                                                     label="Company"
                                                     autoComplete="on"
-                                                    options={[]}
+                                                    options={companies || []}
                                                 />
                                             </Grid>
                                             <Grid item xs={3}>
                                                 <Select
-                                                    name="CityId"
+                                                    name="cityId"
                                                     label="CityId"
                                                     autoComplete="on"
-                                                    options={[]}
+                                                    options={cities || []}
                                                 />
                                             </Grid>
                                             <Grid item xs={3}>
                                                 <Select
-                                                    name="CountryId"
+                                                    name="countryId"
                                                     label="Country"
                                                     autoComplete="on"
-                                                    options={[]}
+                                                    options={countries || []}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <TextfieldWrapperWrapper
-                                                    name="Name"
+                                                    name="name"
                                                     label="Name"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <TextfieldWrapperWrapper
-                                                    name="SurName"
+                                                    name="surName"
                                                     label="Surname"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <TextfieldWrapperWrapper
-                                                    name="FileName"
+                                                    name="fileName"
                                                     label="File Name"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <TextfieldWrapperWrapper
-                                                    name="FileType"
+                                                    name="fileType"
                                                     label="File Type"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <ButtonWrapper
-                                                    // message={LOGIN_ERROR}
-                                                    // isLogin={true}
-                                                    url={ENDPOINT_URLS[LOGIN]}
+                                                    url={ENDPOINT_URLS[EXTENDED_SEARCH_PATH]}
                                                 >
                                                     Search
                                                 </ButtonWrapper>

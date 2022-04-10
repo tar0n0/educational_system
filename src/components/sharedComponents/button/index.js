@@ -10,6 +10,7 @@ import {
     LOGIN,
     UPLOAD_FILE,
     EDIT_USER_INFO,
+    EXTENDED_SEARCH_PATH,
 } from "../../../constants/api.constants";
 import {
     EDITED_USER_INFO,
@@ -113,6 +114,23 @@ const ButtonWrapper = ({
                 : type === COMPANY
                     ? USER_ROLES[COMPANY]
                     : USER_ROLES[USER];
+
+        if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
+            const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
+            DataService.getJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH], {
+                universityId,
+                companyId,
+                cityId,
+                countryId,
+                user: {
+                    name,
+                    surName,
+                    fileName,
+                    fileType,
+                }
+            }).then(val => console.log(val));
+            return;
+        }
 
         if (editUserInfo && Object?.keys(editUserInfo)?.length) {
             const { name, isEdit } = editUserInfo || {};

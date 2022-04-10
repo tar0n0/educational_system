@@ -12,6 +12,7 @@ const SelectWrapper = ({ name, options, ...otherProps }) => {
     // const { pathname } = window.location;
     // let currentType = pathname.split('/').map((el) => el.toUpperCase());
     const [, setFormValues] = useContext(formContext);
+
     const handleChange = (evt) => {
         const { value } = evt.target;
         setFormValues({

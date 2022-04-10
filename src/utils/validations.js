@@ -94,24 +94,24 @@ export const LOGIN_VALIDATION = Yup.object().shape({
         .required('Role is not allowed to be empty.')
 });
 
-export const EXTENDED_SEARCH_VALIDATION = {
-    "UniversityId": Yup.string()
+export const EXTENDED_SEARCH_VALIDATION = Yup.object().shape({
+    universityId: Yup.string()
         .required('UniversityId is not allowed to be empty.'),
-    "CompanyId": Yup.string()
+    companyId: Yup.string()
         .required('CompanyId is not allowed to be empty.'),
-    "CityId": Yup.string()
+    cityId: Yup.string()
         .required('CityId is not allowed to be empty.'),
-    "CountryId": Yup.string()
+    countryId: Yup.string()
         .required('CountryId is not allowed to be empty.'),
-    "Name": Yup.string()
+    name: Yup.string()
         .required('Name is not allowed to be empty.'),
-    "SurName": Yup.string()
+    surName: Yup.string()
         .required('SurName is not allowed to be empty.'),
-    "FileName": Yup.string()
+    fileName: Yup.string()
         .required('FileName is not allowed to be empty.'),
-    "FileType": Yup.string()
+    fileType: Yup.string()
         .required('FileType is not allowed to be empty.'),
-};
+});
 
 export const USER_REGISTRATION_VALIDATION = Yup.object().shape({
     name: Yup.string()

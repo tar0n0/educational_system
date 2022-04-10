@@ -221,7 +221,6 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                     setLoading(false);
                 });
         } else if (isSearch) {
-            console.log(2);
             axios({
                 method: 'GET',
                 url: configs.connection.server_url + ENDPOINT_URLS[INPUT_SEARCH],

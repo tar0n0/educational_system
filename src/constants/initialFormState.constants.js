@@ -4,14 +4,14 @@ export const INITIAL_LOGIN_FORM_STATE = {
 };
 
 export const INITIAL_EXTENDED_SEARCH_STATE = {
-    "UniversityId": '',
-    "CompanyId": '',
-    "CityId": '',
-    "CountryId": '',
-    "Name": '',
-    "SurName": '',
-    "FileName": '',
-    "FileType": '',
+    universityId: '',
+    companyId: '',
+    cityId: '',
+    countryId: '',
+    name: '',
+    surName: '',
+    fileName: '',
+    fileType: '',
 };
 
 export const removeExtraPropsForCompanyForm = ['universityId', 'isUniversity', 'confirmPassword'];
