@@ -304,13 +304,10 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                             >
                                                 <DownloadForOfflineIcon color="warning"/>
                                             </a>
-                                            {/*<DownloadForOfflineIcon color="warning"/>*/}
                                         </IconButton>
-                                        {/*{downloadFile(row.id)}*/}
                                         <IconButton
                                             aria-label="show-file"
                                             onClick={() => {
-
                                             }}
                                         >
                                             <VisibilityIcon color="secondary"/>
