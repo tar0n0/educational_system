@@ -8,7 +8,7 @@ class MakeRequest {
             baseURL: configs.connection.server_url,
             headers: {
                 ...(getStorageItem('user')?.token ? { Authorization: `Bearer ${getStorageItem('user')?.token}` } : {}),
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json-patch+json',
             },
         });
 

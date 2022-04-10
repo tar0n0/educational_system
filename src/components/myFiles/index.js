@@ -52,9 +52,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const createData = (currentFileName,) => ({
+const createData = (currentFileName, userId) => ({
     id: currentFileName,
     currentFileName,
+    userId,
     // calories,
     // fat,
     // carbs,
@@ -136,7 +137,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
             setTableData(data);
             setRows((_) => data.map(el => {
                 const currentName = el?.fileName?.includes('.pdf') && el?.fileName?.split('.pdf');
-                return createData(currentName[0]);
+                return createData(currentName[0], el?.userId);
             }));
         });
     };
@@ -145,7 +146,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
         if (isSearch && searchData) {
             setRows((_) => searchData.map(el => {
                 const currentName = el?.fileName?.includes('.pdf') && el?.fileName?.split('.pdf');
-                return createData(currentName[0]);
+                return createData(currentName[0], el?.userId);
             }));
         }
     }, []);
@@ -200,47 +201,36 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     };
 
 
-    const downloadFile = async fileId => {
-        const file = tableData.find(el => el?.fileName === `${fileId}.pdf`);
-        setLoading(true);
-        toast.info('Wait for download fiel', {
-            type: toast.TYPE.INFO,
-            icon: true,
-            theme: "dark",
-        });
-        if (!isSearch) {
-            await DataService.getJson(ENDPOINT_URLS[DOWNLOAD_FILE], {
-                filename: file?.fileName,
-                usrId: file.userId,
+    // const downloadFile = async fileId => {
+    //     const file = searchData ? searchData.find(el => el?.fileName === `${fileId}.pdf`) : tableData.find(el => el?.fileName === `${fileId}.pdf`);
+    //     setLoading(true);
+    //     toast.info('Wait for download fiel', {
+    //         type: toast.TYPE.INFO,
+    //         icon: true,
+    //         theme: "dark",
+    //     });
 
-            },).then(response => {
-                setLoading(false);
-                fileDownload(response?.data, file?.fileName || 'file.pdf');
-            })
-                .catch(_ => {
-                    setLoading(false);
-                });
-        } else if (isSearch) {
-            axios({
-                method: 'GET',
-                url: configs.connection.server_url + ENDPOINT_URLS[INPUT_SEARCH],
-                params: {
-                    filename: file?.fileName,
-                    input: val,
-                },
-                headers: {
-                    'Content-Type': 'application/pdf',
-                }
-            }).then(response => {
-                console.log(1);
-                setLoading(false);
-                fileDownload(response?.data, file?.fileName || 'file.pdf');
-            })
-                .catch(_ => {
-                    setLoading(false);
-                });
-        }
-    };
+    // await DataService.getJson(ENDPOINT_URLS[DOWNLOAD_FILE], {
+    //     filename: file?.fileName,
+    //     usrId: file?.userId,
+    //
+    // },).then(response => {
+    //     setLoading(false);
+    //     fileDownload(response?.data, file?.fileName || 'file.pdf');
+    // })
+    //     .catch(_ => {
+    //         setLoading(false);
+    //     });
+
+    //     return (
+    //         <>
+    //             <a href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${file?.fileName}&usrId=${file.userId}`}
+    //                 download>
+    //                 <DownloadForOfflineIcon color="warning"/>
+    //             </a>
+    //         </>
+    //     );
+    // };
 
     return (
         <Paper className={classes.root}>
@@ -301,12 +291,22 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                             aria-label="download"
                                             disabled={loading}
                                             onClick={() => {
-                                                const id = row.id;
-                                                downloadFile(id);
+                                                toast.info('Wait for download fiel', {
+                                                    type: toast.TYPE.INFO,
+                                                    icon: true,
+                                                    theme: "dark",
+                                                });
                                             }}
                                         >
-                                            <DownloadForOfflineIcon color="warning"/>
+                                            <a href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}.pdf&usrId=${row?.userId}`}
+                                                download
+                                                target="_blank" rel="noreferrer"
+                                            >
+                                                <DownloadForOfflineIcon color="warning"/>
+                                            </a>
+                                            {/*<DownloadForOfflineIcon color="warning"/>*/}
                                         </IconButton>
+                                        {/*{downloadFile(row.id)}*/}
                                         <IconButton
                                             aria-label="show-file"
                                             onClick={() => {

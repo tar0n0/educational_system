@@ -53,5 +53,5 @@ export const ENDPOINT_URLS = {
     [GET_ALL_CITIES]: '/Profile/GetCities',
     [GET_ALL_COMPANIES]: '/Profile/GetCompanyNames',
     [GET_ALL_UNIVERSITIES]: '/Profile/GetUniversityNames',
-    [EXTENDED_SEARCH_PATH]: '/File/ExtendedSearch',
+    [EXTENDED_SEARCH_PATH]: '/File/ExtandedSearch',
 };

@@ -97,7 +97,7 @@ const ButtonWrapper = ({
         }
     };
 
-    const handelSubmit = () => {
+    const handelSubmit = async () => {
         const currentParams =
             type && type === UNIVERSITY
                 ? removeKeyFromObject(
@@ -117,18 +117,13 @@ const ButtonWrapper = ({
 
         if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
             const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
-            DataService.getJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH], {
-                universityId,
-                companyId,
-                cityId,
-                countryId,
-                user: {
-                    name,
-                    surName,
-                    fileName,
-                    fileType,
+            DataService.getJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH],
+                {
+
+                    "User":
+                        {}
                 }
-            }).then(val => console.log(val));
+            ).then(val => console.log(val));
             return;
         }
 
@@ -196,6 +191,8 @@ const ButtonWrapper = ({
         }
 
         if (url && url === ENDPOINT_URLS[UPLOAD_FILE] && file) {
+            const currentFileName = file?.name.split('.pdf')[0].slice(0, 9);
+            file.name = currentFileName;
             const formData = new FormData();
             formData.append('files', file);
             formData.append('FileVersion', 2);
