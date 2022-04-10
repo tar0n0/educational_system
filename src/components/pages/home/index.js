@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import DataService from '../../../services/dataService';
+import { getStorageItem } from '../../../storage';
 import MyFiles from '../../myFiles';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import { useNavigate } from 'react-router-dom';
@@ -81,8 +83,18 @@ const Home = () => {
                 </div>
                 <div className="search">
                     <input className="search-input" placeholder="Search" autoComplete="off" ref={ref}/>
-                    <button className="extend-search" onClick={() => navigate(EXTENDED_SEARCH)}>
-                        <span className="span-search">Extended Search</span>
+                    <button className="extend-search" onClick={() => {
+                        if(getStorageItem('user').token){
+                            navigate(EXTENDED_SEARCH);
+                        }else {
+                            toast.info('Extended search can only be done by registered users', {
+                                type: toast.TYPE.SUCCESS,
+                                icon: true,
+                                theme: 'dark'
+                            });
+                        }
+                    }}>
+                        <span className="span-search" >Extended Search</span>
                     </button>
                 </div>
             </div>

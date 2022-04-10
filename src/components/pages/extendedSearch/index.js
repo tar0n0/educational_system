@@ -2,7 +2,7 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ENDPOINT_URLS, LOGIN } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, LOGIN, GET_ALL_UNIVERSITIES, GET_ALL_CITIES, GET_ALL_COMPANIES, GET_ALL_COUNTRIES } from '../../../constants/api.constants';
 import { INITIAL_EXTENDED_SEARCH_STATE, INITIAL_LOGIN_FORM_STATE } from '../../../constants/initialFormState.constants';
 import { LOGIN_ERROR } from '../../../constants/messages.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
@@ -10,6 +10,7 @@ import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import { useStyles } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
+import DataService from '../../../services/dataService';
 import { EXTENDED_SEARCH_VALIDATION, LOGIN_VALIDATION } from '../../../utils/validations';
 import ButtonWrapper from '../../sharedComponents/button';
 import Checkbox from '../../sharedComponents/checkbox';
@@ -35,7 +36,18 @@ const ExtendedSearch = () => {
     }, [isUser]);
 
     useEffect(() => {
-
+        DataService.getJson(ENDPOINT_URLS[GET_ALL_COUNTRIES]).then(val => {
+            console.log(val, 'countries');
+        });
+        DataService.getJson(ENDPOINT_URLS[GET_ALL_COMPANIES]).then(val => {
+            console.log(val, 'companies');
+        });
+        DataService.getJson(ENDPOINT_URLS[GET_ALL_CITIES]).then(val => {
+            console.log(val, 'cities');
+        });
+        DataService.getJson(ENDPOINT_URLS[GET_ALL_UNIVERSITIES]).then(val => {
+            console.log(val, 'universities');
+        });
     }, []);
 
     return (
