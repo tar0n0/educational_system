@@ -9,12 +9,13 @@ const Header = (name) => {
     useLayoutEffect(() => {
 
     }, []);
+    console.log(name);
     return (
         <div className="header">
             <div className="logo-for-p">
                 <Link to={'/'}><span className="back-to-home">Home</span></Link>
             </div>
-            <span className="context">{name ? 'Extended Search' : `Create Account For ${type}`}</span>
+            <span className="context">{(typeof name === 'object' && Object.keys(name).length) || (typeof name !== 'object' && name) ? 'Extended Search' : `Create Account For ${type}`}</span>
         </div>
     );
 };

@@ -11,14 +11,40 @@ class MakeRequest {
                 'Content-Type': 'application/json-patch+json',
             },
         });
+        this.currentExecutingRequests = {};
 
         this.axiosInstance.interceptors.response.use(response => {
+            if (this.currentExecutingRequests[response.request.responseURL]) {
+                delete this.currentExecutingRequests[response.request.responseURL];
+            }
             return response;
         }, (error) => {
+            const { config } = error;
+            const originalRequest = config;
+
+            if (axios.isCancel(error)) {
+                return new Promise(() => {});
+            }
+
+            if (this.currentExecutingRequests[originalRequest?.url]) {
+                delete this.currentExecutingRequests[originalRequest?.url];
+            }
             return Promise.reject({ error });
         });
 
         this.axiosInstance.interceptors.request.use(req => {
+            let originalRequest = req;
+            if (this.currentExecutingRequests[req?.url + JSON.stringify(req?.params)]) {
+                const source = this.currentExecutingRequests[req?.url + JSON.stringify(req?.params)];
+                delete this.currentExecutingRequests[req?.url + JSON.stringify(req?.params)];
+                source.cancel();
+            }
+
+            const CancelToken = axios.CancelToken;
+            const source = CancelToken.source();
+            originalRequest.cancelToken = source.token;
+            this.currentExecutingRequests[req?.url + JSON.stringify(req?.params)] = source;
+
             req.headers = {
                 ...req.headers,
                 ...(getStorageItem('user')?.token ? { Authorization: `Bearer ${getStorageItem('user')?.token}` } : {}),

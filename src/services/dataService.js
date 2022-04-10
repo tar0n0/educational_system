@@ -18,6 +18,7 @@ class DataService extends MakeRequest {
         this._confirmedProfiles = new BehaviorSubject([]);
         this._usersForDeleted = new BehaviorSubject({});
         this._userInfo = new BehaviorSubject({});
+        this._extendedSearchData = new BehaviorSubject([]);
     }
 
     getCities(url, name) {
@@ -84,6 +85,10 @@ class DataService extends MakeRequest {
 
     get getUserInfo() {
         return this._userInfo;
+    }
+
+    get getExtendedSearchData() {
+        return this._extendedSearchData;
     }
 }
 

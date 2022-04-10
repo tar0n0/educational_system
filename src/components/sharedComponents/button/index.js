@@ -99,42 +99,63 @@ const ButtonWrapper = ({
 
     const handelSubmit = async () => {
         const currentParams =
-            type && type === UNIVERSITY
-                ? removeKeyFromObject(
-                    values,
-                    ...removeExtraPropsForUniversityForm
-                )
-                : removeKeyFromObject(
-                    values,
-                    ...removeExtraPropsForCompanyForm
-                );
+                type && type === UNIVERSITY
+                    ? removeKeyFromObject(
+                        values,
+                        ...removeExtraPropsForUniversityForm
+                    )
+                    : removeKeyFromObject(
+                        values,
+                        ...removeExtraPropsForCompanyForm
+                    );
         const userID =
-            type === UNIVERSITY
-                ? USER_ROLES[UNIVERSITY]
-                : type === COMPANY
-                    ? USER_ROLES[COMPANY]
-                    : USER_ROLES[USER];
+                type === UNIVERSITY
+                    ? USER_ROLES[UNIVERSITY]
+                    : type === COMPANY
+                        ? USER_ROLES[COMPANY]
+                        : USER_ROLES[USER];
 
         if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
             const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
             DataService.getJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH],
                 {
-
-                    "User":
-                        {}
-                }
-            ).then(val => console.log(val));
+                    universityId,
+                    companyId,
+                    cityId,
+                    countryId,
+                    user: {
+                        name,
+                        surName,
+                        fileName,
+                        fileType,
+                    }
+                }).then(val => {
+                const { data } = val;
+                DataService.getExtendedSearchData.next(data);
+                console.log(val);
+            }).catch(_ => {
+                toast.error(
+                    GLOBAL_ERROR, {
+                        type: toast.TYPE.ERROR,
+                        icon: true,
+                        theme: 'dark'
+                    }
+                );
+                DataService.getExtendedSearchData.next([]);
+            });
             return;
         }
 
         if (editUserInfo && Object?.keys(editUserInfo)?.length) {
             const { name, isEdit } = editUserInfo || {};
             if (name && name === USER_TYPE.UNIVERSITY && isEdit) {
-                const currentEditedUserInfo = {
+                const currentEditedUserInfo = removeKeyFromObject({
                     ...userInfo,
                     ...currentParams,
-                    newPassword: currentParams?.password,
-                };
+                    password: currentParams?.oldPassword,
+                    newPassword: currentParams?.newPassword,
+                }, 'oldPassword', 'citiId', 'countryId');
+
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
                     userType: userID
@@ -149,11 +170,13 @@ const ButtonWrapper = ({
                     });
                 });
             } else if (name && name === USER_TYPE?.COMPANY && isEdit) {
-                const currentEditedUserInfo = {
+                const currentEditedUserInfo = removeKeyFromObject({
+                    ...userInfo,
                     ...currentParams,
-                    cityId: userInfo?.city?.cityId,
-                    countryId: userInfo?.country?.countryId
-                };
+                    password: currentParams?.oldPassword,
+                    newPassword: currentParams?.newPassword,
+                }, 'oldPassword', 'citiId', 'countryId');
+
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
                     userType: userID
@@ -168,11 +191,13 @@ const ButtonWrapper = ({
                     });
                 });
             } else if (name && name === USER_TYPE?.USER && isEdit) {
-                const currentEditedUserInfo = {
+                const currentEditedUserInfo = removeKeyFromObject({
+                    ...userInfo,
                     ...currentParams,
-                    cityId: userInfo?.city?.cityId,
-                    countryId: userInfo?.country?.countryId
-                };
+                    password: currentParams?.oldPassword,
+                    newPassword: currentParams?.newPassword,
+                }, 'oldPassword', 'citiId', 'countryId');
+
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
                     userType: userID
@@ -235,8 +260,8 @@ const ButtonWrapper = ({
             .catch((e) => {
                 toast.error(
                     message ||
-                    e.error.response.data.title ||
-                    "Something Went Wrong",
+                        e.error.response.data.title ||
+                        "Something Went Wrong",
                     {
                         type: toast.TYPE.ERROR,
                         icon: true,

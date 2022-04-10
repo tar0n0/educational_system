@@ -92,7 +92,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             default:
         }
     }, []);
-    console.log(userInfo, 'userInfo');
+
     useEffect(() => {
         if (formValues.countryId && countries.length) {
             switch (type) {
@@ -172,6 +172,8 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             isCity: userInfo?.isCity || false,
                                             isCV: userInfo?.isCV || false,
                                             isImage: userInfo?.isImage || false,
+                                            newPassword: '',
+                                            oldPassword: '',
                                         }}
                                         validationSchema={USER_REGISTRATION_VALIDATION}
                                         onSubmit={() => {
@@ -334,26 +336,19 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     />
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    {isAllContent ? (<TextfieldWrapperWrapper
+                                                    <TextfieldWrapperWrapper
                                                         type="password"
-                                                        name="password"
+                                                        name={editUserInfo ? 'oldPassword' : 'password'}
                                                         autoComplete="on"
-                                                        label="Password"
-                                                    />) : (
-                                                        <TextfieldWrapperWrapper
-                                                            type="password"
-                                                            name="password"
-                                                            autoComplete="on"
-                                                            label="New Password"
-                                                        />
-                                                    )}
+                                                        label={editUserInfo ? 'Old Password' : 'password'}
+                                                    />
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         type="password"
-                                                        name="confirmPassword"
+                                                        name={editUserInfo ? 'newPassword' : 'confirmPassword'}
                                                         autoComplete="on"
-                                                        label="Confirm Password"
+                                                        label={editUserInfo ? 'New Password' : 'Confirm Password'}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>

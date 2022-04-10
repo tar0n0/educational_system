@@ -23,9 +23,8 @@ export const parseJwt = (token) => {
     return JSON.parse(jsonPayload);
 };
 
-export const downloadCSV = (url, fileName = 'data.pdf') => {
+export const downloadFile = (url, fileName = 'data.pdf') => {
     const hiddenElement = document.createElement('a');
-    console.log(hiddenElement);
     hiddenElement.href = url;
     hiddenElement.target = '_blank';
     hiddenElement.download = fileName;

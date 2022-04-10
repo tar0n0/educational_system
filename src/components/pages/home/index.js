@@ -39,7 +39,6 @@ const Home = () => {
             setInputValue(val);
             DataService.getJson(ENDPOINT_URLS[INPUT_SEARCH], { input: val }).then(res => {
                 const { data } = res;
-                console.log(data);
                 setSearchData(data);
             }).catch(_ => setSearchData([]));
         });

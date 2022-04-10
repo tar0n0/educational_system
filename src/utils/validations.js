@@ -136,8 +136,20 @@ export const USER_REGISTRATION_VALIDATION = Yup.object().shape({
     password: Yup.string()
         .required('Password is not allowed to be empty.')
         .min(10, 'Your password must contain at least 10 characters')
-        .max(50, 'Your username must be under 50 character')
+        .max(50, 'Your password must be under 50 character')
         .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/, 'Password must contain at least two uppercase character,' +
+            ' two number and two symbol, two lowerca`se character'),
+    newPassword: Yup.string()
+        .required('New Password is not allowed to be empty.')
+        .min(10, 'Your new password must contain at least 10 characters')
+        .max(50, 'Your new password must be under 50 character')
+        .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/, 'New password must contain at least two uppercase character,' +
+            ' two number and two symbol, two lowercase character'),
+    oldPassword: Yup.string()
+        .required('New Password is not allowed to be empty.')
+        .min(10, 'Your new password must contain at least 10 characters')
+        .max(50, 'Your new password must be under 50 character')
+        .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/, 'New password must contain at least two uppercase character,' +
             ' two number and two symbol, two lowercase character'),
     phone: Yup.string()
         .required('Phone is not allowed to be empty.')

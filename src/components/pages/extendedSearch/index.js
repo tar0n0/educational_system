@@ -8,7 +8,8 @@ import {
     GET_ALL_CITIES,
     GET_ALL_COMPANIES,
     GET_ALL_COUNTRIES,
-    EXTENDED_SEARCH_PATH, USER_INFO,
+    EXTENDED_SEARCH_PATH,
+    USER_INFO,
 } from '../../../constants/api.constants';
 import { INITIAL_EXTENDED_SEARCH_STATE } from '../../../constants/initialFormState.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
@@ -19,6 +20,7 @@ import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import { buildCitiesData, buildCountriesData, buildData } from '../../../utils/supporters';
 import { EXTENDED_SEARCH_VALIDATION } from '../../../utils/validations';
+import MyFiles from '../../myFiles';
 import ButtonWrapper from '../../sharedComponents/button';
 import Footer from '../../sharedComponents/footer/footer';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
@@ -106,94 +108,102 @@ const ExtendedSearch = () => {
                 </div>
             </div>
             <div className="content-extended-search">
-                <Grid container>
-                    <Grid item xs={12}>
-                        <Container maxWidth="sm">
-                            <div className={classes.formWrapper}>
-                                <Formik
-                                    initialValues={{
-                                        ...INITIAL_EXTENDED_SEARCH_STATE,
-                                    }}
-                                    validationSchema={EXTENDED_SEARCH_VALIDATION}
-                                    onSubmit={(params) => console.log(params, 'yyy')}
-                                >
-                                    <Form>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12}>
-                                                <Typography>
-                                                    <h1 className="login-title-in-login-page">Start Search Files</h1>
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={3}>
-                                                <Select
-                                                    name="universityId"
-                                                    label="University"
-                                                    autoComplete="on"
-                                                    options={universities || []}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={3}>
-                                                <Select
-                                                    name="companyId"
-                                                    label="Company"
-                                                    autoComplete="on"
-                                                    options={companies || []}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={3}>
-                                                <Select
-                                                    name="cityId"
-                                                    label="CityId"
-                                                    autoComplete="on"
-                                                    options={cities || []}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={3}>
-                                                <Select
-                                                    name="countryId"
-                                                    label="Country"
-                                                    autoComplete="on"
-                                                    options={countries || []}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextfieldWrapperWrapper
-                                                    name="name"
-                                                    label="Name"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextfieldWrapperWrapper
-                                                    name="surName"
-                                                    label="Surname"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextfieldWrapperWrapper
-                                                    name="fileName"
-                                                    label="File Name"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextfieldWrapperWrapper
-                                                    name="fileType"
-                                                    label="File Type"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <ButtonWrapper
-                                                    url={ENDPOINT_URLS[EXTENDED_SEARCH_PATH]}
-                                                >
-                                                    Search
-                                                </ButtonWrapper>
-                                            </Grid>
-                                        </Grid>
-                                    </Form>
-                                </Formik>
-                            </div>
-                        </Container>
-                    </Grid>
-                </Grid>
+                {DataService.getExtendedSearchData.getValue().length ? (
+                    <>
+                        <MyFiles />
+                    </>
+                ) : (
+                    <>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Container maxWidth="sm">
+                                    <div className={classes.formWrapper}>
+                                        <Formik
+                                            initialValues={{
+                                                ...INITIAL_EXTENDED_SEARCH_STATE,
+                                            }}
+                                            validationSchema={EXTENDED_SEARCH_VALIDATION}
+                                            onSubmit={(params) => console.log(params, 'yyy')}
+                                        >
+                                            <Form>
+                                                <Grid container spacing={2}>
+                                                    <Grid item xs={12}>
+                                                        <Typography>
+                                                            <h1 className="login-title-in-login-page">Start Search Files</h1>
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item xs={3}>
+                                                        <Select
+                                                            name="universityId"
+                                                            label="University"
+                                                            autoComplete="on"
+                                                            options={universities || []}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={3}>
+                                                        <Select
+                                                            name="companyId"
+                                                            label="Company"
+                                                            autoComplete="on"
+                                                            options={companies || []}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={3}>
+                                                        <Select
+                                                            name="cityId"
+                                                            label="CityId"
+                                                            autoComplete="on"
+                                                            options={cities || []}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={3}>
+                                                        <Select
+                                                            name="countryId"
+                                                            label="Country"
+                                                            autoComplete="on"
+                                                            options={countries || []}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextfieldWrapperWrapper
+                                                            name="name"
+                                                            label="Name"
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextfieldWrapperWrapper
+                                                            name="surName"
+                                                            label="Surname"
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextfieldWrapperWrapper
+                                                            name="fileName"
+                                                            label="File Name"
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextfieldWrapperWrapper
+                                                            name="fileType"
+                                                            label="File Type"
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <ButtonWrapper
+                                                            url={ENDPOINT_URLS[EXTENDED_SEARCH_PATH]}
+                                                        >
+                                                            Search
+                                                        </ButtonWrapper>
+                                                    </Grid>
+                                                </Grid>
+                                            </Form>
+                                        </Formik>
+                                    </div>
+                                </Container>
+                            </Grid>
+                        </Grid>
+                    </>
+                )}
             </div>
             <Footer/>
         </>
