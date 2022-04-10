@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './header.css';
 
-const Header = () => {
+const Header = (name) => {
     const type = useLocation().pathname.replaceAll('/', '').replaceAll('sign-up', '').toUpperCase();
 
     useLayoutEffect(() => {
@@ -14,7 +14,7 @@ const Header = () => {
             <div className="logo-for-p">
                 <Link to={'/'}><span className="back-to-home">Home</span></Link>
             </div>
-            <span className="context">Create Account For {type}</span>
+            <span className="context">{name ? 'Extended Search' : `Create Account For ${type}`}</span>
         </div>
     );
 };

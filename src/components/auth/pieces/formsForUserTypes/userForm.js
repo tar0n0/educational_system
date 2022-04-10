@@ -92,7 +92,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             default:
         }
     }, []);
-    console.log(countries, 'countries');
+    console.log(userInfo, 'userInfo');
     useEffect(() => {
         if (formValues.countryId && countries.length) {
             switch (type) {
@@ -233,33 +233,37 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="isPhoneNumber"
                                                     />
                                                 </Grid>
-                                                <Grid item xs={6}>
-                                                    <Select
-                                                        autoComplete="on"
-                                                        name="countryId"
-                                                        label="Country"
-                                                        autoComplete="on"
-                                                        disabled={Boolean(isToken)}
-                                                        options={countries || [userInfo?.country] || []}
-                                                    />
-                                                    <Checkbox
-                                                        name="isCountry"
-                                                        label="Private Country"
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <Select
-                                                        name="cityId"
-                                                        label="City"
-                                                        options={cities || userInfo?.city || []}
-                                                        disabled={Boolean(isToken)}
-                                                        autoComplete="on"
-                                                    />
-                                                    <Checkbox
-                                                        name="isCity"
-                                                        label="Private City"
-                                                    />
-                                                </Grid>
+                                                {!editUserInfo && !editUserInfo?.isEdit && (
+                                                    <Grid item xs={6}>
+                                                        <Select
+                                                            autoComplete="on"
+                                                            name="countryId"
+                                                            label="Country"
+                                                            autoComplete="on"
+                                                            disabled={Boolean(isToken)}
+                                                            options={countries || [userInfo?.country] || []}
+                                                        />
+                                                        <Checkbox
+                                                            name="isCountry"
+                                                            label="Private Country"
+                                                        />
+                                                    </Grid>
+                                                )}
+                                                {!editUserInfo && !editUserInfo?.isEdit && (
+                                                    <Grid item xs={6}>
+                                                        <Select
+                                                            name="cityId"
+                                                            label="City"
+                                                            options={cities || userInfo?.city || []}
+                                                            disabled={Boolean(isToken)}
+                                                            autoComplete="on"
+                                                        />
+                                                        <Checkbox
+                                                            name="isCity"
+                                                            label="Private City"
+                                                        />
+                                                    </Grid>
+                                                )}
                                                 {type && type !== USER && (
                                                     <Grid item xs={12}>
                                                         <Select

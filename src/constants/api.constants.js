@@ -5,7 +5,8 @@ export const CONFIRMED_COMPANY_USER = 'CONFIRMED_COMPANY_USER'; // POST
 export const DELETE_USER = 'DELETE_USER'; // POST
 export const UPLOAD_FILE = 'UPLOAD_FILE'; // POST
 export const EDIT_USER_INFO = 'EDIT_USER_INFO'; // POST
-export const DELETE_FILE = 'DELETE_FILE'; //POST
+export const DELETE_FILE = 'DELETE_FILE'; // POST
+export const EDIT_FILE_NAME = 'EDIT_FILE_NAME'; // POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -18,6 +19,12 @@ export const UNIVERSITY_CONFIRM_PROFILES = 'UNIVERSITY_CONFIRM_PROFILES'; // GET
 export const USER_INFO = 'USER_INFO'; // GET
 export const USER_MATERIALS = 'USER_MATERIALS'; // GET
 export const DOWNLOAD_FILE = 'DOWNLOAD_FILE'; // GET
+export const INPUT_SEARCH = 'INPUT_SEARCH'; // GET
+export const GET_ALL_COUNTRIES = 'GET_ALL_COUNTRIES'; //GET
+export const GET_ALL_CITIES = 'GET_ALL_CITIES'; //GET
+export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; //GET
+export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; //GET
+
 
 export const ENDPOINT_URLS = {
     [LOGIN]: '/authentication/login',
@@ -39,4 +46,10 @@ export const ENDPOINT_URLS = {
     [USER_MATERIALS]: '/File/GetUserMateriales ',
     [DELETE_FILE]: '/File/DeleteFile',
     [DOWNLOAD_FILE]: '/File/DownloadFile',
+    [EDIT_FILE_NAME]: '/File/Rename',
+    [INPUT_SEARCH]: '/File/GetSearchMateriales',
+    [GET_ALL_COUNTRIES]: '/Profile/GetCountries',
+    [GET_ALL_CITIES]: '/Profile/GetCities',
+    [GET_ALL_COMPANIES]: '/Profile/GetCompanyNames',
+    [GET_ALL_UNIVERSITIES]: '/Profile/GetUniversityNames',
 };

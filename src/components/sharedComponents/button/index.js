@@ -118,9 +118,9 @@ const ButtonWrapper = ({
             const { name, isEdit } = editUserInfo || {};
             if (name && name === USER_TYPE.UNIVERSITY && isEdit) {
                 const currentEditedUserInfo = {
+                    ...userInfo,
                     ...currentParams,
-                    cityId: userInfo?.cityId,
-                    countryId: userInfo?.countryId
+                    newPassword: currentParams?.password,
                 };
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,

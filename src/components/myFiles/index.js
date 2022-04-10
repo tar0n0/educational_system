@@ -1,4 +1,5 @@
 import axios from 'axios';
+import fileDownload from 'js-file-download';
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -13,13 +14,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import { toast } from 'react-toastify';
-import { ENDPOINT_URLS, USER_MATERIALS, DELETE_FILE, DOWNLOAD_FILE } from '../../constants/api.constants';
-import { DELETE_YOUR_FILE, GLOBAL_ERROR } from '../../constants/messages.constants';
+import configs from '../../configs/mainConfigs';
+import {
+    ENDPOINT_URLS,
+    USER_MATERIALS,
+    DELETE_FILE,
+    DOWNLOAD_FILE,
+    EDIT_FILE_NAME,
+    INPUT_SEARCH,
+} from '../../constants/api.constants';
+import { DELETE_YOUR_FILE, EDITED_YOUR_FILE, GLOBAL_ERROR } from '../../constants/messages.constants';
 import DataService from '../../services/dataService';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { getStorageItem } from '../../storage';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -73,10 +81,11 @@ const CustomTableCell = ({ row, name, onChange }) => {
     );
 };
 
-const MyFiles = () => {
+const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     const [rows, setRows] = React.useState([]);
     const [previous, setPrevious] = React.useState({});
     const [tableData, setTableData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const classes = useStyles();
 
     const onToggleEditMode = id => {
@@ -133,11 +142,22 @@ const MyFiles = () => {
     };
 
     useEffect(() => {
-        getInitialUserFiles();
+        if (isSearch && searchData) {
+            setRows((_) => searchData.map(el => {
+                const currentName = el?.fileName?.includes('.pdf') && el?.fileName?.split('.pdf');
+                return createData(currentName[0]);
+            }));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isSearch) {
+            getInitialUserFiles();
+        }
     }, []);
 
     const handelDeleteFile = (fileId = '') => {
-        const file = tableData.find(el => el?.fileName === fileId);
+        const file = tableData.find(el => el?.fileName === `${fileId}.pdf`);
         DataService.postJson(ENDPOINT_URLS[DELETE_FILE], {
             fileId: file?.fileId,
             fileName: file?.fileName,
@@ -156,23 +176,71 @@ const MyFiles = () => {
             });
         });
     };
-    const handelEditedUserFileName = (fileId) => {
+    const handelEditedUserFileName = (row = {}) => {
+        const fileId = row?.id;
+        const file = tableData.find(el => el?.fileName === `${fileId}.pdf`);
+        DataService.postJson(ENDPOINT_URLS[EDIT_FILE_NAME], {
+            fileName: `${fileId}.pdf`,
+            newFileName: `${row?.currentFileName}.pdf`,
+        }).then(_ => {
+            toast.success(EDITED_YOUR_FILE, {
+                type: toast.TYPE.SUCCESS,
+                icon: true,
+                theme: "dark",
+            });
+            getInitialUserFiles();
+        }).catch(_ => {
+            toast.error(GLOBAL_ERROR, {
+                type: toast.TYPE.ERROR,
+                icon: true,
+                theme: "dark",
+            });
+            getInitialUserFiles();
+        });
     };
 
 
-    const downloadFile = (fileId) => {
-        const file = tableData.find(el => el?.fileName === fileId);
-        axios.get(ENDPOINT_URLS[DOWNLOAD_FILE], {
-            fileName: file?.fileName,
-            userId: file?.userId,
-        }, {
-            ...(getStorageItem('user')?.token ? { Authorization: `Bearer ${getStorageItem('user')?.token}` } : {}),
-            'Content-Type': 'application/pdf',
-            responseType: 'blob'
-        }).then(val => {
-            console.log(val, 'values');
-            getInitialUserFiles();
+    const downloadFile = async fileId => {
+        const file = tableData.find(el => el?.fileName === `${fileId}.pdf`);
+        setLoading(true);
+        toast.info('Wait for download fiel', {
+            type: toast.TYPE.INFO,
+            icon: true,
+            theme: "dark",
         });
+        if (!isSearch) {
+            await DataService.getJson(ENDPOINT_URLS[DOWNLOAD_FILE], {
+                filename: file?.fileName,
+                usrId: file.userId,
+
+            },).then(response => {
+                setLoading(false);
+                fileDownload(response?.data, file?.fileName || 'file.pdf');
+            })
+                .catch(_ => {
+                    setLoading(false);
+                });
+        } else if (isSearch) {
+            console.log(2);
+            axios({
+                method: 'GET',
+                url: configs.connection.server_url + ENDPOINT_URLS[INPUT_SEARCH],
+                params: {
+                    filename: file?.fileName,
+                    input: val,
+                },
+                headers: {
+                    'Content-Type': 'application/pdf',
+                }
+            }).then(response => {
+                console.log(1);
+                setLoading(false);
+                fileDownload(response?.data, file?.fileName || 'file.pdf');
+            })
+                .catch(_ => {
+                    setLoading(false);
+                });
+        }
     };
 
     return (
@@ -193,33 +261,46 @@ const MyFiles = () => {
                                     <>
                                         <IconButton
                                             aria-label="done"
-                                            onClick={() => onToggleEditMode(row.id)}
+                                            onClick={() => {
+                                                handelEditedUserFileName(row);
+                                                onToggleEditMode(row.id);
+                                            }}
                                         >
                                             <DoneIcon color="success"/>
                                         </IconButton>
                                         <IconButton
                                             aria-label="revert"
-                                            onClick={() => onRevert(row.id)}
+                                            onClick={() => {
+                                                onRevert(row.id);
+                                                getInitialUserFiles();
+                                            }}
                                         >
                                             <DoNotDisturbIcon color={'error'}/>
                                         </IconButton>
                                     </>
                                 ) : (
                                     <>
-                                        <IconButton
-                                            aria-label="delete"
-                                            onClick={() => onToggleEditMode(row.id)}
-                                        >
-                                            <EditIcon color={'info'}/>
-                                        </IconButton>
-                                        <IconButton
-                                            aria-label="delete"
-                                            onClick={() => handelDeleteFile(row.id)}
-                                        >
-                                            <DeleteForeverIcon color="error"/>
-                                        </IconButton>
+                                        {isSearch ? <></> : (
+                                            <>
+                                                <IconButton
+                                                    aria-label="edit"
+                                                    onClick={() => {
+                                                        onToggleEditMode(row.id);
+                                                    }}
+                                                >
+                                                    <EditIcon color={'info'}/>
+                                                </IconButton>
+                                                <IconButton
+                                                    aria-label="delete"
+                                                    onClick={() => handelDeleteFile(row.id)}
+                                                >
+                                                    <DeleteForeverIcon color="error"/>
+                                                </IconButton>
+                                            </>
+                                        )}
                                         <IconButton
                                             aria-label="download"
+                                            disabled={loading}
                                             onClick={() => {
                                                 const id = row.id;
                                                 downloadFile(id);
@@ -228,7 +309,7 @@ const MyFiles = () => {
                                             <DownloadForOfflineIcon color="warning"/>
                                         </IconButton>
                                         <IconButton
-                                            aria-label="download"
+                                            aria-label="show-file"
                                             onClick={() => {
 
                                             }}
