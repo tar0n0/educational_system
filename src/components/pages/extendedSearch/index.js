@@ -1,7 +1,9 @@
 import { Container, Grid, Typography } from '@material-ui/core';
+import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
     ENDPOINT_URLS,
     GET_ALL_UNIVERSITIES,
@@ -9,11 +11,13 @@ import {
     GET_ALL_COMPANIES,
     GET_ALL_COUNTRIES,
     EXTENDED_SEARCH_PATH,
-    USER_INFO,
+    USER_INFO, USER_MATERIALS,
 } from '../../../constants/api.constants';
 import { INITIAL_EXTENDED_SEARCH_STATE } from '../../../constants/initialFormState.constants';
+import { GLOBAL_ERROR } from '../../../constants/messages.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import { useStyles } from '../../../constants/ui.constants';
+import { formContext } from '../../../context/formContext';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
 import DataService from '../../../services/dataService';
@@ -37,6 +41,8 @@ const ExtendedSearch = () => {
     const [universities, setUniversities] = useState([]);
     const [userInfo, setUserInfo] = useState(null);
     const [isUser, setIsUser] = useState(false);
+    const [extendedData, setExtendedData] = useState([]);
+    const [formValues] = useContext(formContext);
     const classes = useStyles();
 
     useEffect(() => {
@@ -108,9 +114,9 @@ const ExtendedSearch = () => {
                 </div>
             </div>
             <div className="content-extended-search">
-                {DataService.getExtendedSearchData.getValue().length ? (
+                {extendedData.length ? (
                     <>
-                        <MyFiles />
+                        <MyFiles searchData={extendedData} isSearch={true}/>
                     </>
                 ) : (
                     <>
@@ -129,7 +135,8 @@ const ExtendedSearch = () => {
                                                 <Grid container spacing={2}>
                                                     <Grid item xs={12}>
                                                         <Typography>
-                                                            <h1 className="login-title-in-login-page">Start Search Files</h1>
+                                                            <h1 className="login-title-in-login-page">Start Search
+                                                                Files</h1>
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item xs={3}>
@@ -189,11 +196,53 @@ const ExtendedSearch = () => {
                                                         />
                                                     </Grid>
                                                     <Grid item xs={12}>
-                                                        <ButtonWrapper
-                                                            url={ENDPOINT_URLS[EXTENDED_SEARCH_PATH]}
-                                                        >
-                                                            Search
-                                                        </ButtonWrapper>
+                                                        <div className="block-extended-data">
+                                                            <Button className="extended-button-submit"
+                                                                variant="contained"
+                                                                onClick={() => {
+                                                                    const {
+                                                                        universityId,
+                                                                        companyId,
+                                                                        countryId,
+                                                                        cityId,
+                                                                        fileName,
+                                                                        fileType,
+                                                                        name,
+                                                                        surName
+                                                                    } = formValues;
+                                                                    DataService.getJson(ENDPOINT_URLS[USER_MATERIALS],
+                                                                        // {
+                                                                        //     universityId,
+                                                                        //     companyId,
+                                                                        //     cityId,
+                                                                        //     countryId,
+                                                                        //     user: {
+                                                                        //         name,
+                                                                        //         surName,
+                                                                        //         fileName,
+                                                                        //         fileType,
+                                                                        //     }
+                                                                        // }
+                                                                    ).then(val => {
+                                                                        const { data } = val;
+                                                                        DataService.getExtendedSearchData.next(data);
+                                                                        setExtendedData(data);
+                                                                    }).catch(_ => {
+                                                                        toast.error(
+                                                                            GLOBAL_ERROR, {
+                                                                                type: toast.TYPE.ERROR,
+                                                                                icon: true,
+                                                                                theme: 'dark'
+                                                                            }
+                                                                        );
+                                                                        setExtendedData([]);
+                                                                    });
+                                                                }}
+                                                            >
+                                                                Search
+                                                            </Button>
+                                                        </div>
+
                                                     </Grid>
                                                 </Grid>
                                             </Form>

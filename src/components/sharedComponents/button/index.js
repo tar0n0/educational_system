@@ -10,6 +10,7 @@ import {
     LOGIN,
     UPLOAD_FILE,
     EDIT_USER_INFO,
+    USER_MATERIALS,
     EXTENDED_SEARCH_PATH,
 } from "../../../constants/api.constants";
 import {
@@ -117,19 +118,20 @@ const ButtonWrapper = ({
 
         if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
             const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
-            DataService.getJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH],
-                {
-                    universityId,
-                    companyId,
-                    cityId,
-                    countryId,
-                    user: {
-                        name,
-                        surName,
-                        fileName,
-                        fileType,
-                    }
-                }).then(val => {
+            DataService.getJson(ENDPOINT_URLS[USER_MATERIALS],
+                // {
+                //     universityId,
+                //     companyId,
+                //     cityId,
+                //     countryId,
+                //     user: {
+                //         name,
+                //         surName,
+                //         fileName,
+                //         fileType,
+                //     }
+                // }
+            ).then(val => {
                 const { data } = val;
                 DataService.getExtendedSearchData.next(data);
                 console.log(val);

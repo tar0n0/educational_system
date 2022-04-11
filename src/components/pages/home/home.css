@@ -428,3 +428,16 @@
 .content-extended-search {
     margin-top: 25px;
 }
+
+.extended-button-submit {
+    text-align: center;
+    width: 100%;
+    padding: 15px;
+    font-size: 25px;
+    background: #002aff;
+}
+
+
+.block-extended-data {
+    background: darkblue;
+}
