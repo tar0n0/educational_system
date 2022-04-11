@@ -7,6 +7,13 @@
     top: 0;
 }
 
+.header-home-search {
+    width: 100%;
+    height: 250px;
+    background-color: darkblue;
+    border: 1px solid darkblue;
+}
+
 .search-header {
     width: 100%;
     height: 250px;

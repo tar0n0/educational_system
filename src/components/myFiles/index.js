@@ -249,6 +249,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                 {row.isEditMode ? (
                                     <>
                                         <IconButton
+                                            style={{ position: "static", top: "-1px" }}
                                             aria-label="done"
                                             onClick={() => {
                                                 handelEditedUserFileName(row);
@@ -258,6 +259,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                             <DoneIcon color="success"/>
                                         </IconButton>
                                         <IconButton
+                                            style={{ position: "static", top: "-1px" }}
                                             aria-label="revert"
                                             onClick={() => {
                                                 onRevert(row.id);
@@ -272,6 +274,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                         {isSearch ? <></> : (
                                             <>
                                                 <IconButton
+                                                    style={{ position: "static", top: "-1px" }}
                                                     aria-label="edit"
                                                     onClick={() => {
                                                         onToggleEditMode(row.id);
@@ -280,6 +283,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                                     <EditIcon color={'info'}/>
                                                 </IconButton>
                                                 <IconButton
+                                                    style={{ position: "static", top: "-1px" }}
                                                     aria-label="delete"
                                                     onClick={() => handelDeleteFile(row.id)}
                                                 >
@@ -290,6 +294,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                         <IconButton
                                             aria-label="download"
                                             disabled={loading}
+                                            style={{ position: "static", top: "-1px" }}
                                             onClick={() => {
                                                 toast.info('Wait for download fiel', {
                                                     type: toast.TYPE.INFO,
@@ -307,6 +312,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                         </IconButton>
                                         <IconButton
                                             aria-label="show-file"
+                                            style={{ position: "static", top: "-1px" }}
                                             onClick={() => {
                                             }}
                                         >
