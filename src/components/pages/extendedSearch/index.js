@@ -210,23 +210,23 @@ const ExtendedSearch = () => {
                                                                         name,
                                                                         surName
                                                                     } = formValues;
-                                                                    DataService.getJson(ENDPOINT_URLS[USER_MATERIALS],
-                                                                        // {
-                                                                        //     universityId,
-                                                                        //     companyId,
-                                                                        //     cityId,
-                                                                        //     countryId,
-                                                                        //     user: {
-                                                                        //         name,
-                                                                        //         surName,
-                                                                        //         fileName,
-                                                                        //         fileType,
-                                                                        //     }
-                                                                        // }
+                                                                    DataService.postJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH],
+                                                                        {
+                                                                            universityId,
+                                                                            companyId,
+                                                                            cityId,
+                                                                            countryId,
+                                                                            user: {
+                                                                                name,
+                                                                                surName,
+                                                                                fileName,
+                                                                                fileType,
+                                                                            }
+                                                                        }
                                                                     ).then(val => {
-                                                                        const { data } = val;
-                                                                        DataService.getExtendedSearchData.next(data);
-                                                                        setExtendedData(data);
+
+                                                                        DataService.getExtendedSearchData.next(val);
+                                                                        setExtendedData(val);
                                                                     }).catch(_ => {
                                                                         toast.error(
                                                                             GLOBAL_ERROR, {
