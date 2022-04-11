@@ -99,21 +99,21 @@ const ButtonWrapper = ({
 
     const handelSubmit = async () => {
         const currentParams =
-                type && type === UNIVERSITY
-                    ? removeKeyFromObject(
-                        values,
-                        ...removeExtraPropsForUniversityForm
-                    )
-                    : removeKeyFromObject(
-                        values,
-                        ...removeExtraPropsForCompanyForm
-                    );
+            type && type === UNIVERSITY
+                ? removeKeyFromObject(
+                    values,
+                    ...removeExtraPropsForUniversityForm
+                )
+                : removeKeyFromObject(
+                    values,
+                    ...removeExtraPropsForCompanyForm
+                );
         const userID =
-                type === UNIVERSITY
-                    ? USER_ROLES[UNIVERSITY]
-                    : type === COMPANY
-                        ? USER_ROLES[COMPANY]
-                        : USER_ROLES[USER];
+            type === UNIVERSITY
+                ? USER_ROLES[UNIVERSITY]
+                : type === COMPANY
+                    ? USER_ROLES[COMPANY]
+                    : USER_ROLES[USER];
 
         if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
             const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
@@ -154,11 +154,17 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
-                }, 'oldPassword', 'citiId', 'countryId');
+                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType', 'password']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
-                    userType: userID
+                    city: {
+                        cityId: currentEditedUserInfo?.city?.cityId
+                    },
+                    country: {
+                        countryId: currentEditedUserInfo?.country?.countryId
+                    },
+                    // userType: userID
                 }).then(() => {
                     toast.success(EDITED_USER_INFO, {
                         type: toast.TYPE.SUCCESS,
@@ -175,11 +181,17 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
-                }, 'oldPassword', 'citiId', 'countryId');
+                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType', 'password']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
-                    userType: userID
+                    city: {
+                        cityId: currentEditedUserInfo?.city?.cityId
+                    },
+                    country: {
+                        countryId: currentEditedUserInfo?.country?.countryId
+                    },
+                    // userType: userID
                 }).then(() => {
                     toast.success(EDITED_USER_INFO, {
                         type: toast.TYPE.SUCCESS,
@@ -196,11 +208,17 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
-                }, 'oldPassword', 'citiId', 'countryId');
+                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType', 'password']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
-                    userType: userID
+                    city: {
+                        cityId: currentEditedUserInfo?.city?.cityId
+                    },
+                    country: {
+                        countryId: currentEditedUserInfo?.country?.countryId
+                    },
+                    // userType: userID
                 }).then(() => {
                     toast.success(EDITED_USER_INFO, {
                         type: toast.TYPE.SUCCESS,
@@ -260,8 +278,8 @@ const ButtonWrapper = ({
             .catch((e) => {
                 toast.error(
                     message ||
-                        e.error.response.data.title ||
-                        "Something Went Wrong",
+                    e.error.response.data.title ||
+                    "Something Went Wrong",
                     {
                         type: toast.TYPE.ERROR,
                         icon: true,
