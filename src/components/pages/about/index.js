@@ -1,3 +1,4 @@
+import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import Header from '../../headerActions';
 import EventAnimationSVG from '../../sharedComponents/animationSVG';
 import SectionAnimated from '../../sharedComponents/sectionAnimated';
@@ -12,7 +13,7 @@ import AuthorizationService from '../../../services/authorizationService';
 import '../home/home.css';
 
 const About = () => {
-    const { setOpen } = useContext(modalContext);
+    const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
 
     useEffect(() => {
@@ -43,7 +44,10 @@ const About = () => {
                                 Login
                             </Link>
                             <span className="slash">\</span>
-                            <span className="sign-up" onClick={() => setOpen(true)}>
+                            <span className="sign-up" onClick={() => {
+                                setOpen(true);
+                                setType(USER_TYPES_FOR_MODAL);
+                            }}>
                         SignUp
                             </span>
                         </>
@@ -62,7 +66,7 @@ const About = () => {
                 </div>
             </div>
             <CarouselS/>
-            <div className='about-footer'>
+            <div className="about-footer">
                 <Footer/>
             </div>
         </>);

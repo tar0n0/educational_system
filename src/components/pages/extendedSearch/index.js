@@ -39,7 +39,7 @@ const ExtendedSearch = () => {
     const [cities, setCities] = useState([]);
     const [companies, setCompanies] = useState([]);
     const [universities, setUniversities] = useState([]);
-    const [userInfo, setUserInfo] = useState(null);
+    // const [userInfo, setUserInfo] = useState(null);
     const [isUser, setIsUser] = useState(false);
     const [extendedData, setExtendedData] = useState([]);
     const [formValues] = useContext(formContext);
@@ -50,17 +50,17 @@ const ExtendedSearch = () => {
         return () => subscription && subscription.unsubscribe();
     }, [isUser]);
 
-    useEffect(() => {
-        if (getStorageItem('user')?.token) {
-            DataService.getJson(ENDPOINT_URLS[USER_INFO]).then(val => {
-                setUserInfo(() => {
-                    return {
-                        ...val?.data,
-                    };
-                });
-            });
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (getStorageItem('user')?.token) {
+    //         DataService.getJson(ENDPOINT_URLS[USER_INFO]).then(val => {
+    //             setUserInfo(() => {
+    //                 return {
+    //                     ...val?.data,
+    //                 };
+    //             });
+    //         });
+    //     }
+    // }, []);
 
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_ALL_COUNTRIES]).then(val => {
@@ -128,7 +128,6 @@ const ExtendedSearch = () => {
                                             initialValues={{
                                                 ...INITIAL_EXTENDED_SEARCH_STATE,
                                             }}
-                                            validationSchema={EXTENDED_SEARCH_VALIDATION}
                                             onSubmit={(params) => console.log(params, 'yyy')}
                                         >
                                             <Form>
@@ -199,6 +198,7 @@ const ExtendedSearch = () => {
                                                         <div className="block-extended-data">
                                                             <Button className="extended-button-submit"
                                                                 variant="contained"
+                                                                disabled={Object.values(formValues).every(el => !el)}
                                                                 onClick={() => {
                                                                     const {
                                                                         universityId,
@@ -212,10 +212,10 @@ const ExtendedSearch = () => {
                                                                     } = formValues;
                                                                     DataService.postJson(ENDPOINT_URLS[EXTENDED_SEARCH_PATH],
                                                                         {
-                                                                            universityId,
-                                                                            companyId,
-                                                                            cityId,
-                                                                            countryId,
+                                                                            universityId: universityId || 0,
+                                                                            companyId: companyId || 0,
+                                                                            cityId: cityId || 0,
+                                                                            countryId: countryId || 0,
                                                                             user: {
                                                                                 name,
                                                                                 surName,

@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
+import { ENDPOINT_URLS, USER_INFO } from '../../../constants/api.constants';
 import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem, removeStorageItem } from '../../../storage';
@@ -10,11 +11,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { parseJwt } from '../../../utils/helpers';
 import AuthorizationService from '../../../services/authorizationService';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [name, setName] = useState('');
+
     const navigate = useNavigate();
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -23,6 +25,19 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+        DataService.getJson(ENDPOINT_URLS[USER_INFO]).then(val => {
+            const { data } = val;
+            const { name, surname } = data;
+            setName(`${name[0]?.toUpperCase()}${surname[0]?.toUpperCase()}`);
+            DataService.getUserInfo.next({
+                ...DataService.getUserInfo.getValue(),
+                name,
+                surname,
+            });
+        });
+    }, []);
 
     return (
         <React.Fragment>
@@ -36,7 +51,11 @@ export default function AccountMenu() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 60, height: 60, backgroundColor: '#0580e8' }}>{'TG'}</Avatar>
+                        <Avatar sx={{
+                            width: 60,
+                            height: 60,
+                            backgroundColor: '#0580e8'
+                        }}>{name || 'TG'}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>

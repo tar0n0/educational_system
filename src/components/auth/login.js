@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <>
-            <Header/>
+            <Header isLogin={true}/>
             <div className="login-container">
                 <Grid container>
                     <Grid item xs={12}>

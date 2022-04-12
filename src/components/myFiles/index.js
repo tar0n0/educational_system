@@ -1,5 +1,3 @@
-import axios from 'axios';
-import fileDownload from 'js-file-download';
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -9,19 +7,15 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import { toast } from 'react-toastify';
-import configs from '../../configs/mainConfigs';
 import {
     ENDPOINT_URLS,
     USER_MATERIALS,
     DELETE_FILE,
-    DOWNLOAD_FILE,
     EDIT_FILE_NAME,
-    INPUT_SEARCH,
 } from '../../constants/api.constants';
 import { DELETE_YOUR_FILE, EDITED_YOUR_FILE, GLOBAL_ERROR } from '../../constants/messages.constants';
 import DataService from '../../services/dataService';
