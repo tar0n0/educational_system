@@ -8,7 +8,7 @@ error404 #main-wrapper {
 }
 
 .errorWrap {
-  color: darkblue;
+  color: #172c88;
   text-align: center;
   padding: 60px 0;
   width: 50%;
@@ -33,7 +33,7 @@ error404 #main-wrapper {
 .errorWrap a {
   display: inline-block;
   height: 32px;
-  background-color: darkblue;
+  background-color: #172c88;
   font-size: 15px;
   color: #fff;
   font-weight: 700;
@@ -44,7 +44,7 @@ error404 #main-wrapper {
 }
 
 .errorWrap a:hover {
-  background-color: darkblue;
+  background-color: #172c88;
   color: #fff;
 }
 
@@ -249,11 +249,11 @@ error404 #main-wrapper {
 }
 
 .cls-2 {
-  fill: darkblue;
+  fill: #172c88;
 }
 
 .cls-3 {
-  fill: darkblue;
+  fill: #172c88;
 }
 
 .cls-4 {

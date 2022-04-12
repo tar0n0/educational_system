@@ -114,7 +114,7 @@ const ExtendedSearch = () => {
                 </div>
             </div>
             <div className="content-extended-search">
-                {extendedData.length ? (
+                {extendedData?.length ? (
                     <>
                         <MyFiles searchData={extendedData} isSearch={true}/>
                     </>
@@ -224,7 +224,6 @@ const ExtendedSearch = () => {
                                                                             }
                                                                         }
                                                                     ).then(val => {
-
                                                                         DataService.getExtendedSearchData.next(val);
                                                                         setExtendedData(val);
                                                                     }).catch(_ => {

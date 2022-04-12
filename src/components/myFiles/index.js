@@ -29,6 +29,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
+import './myFiles.css';
+
 const useStyles = makeStyles(theme => ({
     root: {
         width: "650px",
@@ -52,10 +54,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const createData = (currentFileName, userId) => ({
+const createData = (currentFileName, userId, fileType) => ({
     id: currentFileName,
     currentFileName,
     userId,
+    fileType,
     // calories,
     // fat,
     // carbs,
@@ -136,8 +139,8 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
             const { data } = val;
             setTableData(data);
             setRows((_) => data.map(el => {
-                const currentName = el?.fileName?.includes('.pdf') && el?.fileName?.split('.pdf');
-                return createData(currentName[0], el?.userId);
+                const currentName = el?.fileName?.split(el?.fileType.trim());
+                return createData(currentName[0], el?.userId, el?.fileType);
             }));
         });
     };
@@ -145,8 +148,8 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     useEffect(() => {
         if (isSearch && searchData) {
             setRows((_) => searchData.map(el => {
-                const currentName = el?.fileName?.includes('.pdf') && el?.fileName?.split('.pdf');
-                return createData(currentName[0], el?.userId);
+                const currentName = el?.fileName?.split(el?.fileType.trim());
+                return createData(currentName[0], el?.userId, el?.fileType);
             }));
         }
     }, []);
@@ -157,8 +160,8 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
         }
     }, []);
 
-    const handelDeleteFile = (fileId = '') => {
-        const file = tableData.find(el => el?.fileName === `${fileId}.pdf`);
+    const handelDeleteFile = (row) => {
+        const file = tableData.find(el => el?.fileName === `${row?.id}${row?.fileType}`);
         DataService.postJson(ENDPOINT_URLS[DELETE_FILE], {
             fileId: file?.fileId,
             fileName: file?.fileName,
@@ -179,10 +182,10 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     };
     const handelEditedUserFileName = (row = {}) => {
         const fileId = row?.id;
-        const file = tableData.find(el => el?.fileName === `${fileId}.pdf`);
+        const file = tableData.find(el => el?.fileName === `${fileId}${row?.fileType}`);
         DataService.postJson(ENDPOINT_URLS[EDIT_FILE_NAME], {
-            fileName: `${fileId}.pdf`,
-            newFileName: `${row?.currentFileName}.pdf`,
+            fileName: `${fileId}${row.fileType}`,
+            newFileName: `${row?.currentFileName}${row?.fileType}`,
         }).then(_ => {
             toast.success(EDITED_YOUR_FILE, {
                 type: toast.TYPE.SUCCESS,
@@ -201,37 +204,6 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     };
 
 
-    // const downloadFile = async fileId => {
-    //     const file = searchData ? searchData.find(el => el?.fileName === `${fileId}.pdf`) : tableData.find(el => el?.fileName === `${fileId}.pdf`);
-    //     setLoading(true);
-    //     toast.info('Wait for download fiel', {
-    //         type: toast.TYPE.INFO,
-    //         icon: true,
-    //         theme: "dark",
-    //     });
-
-    // await DataService.getJson(ENDPOINT_URLS[DOWNLOAD_FILE], {
-    //     filename: file?.fileName,
-    //     usrId: file?.userId,
-    //
-    // },).then(response => {
-    //     setLoading(false);
-    //     fileDownload(response?.data, file?.fileName || 'file.pdf');
-    // })
-    //     .catch(_ => {
-    //         setLoading(false);
-    //     });
-
-    //     return (
-    //         <>
-    //             <a href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${file?.fileName}&usrId=${file.userId}`}
-    //                 download>
-    //                 <DownloadForOfflineIcon color="warning"/>
-    //             </a>
-    //         </>
-    //     );
-    // };
-
     return (
         <Paper className={classes.root}>
             <Table className={classes.table} aria-label="caption table">
@@ -244,80 +216,48 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                 </TableHead>
                 <TableBody>
                     {rows.map(row => (
-                        <TableRow key={row.id}>
+                        <TableRow key={row.id + row.fileType}>
                             <TableCell className={classes.selectTableCell}>
                                 {row.isEditMode ? (
                                     <>
-                                        <IconButton
-                                            style={{ position: "static", top: "-1px" }}
-                                            aria-label="done"
-                                            onClick={() => {
-                                                handelEditedUserFileName(row);
-                                                onToggleEditMode(row.id);
-                                            }}
-                                        >
-                                            <DoneIcon color="success"/>
-                                        </IconButton>
-                                        <IconButton
-                                            style={{ position: "static", top: "-1px" }}
-                                            aria-label="revert"
-                                            onClick={() => {
-                                                onRevert(row.id);
-                                                getInitialUserFiles();
-                                            }}
-                                        >
-                                            <DoNotDisturbIcon color={'error'}/>
-                                        </IconButton>
+                                        <span className="icon-btn" onClick={() => {
+                                            handelEditedUserFileName(row);
+                                            onToggleEditMode(row.id);
+                                        }}><DoneIcon color="success"/></span>
+                                        <span className="icon-btn" onClick={() => {
+                                            onRevert(row.id);
+                                            getInitialUserFiles();
+                                        }}><DoNotDisturbIcon color={'error'}/></span>
                                     </>
                                 ) : (
                                     <>
                                         {isSearch ? <></> : (
                                             <>
-                                                <IconButton
-                                                    style={{ position: "static", top: "-1px" }}
-                                                    aria-label="edit"
-                                                    onClick={() => {
-                                                        onToggleEditMode(row.id);
-                                                    }}
-                                                >
-                                                    <EditIcon color={'info'}/>
-                                                </IconButton>
-                                                <IconButton
-                                                    style={{ position: "static", top: "-1px" }}
-                                                    aria-label="delete"
-                                                    onClick={() => handelDeleteFile(row.id)}
-                                                >
-                                                    <DeleteForeverIcon color="error"/>
-                                                </IconButton>
+                                                <span className="icon-btn" onClick={() => {
+                                                    onToggleEditMode(row.id);
+                                                }}><EditIcon color={'info'}/></span>
+                                                <span className="icon-btn" onClick={() => {
+                                                    handelDeleteFile(row);
+                                                }}> <DeleteForeverIcon color="error"/></span>
+
                                             </>
                                         )}
-                                        <IconButton
-                                            aria-label="download"
-                                            disabled={loading}
-                                            style={{ position: "static", top: "-1px" }}
-                                            onClick={() => {
-                                                toast.info('Wait for download fiel', {
-                                                    type: toast.TYPE.INFO,
-                                                    icon: true,
-                                                    theme: "dark",
-                                                });
-                                            }}
-                                        >
-                                            <a href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}.pdf&usrId=${row?.userId}`}
+                                        <span className="icon-btn" onClick={() => {
+                                            toast.info('Wait for download fiel', {
+                                                type: toast.TYPE.INFO,
+                                                icon: true,
+                                                theme: "dark",
+                                            });
+                                        }}>  <a
+                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType.trim()}&usrId=${row?.userId}`}
                                                 download
                                                 target="_blank" rel="noreferrer"
                                             >
                                                 <DownloadForOfflineIcon color="warning"/>
-                                            </a>
-                                        </IconButton>
-                                        <IconButton
-                                            aria-label="show-file"
-                                            style={{ position: "static", top: "-1px" }}
-                                            onClick={() => {
-                                            }}
-                                        >
-                                            <VisibilityIcon color="secondary"/>
-                                        </IconButton>
+                                            </a></span>
+                                        <span className="icon-btn" onClick={() => {
+                                        }}>  <VisibilityIcon color="secondary"/></span>
+
                                     </>
                                 )}
                             </TableCell>

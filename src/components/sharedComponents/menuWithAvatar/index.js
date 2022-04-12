@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { parseJwt } from '../../../utils/helpers';
 import AuthorizationService from '../../../services/authorizationService';
 
 export default function AccountMenu() {
@@ -35,7 +36,7 @@ export default function AccountMenu() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 60, height: 60 }}>TG</Avatar>
+                        <Avatar sx={{ width: 60, height: 60, backgroundColor: '#0580e8' }}>{'TG'}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>

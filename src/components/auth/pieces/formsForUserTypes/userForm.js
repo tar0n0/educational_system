@@ -156,7 +156,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             link: userInfo?.link || '',
                                             isLink: userInfo?.isLink || false,
                                             file: '',
-                                            image: '',
+                                            // image: '',
                                             countryId: userInfo?.country?.countryId || '',
                                             password: userInfo?.password || '',
                                             confirmPassword: userInfo?.confirmPassword || '',
@@ -171,7 +171,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             isCountry: userInfo?.isCountry || false,
                                             isCity: userInfo?.isCity || false,
                                             isCV: userInfo?.isCV || false,
-                                            isImage: userInfo?.isImage || false,
+                                            // isImage: userInfo?.isImage || false,
                                             newPassword: '',
                                             oldPassword: '',
                                         }}
@@ -294,7 +294,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         label="Link"
                                                     />
                                                 </Grid>
-                                                <Grid item xs={6}>
+                                                <Grid item xs={12}>
                                                     <div className="container-uploaded-file">
                                                         {file ? <div className="uploaded-file"
                                                             title={file?.name}>{file?.name}</div> : (
@@ -314,25 +314,6 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <Checkbox
                                                         name="isCV"
                                                         label="Private CV"
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <div className="container-uploaded-file">
-                                                        {image ? <div className="uploaded-file"
-                                                            title={image?.name}>{image?.name}</div> : (
-                                                            <UploadInput
-                                                                className={'imageInput'}
-                                                                accept={'image/*'}
-                                                                setFile={setImage}
-                                                            />
-                                                        )}
-                                                        <span className="uploaded-icon">{image &&
-                                                            <ClearIcon color="error" fontSize={"large"}
-                                                                onClick={() => setImage('')}/>}</span>
-                                                    </div>
-                                                    <Checkbox
-                                                        name="isImage"
-                                                        label="Private Image"
                                                     />
                                                 </Grid>
                                                 <Grid item xs={6}>

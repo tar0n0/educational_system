@@ -1,16 +1,16 @@
 :root {
-  --footer-bg: darkblue;
+  --footer-bg: #172c88;
   --color: #f2f3fb;
   --color-smooth: #9da2ae;
   --input-border: #3a456a;
   --btn-bg-color: #f1f2fc;
   --btn-hover-bg: #d5d9f6;
-  --btn-color: darkblue;
+  --btn-color: #172c88;
 }
 
 footer {
   font-size: 16px;
-  background: darkblue;
+  background: #172c88;
   padding: 2em 4em;
   display: flex;
   align-items: start;
@@ -57,7 +57,7 @@ footer ul {
 .subscribe-input {
   width: auto;
   flex: 1;
-  background: transparent;
+  background: white;
   border: 0.06em solid var(--input-border);
   font-size: 1em;
   font-weight: 500;
@@ -65,7 +65,7 @@ footer ul {
   border-radius: 0.3em;
   transition: all 0.25s ease 0s;
   display: inline-block;
-  color: var(--color-smooth);
+  color: #194d94;
 }
 
 .auout-us-text-for-footer {
@@ -76,19 +76,18 @@ footer ul {
 .subscribe-input:focus {
   outline: none;
   border-color: var(--color);
-  color: var(--color);
 }
 
 .subscribe-btn {
   background: var(--btn-bg-color);
   border: none;
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 400;
   padding: 0.5em;
   border-radius: 0.3em;
   transition: all 0.25s ease 0s;
   display: inline-block;
-  color: var(--btn-color);
+  color: #194d94;
   cursor: pointer;
 }
 

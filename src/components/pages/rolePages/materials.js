@@ -89,7 +89,7 @@ const Materials = () => {
                                                     <UploadInput
                                                         className={'pdfInput'}
                                                         accept={
-                                                            'application/pdf,application/vnd.ms-excel'
+                                                            'image/*,.pdf, .word,.doc,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.documen'
                                                         }
                                                         setFile={setFile}
                                                     />

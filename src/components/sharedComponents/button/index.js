@@ -236,8 +236,6 @@ const ButtonWrapper = ({
         }
 
         if (url && url === ENDPOINT_URLS[UPLOAD_FILE] && file) {
-            const currentFileName = file?.name.split('.pdf')[0].slice(0, 9);
-            file.name = currentFileName;
             const formData = new FormData();
             formData.append('files', file);
             formData.append('FileVersion', 2);

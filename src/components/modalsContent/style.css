@@ -42,8 +42,8 @@
 }
 
 .btn-delete-1 {
-    color: darkblue;
-    border: 3px solid darkblue;
+    color: #172c88;
+    border: 3px solid #172c88;
     margin: 5px;
     padding: 10px;
     border-radius: 8px;
@@ -52,12 +52,12 @@
 }
 
 .btn-delete-1:hover {
-    background: darkblue;
+    background: #172c88;
     color: white;
 }
 
 .select-user-type {
-    color: darkblue;
+    color: #172c88;
     font-weight: bold;
     font-size: 25px;
     font-style: italic;

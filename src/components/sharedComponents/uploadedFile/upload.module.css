@@ -62,7 +62,7 @@
 
 .pdfInput::before {
     width: 100%;
-    content: 'Select Pdf';
+    content: 'Select File';
     background-color: #DCE3D4;
     border: 1px solid #DCE3D4;
     text-align: left;

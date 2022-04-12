@@ -33,7 +33,7 @@ const Companies = () => {
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="30"
                                 height="30"
-                                fill="currentColor"
+                                fill="white"
                                 className="bi bi-person-fill"
                                 viewBox="0 0 16 16"
                             >

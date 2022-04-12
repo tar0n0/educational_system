@@ -3,7 +3,7 @@
   padding: 0;
   width: 100%;
   padding: 50px 75px;
-  background: darkblue;
+  background: #172c88;
 }
 
 .context {
@@ -28,7 +28,7 @@
   background-position: left top;
   display: inline-block;
   position: absolute;
-  top: 15px;
+  top: 26px;
   left: 15px;
 }
 
