@@ -22,6 +22,7 @@ import '../home/home.css';
 const useStyles = makeStyles(theme => ({
     pageTitle: {
         display: "block",
+        position: 'static',
         margin: "16px 0px 32px 0px",
         width: "100%",
         justifyContent: "center",
@@ -36,13 +37,14 @@ const useStyles = makeStyles(theme => ({
     },
     cardsLayout: {
         display: "grid",
+        position:'static',
         gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
         gridGap: "30px",
         maxWidth: "900px",
         margin: "0 auto 20px"
     },
     cardsLayoutItem: {
-        position: "relative"
+        position: "static"
     }
 }));
 

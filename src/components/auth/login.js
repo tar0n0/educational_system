@@ -75,11 +75,6 @@ const Login = () => {
                                                     name="password"
                                                     label="Password"
                                                 />
-                                                <Checkbox
-                                                    name=""
-                                                    label="Remember me"
-                                                    className="checkbox-for-remember-me"
-                                                />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <ButtonWrapper

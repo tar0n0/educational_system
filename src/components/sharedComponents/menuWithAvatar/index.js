@@ -55,7 +55,7 @@ export default function AccountMenu() {
                             width: 60,
                             height: 60,
                             backgroundColor: '#0580e8'
-                        }}>{name || 'TG'}</Avatar>
+                        }}>{'TG'}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>

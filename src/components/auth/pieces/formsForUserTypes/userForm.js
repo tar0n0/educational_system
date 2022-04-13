@@ -88,6 +88,11 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                     DataService.companyCountries.next(buildCountriesData(val));
                     setCountries(buildCountriesData(val));
                 });
+            case USER:
+                DataService.getJson(ENDPOINT_URLS[COMPANY_COUNTRIES]).then(val => {
+                    DataService.companyCountries.next(buildCountriesData(val));
+                    setCountries(buildCountriesData(val));
+                });
                 break;
             default:
         }
@@ -103,6 +108,12 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                     });
                     break;
                 case COMPANY:
+                    DataService.getJson(ENDPOINT_URLS[COMPANY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
+                        setCities(buildCitiesData(val));
+                        DataService.companiesCities.next(buildCitiesData(val));
+                    });
+                    break;
+                case USER:
                     DataService.getJson(ENDPOINT_URLS[COMPANY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
                         setCities(buildCitiesData(val));
                         DataService.companiesCities.next(buildCitiesData(val));
