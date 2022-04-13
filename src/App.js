@@ -7,18 +7,20 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
+import UserIdProvider from './context/userIdContext';
 
 function App() {
     useEffect(() => {
-        console.log(window.location.pathname, 'window.location.pathname');
     }, []);
     return (
         <>
             <ModalContentProvider>
                 <FormValuesProvider>
-                    <BrowserRouter>
-                        <RoutesWrapper/>
-                    </BrowserRouter>
+                    <UserIdProvider>
+                        <BrowserRouter>
+                            <RoutesWrapper/>
+                        </BrowserRouter>
+                    </UserIdProvider>
                 </FormValuesProvider>
             </ModalContentProvider>
             <ToastContainer/>

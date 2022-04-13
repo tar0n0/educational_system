@@ -7,7 +7,9 @@
     top: 0;
 }
 
-
+.avatar-profile-all-user {
+    text-align: center;
+}
 
 .search-header {
     width: 100%;
@@ -114,6 +116,10 @@
     text-align: center;
 }
 
+.content-profile {
+    margin-top: 100px;
+}
+
 .content {
     margin-top: 298px;
 }
@@ -132,7 +138,6 @@
     text-align: center;
     cursor: pointer;
 }
-
 
 
 .list-btns {
@@ -164,6 +169,7 @@
     .search {
         padding: 10px;
     }
+
     .main-btn {
         padding: 15px;
         width: 150px;
@@ -288,6 +294,7 @@
         border: none;
         cursor: pointer;
     }
+
     .main-btn {
         padding: 12px;
         width: 200px;

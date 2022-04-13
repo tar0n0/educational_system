@@ -1,9 +1,9 @@
+import { toast } from 'react-toastify';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
-import Header from '../../headerActions';
-import EventAnimationSVG from '../../sharedComponents/animationSVG';
-import SectionAnimated from '../../sharedComponents/sectionAnimated';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
+import { getStorageItem } from '../../../storage';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
 import CarouselS from '../../sharedComponents/slideShow';
@@ -15,6 +15,7 @@ import '../home/home.css';
 const About = () => {
     const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
@@ -56,7 +57,17 @@ const About = () => {
                 <div className="search">
                     <input className="search-input" placeholder="Search" autoComplete="off"/>
                     <button className="extend-search">
-                        <span className="span-search">Extended Search</span>
+                        <span className="span-search" onClick={() => {
+                            if (getStorageItem('user')?.token) {
+                                navigate(EXTENDED_SEARCH);
+                            } else {
+                                toast.info('Extended search can only be done by registered users', {
+                                    type: toast.TYPE.INFO,
+                                    icon: true,
+                                    theme: 'dark'
+                                });
+                            }
+                        }}>Extended Search</span>
                     </button>
                 </div>
             </div>

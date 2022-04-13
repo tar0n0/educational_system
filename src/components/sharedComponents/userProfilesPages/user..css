@@ -1,0 +1,16 @@
+.avatar-profile-all-user {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 25px;
+
+}
+
+.header-home-profile {
+    width: 100%;
+    height: 200px;
+    background-color: #172c88;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #172c88;
+}
+

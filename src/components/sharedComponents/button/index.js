@@ -134,7 +134,6 @@ const ButtonWrapper = ({
             ).then(val => {
                 const { data } = val;
                 DataService.getExtendedSearchData.next(data);
-                console.log(val);
             }).catch(_ => {
                 toast.error(
                     GLOBAL_ERROR, {

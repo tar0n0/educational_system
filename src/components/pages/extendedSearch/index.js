@@ -26,12 +26,22 @@ import { buildCitiesData, buildCountriesData, buildData } from '../../../utils/s
 import { EXTENDED_SEARCH_VALIDATION } from '../../../utils/validations';
 import MyFiles from '../../myFiles';
 import ButtonWrapper from '../../sharedComponents/button';
+import ExtendedFiles from '../../sharedComponents/extendedFileList';
+import UserList from '../../sharedComponents/extendedSearchList';
+import ExtendedSearchList from '../../sharedComponents/extendedSearchList';
 import Footer from '../../sharedComponents/footer/footer';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Select from '../../sharedComponents/select';
 import TextfieldWrapperWrapper from '../../sharedComponents/textField';
 
 import '../home/home.css';
+
+const createData = (currentFileName, userId, fileType) => ({
+    id: currentFileName,
+    currentFileName,
+    userId,
+    fileType,
+});
 
 const ExtendedSearch = () => {
     const { setOpen, setType } = useContext(modalContext);
@@ -42,6 +52,9 @@ const ExtendedSearch = () => {
     // const [userInfo, setUserInfo] = useState(null);
     const [isUser, setIsUser] = useState(false);
     const [extendedData, setExtendedData] = useState([]);
+    const [userList, setUserList] = useState([]);
+    const [fileList, setFileList] = useState([]);
+    const [isList, setIsList] = useState(false);
     const [formValues] = useContext(formContext);
     const classes = useStyles();
 
@@ -114,9 +127,20 @@ const ExtendedSearch = () => {
                 </div>
             </div>
             <div className="content-extended-search">
-                {extendedData?.length ? (
+                {userList?.length || fileList?.length ? (
                     <>
-                        <MyFiles searchData={extendedData} isSearch={true}/>
+                        {fileList.length && (
+                            <>
+                                <h1 className="main-title">Files</h1>
+                                <ExtendedFiles data={fileList}/>
+                            </>
+                        )}
+                        {userList?.length && (
+                            <>
+                                <h1 className="main-title">Users</h1>
+                                <UserList list={userList} fileList={fileList}/>
+                            </>
+                        )}
                     </>
                 ) : (
                     <>
@@ -224,8 +248,11 @@ const ExtendedSearch = () => {
                                                                             }
                                                                         }
                                                                     ).then(val => {
+                                                                        const { usersList, filesList } = val;
+                                                                        setFileList(filesList);
+                                                                        setUserList(usersList);
                                                                         DataService.getExtendedSearchData.next(val);
-                                                                        setExtendedData(val);
+
                                                                     }).catch(_ => {
                                                                         toast.error(
                                                                             GLOBAL_ERROR, {

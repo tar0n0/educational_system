@@ -11,6 +11,7 @@ import Contact from '../components/pages/contacts';
 import Home from '../components/pages/home';
 import Universities from '../components/pages/universities';
 import Error from '../components/sharedComponents/notFound';
+import UserProfilesPages from '../components/sharedComponents/userProfilesPages';
 import {
     ABOUT,
     COMPANIES,
@@ -78,6 +79,10 @@ export const routesConfig = [
     {
         path: EXTENDED_SEARCH,
         element: <ExtendedSearch/>,
+    },
+    {
+        path: '/show-profile',
+        element: <UserProfilesPages />
     },
     {
         path: '*',

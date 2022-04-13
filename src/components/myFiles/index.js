@@ -80,11 +80,23 @@ const CustomTableCell = ({ row, name, onChange }) => {
 };
 
 const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
-    const [rows, setRows] = React.useState([]);
+    const [rows, setRows] = React.useState(searchData || []);
     const [previous, setPrevious] = React.useState({});
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(false);
     const classes = useStyles();
+    console.log(searchData, rows, 'search Data');
+
+    useEffect(() => {
+        const currentData = searchData.map(el => {
+            const currentName = el?.fileName?.split(el?.fileType.trim());
+            return createData(currentName[0], el?.userId, el?.fileType);
+        });
+        if (isSearch && searchData) {
+            console.log('xxxxx');
+            setRows((_) => currentData);
+        }
+    }, []);
 
     const onToggleEditMode = id => {
         setRows(state => {
@@ -131,22 +143,14 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     const getInitialUserFiles = () => {
         DataService.getJson(ENDPOINT_URLS[USER_MATERIALS]).then(val => {
             const { data } = val;
-            setTableData(data);
-            setRows((_) => data.map(el => {
+            const currentData = data.map(el => {
                 const currentName = el?.fileName?.split(el?.fileType.trim());
                 return createData(currentName[0], el?.userId, el?.fileType);
-            }));
+            });
+            setTableData(data);
+            setRows((_) => currentData);
         });
     };
-
-    useEffect(() => {
-        if (isSearch && searchData) {
-            setRows((_) => searchData.map(el => {
-                const currentName = el?.fileName?.split(el?.fileType.trim());
-                return createData(currentName[0], el?.userId, el?.fileType);
-            }));
-        }
-    }, []);
 
     useEffect(() => {
         if (!isSearch) {
@@ -249,8 +253,8 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                             >
                                                 <DownloadForOfflineIcon color="warning"/>
                                             </a></span>
-                                        <span className="icon-btn" onClick={() => {
-                                        }}>  <VisibilityIcon color="secondary"/></span>
+                                        {/*<span className="icon-btn" onClick={() => {*/}
+                                        {/*}}>  <VisibilityIcon color="secondary"/></span>*/}
 
                                     </>
                                 )}

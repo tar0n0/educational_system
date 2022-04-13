@@ -25,6 +25,7 @@ export const GET_ALL_CITIES = 'GET_ALL_CITIES'; // GET
 export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; // GET
 export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; // GET
 export const EXTENDED_SEARCH_PATH = 'EXTENDED_SEARCH_PATH'; // GET
+export const GET_ALL_USER_PROFILE_DATA = 'GET_ALL_USER_PROFILE_DATA'; // GET
 
 
 export const ENDPOINT_URLS = {
@@ -53,5 +54,6 @@ export const ENDPOINT_URLS = {
     [GET_ALL_CITIES]: '/Profile/GetCities',
     [GET_ALL_COMPANIES]: '/Profile/GetCompanyNames',
     [GET_ALL_UNIVERSITIES]: '/Profile/GetUniversityNames',
-    [EXTENDED_SEARCH_PATH]: '/File/ExtandedSearch',
+    [EXTENDED_SEARCH_PATH]: '/File/ExtendedSearch',
+    [GET_ALL_USER_PROFILE_DATA]: (userId) => `/Profile/GetUserProfile?userId=${userId}`
 };

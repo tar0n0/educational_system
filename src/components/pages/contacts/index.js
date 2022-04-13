@@ -1,6 +1,9 @@
+import { toast } from 'react-toastify';
+import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
+import { getStorageItem } from '../../../storage';
 import EventAnimationSVG from '../../sharedComponents/animationSVG';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
 import CarouselS from '../../sharedComponents/slideShow';
@@ -13,6 +16,7 @@ import AllContacts from './contacts';
 const Contact = () => {
     const { setOpen } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
@@ -51,7 +55,17 @@ const Contact = () => {
                 <div className="search">
                     <input className="search-input" placeholder="Search" autoComplete="off"/>
                     <button className="extend-search">
-                        <span className="span-search">Extended Search</span>
+                        <span className="span-search" onClick={() => {
+                            if (getStorageItem('user')?.token) {
+                                navigate(EXTENDED_SEARCH);
+                            } else {
+                                toast.info('Extended search can only be done by registered users', {
+                                    type: toast.TYPE.INFO,
+                                    icon: true,
+                                    theme: 'dark'
+                                });
+                            }
+                        }}>Extended Search</span>
                     </button>
                 </div>
             </div>
