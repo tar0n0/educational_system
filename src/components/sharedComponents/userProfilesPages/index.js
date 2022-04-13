@@ -1,11 +1,7 @@
-import { Container, Grid } from '@material-ui/core';
-import { Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import { Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { userIdContext } from '../../../context/userIdContext';
-import company from '../../pages/rolePages/company';
 import Footer from '../../sharedComponents/footer/footer';
 import { useNavigate } from 'react-router-dom';
 import CarouselS from '../../sharedComponents/slideShow';
@@ -13,7 +9,7 @@ import AuthorizationService from '../../../services/authorizationService';
 import { makeStyles } from "@material-ui/core/styles";
 import DataService from '../../../services/dataService';
 import { ENDPOINT_URLS, GET_ALL_USER_PROFILE_DATA } from '../../../constants/api.constants';
-import TextfieldWrapperWrapper from '../textField';
+import { getStorageItem } from '../../../storage';
 
 import './user..css';
 
@@ -49,7 +45,7 @@ const UserProfileWithAvatar = () => {
     const [userData, setUserData] = useState([]);
     const classes = useStyles();
     const navigate = useNavigate();
-    console.log(userIds);
+
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
         return () => subscription && subscription.unsubscribe();
@@ -74,7 +70,7 @@ const UserProfileWithAvatar = () => {
                         width: 120,
                         height: 120,
                         backgroundColor: '#0580e8'
-                    }}>{'TG'}</Avatar>
+                    }}>{localStorage.getItem('avatar')}</Avatar>
                 </div>
             </div>
             <div className="content-profile">

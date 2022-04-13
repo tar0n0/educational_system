@@ -24,12 +24,6 @@ const Login = () => {
     const classes = useStyles();
     const { setOpen, setType } = useContext(modalContext);
 
-
-    // const handelSubmit = () => {
-    //     console.log(values)
-    //     DataService.postJson(ENDPOINT_URLS[LOGIN], values).then(val => console.log(val));
-    // }
-
     return (
         <>
             <Header isLogin={true}/>

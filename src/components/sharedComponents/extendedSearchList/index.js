@@ -161,7 +161,6 @@ export default function UserList({ list }) {
                                     onClick={() => {
                                         setUserIds(row?.userId);
                                         navigate('/show-profile');
-                                        console.log(row?.userId, 'showProfile');
                                     }}
                                 >
                                     {/*<a href={`http://www.taceesmplatform.com/File/DownloadFile?filename=pdf&usrId=${row?.userId}`}*/}

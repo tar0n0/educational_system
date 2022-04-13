@@ -85,7 +85,6 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(false);
     const classes = useStyles();
-    console.log(searchData, rows, 'search Data');
 
     useEffect(() => {
         const currentData = searchData.map(el => {
@@ -93,7 +92,6 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
             return createData(currentName[0], el?.userId, el?.fileType);
         });
         if (isSearch && searchData) {
-            console.log('xxxxx');
             setRows((_) => currentData);
         }
     }, []);

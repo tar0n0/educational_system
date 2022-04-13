@@ -59,6 +59,9 @@ const ButtonWrapper = ({
     const handleResponse = (val) => {
         if (url && url === ENDPOINT_URLS[LOGIN]) {
             setStorageItem("user", val);
+            const userCurrentData = parseJwt(getStorageItem('user')?.token);
+            const avatarID = `${userCurrentData?.Name[0]?.toUpperCase()}${userCurrentData?.Surname[0]?.toUpperCase()}`;
+            window?.localStorage.setItem('avatar', avatarID);
             AuthorizationService.isUserStatus.next(true);
             DataService.getUserInfo.next({
                 userData: parseJwt(val?.token),
