@@ -1,9 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { ENDPOINT_URLS, GET_ALL_COMPANIES } from '../../../constants/api.constants';
+import { fromEvent } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ENDPOINT_URLS, GET_ALL_COMPANIES, INPUT_SEARCH } from '../../../constants/api.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
+import DataList from '../../sharedComponents/dataList';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     },
     cardsLayout: {
         display: "grid",
-        position:'static',
+        position: 'static',
         gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
         gridGap: "30px",
         maxWidth: "900px",
@@ -52,6 +55,9 @@ const Companies = () => {
     const { setOpen } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
     const [companies, setCompanies] = useState([]);
+    const [searchData, setSearchData] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const ref = useRef();
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -71,6 +77,24 @@ const Companies = () => {
             });
             setCompanies(_ => currentData);
         });
+    }, []);
+
+    useEffect(() => {
+        const getData = fromEvent(ref.current, "input").pipe(
+            map(e => e.target.value),
+            debounceTime(300),
+            distinctUntilChanged(),
+        ).subscribe(val => {
+            setInputValue(val);
+            DataService.getJson(ENDPOINT_URLS[INPUT_SEARCH], { input: val }).then(res => {
+                const { data } = res;
+                setSearchData(data);
+            }).catch(_ => setSearchData([]));
+        });
+
+        return () => {
+            getData.unsubscribe();
+        };
     }, []);
 
     return (
@@ -103,7 +127,7 @@ const Companies = () => {
                     )}
                 </div>
                 <div className="search">
-                    <input className="search-input" placeholder="Search" autoComplete="off"/>
+                    <input className="search-input" placeholder="Search" autoComplete="off" ref={ref}/>
                     <button className="extend-search">
                         <span className="span-search" onClick={() => {
                             if (getStorageItem('user')?.token) {
@@ -120,16 +144,26 @@ const Companies = () => {
                 </div>
             </div>
             <div className="content">
-                <main>
-                    <section className={classes.pageTitle}>
-                        <Typography variant="h4">Companies</Typography>
-                    </section>
-                    <section className={classes.cardsLayout}>
-                        {companies.map((card, index) => (
-                            <SimpleCard key={index} title={card?.title} url={card?.url} classes={classes}/>
-                        ))}
-                    </section>
-                </main>
+                {searchData?.length ? (
+                    <>
+                        <div className="content">
+                            <DataList data={searchData} title="Search Data"/>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <main>
+                            <section className={classes.pageTitle}>
+                                <Typography variant="h4">Companies</Typography>
+                            </section>
+                            <section className={classes.cardsLayout}>
+                                {companies.map((card, index) => (
+                                    <SimpleCard key={index} title={card?.title} url={card?.url} classes={classes}/>
+                                ))}
+                            </section>
+                        </main>
+                    </>
+                )}
             </div>
             <CarouselS/>
             <div className="company-footer">
