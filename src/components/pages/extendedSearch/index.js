@@ -43,6 +43,7 @@ const createData = (currentFileName, userId, fileType) => ({
     fileType,
 });
 
+
 const ExtendedSearch = () => {
     const { setOpen, setType } = useContext(modalContext);
     const [countries, setCountries] = useState([]);
@@ -129,16 +130,16 @@ const ExtendedSearch = () => {
             <div className="content-extended-search">
                 {userList?.length || fileList?.length ? (
                     <>
-                        {fileList.length && (
-                            <>
-                                <h1 className="main-title">Files</h1>
-                                <ExtendedFiles data={fileList}/>
-                            </>
-                        )}
                         {userList?.length && (
                             <>
                                 <h1 className="main-title">Users</h1>
                                 <UserList list={userList} fileList={fileList}/>
+                            </>
+                        )}
+                        {fileList.length && (
+                            <>
+                                <h1 className="main-title">Files</h1>
+                                <ExtendedFiles data={fileList}/>
                             </>
                         )}
                     </>
@@ -249,7 +250,11 @@ const ExtendedSearch = () => {
                                                                         }
                                                                     ).then(val => {
                                                                         const { usersList, filesList } = val;
-                                                                        setFileList(filesList);
+                                                                        const currentData = filesList.map((el, idx) => {
+                                                                            const currentName = el?.fileName?.split(el?.fileType.trim());
+                                                                            return createData(currentName[0], el?.userId, el?.fileType);
+                                                                        });
+                                                                        setFileList(currentData);
                                                                         setUserList(usersList);
                                                                         DataService.getExtendedSearchData.next(val);
 

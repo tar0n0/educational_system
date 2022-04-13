@@ -155,7 +155,7 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
-                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType', 'password']);
+                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType',]);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
@@ -182,7 +182,7 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
-                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType', 'password']);
+                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
@@ -209,7 +209,7 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
-                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType', 'password']);
+                }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,

@@ -1,4 +1,5 @@
 import { Container, Grid } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
@@ -77,121 +78,75 @@ const UserProfileWithAvatar = () => {
                 </div>
             </div>
             <div className="content-profile">
-                <Grid item xs={12}>
-                    <Container maxWidth="md">
-                        <div className={classes.formWrapper}>
-                            <Formik
-                                // initialValues={{
-                                //     name: userData?.name || '',
-                                //     surname: userData?.surname || '',
-                                //     email: userData?.email || '',
-                                //     phone: userData?.phone || '',
-                                //     city: userData?.city || '',
-                                //     country: userData?.country || '',
-                                //     university: userData?.university ||  '',
-                                //     company: userData?.company || '',
-                                // }}
-                                onSubmit={() => {
-                                }}
-                            >
-                                <Form>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            {userData?.name && (
-                                                <TextfieldWrapperWrapper
-                                                    name="name"
-                                                    label="Name"
-                                                    defaultValue={userData?.name}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.surname && (
-                                                <TextfieldWrapperWrapper
-                                                    name="surname"
-                                                    label="Surname"
-                                                    defaultValue={userData?.surname}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
+                <div className="main">
+                    <h2>Profile Info</h2>
+                    <div className="card">
+                        <div className="card-body">
+                            <i className="fa fa-pen fa-xs edit"></i>
+                            <table>
+                                <tbody>
+                                    {userData?.name && (
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>:</td>
+                                            <td>{userData?.name}</td>
+                                        </tr>
+                                    )}
+                                    {userData?.surname && (
+                                        <tr>
+                                            <td>Surname</td>
+                                            <td>:</td>
+                                            <td>{userData?.surname}</td>
+                                        </tr>
 
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.email && (
-                                                <TextfieldWrapperWrapper
-                                                    name="email"
-                                                    label="Email"
-                                                    defaultValue={userData?.email}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.phone && (
-                                                <TextfieldWrapperWrapper
-                                                    name="phone"
-                                                    label="Phone"
-                                                    defaultValue={userData?.phone}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.city && (
-                                                <TextfieldWrapperWrapper
-                                                    name="city"
-                                                    label="City"
-                                                    defaultValue={userData?.city}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.country && (
-                                                <TextfieldWrapperWrapper
-                                                    name="country"
-                                                    label="Country"
-                                                    defaultValue={userData?.country}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.company && (
-                                                <TextfieldWrapperWrapper
-                                                    name="company"
-                                                    label="Company"
-                                                    defaultValue={userData?.company}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {userData?.university && (
-                                                <TextfieldWrapperWrapper
-                                                    name="university"
-                                                    label="University"
-                                                    defaultValue={userData?.university}
-                                                    autoComplete="on"
-                                                    disabled={true}
-                                                />
-                                            )}
-                                        </Grid>
-                                    </Grid>
-                                </Form>
-                            </Formik>
+                                    )}
+                                    {userData?.phone && (
+                                        <tr>
+                                            <td>Phone</td>
+                                            <td>:</td>
+                                            <td>{userData?.phone}</td>
+                                        </tr>
+                                    )}
+                                    {userData?.link && (
+                                        <tr>
+                                            <td>Link</td>
+                                            <td>:</td>
+                                            <td>{userData?.link}</td>
+                                        </tr>
+                                    )}
+                                    {userData?.city && (
+                                        <tr>
+                                            <td>City</td>
+                                            <td>:</td>
+                                            <td>{userData?.city}</td>
+                                        </tr>
+                                    )}
+                                    {userData?.country && (
+                                        <tr>
+                                            <td>Country</td>
+                                            <td>:</td>
+                                            <td>{userData?.country}</td>
+                                        </tr>
+                                    )}
+                                    {userData?.email && (
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>:</td>
+                                            <td>{userData?.email}</td>
+                                        </tr>
+                                    )}
+                                    {userData?.company && (
+                                        <tr>
+                                            <td>Company</td>
+                                            <td>:</td>
+                                            <td>{userData?.company}</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
-                    </Container>
-                </Grid>
-
+                    </div>
+                </div>
             </div>
             <CarouselS/>
             <div className="company-footer">

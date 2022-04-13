@@ -195,21 +195,14 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         label="First Name"
                                                         autoComplete="on"
                                                     />
-                                                    <Checkbox
-                                                        name="isName"
-                                                        label="Private First Name"
-                                                    />
+
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         name="surname"
                                                         label="Surname"
                                                     />
-                                                    <Checkbox
-                                                        name="isSurname"
-                                                        label="Private Surname"
-                                                        autoComplete="on"
-                                                    />
+
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
@@ -218,10 +211,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         autoComplete="on"
                                                         disabled={Boolean(isToken)}
                                                     />
-                                                    <Checkbox
-                                                        label="Private Email"
-                                                        name="isEmail"
-                                                    />
+
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
@@ -281,11 +271,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         />
                                                     </Grid>
                                                 )}
-                                                <Grid item xs={12}>
-                                                    <Typography>
-                                                        <span className="typography-text">  Uploaded Files</span>
-                                                    </Typography>
-                                                </Grid>
+
                                                 <Grid item xs={12}>
                                                     <TextfieldWrapperWrapper
                                                         type="text"
@@ -293,6 +279,11 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         autoComplete="on"
                                                         label="Link"
                                                     />
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <Typography>
+                                                        <span className="typography-text">  Uploaded Files</span>
+                                                    </Typography>
                                                 </Grid>
                                                 <Grid item xs={12}>
                                                     <div className="container-uploaded-file">

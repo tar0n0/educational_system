@@ -14,7 +14,7 @@ import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: "650px",
+        width: 650,
         marginTop: theme.spacing(3),
         margin: '0 auto',
         overflowX: "auto"
@@ -40,11 +40,6 @@ const createData = (currentFileName, userId, fileType) => ({
     currentFileName,
     userId,
     fileType,
-    // calories,
-    // fat,
-    // carbs,
-    // protein,
-    isEditMode: false
 });
 
 const CustomTableCell = ({ row, name }) => {
@@ -60,13 +55,13 @@ const ExtendedFiles = ({ data }) => {
     const [rows, setRows] = React.useState(data || []);
     const classes = useStyles();
 
-    useEffect(() => {
-        const currentData = data.map((el, idx) => {
-            const currentName = el?.fileName?.split(el?.fileType.trim());
-            return createData(currentName[0], el?.userId, el?.fileType);
-        });
-        setRows(currentData);
-    }, []);
+    // useEffect(() => {
+    //     const currentData = data.map((el, idx) => {
+    //         const currentName = el?.fileName?.split(el?.fileType.trim());
+    //         return createData(currentName[0], el?.userId, el?.fileType);
+    //     });
+    //     setRows(currentData);
+    // }, []);
 
     console.log(rows, 'roews');
     return (

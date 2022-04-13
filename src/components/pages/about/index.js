@@ -73,14 +73,21 @@ const About = () => {
             </div>
             <div className="content">
                 <div className="list-btns">
-
+                    <h1 className='h1-about'>The platform was developed by the NPUA team.</h1>
+                    <p className='text-for-about'>
+                        Through online Platform, TACEESM project opens up enormous possibilities for partner countries
+                        to become part of European network of education and industry, and brings new capabilities of
+                        colaboration through virtual space.
+                        Through dynamic, up to date, and innovative activities partner institutions will collaborate
+                        with local community, industry and international partners through virtual inviroment.</p>
                 </div>
             </div>
             <CarouselS/>
             <div className="about-footer">
                 <Footer/>
             </div>
-        </>);
+        </>
+    );
 };
 
 export default About;
