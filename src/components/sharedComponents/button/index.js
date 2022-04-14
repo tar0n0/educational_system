@@ -340,6 +340,9 @@ const ButtonWrapper = ({
             })
             .catch((e) => {
                 console.log(e, 'error');
+                if (url === ENDPOINT_URLS[REGISTRATION]) {
+                    console.log(e);
+                }
                 toast.error(
                     message ||
                     e.error.response.data.title ||

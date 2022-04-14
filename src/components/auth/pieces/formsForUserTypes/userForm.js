@@ -186,6 +186,10 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             newPassword: '',
                                             oldPassword: '',
                                         }}
+                                        validateOnBlur={true}
+                                        validateOnChange={true}
+                                        isInitialValid={true}
+                                        validateOnMount={true}
                                         validationSchema={USER_REGISTRATION_VALIDATION}
                                         onSubmit={() => {
 
