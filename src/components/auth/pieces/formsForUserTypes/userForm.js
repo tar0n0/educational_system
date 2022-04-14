@@ -204,6 +204,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <TextfieldWrapperWrapper
                                                         name="name"
                                                         label="First Name"
+                                                        required={true}
                                                         autoComplete="on"
                                                     />
 
@@ -212,6 +213,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <TextfieldWrapperWrapper
                                                         name="surname"
                                                         label="Surname"
+                                                        required={true}
                                                     />
 
                                                 </Grid>
@@ -220,6 +222,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="email"
                                                         label="Email"
                                                         autoComplete="on"
+                                                        required={true}
                                                         disabled={Boolean(isToken)}
                                                     />
 
@@ -229,6 +232,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="phone"
                                                         label="Phone"
                                                         autoComplete="on"
+                                                        required={true}
 
                                                     />
                                                     <Checkbox
@@ -288,6 +292,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         type="text"
                                                         name="link"
                                                         autoComplete="on"
+                                                        required={true}
                                                         label="Link"
                                                     />
                                                 </Grid>
@@ -321,6 +326,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         type="password"
+                                                        required={true}
                                                         name={editUserInfo ? 'oldPassword' : 'password'}
                                                         autoComplete="on"
                                                         label={editUserInfo ? 'Old Password' : 'password'}
@@ -329,6 +335,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         type="password"
+                                                        required={true}
                                                         name={editUserInfo ? 'newPassword' : 'confirmPassword'}
                                                         autoComplete="on"
                                                         label={editUserInfo ? 'New Password' : 'Confirm Password'}

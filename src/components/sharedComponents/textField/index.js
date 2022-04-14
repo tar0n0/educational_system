@@ -14,7 +14,7 @@ const TextfieldWrapper = ({
         setFormValues(values);
     }, [values]);
     const configTextfield = {
-        ...field, ...otherProps, fullWidth: true, variant: 'outlined'
+        ...field, ...otherProps, fullWidth: true, variant: 'outlined',
     };
 
     if (mata && mata.touched && mata.error) {

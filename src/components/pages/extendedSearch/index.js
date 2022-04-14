@@ -187,7 +187,7 @@ const ExtendedSearch = () => {
                                                     <Grid item xs={3}>
                                                         <Select
                                                             name="cityId"
-                                                            label="CityId"
+                                                            label="City"
                                                             autoComplete="on"
                                                             options={cities || []}
                                                         />

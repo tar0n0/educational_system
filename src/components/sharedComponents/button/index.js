@@ -158,6 +158,7 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
+                    link: userInfo?.link || currentParams?.link || null
                 }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType',]);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
@@ -185,6 +186,7 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
+                    link: userInfo?.link || currentParams?.link || null
                 }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
@@ -212,6 +214,7 @@ const ButtonWrapper = ({
                     ...currentParams,
                     password: currentParams?.oldPassword,
                     newPassword: currentParams?.newPassword,
+                    link: userInfo?.link || currentParams?.link || null
                 }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType']);
 
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
@@ -278,6 +281,7 @@ const ButtonWrapper = ({
                 handleResponse(val);
             })
             .catch((e) => {
+                console.log(e, 'error');
                 toast.error(
                     message ||
                     e.error.response.data.title ||
