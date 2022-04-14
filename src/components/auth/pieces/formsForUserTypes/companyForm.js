@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,15 +13,18 @@ import {
     COMPANY_CITIES,
     COMPANY_COUNTRIES, COMPANY_NAME,
     ENDPOINT_URLS,
-    EXTENDED_SEARCH_PATH, UNIVERSITY_CITIES,
+    EXTENDED_SEARCH_PATH, LOGIN, REGISTRATION, UNIVERSITY_CITIES,
     UNIVERSITY_COUNTRIES, UNIVERSITY_NAME,
     USER_INFO
 } from '../../../../constants/api.constants';
-import { GLOBAL_ERROR } from '../../../../constants/messages.constants';
+import { GLOBAL_ERROR, LOGIN_SUCCESS, WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
+import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../../constants/pathnames.constants';
 import { USER_TYPE } from '../../../../constants/ui.constants';
 import { formContext } from '../../../../context/formContext';
+import AuthorizationService from '../../../../services/authorizationService';
 import DataService from '../../../../services/dataService';
-import { getStorageItem } from '../../../../storage';
+import { getStorageItem, setStorageItem } from '../../../../storage';
+import { parseJwt } from '../../../../utils/helpers';
 import { buildCitiesData, buildCountriesData, buildData, getData, getNameById } from '../../../../utils/supporters';
 import Header from '../../../headerActions';
 import '../../pieces/style.css';
@@ -52,6 +55,7 @@ const CompanyForm = ({ isAllContent = true }) => {
     const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(false);
     const isToken = getStorageItem('user')?.token || '';
+    const navigate = useNavigate();
     const classes = useStyles();
     const handleSubmit = (params) => {
     };
@@ -94,6 +98,35 @@ const CompanyForm = ({ isAllContent = true }) => {
                 .then(val => setData(buildData(val, true)));
         }
     }, [formValues?.cityId, formValues?.countryId, cities?.length]);
+    const handleResponse = (val) => {
+        navigate(HOME);
+        toast.info(WAIT_ADMIN_CONFIRM, {
+            type: toast.TYPE.INFO,
+            theme: "dark",
+        });
+    };
+
+    const handelSubmit = (values) => {
+        setLoading(true);
+        DataService.postJson(ENDPOINT_URLS[REGISTRATION], { ...values })
+            .then((val) => {
+                handleResponse(val);
+            })
+            .catch((e) => {
+                console.log(e, 'error');
+
+                toast.error(
+                    e.error.response.data.title ||
+                        "Something Went Wrong",
+                    {
+                        type: toast.TYPE.ERROR,
+                        icon: true,
+                        theme: "dark",
+                    }
+                );
+            })
+            .finally(() => setLoading(false));
+    };
 
     return (
         <>
@@ -121,6 +154,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                 validateOnMount={true}
                                 validationSchema={FORM_COMPANY_REGISTRATION_VALIDATOR}
                                 onSubmit={values => {
+                                    handelSubmit(values);
                                 }}
                             >
                                 <Form>
@@ -128,7 +162,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <Typography>
                                                 {isAllContent &&
-                                                    <span className="typography-text">Create Account</span>}
+                                                        <span className="typography-text">Create Account</span>}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
@@ -158,7 +192,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                             />
 
                                         </Grid>
-                              
+
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="link"
@@ -209,13 +243,10 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
-                                                <Button className="extended-button-submit"
-                                                    variant="contained"
-                                                    disabled={Object.values(formValues).every(el => !el)}
-                                                    onClick={() => console.log('Company Form')}
+                                                <button className="extended-button-submit-1"
                                                 >
-                                                    Search
-                                                </Button>
+                                                        Submit
+                                                </button>
                                             </div>
                                         </Grid>
                                     </Grid>
@@ -228,6 +259,7 @@ const CompanyForm = ({ isAllContent = true }) => {
             {isAllContent && <Footer/>}
         </>
     );
-};
+}
+;
 
 export default CompanyForm;

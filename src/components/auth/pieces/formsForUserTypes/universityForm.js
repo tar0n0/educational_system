@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -11,11 +12,13 @@ import {
 import {
     COMPANY_CITIES,
     COMPANY_COUNTRIES, COMPANY_NAME,
-    ENDPOINT_URLS,
+    ENDPOINT_URLS, REGISTRATION,
     UNIVERSITY_CITIES,
     UNIVERSITY_COUNTRIES, UNIVERSITY_NAME,
     USER_INFO
 } from '../../../../constants/api.constants';
+import { WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
+import { HOME } from '../../../../constants/pathnames.constants';
 import { USER_TYPE } from '../../../../constants/ui.constants';
 import { formContext } from '../../../../context/formContext';
 import DataService from '../../../../services/dataService';
@@ -48,6 +51,7 @@ const UniversityForm = ({ isAllContent = true }) => {
     const [file, setFile] = useState();
     const [formValues] = useContext(formContext);
     const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
+    const navigate = useNavigate();
     const [countries, setCountries] = useState(getData(type));
     const [cities, setCities] = useState([]);
     const [data, setData] = useState([]);
@@ -95,7 +99,34 @@ const UniversityForm = ({ isAllContent = true }) => {
     }, [formValues?.cityId, formValues?.countryId, cities?.length]);
 
 
-    const handleSubmit = (params) => {
+    const handleResponse = (val) => {
+        navigate(HOME);
+        toast.info(WAIT_ADMIN_CONFIRM, {
+            type: toast.TYPE.INFO,
+            theme: "dark",
+        });
+    };
+
+    const handelSubmit = (values) => {
+        setLoading(true);
+        DataService.postJson(ENDPOINT_URLS[REGISTRATION], { ...values })
+            .then((val) => {
+                handleResponse(val);
+            })
+            .catch((e) => {
+                console.log(e, 'error');
+
+                toast.error(
+                    e.error.response.data.title ||
+                    "Something Went Wrong",
+                    {
+                        type: toast.TYPE.ERROR,
+                        icon: true,
+                        theme: "dark",
+                    }
+                );
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -124,6 +155,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                                 validateOnMount={true}
                                 validationSchema={FORM_UNIVERSITY_REGISTRATION_VALIDATOR}
                                 onSubmit={values => {
+                                    handelSubmit(values);
                                 }}
                             >
                                 <Form>
@@ -138,7 +170,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             <Select
                                                 name="countryId"
                                                 label="Country"
-                                                required
                                                 disabled={Boolean(isToken)}
                                                 options={countries || [userInfo?.country] || []}
                                             />
@@ -146,7 +177,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Select
-                                                required
                                                 name="cityId"
                                                 label="City"
                                                 disabled={Boolean(isToken)}
@@ -167,7 +197,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             <TextfieldWrapperWrapper
                                                 name="link"
                                                 label="Link"
-                                                required
 
                                             />
 
@@ -191,7 +220,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             {isAllContent && <TextfieldWrapperWrapper
                                                 name="login"
                                                 label="Login"
-                                                required
 
                                             />}
                                         </Grid>
@@ -199,7 +227,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             {isAllContent ? (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
-                                                    required
 
                                                     label="Password"
                                                 />
@@ -207,7 +234,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                                 <TextfieldWrapperWrapper
                                                     name="password"
                                                     label="New Password"
-                                                    required
 
                                                 />
                                             </>)}
@@ -216,20 +242,18 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             <TextfieldWrapperWrapper
                                                 name="confirmPassword"
                                                 label="Confirm Password"
-                                                required
 
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
-                                                <Button className="extended-button-submit"
+                                                <button className="extended-button-submit-1"
                                                     type="submit"
                                                     variant="contained"
-                                                    disabled={Object.values(formValues).every(el => !el)}
                                                     onClick={() => console.log('Company Form')}
                                                 >
-                                                    Search
-                                                </Button>
+                                                    Submit
+                                                </button>
                                             </div>
                                         </Grid>
                                     </Grid>

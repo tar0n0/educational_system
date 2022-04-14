@@ -415,7 +415,18 @@
     padding: 15px;
     font-size: 25px;
     color: white;
-    background: #3498db;
+    background: #172c88;
+}
+
+.extended-button-submit-1 {
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    font-size: 25px;
+    color: white;
+    background: #172c88;
+    cursor: pointer;
 }
 
 
