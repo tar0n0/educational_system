@@ -1,5 +1,7 @@
 import React from 'react';
 import Login from '../components/auth/login';
+import CompanyForm from '../components/auth/pieces/formsForUserTypes/companyForm';
+import UniversityForm from '../components/auth/pieces/formsForUserTypes/universityForm';
 import UserForm from '../components/auth/pieces/formsForUserTypes/userForm';
 import ExtendedSearch from '../components/pages/extendedSearch';
 import UserPage from '../components/pages/rolePages/user';
@@ -58,11 +60,11 @@ export const routesConfig = [
     },
     {
         path: SIGN_UP_UNIVERSITY,
-        element: <UserForm/>
+        element: <UniversityForm/>
     },
     {
         path: SIGN_UP_COMPANY,
-        element: <UserForm/>
+        element: <CompanyForm/>
     },
     {
         path: USER_PAGE,
@@ -82,7 +84,7 @@ export const routesConfig = [
     },
     {
         path: '/show-profile',
-        element: <UserProfilesPages />
+        element: <UserProfilesPages/>
     },
     {
         path: '*',
