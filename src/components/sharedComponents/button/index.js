@@ -160,7 +160,27 @@ const ButtonWrapper = ({
                     newPassword: currentParams?.newPassword,
                     link: userInfo?.link || currentParams?.link || null
                 }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType',]);
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('files', file);
+                    formData.append('FileVersion', 1);
+                    setLoading(true);
+                    axios.post(`${configs.connection.server_url + ENDPOINT_URLS[UPLOAD_FILE]}`, formData, {
+                        headers: {
+                            Authorization: `Bearer ${getStorageItem('user')?.token}`
+                        },
+                    })
+                        .then((_) => {
+                            toast.success(UPLOADED_FILE, {
+                                type: toast.TYPE.SUCCESS,
+                                icon: true,
+                                theme: "dark",
+                            });
+                            handleReset();
+                            setFile(null);
+                        });
 
+                }
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
                     city: {
@@ -188,7 +208,26 @@ const ButtonWrapper = ({
                     newPassword: currentParams?.newPassword,
                     link: userInfo?.link || currentParams?.link || null
                 }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType']);
-
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('files', file);
+                    formData.append('FileVersion', 1);
+                    setLoading(true);
+                    axios.post(`${configs.connection.server_url + ENDPOINT_URLS[UPLOAD_FILE]}`, formData, {
+                        headers: {
+                            Authorization: `Bearer ${getStorageItem('user')?.token}`
+                        },
+                    })
+                        .then((_) => {
+                            toast.success(UPLOADED_FILE, {
+                                type: toast.TYPE.SUCCESS,
+                                icon: true,
+                                theme: "dark",
+                            });
+                            handleReset();
+                            setFile(null);
+                        });
+                }
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
                     city: {
@@ -216,7 +255,26 @@ const ButtonWrapper = ({
                     newPassword: currentParams?.newPassword,
                     link: userInfo?.link || currentParams?.link || null
                 }, ...['oldPassword', 'cityId', 'countryId', 'companyId', 'universityId', 'file', 'image', 'isCV', 'isImage', 'userType']);
-
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('files', file);
+                    formData.append('FileVersion', 1);
+                    setLoading(true);
+                    axios.post(`${configs.connection.server_url + ENDPOINT_URLS[UPLOAD_FILE]}`, formData, {
+                        headers: {
+                            Authorization: `Bearer ${getStorageItem('user')?.token}`
+                        },
+                    })
+                        .then((_) => {
+                            toast.success(UPLOADED_FILE, {
+                                type: toast.TYPE.SUCCESS,
+                                icon: true,
+                                theme: "dark",
+                            });
+                            handleReset();
+                            setFile(null);
+                        });
+                }
                 DataService.postJson(ENDPOINT_URLS[EDIT_USER_INFO], {
                     ...currentEditedUserInfo,
                     city: {

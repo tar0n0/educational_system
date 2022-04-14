@@ -1,4 +1,3 @@
-import Avatar from '@mui/material/Avatar';
 import './userCard.css';
 import { useEffect, useState } from 'react';
 import { ENDPOINT_URLS, GET_ALL_USER_PROFILE_DATA } from '../../../constants/api.constants';

@@ -205,7 +205,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="name"
                                                         label="First Name"
                                                         required={true}
-                                                        autoComplete="on"
+                                                        autoComplete="off"
                                                     />
 
                                                 </Grid>
@@ -221,7 +221,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <TextfieldWrapperWrapper
                                                         name="email"
                                                         label="Email"
-                                                        autoComplete="on"
+                                                        autoComplete="off"
                                                         required={true}
                                                         disabled={Boolean(isToken)}
                                                     />
@@ -291,7 +291,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <TextfieldWrapperWrapper
                                                         type="text"
                                                         name="link"
-                                                        autoComplete="on"
+                                                        autoComplete="off"
                                                         required={true}
                                                         label="Link"
                                                     />
@@ -328,7 +328,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         type="password"
                                                         required={true}
                                                         name={editUserInfo ? 'oldPassword' : 'password'}
-                                                        autoComplete="on"
+                                                        autoComplete="off"
                                                         label={editUserInfo ? 'Old Password' : 'password'}
                                                     />
                                                 </Grid>
@@ -337,7 +337,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         type="password"
                                                         required={true}
                                                         name={editUserInfo ? 'newPassword' : 'confirmPassword'}
-                                                        autoComplete="on"
+                                                        autoComplete="off"
                                                         label={editUserInfo ? 'New Password' : 'Confirm Password'}
                                                     />
                                                 </Grid>
