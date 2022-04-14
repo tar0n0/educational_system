@@ -141,7 +141,14 @@
     cursor: pointer;
 }
 
-
+.about-content {
+    margin: 0 auto;
+    max-width: 850px;
+    padding: 10px;
+    border-radius: 12px;
+    background: #1c4f97;
+    color: white;
+}
 .list-btns {
     width: 100%;
     display: inline-block;
@@ -417,18 +424,19 @@
 }
 
 .h1-about {
-    color: darkblue;
+    color: white;
     margin-bottom: 25px;
+    padding: 10px;
     font-size: 30px;
     font-family: sans-serif;
 }
 
 .text-for-about {
     font-family: sans-serif;
-    padding: 5px;
+    padding: 15px;
     margin-top: 10px;
     font-size: 20px;
-    color: darkblue;
+    color: white;
 
     font-style: italic;
     font-weight: bold;

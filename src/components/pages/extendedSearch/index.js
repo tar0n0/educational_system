@@ -35,6 +35,7 @@ import Select from '../../sharedComponents/select';
 import TextfieldWrapperWrapper from '../../sharedComponents/textField';
 
 import '../home/home.css';
+import UserCard from '../../sharedComponents/userCard';
 
 const createData = (currentFileName, userId, fileType) => ({
     id: currentFileName,
@@ -130,10 +131,14 @@ const ExtendedSearch = () => {
             <div className="content-extended-search">
                 {userList?.length || fileList?.length ? (
                     <>
-                        {userList?.length && (
+                        {userList?.length && userList.length > 1 ? (
                             <>
                                 <h1 className="main-title">Users</h1>
                                 <UserList list={userList} fileList={fileList}/>
+                            </>
+                        ) : (
+                            <>
+                                <UserCard data={userList[0]}/>
                             </>
                         )}
                         {fileList.length && (
@@ -254,6 +259,13 @@ const ExtendedSearch = () => {
                                                                             const currentName = el?.fileName?.split(el?.fileType.trim());
                                                                             return createData(currentName[0], el?.userId, el?.fileType);
                                                                         });
+                                                                        if (!usersList?.length && !filesList?.length) {
+                                                                            toast.info('No data were found during the search', {
+                                                                                type: toast.TYPE.INFO,
+                                                                                icon: true,
+                                                                                theme: "dark"
+                                                                            });
+                                                                        }
                                                                         setFileList(currentData);
                                                                         setUserList(usersList);
                                                                         DataService.getExtendedSearchData.next(val);

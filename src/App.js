@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
 import UserIdProvider from './context/userIdContext';
+import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap"; // <-- JS File
 
 function App() {
     useEffect(() => {

@@ -36,14 +36,15 @@ const useStyles = makeStyles(theme => ({
         minWidth: 650
     },
     selectTableCell: {
-        width: 60
+        width: 150,
+        marginRight: 20
     },
     tableCell: {
-        width: 130,
+        width: 200,
         height: 40
     },
     input: {
-        width: 130,
+        width: 200,
         height: 40
     }
 }));
@@ -65,7 +66,7 @@ const CustomTableCell = ({ row, name, onChange }) => {
     const { isEditMode } = row;
     return (
         <TableCell align="left" className={classes.tableCell}>
-            {isEditMode ? (
+            {isEditMode && name !== 'fileType' ? (
                 <Input
                     value={row[name]}
                     name={name}
@@ -208,6 +209,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                     <TableRow>
                         <TableCell align="left">Actions</TableCell>
                         <TableCell align="left">Your File names</TableCell>
+                        <TableCell align="left">File Type</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -258,6 +260,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                 )}
                             </TableCell>
                             <CustomTableCell {...{ row, name: "currentFileName", onChange }} />
+                            <CustomTableCell {...{ row, name: "fileType" }} disabled />
                         </TableRow>
                     ))}
                 </TableBody>

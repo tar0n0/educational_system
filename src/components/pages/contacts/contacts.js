@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import EmailIcon from '@mui/icons-material/Email';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-import './contact.css';
+// import './contact.css';
 
 const AllContacts = () => {
     return (

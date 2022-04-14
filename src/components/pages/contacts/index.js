@@ -16,7 +16,7 @@ import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
 
 import '../home/home.css';
-import AllContacts from './contacts';
+import './contact.css';
 
 const Contact = () => {
     const { setOpen } = useContext(modalContext);
@@ -105,10 +105,36 @@ const Contact = () => {
                     </>
                 ) : (
                     <>
-                        <div>
+
+                        <div className="profile-wrapper">
+                            <div className="profile-details">
+                                <div>
+                                    <div className="profile-title">
+                                        <h1 id="profile-name" className="profile-name">Polytech Team</h1>
+                                    </div>
+                                    <ul>
+                                        <li className="profile-number">
+                                            <div>Name</div>
+                                            <div id="profile-first-number">Polytechnic</div>
+                                        </li>
+                                        <li className="profile-number">
+                                            <div>Address</div>
+                                            <div id="profile-second-number">Armenia, Yerevan, Teryan 105, 0009</div>
+                                        </li>
+                                        <li className="profile-email">
+                                            <div> Email</div>
+                                            <div id="profile-primary-email">info@polytechnic.am</div>
+                                        </li>
+                                        <li className="profile-email">
+                                            <div>Phone </div>
+                                            <div id="profile-secondary-email">+374 10 56 79 68</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div className="list-btns">
-                            <AllContacts/>
+                        <div className="contact-action">
+
                         </div>
                     </>
                 )}

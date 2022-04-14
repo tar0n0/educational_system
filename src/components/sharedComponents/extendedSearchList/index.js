@@ -85,8 +85,8 @@ function TablePaginationActions(props) {
     );
 }
 
-function createData(name, surname, userId) {
-    return { name, surname, userId };
+function createData(name, surName, userId) {
+    return { name, surName, userId };
 }
 
 
@@ -100,7 +100,8 @@ export default function UserList({ list }) {
     const getInitialData = () => {
         setIsLoading(true);
         if (list && list.length) {
-            const currentData = list?.map(el => createData(el?.name, el?.surname, el?.userId));
+            console.log(list, 'list');
+            const currentData = list?.map(el => createData(el?.name, el?.surName, el?.userId));
             setRows(currentData);
         }
         setIsLoading(false);
@@ -151,7 +152,7 @@ export default function UserList({ list }) {
                                 {row.name}
                             </TableCell>
                             <TableCell align="right">
-                                {row.surname}
+                                {row.surName}
                             </TableCell>
                             <TableCell align="right">
                                 <IconButton
