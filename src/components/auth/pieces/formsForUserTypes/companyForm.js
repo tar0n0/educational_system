@@ -46,9 +46,12 @@ const CompanyForm = ({ isAllContent = true }) => {
     const location = useLocation();
     const isSignUpPage = location?.pathname.replaceAll('/', '').includes('sign-up');
     const type = isSignUpPage ? location.pathname.replaceAll('/', '').replaceAll('sign-up', '').toUpperCase() : '';
+    const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
+    const dropdownLabel = (type === UNIVERSITY) ? 'University' : (type === COMPANY) ? 'Company' : '';
+    const dropdownName = (type === UNIVERSITY) ? 'university' : (type === COMPANY) ? 'company' : '';
+    const checkboxName = (type === UNIVERSITY) ? 'isUniversity' : (type === COMPANY) ? 'isCompany' : '';
     const [file, setFile] = useState();
     const [formValues] = useContext(formContext);
-    const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
     const [countries, setCountries] = useState(getData(type));
     const [cities, setCities] = useState([]);
     const [data, setData] = useState([]);
@@ -106,9 +109,10 @@ const CompanyForm = ({ isAllContent = true }) => {
         });
     };
 
-    const handelSubmit = (values) => {
+    const handelSubmit = () => {
+        console.log(formValues, 'sadas');
         setLoading(true);
-        DataService.postJson(ENDPOINT_URLS[REGISTRATION], { ...values })
+        DataService.postJson(ENDPOINT_URLS[REGISTRATION], {})
             .then((val) => {
                 handleResponse(val);
             })
@@ -154,7 +158,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                 validateOnMount={true}
                                 validationSchema={FORM_COMPANY_REGISTRATION_VALIDATOR}
                                 onSubmit={values => {
-                                    handelSubmit(values);
+
                                 }}
                             >
                                 <Form>
@@ -243,15 +247,18 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
-                                                <button className="extended-button-submit-1"
+                                                <Button className="extended-button-submit-1"
+                                                    url={ENDPOINT_URLS[REGISTRATION]}
+                                                    type={type}
                                                 >
                                                         Submit
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Grid>
                                     </Grid>
                                 </Form>
                             </Formik>
+
                         </div>
                     </Container>
                 </Grid>

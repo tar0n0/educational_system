@@ -51,7 +51,7 @@ const ButtonWrapper = ({
     setClickType,
     ...otherProps
 }) => {
-    const { values, handleReset } = useFormikContext();
+    const { values, handleReset } = useFormikContext() || {};
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
@@ -103,21 +103,21 @@ const ButtonWrapper = ({
 
     const handelSubmit = async () => {
         const currentParams =
-            type && type === UNIVERSITY
-                ? removeKeyFromObject(
-                    values,
-                    ...removeExtraPropsForUniversityForm
-                )
-                : removeKeyFromObject(
-                    values,
-                    ...removeExtraPropsForCompanyForm
-                );
+                type && type === UNIVERSITY
+                    ? removeKeyFromObject(
+                        values,
+                        ...removeExtraPropsForUniversityForm
+                    )
+                    : removeKeyFromObject(
+                        values,
+                        ...removeExtraPropsForCompanyForm
+                    );
         const userID =
-            type === UNIVERSITY
-                ? USER_ROLES[UNIVERSITY]
-                : type === COMPANY
-                    ? USER_ROLES[COMPANY]
-                    : USER_ROLES[USER];
+                type === UNIVERSITY
+                    ? USER_ROLES[UNIVERSITY]
+                    : type === COMPANY
+                        ? USER_ROLES[COMPANY]
+                        : USER_ROLES[USER];
 
         if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
             const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
@@ -334,7 +334,26 @@ const ButtonWrapper = ({
         }
 
         setLoading(true);
-        DataService.postJson(url, { ...currentParams, userType: userID })
+        console.log(currentParams, 'currentParams');
+
+        DataService.postJson(url, {
+            ...removeKeyFromObject({
+                ...currentParams,
+                ...(type && type === USER_TYPE.COMPANY ? {
+                    ...currentParams,
+                    email: currentParams?.login,
+                    name: currentParams?.companyId,
+                    surname: 'COMPANY',
+                } : {}),
+                ...(type && type === USER_TYPE.UNIVERSITY ? {
+                    ...currentParams,
+                    email: currentParams?.login,
+                    name: currentParams?.universityId,
+                    surname: 'UNIVERSITY',
+                } : {}),
+            }, 'login'),
+            userType: userID === 3 ? DataService.getUserType.getValue() : userID,
+        })
             .then((val) => {
                 handleResponse(val);
             })
@@ -345,8 +364,8 @@ const ButtonWrapper = ({
                 }
                 toast.error(
                     message ||
-                    e.error.response.data.title ||
-                    "Something Went Wrong",
+                        e.error.response.data.title ||
+                        "Something Went Wrong",
                     {
                         type: toast.TYPE.ERROR,
                         icon: true,
@@ -355,7 +374,8 @@ const ButtonWrapper = ({
                 );
             })
             .finally(() => setLoading(false));
-    };
+    }
+    ;
 
     const configButton = {
         variant: "contained",

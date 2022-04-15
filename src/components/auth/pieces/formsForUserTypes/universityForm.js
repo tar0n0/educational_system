@@ -48,9 +48,9 @@ const UniversityForm = ({ isAllContent = true }) => {
     const location = useLocation();
     const isSignUpPage = location?.pathname.replaceAll('/', '').includes('sign-up');
     const type = isSignUpPage ? location.pathname.replaceAll('/', '').replaceAll('sign-up', '').toUpperCase() : '';
+    const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
     const [file, setFile] = useState();
     const [formValues] = useContext(formContext);
-    const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
     const navigate = useNavigate();
     const [countries, setCountries] = useState(getData(type));
     const [cities, setCities] = useState([]);
@@ -247,13 +247,12 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
-                                                <button className="extended-button-submit-1"
-                                                    type="submit"
-                                                    variant="contained"
-                                                    onClick={() => console.log('Company Form')}
+                                                <Button className="extended-button-submit-1"
+                                                    type={type}
+                                                    url={ENDPOINT_URLS[REGISTRATION]}
                                                 >
                                                     Submit
-                                                </button>
+                                                </Button>
                                             </div>
                                         </Grid>
                                     </Grid>
