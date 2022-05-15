@@ -10,12 +10,11 @@ import {
     Typography
 } from '@material-ui/core';
 import {
-    COMPANY_CITIES,
-    COMPANY_COUNTRIES, COMPANY_NAME,
     ENDPOINT_URLS, REGISTRATION,
     UNIVERSITY_CITIES,
     UNIVERSITY_COUNTRIES, UNIVERSITY_NAME,
-    USER_INFO
+    USER_INFO,
+    UNIVERSITY_REGISTRATION,
 } from '../../../../constants/api.constants';
 import { WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
 import { HOME } from '../../../../constants/pathnames.constants';
@@ -27,13 +26,11 @@ import { buildCitiesData, buildCountriesData, buildData, getData, getNameById } 
 import Header from '../../../headerActions';
 import '../../pieces/style.css';
 import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
-import Checkbox from '../../../sharedComponents/checkbox';
 import Button from '../../../sharedComponents/button';
 import Select from '../../../sharedComponents/select';
 import Footer from '../../../sharedComponents/footer/footer';
 import UploadInput from '../../../sharedComponents/uploadedFile';
 import { FORM_UNIVERSITY_REGISTRATION_VALIDATOR } from '../../../../utils/validations';
-import { INITIAL_UNIVERSITY_REGISTRATION_STATE } from '../../../../constants/initialFormState.constants';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -249,7 +246,8 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             <div className="block-extended-data">
                                                 <Button className="extended-button-submit-1"
                                                     type={type}
-                                                    url={ENDPOINT_URLS[REGISTRATION]}
+                                                    url={ENDPOINT_URLS[UNIVERSITY_REGISTRATION]}
+                                                    universities={data}
                                                 >
                                                     Submit
                                                 </Button>

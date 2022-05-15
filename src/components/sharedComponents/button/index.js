@@ -49,6 +49,8 @@ const ButtonWrapper = ({
     userInfo,
     editUserInfo,
     setClickType,
+    universities,
+    companies,
     ...otherProps
 }) => {
     const { values, handleReset } = useFormikContext() || {};
@@ -334,7 +336,9 @@ const ButtonWrapper = ({
         }
 
         setLoading(true);
-        console.log(currentParams, 'currentParams');
+
+        const universityName = type && type === USER_TYPE.UNIVERSITY && Object?.keys(universities)?.length && universities?.find(el => el?.id === currentParams?.universityId);
+        const companyName = type && type === USER_TYPE.COMPANY && Object?.keys(companies)?.length && companies?.find(el => el?.id === currentParams?.companyId);
 
         DataService.postJson(url, {
             ...removeKeyFromObject({
@@ -342,13 +346,13 @@ const ButtonWrapper = ({
                 ...(type && type === USER_TYPE.COMPANY ? {
                     ...currentParams,
                     email: currentParams?.login,
-                    name: currentParams?.companyId,
+                    name: (companyName && companyName?.name) || currentParams?.companyId,
                     surname: 'COMPANY',
                 } : {}),
                 ...(type && type === USER_TYPE.UNIVERSITY ? {
                     ...currentParams,
                     email: currentParams?.login,
-                    name: currentParams?.universityId,
+                    name: (universityName && universityName?.name) || currentParams?.companyId,
                     surname: 'UNIVERSITY',
                 } : {}),
             }, 'login'),

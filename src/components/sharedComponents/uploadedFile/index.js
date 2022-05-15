@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './upload.module.css';
 
 const UploadInput = (props) => {
@@ -16,7 +16,7 @@ const UploadInput = (props) => {
         }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (inputFileRef.current) {
             inputFileRef.current.addEventListener('change', handleChangeImage);
         }

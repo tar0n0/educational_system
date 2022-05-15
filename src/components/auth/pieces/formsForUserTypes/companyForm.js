@@ -15,6 +15,7 @@ import {
     ENDPOINT_URLS,
     EXTENDED_SEARCH_PATH, LOGIN, REGISTRATION, UNIVERSITY_CITIES,
     UNIVERSITY_COUNTRIES, UNIVERSITY_NAME,
+    COMPANY_REGISTRATION,
     USER_INFO
 } from '../../../../constants/api.constants';
 import { GLOBAL_ERROR, LOGIN_SUCCESS, WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
@@ -248,8 +249,9 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
                                                 <Button className="extended-button-submit-1"
-                                                    url={ENDPOINT_URLS[REGISTRATION]}
+                                                    url={ENDPOINT_URLS[COMPANY_REGISTRATION]}
                                                     type={type}
+                                                    companies={data}
                                                 >
                                                         Submit
                                                 </Button>

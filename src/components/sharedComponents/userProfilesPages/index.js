@@ -1,51 +1,51 @@
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { userIdContext } from '../../../context/userIdContext';
 import Footer from '../../sharedComponents/footer/footer';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import CarouselS from '../../sharedComponents/slideShow';
 import AuthorizationService from '../../../services/authorizationService';
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import DataService from '../../../services/dataService';
 import { ENDPOINT_URLS, GET_ALL_USER_PROFILE_DATA } from '../../../constants/api.constants';
-import { getStorageItem } from '../../../storage';
+// import { getStorageItem } from '../../../storage';
 
 import './user..css';
-import UserCard from '../userCard';
+// import UserCard from '../userCard';
 
-const useStyles = makeStyles(theme => ({
-    pageTitle: {
-        display: "block",
-        margin: "16px 0px 32px 0px",
-        width: "100%",
-        justifyContent: "center",
-        color: "#194d94",
-        fontFamily: "sans-serif",
-        fontWeight: "normal",
-        fontStyle: "italic",
-        fontSize: "55px",
-        marginTop: "20px",
-        textAlign: "center",
-    },
-    cardsLayout: {
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-        gridGap: "30px",
-        maxWidth: "900px",
-        margin: "0 auto 20px"
-    },
-    cardsLayoutItem: {
-        position: "relative"
-    }
-}));
+// const useStyles = makeStyles(theme => ({
+//     pageTitle: {
+//         display: "block",
+//         margin: "16px 0px 32px 0px",
+//         width: "100%",
+//         justifyContent: "center",
+//         color: "#194d94",
+//         fontFamily: "sans-serif",
+//         fontWeight: "normal",
+//         fontStyle: "italic",
+//         fontSize: "55px",
+//         marginTop: "20px",
+//         textAlign: "center",
+//     },
+//     cardsLayout: {
+//         display: "grid",
+//         gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+//         gridGap: "30px",
+//         maxWidth: "900px",
+//         margin: "0 auto 20px"
+//     },
+//     cardsLayoutItem: {
+//         position: "relative"
+//     }
+// }));
 
 const UserProfileWithAvatar = ({ data }) => {
     const [userIds] = useContext(userIdContext);
     const [isUser, setIsUser] = useState(false);
     const [userData, setUserData] = useState([]);
-    const classes = useStyles();
-    const navigate = useNavigate();
+    // const classes = useStyles();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
@@ -58,7 +58,7 @@ const UserProfileWithAvatar = ({ data }) => {
             setUserData(data);
         });
     }, []);
-    console.log(userData);
+
     return (
         <>
             <div className="header-home-profile ">
@@ -79,9 +79,9 @@ const UserProfileWithAvatar = ({ data }) => {
                                     <div className="row m-l-0 m-r-0">
                                         <div className="col-sm-4 bg-c-lite-green user-profile">
                                             <div className="card-block text-center text-white">
-                                                <div className="m-b-25"><img
+                                                <div className="m-b-25" ><img
                                                     src="https://img.icons8.com/bubbles/100/000000/user.png"
-                                                    className="img-radius" alt="User-Profile-Image"/></div>
+                                                    className="img-radius" alt="User Profile Image"/></div>
                                                 <h6 className="f-w-600">{`${userData?.name} ${userData?.surname || ''}`}</h6>
                                                 <p>User</p>
                                             </div>

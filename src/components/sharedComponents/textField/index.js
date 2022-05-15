@@ -7,12 +7,13 @@ const TextfieldWrapper = ({
     name, ...otherProps
 }) => {
     const [field, mata] = useField(name);
-    const { setFieldValue, values } = useFormikContext();
+    const { values } = useFormikContext();
     const [, setFormValues] = useContext(formContext);
 
     useEffect(() => {
         setFormValues(values);
     }, [values]);
+
     const configTextfield = {
         ...field, ...otherProps, fullWidth: true, variant: 'outlined',
     };

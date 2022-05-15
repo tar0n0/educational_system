@@ -42,9 +42,7 @@ const Login = () => {
                                     <Form>
                                         <Grid container spacing={2}>
                                             <Grid item xs={12}>
-                                                <Typography>
-                                                    <h1 className="login-title-in-login-page">Login to your account</h1>
-                                                </Typography>
+                                                <h1 className="login-title-in-login-page">Login to your account</h1>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography>

@@ -100,7 +100,6 @@ export default function UserList({ list }) {
     const getInitialData = () => {
         setIsLoading(true);
         if (list && list.length) {
-            console.log(list, 'list');
             const currentData = list?.map(el => createData(el?.name, el?.surName, el?.userId));
             setRows(currentData);
         }

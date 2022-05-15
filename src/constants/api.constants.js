@@ -7,6 +7,8 @@ export const UPLOAD_FILE = 'UPLOAD_FILE'; // POST
 export const EDIT_USER_INFO = 'EDIT_USER_INFO'; // POST
 export const DELETE_FILE = 'DELETE_FILE'; // POST
 export const EDIT_FILE_NAME = 'EDIT_FILE_NAME'; // POST
+export const COMPANY_REGISTRATION = 'COMPANY_REGISTRATION'; // POST
+export const UNIVERSITY_REGISTRATION = 'UNIVERSITY_REGISTRATION'; // POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -27,10 +29,13 @@ export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; // GET
 export const EXTENDED_SEARCH_PATH = 'EXTENDED_SEARCH_PATH'; // GET
 export const GET_ALL_USER_PROFILE_DATA = 'GET_ALL_USER_PROFILE_DATA'; // GET
 
-
+//TODO university Form and company form with endpoints /admin
+//TODO user registration with endpoint only /registration
 export const ENDPOINT_URLS = {
     [LOGIN]: '/authentication/login',
     [REGISTRATION]: '/authentication/register',
+    [UNIVERSITY_REGISTRATION]: '/authentication/RegisterAdmin',
+    [COMPANY_REGISTRATION]: '/authentication/RegisterAdmin',
     [UNIVERSITY_COUNTRIES]: '/university/getcountries',
     [COMPANY_COUNTRIES]: '/company/getcountries',
     [COMPANY_CITIES]: (countryName) => `/company/getcities?country=${countryName}`,

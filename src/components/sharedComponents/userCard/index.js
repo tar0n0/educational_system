@@ -12,7 +12,7 @@ const UserCard = ({ data }) => {
             setUserData(data);
         });
     }, []);
-    console.log(userData, 'userInfo');
+
     return (
         <>
             <div className="page-content page-container" id="page-content">

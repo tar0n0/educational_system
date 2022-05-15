@@ -29,21 +29,21 @@ export const passwordValidator = (value) => {
     return validate(schema, value);
 };
 
-export const emailValidation = (value) => {
-    const schema = string()
-        .required('Email is not allowed to be empty.')
-        .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Email must be valid email');
+// export const emailValidation = (value) => {
+//     const schema = string()
+//         .required('Email is not allowed to be empty.')
+//         .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Email must be valid email');
+//
+//     return validate(schema, value);
+// };
 
-    return validate(schema, value);
-};
-
-export const loginValidation = (value) => {
-    const schema = string()
-        .required('Login is not allowed to be empty.')
-        .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Login must be valid login');
-
-    return validate(schema, value);
-};
+// export const loginValidation = (value) => {
+//     const schema = string()
+//         .required('Login is not allowed to be empty.')
+//         .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Login must be valid login');
+//
+//     return validate(schema, value);
+// };
 
 export const firstNameValidator = (value) => {
     const schema = string()

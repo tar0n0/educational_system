@@ -54,6 +54,21 @@ const Home = () => {
             <div className="header-home">
                 <div className="logo-for-p">
                     <Link to={'/'}><span className="back-to-home">Home</span></Link>
+                    <Link to={'/about'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">About</span>
+                    </Link>
+                    <Link to={'/universities'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Universities</span>
+                    </Link>
+                    <Link to={'/companies'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Companies</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Contacts</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Courses</span>
+                    </Link>
                 </div>
                 <div className="auth">
                     {isUser ? (<AccountMenu/>) : (
@@ -104,21 +119,7 @@ const Home = () => {
                 </div>
             ) : (
                 <div className="content">
-                    <h1 className="main-title">Home</h1>
-                    <div className="list-btns">
-                        <Link to={'/about'}>
-                            <button className="main-btn">About</button>
-                        </Link>
-                        <Link to={'/universities'}>
-                            <button className="main-btn">Universities</button>
-                        </Link>
-                        <Link to={'/companies'}>
-                            <button className="main-btn">Companies</button>
-                        </Link>
-                        <Link to={'/contacts'}>
-                            <button className="main-btn">Contacts</button>
-                        </Link>
-                    </div>
+
                 </div>
             )}
             <div className="home-footer">

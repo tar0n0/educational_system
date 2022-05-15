@@ -20,6 +20,7 @@ class DataService extends MakeRequest {
         this._userInfo = new BehaviorSubject({});
         this._extendedSearchData = new BehaviorSubject([]);
         this._userType = new BehaviorSubject(0);
+        this._userCategory = new BehaviorSubject(null);
     }
 
     getCities(url, name) {
@@ -94,6 +95,10 @@ class DataService extends MakeRequest {
 
     get getUserType() {
         return this._userType;
+    }
+
+    get getUserCategory() {
+        return this._userCategory;
     }
 }
 

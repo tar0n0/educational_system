@@ -22,7 +22,7 @@
 
 .login,
 .sign-up {
-    font-size: 25px;
+    font-size: 20px;
     margin-left: 5px;
     margin-right: 5px;
     color: aliceblue;
@@ -30,14 +30,16 @@
     border: none;
     text-decoration: none;
 }
-
+.sign-up:hover {
+    color: #0d6efd;
+}
 .sign-up {
     margin-right: 25px;
     cursor: pointer;
 }
 
 .slash {
-    font-size: 30px;
+    font-size: 20px;
     color: aliceblue;
     margin-right: 5px;
     margin-left: 5px;
@@ -58,7 +60,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 130px;
     text-align: center;
 }
 
@@ -67,9 +69,9 @@
     justify-content: center;
     align-items: center;
     width: 500px;
-    height: 60px;
+    height: 25px;
     font-style: italic;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 10px;
     border: 1px solid white;
     background: white;
@@ -82,8 +84,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 220px;
-    height: 60px;
+    width: 180px;
+    height: 25px;
     font-style: italic;
     font-size: 20px;
     border-radius: 10px;
@@ -224,10 +226,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 500px;
-        height: 60px;
+        width: 430px;
+        height: 25px;
         font-style: italic;
-        font-size: 25px;
+        font-size: 18px;
         border-radius: 10px;
         border: 1px solid white;
         background: white;
@@ -238,7 +240,7 @@
 
     .login,
     .sign-up {
-        font-size: 25px;
+        font-size: 20px;
         margin-left: 3px;
         margin-right: 3px;
         color: aliceblue;
@@ -250,7 +252,7 @@
     }
 
     .slash {
-        font-size: 25px;
+        font-size: 20px;
         color: aliceblue;
         margin-right: 5px;
         margin-left: 5px;
@@ -261,8 +263,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 220px;
-        height: 60px;
+        width: 180px;
+        height: 25px;
         font-style: italic;
         font-size: 18px;
         border-radius: 10px;
@@ -278,7 +280,7 @@
         justify-content: center;
         align-items: center;
         width: 250px;
-        height: 60px;
+        height: 25px;
         font-style: italic;
         font-size: 18px;
         border-radius: 10px;
@@ -294,7 +296,7 @@
         justify-content: center;
         align-items: center;
         width: 185px;
-        height: 60px;
+        height: 25px;
         font-style: italic;
         font-size: 16px;
         border-radius: 10px;
@@ -339,7 +341,7 @@
         justify-content: center;
         align-items: center;
         width: 190px;
-        height: 60px;
+        height: 25px;
         font-style: italic;
         font-size: 16px;
         border-radius: 10px;
@@ -354,8 +356,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 150px;
-        height: 60px;
+        width: 120px;
+        height: 25px;
         font-style: italic;
         font-size: 16px;
         border-radius: 10px;
@@ -409,6 +411,25 @@
     margin-top: 25px;
 }
 
+
+.menu-items-for-header {
+    color: white;
+    margin-right: 12px;
+    font-size: 18px;
+    font-family: Roboto sans-serif;
+    font-style: italic;
+    border: none;
+}
+.menu-items-for-header:hover {
+    color: #002aff;
+}
+.menu-links-with-navigation {
+    border: none;
+    text-decoration-color: white;
+}
+.menu-links-with-navigation:hover {
+    text-decoration-color: #002aff;
+}
 .extended-button-submit {
     text-align: center;
     width: 100%;

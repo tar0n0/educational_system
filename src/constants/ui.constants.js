@@ -17,6 +17,11 @@ export const USER_TYPE = {
     USER: 'USER',
 };
 
+export const CATEGORY_UNIVERSITY = {
+    TEACHER: 1,
+    STUDENT: 2,
+};
+
 export const useStyles = makeStyles((theme) => ({
     formWrapper: {
         marginTop: theme.spacing(5),
