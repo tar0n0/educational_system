@@ -3,10 +3,14 @@
 .header-home {
     width: 100%;
     height: 200px;
-    background-color: #172c88;
+    /*background-color: #172c88;*/
     border: 1px solid #172c88;
-    position: fixed;
-    top: 0;
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    /*position: fixed;*/
+    /*top: 0;*/
 }
 
 .avatar-profile-all-user {
@@ -124,8 +128,13 @@
     margin-top: 100px;
 }
 
-.content {
-    margin-top: 298px;
+.content-home-page {
+    /*margin-top: 298px;*/
+    width: 100%;
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .main-btn {
@@ -213,7 +222,7 @@
 }
 
 .home-footer {
-    margin-top: 250px;
+    margin-top: 30px;
 }
 
 @media only screen and (max-width: 792px) {
@@ -473,4 +482,64 @@
     font-style: italic;
     font-weight: bold;
     padding: 5px;
+}
+
+
+.container_slider_css {
+    margin: 30px auto;
+    width: 500px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+.photo_slider_css {
+    position: absolute;
+    animation: round 4s infinite;
+    opacity: 0;
+    width: 100%;
+    border-radius: 8px;
+
+
+}
+
+@keyframes round {
+    25% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+}
+.photo_slider_css:nth-child(1) {
+    animation-delay: 3s;
+}
+
+.photo_slider_css:nth-child(2) {
+    animation-delay: 6s;
+}
+
+.photo_slider_css:nth-child(3) {
+    animation-delay: 9s;
+}
+
+.photo_slider_css:nth-child(4) {
+    animation-delay: 0s;
+}
+
+@media(min-width:0px) and (max-width:320px) {
+    /* совсем маленькие экраны андроидов */
+    .container_slider_css{
+        width: 80%;
+        height: 190px;
+    }
+}
+
+@media(min-width:321px) and (max-width:480px) {
+    /* популярные разрешения смартфонов уже более позднего поколения андроид */
+    .container_slider_css{
+        width: 80%;
+        height: 190px;
+    }
 }

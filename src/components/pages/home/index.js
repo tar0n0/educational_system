@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
-import MyFiles from '../../myFiles';
 import DataList from '../../sharedComponents/dataList';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +14,10 @@ import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 import { fromEvent } from "rxjs";
 import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import { ENDPOINT_URLS, INPUT_SEARCH } from '../../../constants/api.constants';
+import  Img1 from "../../../components/pages/home/Slider_pict/images1.jpg";
+import  Img2 from "../../../components/pages/home/Slider_pict/images2.jpg";
+import  Img3 from "../../../components/pages/home/Slider_pict/images3.jpg";
+import  Img4 from "../../../components/pages/home/Slider_pict/images4.jpg";
 
 import './home.css';
 
@@ -118,7 +121,13 @@ const Home = () => {
                     <DataList data={searchData} title='Search Data'/>
                 </div>
             ) : (
-                <div className="content">
+                <div className="content-home-page">
+                    <div className="container_slider_css">
+                        <img className='photo_slider_css' src={Img1}/>
+                        <img className='photo_slider_css' src={Img2}/>
+                        <img className='photo_slider_css' src={Img3}/>
+                        <img className='photo_slider_css' src={Img4}/>
+                    </div>
 
                 </div>
             )}

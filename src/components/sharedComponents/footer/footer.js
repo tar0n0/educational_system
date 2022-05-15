@@ -34,7 +34,7 @@ const Footer = () => {
                     <h3 className="col-title">Authentication</h3>
                     <nav className="col-list">
                         <ul>
-                            <li className="li-auth-footer">
+                            <li className="li-auth-footer sign-up-list" >
                                 <span onClick={() => {
                                     setType(USER_TYPES_FOR_MODAL);
                                     setOpen(true);
