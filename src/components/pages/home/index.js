@@ -75,8 +75,8 @@ const Home = () => {
                         <>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="30"
-                                height="30"
+                                width="20"
+                                height="20"
                                 fill="currentColor"
                                 className="bi bi-person-fill"
                                 viewBox="0 0 16 16"
