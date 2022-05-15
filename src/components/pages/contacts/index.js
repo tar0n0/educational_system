@@ -55,6 +55,21 @@ const Contact = () => {
             <div className="header-home">
                 <div className="logo-for-p">
                     <Link to={'/'}><span className="back-to-home">Home</span></Link>
+                    <Link to={'/about'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">About</span>
+                    </Link>
+                    <Link to={'/universities'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Universities</span>
+                    </Link>
+                    <Link to={'/companies'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Companies</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Contacts</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Courses</span>
+                    </Link>
                 </div>
                 <div className="auth">
                     {isUser ? (<AccountMenu/>) : (
