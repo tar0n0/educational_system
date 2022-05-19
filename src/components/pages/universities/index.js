@@ -55,6 +55,7 @@ const Universities = () => {
     const [universities, setUniversities] = useState([]);
     const [searchData, setSearchData] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const ref = useRef();
     const navigate = useNavigate();
     const classes = useStyles();
@@ -65,6 +66,7 @@ const Universities = () => {
     }, [isUser]);
 
     useEffect(() => {
+        setIsLoading(true);
         DataService.getJson(ENDPOINT_URLS[GET_ALL_UNIVERSITIES]).then(val => {
             const { data } = val;
             const currentData = data.map(el => {
@@ -74,7 +76,7 @@ const Universities = () => {
                 };
             });
             setUniversities(_ => currentData);
-        });
+        }).finally(() => setIsLoading(false));
     }, []);
 
     useEffect(() => {
