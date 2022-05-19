@@ -66,3 +66,11 @@ export const USER_ROLES = {
     [USER_TYPE.COMPANY]: 2,
     [USER_TYPE.USER]: 3,
 };
+
+export const rightSideItemsName = {
+    PROFILE: 'Profile',
+    MATERIALS: 'Materials',
+    ANNOUNCEMENTS: 'Announcements',
+    NEWS: 'News',
+    COURSES: 'Courses',
+};

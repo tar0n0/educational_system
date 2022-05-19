@@ -12,6 +12,7 @@ import Companies from '../components/pages/companies';
 import Contact from '../components/pages/contacts';
 import Home from '../components/pages/home';
 import Universities from '../components/pages/universities';
+import UniversityEntry from '../components/pages/universities/universityEntry';
 import Error from '../components/sharedComponents/notFound';
 import UserProfilesPages from '../components/sharedComponents/userProfilesPages';
 import {
@@ -89,5 +90,9 @@ export const routesConfig = [
     {
         path: '*',
         element: <Error/>,
+    },
+    {
+        path: '/university/:universityName',
+        element: <UniversityEntry />,
     },
 ];

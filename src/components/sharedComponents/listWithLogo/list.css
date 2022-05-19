@@ -1,0 +1,40 @@
+.container-with-logo-card {
+    max-width: 850px;
+    display: flex;
+    margin-bottom: 35px;
+    justify-content: space-between;
+    background: #005AA7; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    transition: all 1.1s ease;
+}
+
+/************ hover *************/
+.container-with-logo-card:hover {
+    max-width: 890px;
+    background: #12c2e9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 13px;
+}
+
+.block-for-image-logo {
+    width: 250px;
+}
+
+.block-for-image-logo img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.block-for-name-logo {
+    font-style: italic;
+    font-size: 20px;
+    padding: 20px;
+    cursor: pointer;
+}

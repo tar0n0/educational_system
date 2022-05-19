@@ -5,8 +5,8 @@
     height: 200px;
     /*background-color: #172c88;*/
     border: 1px solid #172c88;
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     /*position: fixed;*/
@@ -34,9 +34,11 @@
     border: none;
     text-decoration: none;
 }
+
 .sign-up:hover {
     color: #0d6efd;
 }
+
 .sign-up {
     margin-right: 25px;
     cursor: pointer;
@@ -131,8 +133,8 @@
 .content-home-page {
     /*margin-top: 298px;*/
     width: 100%;
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
@@ -160,6 +162,7 @@
     background: #1c4f97;
     color: white;
 }
+
 .list-btns {
     width: 100%;
     display: inline-block;
@@ -429,16 +432,20 @@
     font-style: italic;
     border: none;
 }
+
 .menu-items-for-header:hover {
     color: #002aff;
 }
+
 .menu-links-with-navigation {
     border: none;
     text-decoration-color: white;
 }
+
 .menu-links-with-navigation:hover {
     text-decoration-color: #002aff;
 }
+
 .extended-button-submit {
     text-align: center;
     width: 100%;
@@ -512,6 +519,7 @@
         opacity: 0;
     }
 }
+
 .photo_slider_css:nth-child(1) {
     animation-delay: 3s;
 }
@@ -528,18 +536,24 @@
     animation-delay: 0s;
 }
 
-@media(min-width:0px) and (max-width:320px) {
+@media (min-width: 0px) and (max-width: 320px) {
     /* совсем маленькие экраны андроидов */
-    .container_slider_css{
+    .container_slider_css {
         width: 80%;
         height: 190px;
     }
 }
 
-@media(min-width:321px) and (max-width:480px) {
+@media (min-width: 321px) and (max-width: 480px) {
     /* популярные разрешения смартфонов уже более позднего поколения андроид */
-    .container_slider_css{
+    .container_slider_css {
         width: 80%;
         height: 190px;
     }
+}
+
+.content-for-universities {
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

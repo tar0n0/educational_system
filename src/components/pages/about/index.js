@@ -66,7 +66,7 @@ const About = () => {
                     <Link to={'/contacts'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Contacts</span>
                     </Link>
-                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                    <Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link>
                 </div>

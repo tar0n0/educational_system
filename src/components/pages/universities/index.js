@@ -10,6 +10,7 @@ import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import DataList from '../../sharedComponents/dataList';
+import ListWithLogo from '../../sharedComponents/listWithLogo';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
 import CarouselS from '../../sharedComponents/slideShow';
@@ -20,11 +21,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import '../home/home.css';
 
-// import cards from "./store";
-
-import '../home/home.css';
-
-
 const useStyles = makeStyles(theme => ({
     pageTitle: {
         display: "block",
@@ -32,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         justifyContent: "center",
         // textAlign: "center",
-        color: "#194d94",
+        color: "#ffffff",
         fontFamily: "sans-serif",
         fontWeight: "normal",
         fontStyle: "italic",
@@ -161,7 +157,7 @@ const Universities = () => {
                     </button>
                 </div>
             </div>
-            <div className="content">
+            <div className="content-for-universities">
                 {searchData?.length ? (
                     <>
                         <div className="content">
@@ -170,21 +166,21 @@ const Universities = () => {
                     </>
                 ) : (
                     <>
-                        <main>
+                        <div className="container-for-list-universities">
                             <section className={classes.pageTitle}>
                                 <Typography variant="h4">Universities</Typography>
                             </section>
-                            <section className={classes.cardsLayout}>
+                            <>
                                 {universities.map((card, index) => (
-                                    <SimpleCard key={index} title={card?.title} url={card?.url} classes={classes}/>
+                                    <ListWithLogo key={index} title={card.title} url={card.url}/>
                                 ))}
-                            </section>
-                        </main>
+                            </>
+                        </div>
                     </>
                 )}
             </div>
             <CarouselS/>
-            <div className="university-footer">
+            <div className={`${universities.length ? '' : 'university-footer'}`}>
                 <Footer/>
             </div>
         </>);

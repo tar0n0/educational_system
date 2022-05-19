@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import polytechnic from '../../../assets/aboutUs.jpg';
 import { ENDPOINT_URLS, GET_ALL_COMPANIES, INPUT_SEARCH } from '../../../constants/api.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
@@ -16,8 +17,6 @@ import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import SimpleCard from '../../simplCard';
-// import cards from "./store";
 
 import '../home/home.css';
 
@@ -30,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         width: "100%",
         justifyContent: "center",
         // textAlign: "center",
-        color: "#194d94",
+        color: "#f7f9fc",
         fontFamily: "sans-serif",
         fontWeight: "normal",
         fontStyle: "italic",
@@ -114,7 +113,7 @@ const Companies = () => {
                     <Link to={'/contacts'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Contacts</span>
                     </Link>
-                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                    <Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link>
                 </div>
@@ -158,7 +157,7 @@ const Companies = () => {
                     </button>
                 </div>
             </div>
-            <div className="content">
+            <div className="content-for-universities">
                 {searchData?.length ? (
                     <>
                         <div className="content">
@@ -167,21 +166,27 @@ const Companies = () => {
                     </>
                 ) : (
                     <>
-                        <main>
+                        <div className="container-for-list-universities">
                             <section className={classes.pageTitle}>
-                                <Typography variant="h4">Companies</Typography>
+                                <Typography variant="h4">Enterprises</Typography>
                             </section>
-                            <section className={classes.cardsLayout}>
+                            <>
                                 {companies.map((card, index) => (
-                                    <SimpleCard key={index} title={card?.title} url={card?.url} classes={classes}/>
+                                    <div className="container-with-logo-card" key={index}>
+                                        <div className="block-for-image-logo">
+                                            <img src={card?.image || polytechnic} alt=""/>
+                                        </div>
+                                        <div><p className="block-for-name-logo">{card?.title}<span
+                                            className=""> </span></p></div>
+                                    </div>
                                 ))}
-                            </section>
-                        </main>
+                            </>
+                        </div>
                     </>
                 )}
             </div>
             <CarouselS/>
-            <div className="company-footer">
+            <div className={`${companies.length ? '' : 'company-footer'}`}>
                 <Footer/>
             </div>
         </>);
