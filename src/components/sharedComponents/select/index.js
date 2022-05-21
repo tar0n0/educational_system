@@ -37,7 +37,7 @@ const SelectWrapper = ({ name, options, ...otherProps }) => {
     }
 
     return (
-        <TextField {...configSelect} defaultValue="" ref={nodeRef}>
+        <TextField {...configSelect} defaultValue="" ref={nodeRef} >
             {Object.keys(options).map((item) => {
                 return (
                     <MenuItem key={item} value={options[item].id || ''} ref={nodeRef}>

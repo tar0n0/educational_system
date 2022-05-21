@@ -3,6 +3,7 @@ import Login from '../components/auth/login';
 import CompanyForm from '../components/auth/pieces/formsForUserTypes/companyForm';
 import UniversityForm from '../components/auth/pieces/formsForUserTypes/universityForm';
 import UserForm from '../components/auth/pieces/formsForUserTypes/userForm';
+import CompanyEntry from '../components/pages/companies/companyEntry';
 import ExtendedSearch from '../components/pages/extendedSearch';
 import UserPage from '../components/pages/rolePages/user';
 import CompanyPage from '../components/pages/rolePages/company';
@@ -93,6 +94,10 @@ export const routesConfig = [
     },
     {
         path: '/university/:universityName',
-        element: <UniversityEntry />,
+        element: <UniversityEntry/>,
+    },
+    {
+        path: '/company/:companyName',
+        element: <CompanyEntry />,
     },
 ];

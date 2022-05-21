@@ -10,7 +10,7 @@ import { rightSideItemsName } from '../../../../constants/ui.constants';
 
 import '../../universities/universityEntry/rightSideMenu.css';
 
-const UniversityEntry = () => {
+const CompanyEntry = () => {
     const [selectedItem, setSelectedItem] = useState('');
     return (
         <>
@@ -18,7 +18,7 @@ const UniversityEntry = () => {
                 <div className="logo-for-p-user">
                     <Link to={'/'}><span className="back-to-home-user">Home</span></Link>
                 </div>
-                <div className="context-user">University Name</div>
+                <div className="context-user">Enterprise Name</div>
                 <div className="avatar">
                     <AccountMenu/>
                 </div>
@@ -85,7 +85,7 @@ const UniversityEntry = () => {
                     </ul>
                 </div>
                 <div>
-                    <h1 className="sub-title-for-side">University Public Page</h1>
+                    <h1 className="sub-title-for-side">Enterprise Public Page</h1>
                 </div>
             </div>
             <div className="home-footer">
@@ -95,4 +95,4 @@ const UniversityEntry = () => {
     );
 };
 
-export default UniversityEntry;
+export default CompanyEntry;

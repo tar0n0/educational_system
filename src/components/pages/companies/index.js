@@ -173,10 +173,10 @@ const Companies = () => {
                             <>
                                 {companies.map((card, index) => (
                                     <div className="container-with-logo-card" key={index}>
-                                        <div className="block-for-image-logo">
+                                        <div className="block-for-image-logo" onClick={() => navigate(`/company/:${card?.title}`)}>
                                             <img src={card?.image || polytechnic} alt=""/>
                                         </div>
-                                        <div><p className="block-for-name-logo">{card?.title}<span
+                                        <div><p className="block-for-name-logo" onClick={() => navigate(`/company/:${card?.title}`)}>{card?.title}<span
                                             className=""> </span></p></div>
                                     </div>
                                 ))}
