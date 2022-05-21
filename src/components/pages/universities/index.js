@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { ENDPOINT_URLS, GET_ALL_UNIVERSITIES, INPUT_SEARCH } from '../../../constants/api.constants';
+import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
@@ -16,7 +17,6 @@ import Footer from '../../sharedComponents/footer/footer';
 import CarouselS from '../../sharedComponents/slideShow';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
-import SimpleCard from '../../simplCard';
 import { makeStyles } from "@material-ui/core/styles";
 
 import '../home/home.css';
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const Universities = () => {
-    const { setOpen } = useContext(modalContext);
+    const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
     const [universities, setUniversities] = useState([]);
     const [searchData, setSearchData] = useState([]);
@@ -136,7 +136,10 @@ const Universities = () => {
                                 Login
                             </Link>
                             <span className="slash">\</span>
-                            <span className="sign-up" onClick={() => setOpen(true)}>
+                            <span className="sign-up" onClick={() => {
+                                setType(USER_TYPES_FOR_MODAL);
+                                setOpen(true);
+                            }}>
                         SignUp
                             </span>
                         </>

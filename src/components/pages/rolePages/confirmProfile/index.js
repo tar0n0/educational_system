@@ -34,8 +34,8 @@ import { modalContext } from '../../../../context/modalContext';
 import DataService from '../../../../services/dataService';
 import { getStorageItem } from '../../../../storage';
 
-function createData(email,) {
-    return { email };
+function createData(email, name, surName) {
+    return { email, name, surName };
 }
 
 function desc(a, b, orderBy) {
@@ -70,6 +70,18 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: "Email",
+    },
+    {
+        id: "name",
+        numeric: false,
+        disablePadding: true,
+        label: "Name",
+    },
+    {
+        id: "surname",
+        numeric: false,
+        disablePadding: true,
+        label: "Surname",
     },
 ];
 
@@ -262,7 +274,7 @@ export default function ConfirmProfile() {
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
-                const currentData = data?.map(el => createData(el));
+                const currentData = data?.map(el => createData(el.email, el?.name, el?.surName));
                 currentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(currentData);
                 setData(DataService?.getConfirmedProfiles?.getValue());
@@ -278,7 +290,7 @@ export default function ConfirmProfile() {
         } else {
             DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
-                const companyCurrentData = data.map(el => createData(el));
+                const companyCurrentData = data.map(el => createData(el.email, el?.name, el?.surName));
                 companyCurrentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(companyCurrentData);
                 setData(DataService?.getConfirmedProfiles?.getValue());
@@ -410,7 +422,7 @@ export default function ConfirmProfile() {
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <EnhancedTableToolbar
-                        numSelected={selected.length}
+                        numSelected={selected?.length}
                         handelDelete={handleDeleteUser}
                         handelConfirm={handleConfirm
                         }/>
@@ -423,12 +435,12 @@ export default function ConfirmProfile() {
                         >
                             <EnhancedTableHead
                                 classes={classes}
-                                numSelected={selected.length}
+                                numSelected={selected?.length}
                                 order={order}
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                rowCount={data.length}
+                                rowCount={data?.length}
                             />
                             <TableBody>
                                 {stableSort(data, getSorting(order, orderBy))
@@ -437,19 +449,19 @@ export default function ConfirmProfile() {
                                         page * rowsPerPage + rowsPerPage
                                     )
                                     .map((row, index) => {
-                                        const isItemSelected = isSelected(row.email);
+                                        const isItemSelected = isSelected(row?.email);
                                         const labelId = `enhanced-table-checkbox-${index}`;
 
                                         return (
                                             <TableRow
                                                 hover
                                                 onClick={(event) =>
-                                                    handleClick(event, row.email)
+                                                    handleClick(event, row?.email)
                                                 }
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={row.email}
+                                                key={row?.email}
                                                 selected={isItemSelected}
                                             >
                                                 <TableCell padding="checkbox">
@@ -467,7 +479,23 @@ export default function ConfirmProfile() {
                                                     scope="row"
                                                     padding="none"
                                                 >
-                                                    {row.email}
+                                                    {row?.email}
+                                                </TableCell>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                    padding="none"
+                                                >
+                                                    {row?.name}
+                                                </TableCell>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                    padding="none"
+                                                >
+                                                    {row?.surName}
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -487,9 +515,15 @@ export default function ConfirmProfile() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={data.length}
+                        count={data?.length < 0 ? 0 : data?.length}
                         rowsPerPage={rowsPerPage}
-                        page={page}
+                        page={page < 0 ? 0 : page}
+                        SelectProps={{
+                            inputProps: {
+                                'aria-label': 'rows per page',
+                            },
+                            native: true,
+                        }}
                         backIconButtonProps={{
                             "aria-label": "previous page",
                         }}

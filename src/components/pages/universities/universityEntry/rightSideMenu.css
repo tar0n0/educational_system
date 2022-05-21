@@ -81,3 +81,88 @@
     /*background: linear-gradient(to right, #1565C0, #b92b27); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
 
 }
+.sub-routing-for-side-for-university {
+    display: flex;
+    margin-top: 32px;
+    /*background: #373B44; !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to right, #4286f4, #373B44); !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: linear-gradient(to right, #4286f4, #373B44); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+    /*color: white;*/
+    /*background: #b92b27; !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to right, #1565C0, #b92b27); !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: linear-gradient(to right, #1565C0, #b92b27); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
+}
+
+.list-for-side-for-university {
+    background: #373B44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 20px 0 10px 10px;
+    border-right: 5px solid #3F83EF;
+    width: 150px;
+    height: auto;
+    transition: 0.5s;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-right: 25px;
+
+}
+
+.list-for-side-for-university li {
+    list-style: none;
+    padding: 15px;
+    padding-right: 0;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.5s;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
+
+
+.list-for-side-for-university .item-for-side:hover {
+    transition: 0s;
+    background: #242932;
+}
+
+.list-for-side-for-university .item-for-side.active:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px 10px 0 #3F83EF;
+}
+
+.list-for-side-for-university .item-for-side.active:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 10px -10px 0 #3F83EF;
+
+}
+
+.list-for-side-for-university .item-for-side.active {
+    background: #3F83EF;
+}
+
+.list-for-side-for-university:hover {
+    width: 300px
+}
+
+.second-block-for-right-side-menu {
+    width: 100%;
+}

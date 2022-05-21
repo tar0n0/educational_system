@@ -15,8 +15,8 @@ import '../style.css';
 import DataService from '../../../services/dataService';
 
 
-function createData(email) {
-    return { email };
+function createData(email, name, surName) {
+    return { email, name, surName };
 }
 
 const DeleteEmails = () => {
@@ -30,14 +30,14 @@ const DeleteEmails = () => {
             if (pathName.includes(UNIVERSITY.toLowerCase())) {
                 DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                     const { data } = val;
-                    const currentData = data.map(el => createData(el));
+                    const currentData = data.map(el => createData(el.email, el?.name, el?.surName));
                     DataService.getConfirmedProfiles.next(currentData);
                     state(currentData);
                 });
             } else {
                 DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
                     const { data } = val;
-                    const companyCurrentData = data.map(el => createData(el));
+                    const companyCurrentData = data.map(el => createData(el.email, el?.name, el?.surName));
                     DataService.getConfirmedProfiles.next(companyCurrentData);
                     state(companyCurrentData);
                 });

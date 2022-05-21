@@ -12,11 +12,15 @@ import {
     EDIT_USER_INFO,
     USER_MATERIALS,
     EXTENDED_SEARCH_PATH,
+    COMPANY_REGISTRATION,
+    UNIVERSITY_REGISTRATION,
 } from "../../../constants/api.constants";
 import {
     EDITED_USER_INFO,
-    GLOBAL_ERROR, INFOR_FOR_UPLOADED,
-    LOGIN_SUCCESS, UPLOADED_FILE,
+    GLOBAL_ERROR,
+    INFOR_FOR_UPLOADED,
+    LOGIN_SUCCESS,
+    UPLOADED_FILE,
     WAIT_ADMIN_CONFIRM,
 } from "../../../constants/messages.constants";
 import { USER_ROLES, USER_TYPE } from "../../../constants/ui.constants";
@@ -94,7 +98,7 @@ const ButtonWrapper = ({
                 icon: true,
                 theme: "dark",
             });
-        } else if (url && url === ENDPOINT_URLS[REGISTRATION]) {
+        } else if (url && url === ENDPOINT_URLS[REGISTRATION] || url === ENDPOINT_URLS[UNIVERSITY_REGISTRATION] || url === ENDPOINT_URLS[COMPANY_REGISTRATION]) {
             navigate(HOME);
             toast.info(WAIT_ADMIN_CONFIRM, {
                 type: toast.TYPE.INFO,
@@ -352,8 +356,6 @@ const ButtonWrapper = ({
                 ...(type && type === USER_TYPE.UNIVERSITY ? {
                     ...currentParams,
                     email: currentParams?.login,
-                    name: (universityName && universityName?.name) || currentParams?.companyId,
-                    surname: 'UNIVERSITY',
                 } : {}),
             }, 'login'),
             userType: userID === 3 ? DataService.getUserType.getValue() : userID,
@@ -362,7 +364,6 @@ const ButtonWrapper = ({
                 handleResponse(val);
             })
             .catch((e) => {
-                console.log(e, 'error');
                 if (url === ENDPOINT_URLS[REGISTRATION]) {
                     console.log(e);
                 }

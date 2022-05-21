@@ -1,20 +1,20 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-
-import '../style.css';
-import { COMPANY_COUNTRIES, UNIVERSITY_COUNTRIES } from '../../../constants/api.constants';
-import { USER_TYPE } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
 import dataService from '../../../services/dataService';
 import DataService from '../../../services/dataService';
+
+import '../style.css';
+
 
 const UserType = ({}) => {
     const [userFrom, setUserFrom] = useState(false);
     const [universityType, setUniversityType] = useState(false);
     const { setOpen, setType } = useContext(modalContext);
     const [registerId, setRegisterId] = useState('');
+
     return (
         <>
             {!userFrom && !universityType ? (
@@ -56,7 +56,10 @@ const UserType = ({}) => {
                                     setUserFrom(false);
                                 }}> University</span>
                             </Button>
-                            <Button variant="contained">
+                            <Button variant="contained" onClick={() => {
+                                DataService.getUserType.next(2);
+                                setOpen(false);
+                            }}>
                                 <Link className={'link'} to={'/sign-up/user'} onClick={() => {
                                     DataService.getUserType.next(2);
                                     setOpen(false);

@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Container,
@@ -26,7 +27,7 @@ import { buildCitiesData, buildCountriesData, buildData, getData, getNameById } 
 import Header from '../../../headerActions';
 import '../../pieces/style.css';
 import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
-import Button from '../../../sharedComponents/button';
+// import Button from '../../../sharedComponents/button';
 import Select from '../../../sharedComponents/select';
 import Footer from '../../../sharedComponents/footer/footer';
 import UploadInput from '../../../sharedComponents/uploadedFile';
@@ -104,9 +105,9 @@ const UniversityForm = ({ isAllContent = true }) => {
         });
     };
 
-    const handelSubmit = (values) => {
+    const handelSubmit = (data = {}) => {
         setLoading(true);
-        DataService.postJson(ENDPOINT_URLS[REGISTRATION], { ...values })
+        DataService.postJson(ENDPOINT_URLS[UNIVERSITY_REGISTRATION], { ...data })
             .then((val) => {
                 handleResponse(val);
             })
@@ -138,9 +139,11 @@ const UniversityForm = ({ isAllContent = true }) => {
                             <Formik
                                 initialValues={{
                                     universityId: userInfo?.university || '',
-                                    link: userInfo?.surname || '',
+                                    link: userInfo?.link || '',
                                     countryId: userInfo?.country?.countryId || '',
                                     cityId: userInfo?.city?.cityId || '',
+                                    name: userInfo?.name || '',
+                                    surname: userInfo?.surname || '',
                                     cv: '',
                                     login: '',
                                     password: '',
@@ -152,7 +155,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                                 validateOnMount={true}
                                 validationSchema={FORM_UNIVERSITY_REGISTRATION_VALIDATOR}
                                 onSubmit={values => {
-                                    handelSubmit(values);
+                                    console.log(values);
                                 }}
                             >
                                 <Form>
@@ -163,6 +166,19 @@ const UniversityForm = ({ isAllContent = true }) => {
                                                     <span className="typography-text">Create Account</span>}
                                             </Typography>
                                         </Grid>
+                                        <Grid item xs={12}>
+                                            <TextfieldWrapperWrapper
+                                                name="name"
+                                                label="First Name"
+
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextfieldWrapperWrapper
+                                                name="surname"
+                                                label="Surname"
+                                            />
+                                        </Grid>
                                         <Grid item xs={6}>
                                             <Select
                                                 name="countryId"
@@ -170,7 +186,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                                 disabled={Boolean(isToken)}
                                                 options={countries || [userInfo?.country] || []}
                                             />
-
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Select
@@ -187,16 +202,13 @@ const UniversityForm = ({ isAllContent = true }) => {
                                                 disabled={Boolean(isToken)}
                                                 options={data || []}
                                             />
-
                                         </Grid>
-
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="link"
                                                 label="Link"
 
                                             />
-
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography>
@@ -211,7 +223,6 @@ const UniversityForm = ({ isAllContent = true }) => {
                                                 }
                                                 setFile={setFile}
                                             />
-
                                         </Grid>
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
@@ -224,11 +235,12 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             {isAllContent ? (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
-
+                                                    type="password"
                                                     label="Password"
                                                 />
                                             </>) : (<>
                                                 <TextfieldWrapperWrapper
+                                                    type="password"
                                                     name="password"
                                                     label="New Password"
 
@@ -237,6 +249,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <TextfieldWrapperWrapper
+                                                type="password"
                                                 name="confirmPassword"
                                                 label="Confirm Password"
 
@@ -245,9 +258,11 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
                                                 <Button className="extended-button-submit-1"
-                                                    type={type}
-                                                    url={ENDPOINT_URLS[UNIVERSITY_REGISTRATION]}
-                                                    universities={data}
+                                                    variant="contained"
+                                                    onClick={() => handelSubmit(formValues)}
+                                                    // type={type}
+                                                    // url={ENDPOINT_URLS[UNIVERSITY_REGISTRATION]}
+                                                    // universities={data}
                                                 >
                                                     Submit
                                                 </Button>

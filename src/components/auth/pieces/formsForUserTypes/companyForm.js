@@ -111,7 +111,6 @@ const CompanyForm = ({ isAllContent = true }) => {
     };
 
     const handelSubmit = () => {
-        console.log(formValues, 'sadas');
         setLoading(true);
         DataService.postJson(ENDPOINT_URLS[REGISTRATION], {})
             .then((val) => {
@@ -231,11 +230,13 @@ const CompanyForm = ({ isAllContent = true }) => {
                                             {isAllContent ? (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
+                                                    type='password'
                                                     label="Password"
                                                 />
                                             </>) : (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
+                                                    type='password'
                                                     label="New Password"
                                                 />
                                             </>)}
@@ -243,6 +244,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={6}>
                                             <TextfieldWrapperWrapper
                                                 name="confirmPassword"
+                                                type='password'
                                                 label="Confirm Password"
                                             />
                                         </Grid>

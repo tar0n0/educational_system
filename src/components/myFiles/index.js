@@ -21,7 +21,6 @@ import { DELETE_YOUR_FILE, EDITED_YOUR_FILE, GLOBAL_ERROR } from '../../constant
 import DataService from '../../services/dataService';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import './myFiles.css';
 
@@ -54,10 +53,6 @@ const createData = (currentFileName, userId, fileType) => ({
     currentFileName,
     userId,
     fileType,
-    // calories,
-    // fat,
-    // carbs,
-    // protein,
     isEditMode: false
 });
 
@@ -199,7 +194,6 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
             getInitialUserFiles();
         });
     };
-
 
     return (
         <Paper className={classes.root}>

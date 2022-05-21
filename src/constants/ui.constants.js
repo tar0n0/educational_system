@@ -73,4 +73,5 @@ export const rightSideItemsName = {
     ANNOUNCEMENTS: 'Announcements',
     NEWS: 'News',
     COURSES: 'Courses',
+    CONFIRM_PROFILE: 'Confirm User',
 };
