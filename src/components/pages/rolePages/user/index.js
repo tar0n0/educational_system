@@ -25,7 +25,26 @@ const UserPage = () => {
                 <div className="logo-for-p-user">
                     <Link to={'/'}><span className="back-to-home-user">Home</span></Link>
                 </div>
-                <div className="context-user">Users's Page</div>
+                <div className="context-user">
+                    <Link to={'/about'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">About</span>
+                    </Link>
+                    <Link to={'/universities'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Universities</span>
+                    </Link>
+                    <Link to={'/companies'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Companies</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Contacts</span>
+                    </Link>
+                    <Link to={'/courses'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Courses</span>
+                    </Link>
+                    <Link to={'/announcements'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Announcements</span>
+                    </Link>
+                </div>
                 <div className="avatar">
                     <AccountMenu/>
                 </div>
