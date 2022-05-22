@@ -26,6 +26,13 @@ const Footer = () => {
                             <li>
                                 <Link to={'/contacts'}> Contacts</Link>
                             </li>
+                            <li>
+                                <Link to={'/courses'}> Courses</Link>
+                            </li>
+                            <li>
+                                <Link to={'/announcements'}> Announcements</Link>
+                            </li>
+                     
                         </ul>
                     </nav>
                 </span>
@@ -34,7 +41,7 @@ const Footer = () => {
                     <h3 className="col-title">Authentication</h3>
                     <nav className="col-list">
                         <ul>
-                            <li className="li-auth-footer sign-up-list" >
+                            <li className="li-auth-footer sign-up-list">
                                 <span onClick={() => {
                                     setType(USER_TYPES_FOR_MODAL);
                                     setOpen(true);
