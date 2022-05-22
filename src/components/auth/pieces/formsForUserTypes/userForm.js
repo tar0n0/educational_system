@@ -16,7 +16,7 @@ import {
     COMPANY_CITIES,
     UNIVERSITY_NAME,
     COMPANY_NAME,
-    USER_INFO,
+    USER_INFO, SAVE_LOGO,
 } from '../../../../constants/api.constants';
 import { WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
 import { HOME } from '../../../../constants/pathnames.constants';
@@ -180,7 +180,12 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             }, 'confirmPassword')
         })
             .then((val) => {
+                const { userId } = val;
                 handleResponse(val);
+                const formData = new FormData();
+                formData.append('imageFile', file);
+                formData.append('userId', userId);
+                DataService.postJson(ENDPOINT_URLS[SAVE_LOGO], formData);
             })
             .catch((e) => {
                 console.log(e, 'error');
@@ -197,7 +202,6 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             })
             .finally(() => setLoading(false));
     };
-
 
     return (
         <>

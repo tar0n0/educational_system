@@ -15,10 +15,10 @@ import {
     COMPANY_COUNTRIES, COMPANY_NAME,
     ENDPOINT_URLS,
     COMPANY_REGISTRATION,
-    USER_INFO
+    USER_INFO, SAVE_LOGO
 } from '../../../../constants/api.constants';
-import {  WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
-import { HOME} from '../../../../constants/pathnames.constants';
+import { WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
+import { HOME } from '../../../../constants/pathnames.constants';
 import { USER_ROLES, USER_TYPE } from '../../../../constants/ui.constants';
 import { formContext } from '../../../../context/formContext';
 import DataService from '../../../../services/dataService';
@@ -102,6 +102,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                 .then(val => setData(buildData(val, true)));
         }
     }, [formValues?.cityId, formValues?.countryId, cities?.length]);
+
     const handleResponse = (val) => {
         navigate(HOME);
         toast.info(WAIT_ADMIN_CONFIRM, {
@@ -112,9 +113,20 @@ const CompanyForm = ({ isAllContent = true }) => {
 
     const handelSubmit = (data = {}) => {
         setLoading(true);
-        DataService.postJson(ENDPOINT_URLS[COMPANY_REGISTRATION], {...removeKeyFromObject({ ...data, countryId, userType: USER_ROLES[COMPANY] }, 'confirmPassword')} )
+        DataService.postJson(ENDPOINT_URLS[COMPANY_REGISTRATION], {
+            ...removeKeyFromObject({
+                ...data,
+                countryId,
+                userType: USER_ROLES[COMPANY]
+            }, 'confirmPassword')
+        })
             .then((val) => {
+                const { userId } = val;
                 handleResponse(val);
+                const formData = new FormData();
+                formData.append('imageFile', file);
+                formData.append('userId', userId);
+                DataService.postJson(ENDPOINT_URLS[SAVE_LOGO], formData);
             })
             .catch((e) => {
                 console.log(e, 'error');
@@ -236,13 +248,13 @@ const CompanyForm = ({ isAllContent = true }) => {
                                             {isAllContent ? (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
-                                                    type='password'
+                                                    type="password"
                                                     label="Password"
                                                 />
                                             </>) : (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
-                                                    type='password'
+                                                    type="password"
                                                     label="New Password"
                                                 />
                                             </>)}
@@ -250,7 +262,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={6}>
                                             <TextfieldWrapperWrapper
                                                 name="confirmPassword"
-                                                type='password'
+                                                type="password"
                                                 label="Confirm Password"
                                             />
                                         </Grid>
@@ -263,7 +275,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                                     // url={ENDPOINT_URLS[UNIVERSITY_REGISTRATION]}
                                                     // universities={data}
                                                 >
-                                                    Submit
+                                                        Submit
                                                 </Button>
                                             </div>
                                         </Grid>
