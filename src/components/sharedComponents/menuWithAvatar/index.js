@@ -55,7 +55,7 @@ export default function AccountMenu() {
                             width: 60,
                             height: 60,
                             backgroundColor: '#0580e8'
-                        }}>{localStorage.getItem('avatar')}</Avatar>
+                        }}></Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
