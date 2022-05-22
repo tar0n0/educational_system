@@ -28,6 +28,7 @@ export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; // GET
 export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; // GET
 export const EXTENDED_SEARCH_PATH = 'EXTENDED_SEARCH_PATH'; // GET
 export const GET_ALL_USER_PROFILE_DATA = 'GET_ALL_USER_PROFILE_DATA'; // GET
+export const SAVE_LOGO = 'SAVE_LOGO'; //POST
 
 //TODO university Form and company form with endpoints /admin
 //TODO user registration with endpoint only /registration
@@ -60,5 +61,6 @@ export const ENDPOINT_URLS = {
     [GET_ALL_COMPANIES]: '/Profile/GetCompanyNames',
     [GET_ALL_UNIVERSITIES]: '/Profile/GetUniversityNames',
     [EXTENDED_SEARCH_PATH]: '/File/ExtendedSearch',
-    [GET_ALL_USER_PROFILE_DATA]: (userId) => `/Profile/GetUserProfile?userId=${userId}`
+    [GET_ALL_USER_PROFILE_DATA]: (userId) => `/Profile/GetUserProfile?userId=${userId}`,
+    [SAVE_LOGO]: '/File/SaveImageforregister',
 };

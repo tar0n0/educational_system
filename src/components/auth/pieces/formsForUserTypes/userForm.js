@@ -5,6 +5,8 @@ import {
     Grid,
     Typography,
 } from '@material-ui/core';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import {
     COMPANY_COUNTRIES,
     ENDPOINT_URLS,
@@ -16,10 +18,12 @@ import {
     COMPANY_NAME,
     USER_INFO,
 } from '../../../../constants/api.constants';
+import { WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
+import { HOME } from '../../../../constants/pathnames.constants';
 import { formContext } from '../../../../context/formContext';
 import DataService from '../../../../services/dataService';
 import { getStorageItem } from '../../../../storage';
-import { parseJwt } from '../../../../utils/helpers';
+import { parseJwt, removeKeyFromObject } from '../../../../utils/helpers';
 import {
     buildCitiesData,
     buildCountriesData, buildData,
@@ -29,13 +33,13 @@ import {
 import Header from '../../../headerActions';
 import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
 import Checkbox from '../../../sharedComponents/checkbox';
-import Button from '../../../sharedComponents/button';
+import Button from '@mui/material/Button';
 import Select from '../../../sharedComponents/select';
 import Footer from '../../../sharedComponents/footer/footer';
 import UploadInput from '../../../sharedComponents/uploadedFile';
 import { USER_REGISTRATION_VALIDATION } from '../../../../utils/validations';
 import { useLocation } from 'react-router-dom';
-import { USER_TYPE, useStyles } from '../../../../constants/ui.constants';
+import { USER_ROLES, USER_TYPE, useStyles } from '../../../../constants/ui.constants';
 import ClearIcon from '@mui/icons-material/Clear';
 import { CircularProgress } from '@mui/material';
 
@@ -51,6 +55,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
     const dropdownName = (type === UNIVERSITY) ? 'university' : (type === COMPANY) ? 'company' : '';
     const checkboxName = (type === UNIVERSITY) ? 'isUniversity' : (type === COMPANY) ? 'isCompany' : '';
     const [file, setFile] = useState();
+    const [countryId, setCountryId] = useState();
     const [image, setImage] = useState();
     const [countries, setCountries] = useState(getData(type));
     const [cities, setCities] = useState([]);
@@ -61,6 +66,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
     const classes = useStyles();
     const isToken = getStorageItem('user')?.token || '';
     const userData = getStorageItem('user')?.token && parseJwt(getStorageItem('user')?.token);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (getStorageItem('user')?.token) {
@@ -74,7 +80,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             }).finally(() => setLoading(false));
         }
     }, []);
-
+    console.log(type);
     useEffect(() => {
         switch (type) {
             case UNIVERSITY:
@@ -103,20 +109,26 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             switch (type) {
                 case UNIVERSITY:
                     DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
-                        setCities(buildCitiesData(val));
-                        DataService.universityCountries.next(buildCitiesData(val));
+                        const data = val?.data?.cities || val?.data;
+                        setCountryId(val?.data?.countryId);
+                        setCities(buildCitiesData(data));
+                        DataService.universityCountries.next(buildCitiesData(data));
                     });
                     break;
                 case COMPANY:
                     DataService.getJson(ENDPOINT_URLS[COMPANY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
-                        setCities(buildCitiesData(val));
-                        DataService.companiesCities.next(buildCitiesData(val));
+                        const data = val?.data?.cities || val?.data;
+                        setCountryId(val?.data?.countryId);
+                        setCities(buildCitiesData(data));
+                        DataService.companiesCities.next(buildCitiesData(data));
                     });
                     break;
                 case USER:
                     DataService.getJson(ENDPOINT_URLS[COMPANY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
-                        setCities(buildCitiesData(val));
-                        DataService.companiesCities.next(buildCitiesData(val));
+                        const data = val?.data?.cities || val?.data;
+                        setCountryId(val?.data?.countryId);
+                        setCities(buildCitiesData(data));
+                        DataService.companiesCities.next(buildCitiesData(data));
                     });
                     break;
                 default:
@@ -128,19 +140,64 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
         if (formValues.cityId && formValues.countryId && countries.length && cities.length) {
             let countryName = (getNameById(countries, formValues.countryId) && getNameById(countries, formValues.countryId).name) || '';
             let cityName = (getNameById(cities, formValues.cityId) && getNameById(cities, formValues.cityId).name) || '';
-            switch (type) {
-                case UNIVERSITY:
-                    DataService.getJson(ENDPOINT_URLS[UNIVERSITY_NAME](countryName, cityName))
-                        .then(val => setData(buildData(val)));
-                    break;
-                case COMPANY:
-                    DataService.getJson(ENDPOINT_URLS[COMPANY_NAME](countryName, cityName))
-                        .then(val => setData(buildData(val, true)));
-                    break;
-                default:
+            if(DataService.getUserCategory.getValue()) {
+                DataService.getJson(ENDPOINT_URLS[UNIVERSITY_NAME](countryName, cityName))
+                    .then(val => setData(buildData(val)));
+            }else {
+                DataService.getJson(ENDPOINT_URLS[COMPANY_NAME](countryName, cityName))
+                    .then(val => setData(buildData(val, true)));
             }
+            // switch (type) {
+            //     case UNIVERSITY:
+            //         DataService.getJson(ENDPOINT_URLS[UNIVERSITY_NAME](countryName, cityName))
+            //             .then(val => setData(buildData(val)));
+            //         break;
+            //     case COMPANY:
+            //         DataService.getJson(ENDPOINT_URLS[COMPANY_NAME](countryName, cityName))
+            //             .then(val => setData(buildData(val, true)));
+            //         break;
+            //     default:
+            // }
         }
     }, [formValues?.cityId, formValues?.countryId, cities?.length]);
+
+    const handleResponse = (val) => {
+        navigate(HOME);
+        toast.info(WAIT_ADMIN_CONFIRM, {
+            type: toast.TYPE.INFO,
+            theme: "dark",
+        });
+    };
+
+    const handelSubmit = (data = {}) => {
+        setLoading(true);
+
+        DataService.postJson(ENDPOINT_URLS[REGISTRATION], {
+            ...removeKeyFromObject({
+                ...data,
+                countryId,
+                userType: USER_ROLES[UNIVERSITY]
+            }, 'confirmPassword')
+        })
+            .then((val) => {
+                handleResponse(val);
+            })
+            .catch((e) => {
+                console.log(e, 'error');
+
+                toast.error(
+                    e.error.response.data.title ||
+                    "Something Went Wrong",
+                    {
+                        type: toast.TYPE.ERROR,
+                        icon: true,
+                        theme: "dark",
+                    }
+                );
+            })
+            .finally(() => setLoading(false));
+    };
+
 
     return (
         <>
@@ -275,21 +332,15 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         />
                                                     </Grid>
                                                 )}
-                                                {type && type !== USER && (
-                                                    <Grid item xs={12}>
-                                                        <Select
-                                                            name={dropdownName}
-                                                            label={dropdownLabel}
-                                                            disabled={Boolean(isToken)}
-                                                            autoComplete="on"
-                                                            options={data || []}
-                                                        />
-                                                        <Checkbox
-                                                            name={checkboxName && checkboxName}
-                                                            label={`Private ${dropdownLabel && dropdownLabel}`}
-                                                        />
-                                                    </Grid>
-                                                )}
+                                                <Grid item xs={12}>
+                                                    <Select
+                                                        name={DataService.getUserCategory.getValue() ? 'universityId' : 'companyId'}
+                                                        label={DataService.getUserCategory.getValue() ? 'University' : 'Company'}
+                                                        disabled={Boolean(isToken)}
+                                                        autoComplete="on"
+                                                        options={data || []}
+                                                    />
+                                                </Grid>
 
                                                 <Grid item xs={12}>
                                                     <TextfieldWrapperWrapper
@@ -346,18 +397,17 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>
-                                                    <Button
-                                                        type={type}
-                                                        isLogin={false}
-                                                        url={ENDPOINT_URLS[REGISTRATION]}
-                                                        file={file}
-                                                        image={image}
-                                                        userInfo={userInfo}
-                                                        setClickType={setClickType}
-                                                        editUserInfo={editUserInfo}
-                                                    >
-                                                        {window.location.pathname.split('/').includes('sign-up') ? 'Sign Up' : 'Edit Profile Info'}
-                                                    </Button>
+                                                    <div className="block-extended-data">
+                                                        <Button className="extended-button-submit-1"
+                                                            variant="contained"
+                                                            onClick={() => handelSubmit(formValues)}
+                                                            // type={type}
+                                                            // url={ENDPOINT_URLS[UNIVERSITY_REGISTRATION]}
+                                                            // universities={data}
+                                                        >
+                                                            Submit
+                                                        </Button>
+                                                    </div>
                                                 </Grid>
                                             </Grid>
                                         </Form>

@@ -70,6 +70,9 @@ const Contact = () => {
                     <Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link>
+                    <Link to={'/announcements'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Announcements</span>
+                    </Link>
                 </div>
                 <div className="auth">
                     {isUser ? (<AccountMenu/>) : (

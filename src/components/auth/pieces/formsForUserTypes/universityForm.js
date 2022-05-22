@@ -11,23 +11,25 @@ import {
     Typography
 } from '@material-ui/core';
 import {
-    ENDPOINT_URLS, REGISTRATION,
+    ENDPOINT_URLS,
     UNIVERSITY_CITIES,
-    UNIVERSITY_COUNTRIES, UNIVERSITY_NAME,
+    UNIVERSITY_COUNTRIES,
+    UNIVERSITY_NAME,
     USER_INFO,
+    SAVE_LOGO,
     UNIVERSITY_REGISTRATION,
 } from '../../../../constants/api.constants';
 import { WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
 import { HOME } from '../../../../constants/pathnames.constants';
-import { USER_TYPE } from '../../../../constants/ui.constants';
+import { USER_ROLES, USER_TYPE } from '../../../../constants/ui.constants';
 import { formContext } from '../../../../context/formContext';
 import DataService from '../../../../services/dataService';
 import { getStorageItem } from '../../../../storage';
+import { removeKeyFromObject } from '../../../../utils/helpers';
 import { buildCitiesData, buildCountriesData, buildData, getData, getNameById } from '../../../../utils/supporters';
 import Header from '../../../headerActions';
 import '../../pieces/style.css';
 import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
-// import Button from '../../../sharedComponents/button';
 import Select from '../../../sharedComponents/select';
 import Footer from '../../../sharedComponents/footer/footer';
 import UploadInput from '../../../sharedComponents/uploadedFile';
@@ -49,6 +51,7 @@ const UniversityForm = ({ isAllContent = true }) => {
     const { UNIVERSITY, COMPANY, USER } = USER_TYPE || {};
     const [file, setFile] = useState();
     const [formValues] = useContext(formContext);
+    const [countryId, setCountryId] = useState();
     const navigate = useNavigate();
     const [countries, setCountries] = useState(getData(type));
     const [cities, setCities] = useState([]);
@@ -81,8 +84,10 @@ const UniversityForm = ({ isAllContent = true }) => {
     useEffect(() => {
         if (formValues.countryId && countries.length) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
-                setCities(buildCitiesData(val));
-                DataService.universityCountries.next(buildCitiesData(val));
+                const data = val?.data?.cities || val?.data;
+                setCountryId(val?.data?.countryId);
+                setCities(buildCitiesData(data));
+                DataService.universityCountries.next(buildCitiesData(data));
             });
         }
     }, [formValues.countryId]);
@@ -107,9 +112,20 @@ const UniversityForm = ({ isAllContent = true }) => {
 
     const handelSubmit = (data = {}) => {
         setLoading(true);
-        DataService.postJson(ENDPOINT_URLS[UNIVERSITY_REGISTRATION], { ...data })
+        DataService.postJson(ENDPOINT_URLS[UNIVERSITY_REGISTRATION], {
+            ...removeKeyFromObject({
+                ...data,
+                countryId,
+                userType: USER_ROLES[UNIVERSITY]
+            }, 'confirmPassword')
+        })
             .then((val) => {
+                const { userId } = val;
                 handleResponse(val);
+                const formData = new FormData();
+                formData.append('imageFile', file);
+                formData.append('userId', userId);
+                DataService.postJson(ENDPOINT_URLS[SAVE_LOGO], formData);
             })
             .catch((e) => {
                 console.log(e, 'error');
@@ -144,11 +160,9 @@ const UniversityForm = ({ isAllContent = true }) => {
                                     cityId: userInfo?.city?.cityId || '',
                                     name: userInfo?.name || '',
                                     surname: userInfo?.surname || '',
-                                    cv: '',
-                                    login: '',
+                                    username: userInfo?.username || '',
+                                    email: '',
                                     password: '',
-                                    confirmPassword: '',
-
                                 }}
                                 validateOnChange={true}
                                 validateOnBlur={true}
@@ -176,7 +190,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="surname"
-                                                label="Surname"
+                                                label="Last Name"
                                             />
                                         </Grid>
                                         <Grid item xs={6}>
@@ -212,22 +226,29 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography>
-                                                <span className="typography-text">  Uploaded Files</span>
+                                                <span className="typography-text">  Uploaded Logo</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
                                             <UploadInput
                                                 className={'pdfInput'}
                                                 accept={
-                                                    'application/pdf,application/vnd.ms-excel'
+                                                    'image/*'
                                                 }
                                                 setFile={setFile}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
-                                                name="login"
-                                                label="Login"
+                                                name="username"
+                                                label="Username"
+
+                                            />}
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            {isAllContent && <TextfieldWrapperWrapper
+                                                name="email"
+                                                label="Email"
 
                                             />}
                                         </Grid>

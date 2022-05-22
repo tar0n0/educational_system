@@ -1,18 +1,14 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CheckIcon from '@mui/icons-material/Check';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SchoolIcon from '@mui/icons-material/School';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import MyFiles from '../../../myFiles';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
-import UserForm from '../../../auth/pieces/formsForUserTypes/userForm';
-import { CONTENT_TYPE, MATERIALS_TYPE, rightSideItemsName, USER_TYPE } from '../../../../constants/ui.constants';
+import { CONTENT_TYPE, rightSideItemsName } from '../../../../constants/ui.constants';
 
 import '../style.css';
 import Footer from '../../../sharedComponents/footer/footer';
-import Materials from '../materials';
 import SelectedMenuContent from '../university/selectedMenuContent';
 
 const UserPage = () => {
@@ -20,8 +16,8 @@ const UserPage = () => {
     const [clickMaterialTYpe, setClickMaterialType] = useState('');
     const { MATERIALS, PROFILE } = CONTENT_TYPE;
     const [selectedItem, setSelectedItem] = useState('');
-    const { UPLOAD_FILE, MY_FILES } = MATERIALS_TYPE;
-    const handleClick = (type = '') => setClickType(type);
+    // const { UPLOAD_FILE, MY_FILES } = MATERIALS_TYPE;
+    // const handleClick = (type = '') => setClickType(type);
 
     return (
         <>

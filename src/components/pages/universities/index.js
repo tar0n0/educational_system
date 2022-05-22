@@ -118,6 +118,9 @@ const Universities = () => {
                     <Link to={'/contacts'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link>
+                    <Link to={'/announcements'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Announcements</span>
+                    </Link>
                 </div>
                 <div className="auth">
                     {isUser ? (<AccountMenu/>) : (
@@ -177,7 +180,7 @@ const Universities = () => {
                             </section>
                             <>
                                 {universities.map((card, index) => (
-                                    <ListWithLogo key={index} title={card.title} url={card.url}/>
+                                    <ListWithLogo key={index} title={card.title} url={card.url} image={card?.imageSrc}/>
                                 ))}
                             </>
                         </div>

@@ -19,8 +19,8 @@ export const getData = (type = '') => {
 export const buildCountriesData = (val) => {
     const { data } = val;
     const currentData = [...data.map(el => ({
-        name: el.countryName,
-        id: el.countryId,
+        name: el,
+        id: el,
     }))];
     return currentData;
 };
@@ -29,8 +29,8 @@ export const getNameById = (countries, countryId) => {
     return countries.find(el => el.id === countryId);
 };
 
-export const buildCitiesData = (val) => {
-    const { data } = val;
+export const buildCitiesData = (data = []) => {
+    /*eslint no-unsafe-optional-chaining: "error"*/
     const currentData = [...data.map(el => ({
         name: el.cityName,
         id: el.cityId,

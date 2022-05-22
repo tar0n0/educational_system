@@ -85,7 +85,8 @@ const ExtendedSearch = () => {
             setCompanies(buildData(val, true));
         });
         DataService.getJson(ENDPOINT_URLS[GET_ALL_CITIES]).then(val => {
-            setCities(buildCitiesData(val));
+            const data = val?.data?.cities || val?.data;
+            setCities(buildCitiesData(data));
         });
         DataService.getJson(ENDPOINT_URLS[GET_ALL_UNIVERSITIES]).then(val => {
             setUniversities(buildData(val));

@@ -4,15 +4,11 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SchoolIcon from '@mui/icons-material/School';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import MyFiles from '../../../myFiles';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
 import { CONTENT_TYPE, MATERIALS_TYPE, rightSideItemsName, USER_TYPE } from '../../../../constants/ui.constants';
 import CheckIcon from '@mui/icons-material/Check';
 import '../style.css';
-import UserForm from '../../../auth/pieces/formsForUserTypes/userForm';
 import Footer from '../../../sharedComponents/footer/footer';
-import ConfirmProfile from '../confirmProfile';
-import Materials from '../materials';
 
 import '../../../headerActions/header.css';
 import SelectedMenuContent from './selectedMenuContent';
@@ -31,7 +27,26 @@ const UniversityPage = () => {
                 <div className="logo-for-p-university">
                     <Link to={'/'}><span className="back-to-home-university">Home</span></Link>
                 </div>
-                <div className="context-university">University Page</div>
+                <div className="context-university">
+                    <Link to={'/about'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">About</span>
+                    </Link>
+                    <Link to={'/universities'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Universities</span>
+                    </Link>
+                    <Link to={'/companies'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Companies</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Contacts</span>
+                    </Link>
+                    <Link to={'/courses'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Courses</span>
+                    </Link>
+                    <Link to={'/announcements'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Announcements</span>
+                    </Link>
+                </div>
             </div>
             <div className="avatar">
                 <AccountMenu/>
@@ -49,6 +64,14 @@ const UniversityPage = () => {
                             }}/>
                             Profile
                         </div>
+                    </li>
+                    <li className={`item-for-side ${selectedItem === rightSideItemsName.CONFIRM_MEMBER ? 'active' : ''}`}
+                        onClick={() => setSelectedItem(rightSideItemsName.CONFIRM_MEMBER)}>
+                        <CheckIcon color={"inherit"} sx={{
+                            width: 32,
+                            height: 32
+                        }}/>
+                        <span>Confirm member</span>
                     </li>
                     <li className={`item-for-side ${selectedItem === rightSideItemsName.CONFIRM_PROFILE ? 'active' : ''}`}
                         onClick={() => setSelectedItem(rightSideItemsName.CONFIRM_PROFILE)}>
@@ -106,8 +129,7 @@ const UniversityPage = () => {
 
                 </ul>
             </div>
-            <div className='second-block-for-right-side-menu'>
-                {/*type = '', setClickType, clickMaterialTYpe, setClickMaterialType, clickType*/}
+            <div className="second-block-for-right-side-menu">
                 <SelectedMenuContent type={selectedItem} setClickType={setClickType}
                     setClickMaterialType={setClickMaterialType}
                     clickMaterialTYpe={clickMaterialTYpe} clickType={clickType}/>

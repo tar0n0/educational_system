@@ -126,20 +126,7 @@ const ButtonWrapper = ({
                         : USER_ROLES[USER];
 
         if (url && url === ENDPOINT_URLS[EXTENDED_SEARCH_PATH]) {
-            const { universityId, companyId, countryId, cityId, fileName, fileType, name, surName } = values;
             DataService.getJson(ENDPOINT_URLS[USER_MATERIALS],
-                // {
-                //     universityId,
-                //     companyId,
-                //     cityId,
-                //     countryId,
-                //     user: {
-                //         name,
-                //         surName,
-                //         fileName,
-                //         fileType,
-                //     }
-                // }
             ).then(val => {
                 const { data } = val;
                 DataService.getExtendedSearchData.next(data);

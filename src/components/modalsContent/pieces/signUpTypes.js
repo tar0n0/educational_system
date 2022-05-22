@@ -66,6 +66,7 @@ const UserType = ({}) => {
                                 }}>
                                     <span className="link-btn" onClick={() => {
                                         DataService.getUserType.next(2);
+                                        DataService.getUserCategory.next(null);
                                         setOpen(false);
                                     }}>Company</span>
                                 </Link>

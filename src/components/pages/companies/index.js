@@ -116,6 +116,9 @@ const Companies = () => {
                     <Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link>
+                    <Link to={'/announcements'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Announcements</span>
+                    </Link>
                 </div>
                 <div className="auth">
                     {isUser ? (<AccountMenu/>) : (
@@ -173,10 +176,10 @@ const Companies = () => {
                             <>
                                 {companies.map((card, index) => (
                                     <div className="container-with-logo-card" key={index}>
-                                        <div className="block-for-image-logo" onClick={() => navigate(`/company/:${card?.title}`)}>
-                                            <img src={card?.image || polytechnic} alt=""/>
+                                        <div className="block-for-image-logo" onClick={() => window.open(card?.url)}>
+                                            <img src={card?.imageSrc || polytechnic} alt=""/>
                                         </div>
-                                        <div><p className="block-for-name-logo" onClick={() => navigate(`/company/:${card?.title}`)}>{card?.title}<span
+                                        <div><p className="block-for-name-logo"  onClick={() => window.open(card?.url)}>{card?.title}<span
                                             className=""> </span></p></div>
                                     </div>
                                 ))}

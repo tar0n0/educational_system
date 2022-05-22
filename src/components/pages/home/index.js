@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
+import useWindowResize from '../../../hooks/useWindowResize';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import DataList from '../../sharedComponents/dataList';
@@ -14,10 +15,10 @@ import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 import { fromEvent } from "rxjs";
 import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import { ENDPOINT_URLS, INPUT_SEARCH } from '../../../constants/api.constants';
-import  Img1 from "../../../components/pages/home/Slider_pict/images1.jpg";
-import  Img2 from "../../../components/pages/home/Slider_pict/images2.jpg";
-import  Img3 from "../../../components/pages/home/Slider_pict/images3.jpg";
-import  Img4 from "../../../components/pages/home/Slider_pict/images4.jpg";
+import Img1 from "../../../components/pages/home/Slider_pict/images1.jpg";
+import Img2 from "../../../components/pages/home/Slider_pict/images2.jpg";
+import Img3 from "../../../components/pages/home/Slider_pict/images3.jpg";
+import Img4 from "../../../components/pages/home/Slider_pict/images4.jpg";
 
 import './home.css';
 
@@ -26,9 +27,10 @@ const Home = () => {
     const [isUser, setIsUser] = useState(false);
     const [searchData, setSearchData] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const { width } = useWindowResize();
     const ref = useRef();
     const navigate = useNavigate();
-
+    console.log(width);
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
         return () => subscription && subscription.unsubscribe();
@@ -71,6 +73,9 @@ const Home = () => {
                     </Link>
                     <Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
+                    </Link>
+                    <Link to={'/announcements'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Announcements</span>
                     </Link>
                 </div>
                 <div className="auth">
@@ -118,15 +123,15 @@ const Home = () => {
             </div>
             {searchData.length ? (
                 <div className="content">
-                    <DataList data={searchData} title='Search Data'/>
+                    <DataList data={searchData} title="Search Data"/>
                 </div>
             ) : (
                 <div className="content-home-page">
                     <div className="container_slider_css">
-                        <img className='photo_slider_css' src={Img1}/>
-                        <img className='photo_slider_css' src={Img2}/>
-                        <img className='photo_slider_css' src={Img3}/>
-                        <img className='photo_slider_css' src={Img4}/>
+                        <img className="photo_slider_css" src={Img1}/>
+                        <img className="photo_slider_css" src={Img2}/>
+                        <img className="photo_slider_css" src={Img3}/>
+                        <img className="photo_slider_css" src={Img4}/>
                     </div>
 
                 </div>

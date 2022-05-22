@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Container,
@@ -13,24 +14,20 @@ import {
     COMPANY_CITIES,
     COMPANY_COUNTRIES, COMPANY_NAME,
     ENDPOINT_URLS,
-    EXTENDED_SEARCH_PATH, LOGIN, REGISTRATION, UNIVERSITY_CITIES,
-    UNIVERSITY_COUNTRIES, UNIVERSITY_NAME,
     COMPANY_REGISTRATION,
     USER_INFO
 } from '../../../../constants/api.constants';
-import { GLOBAL_ERROR, LOGIN_SUCCESS, WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
-import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../../constants/pathnames.constants';
-import { USER_TYPE } from '../../../../constants/ui.constants';
+import {  WAIT_ADMIN_CONFIRM } from '../../../../constants/messages.constants';
+import { HOME} from '../../../../constants/pathnames.constants';
+import { USER_ROLES, USER_TYPE } from '../../../../constants/ui.constants';
 import { formContext } from '../../../../context/formContext';
-import AuthorizationService from '../../../../services/authorizationService';
 import DataService from '../../../../services/dataService';
-import { getStorageItem, setStorageItem } from '../../../../storage';
-import { parseJwt } from '../../../../utils/helpers';
+import { getStorageItem } from '../../../../storage';
+import { removeKeyFromObject } from '../../../../utils/helpers';
 import { buildCitiesData, buildCountriesData, buildData, getData, getNameById } from '../../../../utils/supporters';
 import Header from '../../../headerActions';
 import '../../pieces/style.css';
 import TextfieldWrapperWrapper from '../../../sharedComponents/textField';
-import Button from '../../../sharedComponents/button';
 import Select from '../../../sharedComponents/select';
 import Footer from '../../../sharedComponents/footer/footer';
 import UploadInput from '../../../sharedComponents/uploadedFile';
@@ -53,6 +50,7 @@ const CompanyForm = ({ isAllContent = true }) => {
     const checkboxName = (type === UNIVERSITY) ? 'isUniversity' : (type === COMPANY) ? 'isCompany' : '';
     const [file, setFile] = useState();
     const [formValues] = useContext(formContext);
+    const [countryId, setCountryId] = useState();
     const [countries, setCountries] = useState(getData(type));
     const [cities, setCities] = useState([]);
     const [data, setData] = useState([]);
@@ -87,8 +85,10 @@ const CompanyForm = ({ isAllContent = true }) => {
     useEffect(() => {
         if (formValues.countryId && countries.length) {
             DataService.getJson(ENDPOINT_URLS[COMPANY_CITIES](getNameById(countries, formValues.countryId).name)).then(val => {
-                setCities(buildCitiesData(val));
-                DataService.companiesCities.next(buildCitiesData(val));
+                const data = val?.data?.cities || val?.data;
+                setCountryId(val?.data.countryId);
+                setCities(buildCitiesData(data));
+                DataService.companiesCities.next(buildCitiesData(data));
             });
 
         }
@@ -110,9 +110,9 @@ const CompanyForm = ({ isAllContent = true }) => {
         });
     };
 
-    const handelSubmit = () => {
+    const handelSubmit = (data = {}) => {
         setLoading(true);
-        DataService.postJson(ENDPOINT_URLS[REGISTRATION], {})
+        DataService.postJson(ENDPOINT_URLS[COMPANY_REGISTRATION], {...removeKeyFromObject({ ...data, countryId, userType: USER_ROLES[COMPANY] }, 'confirmPassword')} )
             .then((val) => {
                 handleResponse(val);
             })
@@ -148,10 +148,9 @@ const CompanyForm = ({ isAllContent = true }) => {
                                     link: userInfo?.link || '',
                                     countryId: userInfo?.country?.countryId || '',
                                     cityId: userInfo?.city?.cityId || '',
-                                    cv: '',
+                                    username: userInfo?.username || '',
                                     login: '',
                                     password: '',
-                                    confirmPassword: '',
                                 }}
                                 validateOnChange={true}
                                 validateOnBlur={true}
@@ -221,6 +220,13 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
+                                                name="username"
+                                                label="Username"
+
+                                            />}
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            {isAllContent && <TextfieldWrapperWrapper
                                                 name="login"
                                                 label="Login"
                                             />
@@ -251,11 +257,13 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <div className="block-extended-data">
                                                 <Button className="extended-button-submit-1"
-                                                    url={ENDPOINT_URLS[COMPANY_REGISTRATION]}
-                                                    type={type}
-                                                    companies={data}
+                                                    variant="contained"
+                                                    onClick={() => handelSubmit(formValues)}
+                                                    // type={type}
+                                                    // url={ENDPOINT_URLS[UNIVERSITY_REGISTRATION]}
+                                                    // universities={data}
                                                 >
-                                                        Submit
+                                                    Submit
                                                 </Button>
                                             </div>
                                         </Grid>
