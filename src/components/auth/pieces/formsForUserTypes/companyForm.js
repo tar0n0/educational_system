@@ -155,6 +155,8 @@ const CompanyForm = ({ isAllContent = true }) => {
                         <div className={classes.formWrapper}>
                             <Formik
                                 initialValues={{
+                                    name: userInfo?.name || '',
+                                    surname: userInfo?.surname || '',
                                     companyId: userInfo?.companyId || '',
                                     email: userInfo?.email || '',
                                     link: userInfo?.link || '',
@@ -179,6 +181,19 @@ const CompanyForm = ({ isAllContent = true }) => {
                                                 {isAllContent &&
                                                         <span className="typography-text">Create Account</span>}
                                             </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextfieldWrapperWrapper
+                                                name="name"
+                                                label="First Name"
+
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextfieldWrapperWrapper
+                                                name="surname"
+                                                label="Last Name"
+                                            />
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Select
