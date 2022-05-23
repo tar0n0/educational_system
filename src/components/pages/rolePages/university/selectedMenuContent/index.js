@@ -4,6 +4,8 @@ import UserForm from '../../../../auth/pieces/formsForUserTypes/userForm';
 import MyFiles from '../../../../myFiles';
 import ConfirmProfile from '../../confirmProfile';
 import Materials from '../../materials';
+import ConfirmCompanyMember from '../confirmCompanyMember';
+import ConfirmMember from '../confirmMember';
 
 const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setClickMaterialType, clickType }) => {
     const { UPLOAD_FILE, MY_FILES } = MATERIALS_TYPE;
@@ -53,6 +55,20 @@ const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setCl
         }
         case rightSideItemsName.CONFIRM_PROFILE : {
             return <ConfirmProfile />;
+        }
+        case rightSideItemsName.CONFIRM_MEMBER : {
+            return (
+                <>
+                    <div>
+                        <h1>University Members</h1>
+                        <ConfirmMember />
+                    </div>
+                    <div>
+                        <h1>Company Members</h1>
+                        <ConfirmCompanyMember  />
+                    </div>
+                </>
+            );
         }
         default :
             return null;

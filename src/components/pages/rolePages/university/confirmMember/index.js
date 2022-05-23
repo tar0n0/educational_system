@@ -26,13 +26,13 @@ import {
     UNIVERSITY_CONFIRM_PROFILES,
     CONFIRMED_COMPANY_USER,
     CONFIRMED_UNIVERSITY_USER,
-} from '../../../../constants/api.constants';
-import { CONFIRM_SUCCESS, ERROR_CONFIRM, GLOBAL_ERROR } from '../../../../constants/messages.constants';
-import { DELETE_EMAILS } from '../../../../constants/modals.constat';
-import { USER_TYPE } from '../../../../constants/ui.constants';
-import { modalContext } from '../../../../context/modalContext';
-import DataService from '../../../../services/dataService';
-import { getStorageItem } from '../../../../storage';
+} from '../../../../../constants/api.constants';
+import { CONFIRM_SUCCESS, ERROR_CONFIRM, GLOBAL_ERROR } from '../../../../../constants/messages.constants';
+import { DELETE_EMAILS } from '../../../../../constants/modals.constat';
+import { USER_TYPE } from '../../../../../constants/ui.constants';
+import { modalContext } from '../../../../../context/modalContext';
+import DataService from '../../../../../services/dataService';
+// import { getStorageItem } from '../../../../storage';
 
 function createData(email, name, surName) {
     return { email, name, surName };
@@ -255,7 +255,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ConfirmProfile() {
+export default function ConfirmMember() {
     const classes = useStyles();
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("calories");
@@ -274,7 +274,7 @@ export default function ConfirmProfile() {
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
-                const filteredData = data.filter(el => el.userRole === 'User' && el.userType == 'University');
+                const filteredData = data.filter(el => el.userRole !== 'User' && el.userType === 'University');
                 const currentData = filteredData?.map(el => createData(el.email, el?.name, el?.surName));
                 currentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(currentData);
@@ -291,7 +291,7 @@ export default function ConfirmProfile() {
         } else {
             DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
-                const filteredData = data.filter(el => el.userRole === 'User' && el.userType == 'Company');
+                const filteredData = data.filter(el => el.userRole !== 'User');
                 const companyCurrentData = filteredData.map(el => createData(el.email, el?.name, el?.surName));
                 companyCurrentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(companyCurrentData);
