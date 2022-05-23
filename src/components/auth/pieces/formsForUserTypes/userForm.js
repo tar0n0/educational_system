@@ -140,10 +140,10 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
         if (formValues.cityId && formValues.countryId && countries.length && cities.length) {
             let countryName = (getNameById(countries, formValues.countryId) && getNameById(countries, formValues.countryId).name) || '';
             let cityName = (getNameById(cities, formValues.cityId) && getNameById(cities, formValues.cityId).name) || '';
-            if(DataService.getUserCategory.getValue()) {
+            if (DataService.getUserCategory.getValue()) {
                 DataService.getJson(ENDPOINT_URLS[UNIVERSITY_NAME](countryName, cityName))
                     .then(val => setData(buildData(val)));
-            }else {
+            } else {
                 DataService.getJson(ENDPOINT_URLS[COMPANY_NAME](countryName, cityName))
                     .then(val => setData(buildData(val, true)));
             }
@@ -168,15 +168,16 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             theme: "dark",
         });
     };
-
+    console.log(DataService.getUserCategory.getValue(), DataService.getUserType.getValue());
     const handelSubmit = (data = {}) => {
         setLoading(true);
 
         DataService.postJson(ENDPOINT_URLS[REGISTRATION], {
             ...removeKeyFromObject({
                 ...data,
+                ...(DataService.getUserCategory.getValue() ? {userCategory : DataService.getUserCategory.getValue()} : {}),
                 countryId,
-                userType: USER_ROLES[UNIVERSITY]
+                userType: DataService.getUserType.getValue(),
             }, 'confirmPassword')
         })
             .then((val) => {
@@ -228,6 +229,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                             link: userInfo?.link || '',
                                             isLink: userInfo?.isLink || false,
                                             file: '',
+                                            username: userInfo?.username || '',
                                             // image: '',
                                             countryId: userInfo?.country?.countryId || '',
                                             password: userInfo?.password || '',
@@ -268,7 +270,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         name="name"
-                                                        label="First Name"
+                                                        label="First Name *"
                                                         required={true}
                                                         autoComplete="off"
                                                     />
@@ -277,15 +279,22 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         name="surname"
-                                                        label="Surname"
+                                                        label="Last name *"
                                                         required={true}
                                                     />
 
                                                 </Grid>
+                                                <Grid item xs={12}>
+                                                    <TextfieldWrapperWrapper
+                                                        name="username"
+                                                        label="Username *"
+
+                                                    />
+                                                </Grid>
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         name="email"
-                                                        label="Email"
+                                                        label="Email *"
                                                         autoComplete="off"
                                                         required={true}
                                                         disabled={Boolean(isToken)}
@@ -295,7 +304,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         name="phone"
-                                                        label="Phone"
+                                                        label="Phone *"
                                                         autoComplete="on"
                                                         required={true}
 
@@ -310,7 +319,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         <Select
                                                             autoComplete="on"
                                                             name="countryId"
-                                                            label="Country"
+                                                            label="Country *"
                                                             autoComplete="on"
                                                             disabled={Boolean(isToken)}
                                                             options={countries || [userInfo?.country] || []}
@@ -325,7 +334,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                     <Grid item xs={6}>
                                                         <Select
                                                             name="cityId"
-                                                            label="City"
+                                                            label="City *"
                                                             options={cities || userInfo?.city || []}
                                                             disabled={Boolean(isToken)}
                                                             autoComplete="on"
@@ -352,7 +361,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         name="link"
                                                         autoComplete="off"
                                                         required={true}
-                                                        label="Link"
+                                                        label="Link *"
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>
@@ -388,7 +397,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         required={true}
                                                         name={editUserInfo ? 'oldPassword' : 'password'}
                                                         autoComplete="off"
-                                                        label={editUserInfo ? 'Old Password' : 'password'}
+                                                        label={editUserInfo ? 'Old Password *' : 'password *'}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={6}>
@@ -397,7 +406,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
                                                         required={true}
                                                         name={editUserInfo ? 'newPassword' : 'confirmPassword'}
                                                         autoComplete="off"
-                                                        label={editUserInfo ? 'New Password' : 'Confirm Password'}
+                                                        label={editUserInfo ? 'New Password *' : 'Confirm Password *'}
                                                     />
                                                 </Grid>
                                                 <Grid item xs={12}>

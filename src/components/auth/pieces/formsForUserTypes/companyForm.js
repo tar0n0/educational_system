@@ -163,6 +163,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                     countryId: userInfo?.country?.countryId || '',
                                     cityId: userInfo?.city?.cityId || '',
                                     username: userInfo?.username || '',
+                                    OrganizationName: userInfo?.OrganizationName || null,
                                     login: '',
                                     password: '',
                                 }}
@@ -185,20 +186,20 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="name"
-                                                label="First Name"
+                                                label="First Name *"
 
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="surname"
-                                                label="Last Name"
+                                                label="Last Name *"
                                             />
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Select
                                                 name="countryId"
-                                                label="Country"
+                                                label="Country *"
                                                 disabled={Boolean(isToken)}
                                                 options={countries || [userInfo?.country] || []}
                                             />
@@ -207,26 +208,32 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={6}>
                                             <Select
                                                 name="cityId"
-                                                label="City"
+                                                label="City *"
                                                 disabled={Boolean(isToken)}
                                                 options={cities || [userInfo?.city] || []}
                                             />
 
                                         </Grid>
+                                        {/*<Grid item xs={12}>*/}
+                                        {/*    <Select*/}
+                                        {/*        name="companyId"*/}
+                                        {/*        label="Company"*/}
+                                        {/*        disabled={Boolean(isToken)}*/}
+                                        {/*        options={data || []}*/}
+                                        {/*    />*/}
+
+                                        {/*</Grid>*/}
                                         <Grid item xs={12}>
-                                            <Select
-                                                name="companyId"
-                                                label="Company"
-                                                disabled={Boolean(isToken)}
-                                                options={data || []}
+                                            <TextfieldWrapperWrapper
+                                                name="OrganizationName"
+                                                label="Organization Name *"
                                             />
 
                                         </Grid>
-
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="link"
-                                                label="Link"
+                                                label="Link *"
                                             />
 
                                         </Grid>
@@ -248,14 +255,14 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
                                                 name="username"
-                                                label="Username"
+                                                label="Username *"
 
                                             />}
                                         </Grid>
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
-                                                name="login"
-                                                label="Login"
+                                                name="email"
+                                                label="Email *"
                                             />
                                             }
                                         </Grid>
@@ -264,13 +271,13 @@ const CompanyForm = ({ isAllContent = true }) => {
                                                 <TextfieldWrapperWrapper
                                                     name="password"
                                                     type="password"
-                                                    label="Password"
+                                                    label="Password *"
                                                 />
                                             </>) : (<>
                                                 <TextfieldWrapperWrapper
                                                     name="password"
                                                     type="password"
-                                                    label="New Password"
+                                                    label="New Password *"
                                                 />
                                             </>)}
                                         </Grid>
@@ -278,7 +285,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                             <TextfieldWrapperWrapper
                                                 name="confirmPassword"
                                                 type="password"
-                                                label="Confirm Password"
+                                                label="Confirm Password *"
                                             />
                                         </Grid>
                                         <Grid item xs={12}>

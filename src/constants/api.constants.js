@@ -62,5 +62,5 @@ export const ENDPOINT_URLS = {
     [GET_ALL_UNIVERSITIES]: '/Profile/GetUniversityNames',
     [EXTENDED_SEARCH_PATH]: '/File/ExtendedSearch',
     [GET_ALL_USER_PROFILE_DATA]: (userId) => `/Profile/GetUserProfile?userId=${userId}`,
-    [SAVE_LOGO]: '/File/SaveImageforregister',
+    [SAVE_LOGO]: '/File/SaveImageforregister?',
 };

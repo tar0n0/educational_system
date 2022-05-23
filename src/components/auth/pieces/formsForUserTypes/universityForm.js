@@ -124,8 +124,8 @@ const UniversityForm = ({ isAllContent = true }) => {
                 handleResponse(val);
                 const formData = new FormData();
                 formData.append('imageFile', file);
-                formData.append('userId', userId);
-                DataService.postJson(ENDPOINT_URLS[SAVE_LOGO], formData);
+                // formData.append('_userId', userId);
+                DataService.postJson(`${ENDPOINT_URLS[SAVE_LOGO]}_userId=${userId}`, formData);
             })
             .catch((e) => {
                 console.log(e, 'error');
@@ -142,7 +142,7 @@ const UniversityForm = ({ isAllContent = true }) => {
             })
             .finally(() => setLoading(false));
     };
-
+    //TODO Organization Name for CompanyForm, and delete company call
     return (
         <>
             <Grid container>
@@ -154,7 +154,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                         <div className={classes.formWrapper}>
                             <Formik
                                 initialValues={{
-                                    universityId: userInfo?.university || '',
+                                    universityId: userInfo?.university || null,
                                     link: userInfo?.link || '',
                                     countryId: userInfo?.country?.countryId || '',
                                     cityId: userInfo?.city?.cityId || '',
@@ -163,6 +163,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                                     username: userInfo?.username || '',
                                     email: '',
                                     password: '',
+                                    OrganizationName: '',
                                 }}
                                 validateOnChange={true}
                                 validateOnBlur={true}
@@ -183,20 +184,20 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="name"
-                                                label="First Name"
+                                                label="First Name *"
 
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="surname"
-                                                label="Last Name"
+                                                label="Last Name *"
                                             />
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Select
                                                 name="countryId"
-                                                label="Country"
+                                                label="Country *"
                                                 disabled={Boolean(isToken)}
                                                 options={countries || [userInfo?.country] || []}
                                             />
@@ -204,23 +205,30 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         <Grid item xs={6}>
                                             <Select
                                                 name="cityId"
-                                                label="City"
+                                                label="City *"
                                                 disabled={Boolean(isToken)}
                                                 options={cities || [userInfo?.city] || []}
                                             />
                                         </Grid>
+                                        {/*<Grid item xs={12}>*/}
+                                        {/*    <Select*/}
+                                        {/*        name="universityId"*/}
+                                        {/*        label="University"*/}
+                                        {/*        disabled={Boolean(isToken)}*/}
+                                        {/*        options={data || []}*/}
+                                        {/*    />*/}
+                                        {/*</Grid>*/}
                                         <Grid item xs={12}>
-                                            <Select
-                                                name="universityId"
-                                                label="University"
-                                                disabled={Boolean(isToken)}
-                                                options={data || []}
+                                            <TextfieldWrapperWrapper
+                                                name="OrganizationName"
+                                                label="Organization Name *"
+
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextfieldWrapperWrapper
                                                 name="link"
-                                                label="Link"
+                                                label="Link *"
 
                                             />
                                         </Grid>
@@ -241,14 +249,14 @@ const UniversityForm = ({ isAllContent = true }) => {
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
                                                 name="username"
-                                                label="Username"
+                                                label="Username *"
 
                                             />}
                                         </Grid>
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper
                                                 name="email"
-                                                label="Email"
+                                                label="Email *"
 
                                             />}
                                         </Grid>
@@ -257,13 +265,13 @@ const UniversityForm = ({ isAllContent = true }) => {
                                                 <TextfieldWrapperWrapper
                                                     name="password"
                                                     type="password"
-                                                    label="Password"
+                                                    label="Password *"
                                                 />
                                             </>) : (<>
                                                 <TextfieldWrapperWrapper
                                                     type="password"
                                                     name="password"
-                                                    label="New Password"
+                                                    label="New Password *"
 
                                                 />
                                             </>)}
@@ -272,7 +280,7 @@ const UniversityForm = ({ isAllContent = true }) => {
                                             <TextfieldWrapperWrapper
                                                 type="password"
                                                 name="confirmPassword"
-                                                label="Confirm Password"
+                                                label="Confirm Password *"
 
                                             />
                                         </Grid>
