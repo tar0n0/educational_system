@@ -138,14 +138,16 @@ const Announcements = () => {
                                 {data?.map(el => {
                                     return (
                                         <>
-                                            <div className="posts">
-                                                <h2 className="title-announcement">{el?.title}</h2>
-                                                {el?.content.substring(1, 300)}
-                                                <p className="style-6" onClick={() => {
-                                                    DataService.getAnnouncement.next(el);
-                                                    setOpenDialog(true);
-                                                }}>Read More</p>
-                                            </div>
+                                            {el?.content?.length ? (
+                                                <div className="posts">
+                                                    <h2 className="title-announcement">{el?.title}</h2>
+                                                    {el?.content.substring(1, 300)}
+                                                    <p className="style-6" onClick={() => {
+                                                        DataService.getAnnouncement.next(el);
+                                                        setOpenDialog(true);
+                                                    }}>Read More</p>
+                                                </div>
+                                            ) : null}
                                         </>
                                     );
                                 })}
