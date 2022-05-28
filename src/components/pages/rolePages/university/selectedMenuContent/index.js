@@ -2,6 +2,7 @@ import React from 'react';
 import { CONTENT_TYPE, MATERIALS_TYPE, rightSideItemsName, USER_TYPE } from '../../../../../constants/ui.constants';
 import UserForm from '../../../../auth/pieces/formsForUserTypes/userForm';
 import MyFiles from '../../../../myFiles';
+import Announcement from '../../../../sharedComponents/Announcements';
 import ConfirmProfile from '../../confirmProfile';
 import Materials from '../../materials';
 import ConfirmCompanyMember from '../confirmCompanyMember';
@@ -60,15 +61,14 @@ const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setCl
             return (
                 <>
                     <div>
-                        <h1>University Members</h1>
+                        <h1>Members</h1>
                         <ConfirmMember />
-                    </div>
-                    <div>
-                        <h1>Company Members</h1>
-                        <ConfirmCompanyMember  />
                     </div>
                 </>
             );
+        }
+        case rightSideItemsName.ANNOUNCEMENTS: {
+            return <Announcement />;
         }
         default :
             return null;

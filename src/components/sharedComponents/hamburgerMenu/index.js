@@ -29,16 +29,16 @@ const HamburgerMenu = () => {
                         <span className="menu-items-for-header">Universities</span>
                     </Link></li>
                     <li><Link to={'/companies'} className={'menu-links-with-navigation'}>
-                        <span className="menu-items-for-header">Companies</span>
-                    </Link></li>
-                    <li><Link to={'/contacts'} className={'menu-links-with-navigation'}>
-                        <span className="menu-items-for-header">Contacts</span>
+                        <span className="menu-items-for-header">Enterprises</span>
                     </Link></li>
                     <li><Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link></li>
                     <li><Link to={'/announcements'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Announcements</span>
+                    </Link></li>
+                    <li><Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Contacts</span>
                     </Link></li>
                 </ul>
             </div>

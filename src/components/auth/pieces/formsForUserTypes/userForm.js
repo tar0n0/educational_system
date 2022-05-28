@@ -80,7 +80,6 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             }).finally(() => setLoading(false));
         }
     }, []);
-    console.log(type);
     useEffect(() => {
         switch (type) {
             case UNIVERSITY:
@@ -168,7 +167,7 @@ const UserForm = ({ isAllContent = true, inUniversity = false, inCompany = false
             theme: "dark",
         });
     };
-    console.log(DataService.getUserCategory.getValue(), DataService.getUserType.getValue());
+
     const handelSubmit = (data = {}) => {
         setLoading(true);
 

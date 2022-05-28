@@ -1,0 +1,105 @@
+body {
+    background:#eee;
+    margin:0;
+    font:15px Open Sans;
+}
+
+.posts {
+    margin:60px auto;
+    border:1px solid #dfdfdf;
+    background:#fff;
+    max-width:60%;
+    padding:40px;
+    line-height:1.5em;
+    text-align:justify;
+    border-radius:8px;
+}
+.posts .title-announcement {
+    text-align:center
+}
+
+.separate {
+    padding:30px 0;
+    display:block;
+}
+.one { background:#fff; }
+.two { background:#888; }
+
+.style-6 {
+    cursor: pointer;
+    text-decoration:none;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.style-6:hover {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+
+.style-6 {
+    background:#defac3;
+    border:3px solid #001eb7;
+    color: #0034b7;
+    font:12px Montserrat;
+    text-transform:uppercase;
+    padding:10px;
+    font-weight:600;
+    max-width:200px;
+    display:block;
+    text-align:left;
+    margin:20px 19px 0px auto;
+    position:relative;
+}
+.style-6:before {
+    content:">";
+    position:absolute;
+    right:-21px;
+    top:-3px;
+    border-radius:100%;
+    background: #0b1e44;
+    color:#fff;
+    font-size:20px;
+    width:41px;
+    height:41px;
+    line-height:39px;
+    text-align:center;
+    font-family:consolas;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.style-6:hover:before {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    text-shadow:1px 1px 0px rgba(0,0,0,0.5);
+}
+.style-6:hover {
+    background:transparent;
+    border-color: #0b1e44;
+    color: #0b1e44;
+    letter-spacing:3px;
+}
+
+.new-announcement {
+    width: 100%;
+    text-align: right;
+    padding-right: 20px;
+}
+

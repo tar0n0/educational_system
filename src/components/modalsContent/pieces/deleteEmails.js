@@ -30,7 +30,7 @@ const DeleteEmails = () => {
             if (pathName.includes(UNIVERSITY.toLowerCase())) {
                 DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                     const { data } = val;
-                    const currentData = data.map(el => createData(el.email, el?.name, el?.surName));
+                    const currentData = data.map(el => createData(el.email, el?.name, el?.surName, el?.userType));
                     DataService.getConfirmedProfiles.next(currentData);
                     state(currentData);
                 });

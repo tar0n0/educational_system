@@ -33,16 +33,16 @@ const UserPage = () => {
                         <span className="menu-items-for-header">Universities</span>
                     </Link>
                     <Link to={'/companies'} className={'menu-links-with-navigation'}>
-                        <span className="menu-items-for-header">Companies</span>
-                    </Link>
-                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
-                        <span className="menu-items-for-header">Contacts</span>
+                        <span className="menu-items-for-header">Enterprises</span>
                     </Link>
                     <Link to={'/courses'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Courses</span>
                     </Link>
                     <Link to={'/announcements'} className={'menu-links-with-navigation'}>
                         <span className="menu-items-for-header">Announcements</span>
+                    </Link>
+                    <Link to={'/contacts'} className={'menu-links-with-navigation'}>
+                        <span className="menu-items-for-header">Contacts</span>
                     </Link>
                 </div>
                 <div className="avatar">

@@ -9,6 +9,9 @@ export const DELETE_FILE = 'DELETE_FILE'; // POST
 export const EDIT_FILE_NAME = 'EDIT_FILE_NAME'; // POST
 export const COMPANY_REGISTRATION = 'COMPANY_REGISTRATION'; // POST
 export const UNIVERSITY_REGISTRATION = 'UNIVERSITY_REGISTRATION'; // POST
+export const SAVE_LOGO = 'SAVE_LOGO'; //POST
+export const ADD_NEW_ANNOUNCEMENT = 'ADD_NEW_ANNOUNCEMENT'; //POST
+export const DELETE_ANNOUNCEMENT = 'DELETE_ANNOUNCEMENT'; //POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -28,10 +31,14 @@ export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; // GET
 export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; // GET
 export const EXTENDED_SEARCH_PATH = 'EXTENDED_SEARCH_PATH'; // GET
 export const GET_ALL_USER_PROFILE_DATA = 'GET_ALL_USER_PROFILE_DATA'; // GET
-export const SAVE_LOGO = 'SAVE_LOGO'; //POST
 
-//TODO university Form and company form with endpoints /admin
-//TODO user registration with endpoint only /registration
+export const GET_ANNOUNCEMENTS = 'GET_ANNOUNCEMENTS'; // GET
+export const GET_MY_ANNOUNCEMENTS = 'GET_MY_ANNOUNCEMENTS'; // GET
+
+export const GET_COURSES = 'GET_COURSES'; //GET
+export const GET_MY_COURSES = 'GET_MY_COURSES'; //GET
+
+
 export const ENDPOINT_URLS = {
     [LOGIN]: '/authentication/login',
     [REGISTRATION]: '/authentication/register',
@@ -63,4 +70,10 @@ export const ENDPOINT_URLS = {
     [EXTENDED_SEARCH_PATH]: '/File/ExtendedSearch',
     [GET_ALL_USER_PROFILE_DATA]: (userId) => `/Profile/GetUserProfile?userId=${userId}`,
     [SAVE_LOGO]: '/File/SaveImageforregister?',
+    [GET_ANNOUNCEMENTS]: '/Announcements/get',
+    [GET_MY_ANNOUNCEMENTS]: '/Announcements/GetMyAnnouncements',
+    [GET_COURSES]: '/Courses/Get',
+    [GET_MY_COURSES]: '/Courses/GetMyCourses',
+    [ADD_NEW_ANNOUNCEMENT]: '/Announcements/Add',
+    [DELETE_ANNOUNCEMENT]: (announcementId) => `/Announcements/Delete?id=${announcementId}`
 };

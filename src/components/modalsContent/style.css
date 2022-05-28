@@ -64,3 +64,25 @@
     text-align: center;
     margin-bottom: 25px;
 }
+
+.block-for-announcement {
+    text-align: center;
+}
+
+.title-for-announcement-whr {
+    text-align: center;
+    font-size: 19px;
+    color: blue;
+    font-style: italic;
+}
+
+.input-for-announcement {
+    border: 1px solid blue;
+}
+
+.textarea-for-announcement {
+    max-width: 450px;
+    max-height: 200px;
+    border: 1px solid blue;
+    border-radius: 18px;
+}

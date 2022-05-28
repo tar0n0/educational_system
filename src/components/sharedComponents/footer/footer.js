@@ -24,15 +24,14 @@ const Footer = () => {
                                 <Link to={'/universities'}> Universities</Link>
                             </li>
                             <li>
-                                <Link to={'/contacts'}> Contacts</Link>
-                            </li>
-                            <li>
                                 <Link to={'/courses'}> Courses</Link>
                             </li>
                             <li>
                                 <Link to={'/announcements'}> Announcements</Link>
                             </li>
-                     
+                            <li>
+                                <Link to={'/contacts'}> Contacts</Link>
+                            </li>
                         </ul>
                     </nav>
                 </span>

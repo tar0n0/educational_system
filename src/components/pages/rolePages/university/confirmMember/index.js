@@ -32,10 +32,11 @@ import { DELETE_EMAILS } from '../../../../../constants/modals.constat';
 import { USER_TYPE } from '../../../../../constants/ui.constants';
 import { modalContext } from '../../../../../context/modalContext';
 import DataService from '../../../../../services/dataService';
+
 // import { getStorageItem } from '../../../../storage';
 
-function createData(email, name, surName) {
-    return { email, name, surName };
+function createData(email, name, surName, type) {
+    return { email, name, surName, type };
 }
 
 function desc(a, b, orderBy) {
@@ -82,6 +83,12 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: "Surname",
+    },
+    {
+        id: "type",
+        numeric: false,
+        disablePadding: true,
+        label: "Organization type",
     },
 ];
 
@@ -202,7 +209,7 @@ const EnhancedTableToolbar = (props) => {
             {numSelected > 0 ? (
                 <>
                     <Tooltip title="Delete">
-                        <IconButton aria-label="delete" onClick={handelDelete}>
+                        <IconButton aria-label="delete" onClick={handelDelete} disabled={true}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
@@ -274,8 +281,8 @@ export default function ConfirmMember() {
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
             DataService.getJson(ENDPOINT_URLS[UNIVERSITY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
-                const filteredData = data.filter(el => el.userRole !== 'User' && el.userType === 'University');
-                const currentData = filteredData?.map(el => createData(el.email, el?.name, el?.surName));
+                const filteredData = data.filter(el => el.userRole !== 'User');
+                const currentData = filteredData?.map(el => createData(el.email, el?.name, el?.surName, el?.userType));
                 currentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(currentData);
                 setData(DataService?.getConfirmedProfiles?.getValue());
@@ -292,7 +299,7 @@ export default function ConfirmMember() {
             DataService.getJson(ENDPOINT_URLS[COMPANY_CONFIRM_PROFILES]).then(val => {
                 const { data } = val;
                 const filteredData = data.filter(el => el.userRole !== 'User');
-                const companyCurrentData = filteredData.map(el => createData(el.email, el?.name, el?.surName));
+                const companyCurrentData = filteredData.map(el => createData(el.email, el?.name, el?.surName, el?.userType));
                 companyCurrentData.length > 5 && setRowsPerPage(10);
                 DataService?.getConfirmedProfiles?.next(companyCurrentData);
                 setData(DataService?.getConfirmedProfiles?.getValue());
@@ -453,7 +460,6 @@ export default function ConfirmMember() {
                                     .map((row, index) => {
                                         const isItemSelected = isSelected(row?.email);
                                         const labelId = `enhanced-table-checkbox-${index}`;
-
                                         return (
                                             <TableRow
                                                 hover
@@ -498,6 +504,14 @@ export default function ConfirmMember() {
                                                     padding="none"
                                                 >
                                                     {row?.surName}
+                                                </TableCell>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                    padding="none"
+                                                >
+                                                    {row?.type}
                                                 </TableCell>
                                             </TableRow>
                                         );

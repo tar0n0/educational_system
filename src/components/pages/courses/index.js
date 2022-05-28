@@ -1,35 +1,30 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { fromEvent } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ENDPOINT_URLS, INPUT_SEARCH } from '../../../constants/api.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
-import useWindowResize from '../../../hooks/useWindowResize';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import DataList from '../../sharedComponents/dataList';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
-import { useNavigate } from 'react-router-dom';
 import Footer from '../../sharedComponents/footer/footer';
+import CarouselS from '../../sharedComponents/slideShow';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
-import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
-import { fromEvent } from "rxjs";
-import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
-import { ENDPOINT_URLS, INPUT_SEARCH } from '../../../constants/api.constants';
-import Img1 from "../../../components/pages/home/Slider_pict/images1.jpg";
-import Img2 from "../../../components/pages/home/Slider_pict/images2.jpg";
-import Img3 from "../../../components/pages/home/Slider_pict/images3.jpg";
-import Img4 from "../../../components/pages/home/Slider_pict/images4.jpg";
 
-import './home.css';
+// import '../home/home.css';
 
-const Home = () => {
+const Courses = () => {
     const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
     const [searchData, setSearchData] = useState([]);
     const [inputValue, setInputValue] = useState('');
-    const { width } = useWindowResize();
     const ref = useRef();
     const navigate = useNavigate();
+
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
         return () => subscription && subscription.unsubscribe();
@@ -52,6 +47,7 @@ const Home = () => {
             getData.unsubscribe();
         };
     }, []);
+
 
     return (
         <>
@@ -82,8 +78,8 @@ const Home = () => {
                         <>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
+                                width="30"
+                                height="30"
                                 fill="currentColor"
                                 className="bi bi-person-fill"
                                 viewBox="0 0 16 16"
@@ -95,8 +91,8 @@ const Home = () => {
                             </Link>
                             <span className="slash">\</span>
                             <span className="sign-up" onClick={() => {
-                                setType(USER_TYPES_FOR_MODAL);
                                 setOpen(true);
+                                setType(USER_TYPES_FOR_MODAL);
                             }}>
                         SignUp
                             </span>
@@ -105,41 +101,40 @@ const Home = () => {
                 </div>
                 <div className="search">
                     <input className="search-input" placeholder="Search" autoComplete="off" ref={ref}/>
-                    <button className="extend-search" onClick={() => {
-                        if (getStorageItem('user')?.token) {
-                            navigate(EXTENDED_SEARCH);
-                        } else {
-                            toast.info('Extended search can only be done by registered users', {
-                                type: toast.TYPE.INFO,
-                                icon: true,
-                                theme: 'dark'
-                            });
-                        }
-                    }}>
-                        <span className="span-search">Extended Search</span>
+                    <button className="extend-search">
+                        <span className="span-search" onClick={() => {
+                            if (getStorageItem('user')?.token) {
+                                navigate(EXTENDED_SEARCH);
+                            } else {
+                                toast.info('Extended search can only be done by registered users', {
+                                    type: toast.TYPE.INFO,
+                                    icon: true,
+                                    theme: 'dark'
+                                });
+                            }
+                        }}>Extended Search</span>
                     </button>
                 </div>
             </div>
-            {searchData.length ? (
-                <div className="content">
-                    <DataList data={searchData} title="Search Data"/>
-                </div>
-            ) : (
-                <div className="content-home-page">
-                    <div className="container_slider_css">
-                        <img className="photo_slider_css" src={Img1}/>
-                        <img className="photo_slider_css" src={Img2}/>
-                        <img className="photo_slider_css" src={Img3}/>
-                        <img className="photo_slider_css" src={Img4}/>
+            {searchData?.length ? (
+                <>
+                    <div className="content">
+                        <DataList data={searchData} title="Search Data"/>
                     </div>
-
-                </div>
+                </>
+            ) : (
+                <>
+                    <div className="content">
+                        <h1>Courses</h1>
+                    </div>
+                </>
             )}
-            <div className="home-footer">
+            <CarouselS/>
+            <div className="about-footer">
                 <Footer/>
             </div>
         </>
     );
 };
 
-export default Home;
+export default Courses;

@@ -34,8 +34,8 @@ import { modalContext } from '../../../../../context/modalContext';
 import DataService from '../../../../../services/dataService';
 // import { getStorageItem } from '../../../../storage';
 
-function createData(email, name, surName) {
-    return { email, name, surName };
+function createData(email, name, surName, type) {
+    return { email, name, surName, type };
 }
 
 function desc(a, b, orderBy) {

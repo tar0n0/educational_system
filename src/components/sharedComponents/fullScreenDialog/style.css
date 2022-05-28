@@ -1,0 +1,23 @@
+.form-for-entry {
+    width: 600px;
+    margin: 35px auto;
+    border: 1px solid blue;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.label-for-ann {
+    font-size: 20px;
+    font-style: italic;
+    color: #002aff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.form-ann-lo {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+    color: #002aff;
+}

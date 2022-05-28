@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { ENDPOINT_URLS, INPUT_SEARCH } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, GET_ANNOUNCEMENTS, INPUT_SEARCH } from '../../../constants/api.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,15 +15,23 @@ import CarouselS from '../../sharedComponents/slideShow';
 import { modalContext } from '../../../context/modalContext';
 import AuthorizationService from '../../../services/authorizationService';
 
-import '../home/home.css';
+// import '../home/home.css';
 
-const About = () => {
-    const { setOpen, setType } = useContext(modalContext);
+const Announcements = () => {
+    const { setOpen, setType, setOpenDialog } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
     const [searchData, setSearchData] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [data, setData] = useState([]);
     const ref = useRef();
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        DataService.getJson(ENDPOINT_URLS[GET_ANNOUNCEMENTS]).then(val => {
+            setData(val?.data);
+        });
+    }, []);
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
@@ -125,22 +133,78 @@ const About = () => {
             ) : (
                 <>
                     <div className="content">
-                        <div className="list-btns">
-                            <div className='about-content'>
-                                <h1 className="h1-about">The platform was developed by the NPUA team.</h1>
-                                <p className="text-for-about">
-                                    Through online Platform, TACEESM project opens up enormous possibilities for partner
-                                    countries
-                                    to become part of European network of education and industry, and brings new
-                                    capabilities of
-                                    colaboration through virtual space.
-                                    Through dynamic, up to date, and innovative activities partner institutions will
-                                    collaborate
-                                    with local community, industry and international partners through virtual
-                                    inviroment.</p>
-                            </div>
+                        {data?.length ? (
+                            <>
+                                {data?.map(el => {
+                                    return (
+                                        <>
+                                            <div className="posts">
+                                                <h2 className="title-announcement">{el?.title}</h2>
+                                                {el?.content.substring(1, 300)}
+                                                <p className="style-6" onClick={() => {
+                                                    DataService.getAnnouncement.next(el);
+                                                    setOpenDialog(true);
+                                                }}>Read More</p>
+                                            </div>
+                                        </>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <>
+                                <h1>Announcements</h1>
+                                <div className="posts">
+                                    <h2 className="title-announcement">Read More</h2>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
+                                    urna sagittis
+                                    egestas.
+                                    Mauris id bibendum purus, vestibulum tristique mauris. Nullam dapibus sem non nulla
+                                    lobortis,
+                                    vitae
+                                    blandit sem volutpat. Integer fringilla aliquet nulla eu aliquam. Donec euismod
+                                    scelerisque mi
+                                    quis
+                                    lobortis.<br/><br/> Aliquam convallis risus ligula, non pellentesque dolor hendrerit
+                                    id. Nunc
+                                    facilisis
+                                    arcu nulla, nec tempus neque scelerisque vel. Donec pharetra dolor eget ullamcorper
+                                    porta.
+                                    Suspendisse
+                                    interdum diam velit, nec porta magna elementum quis. Etiam id suscipit est. Cras
+                                    rhoncus felis
+                                    tincidunt
+                                    lorem rutrum, id vehicula neque scelerisque. Fusce a tempor ipsum, quis accumsan
+                                    nisl.
 
-                        </div>
+                                    <a href="#" className="style-6">Read More</a>
+                                </div>
+                                <div className="posts">
+                                    <h2 className="title-announcement">Read More</h2>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
+                                    urna sagittis
+                                    egestas.
+                                    Mauris id bibendum purus, vestibulum tristique mauris. Nullam dapibus sem non nulla
+                                    lobortis,
+                                    vitae
+                                    blandit sem volutpat. Integer fringilla aliquet nulla eu aliquam. Donec euismod
+                                    scelerisque mi
+                                    quis
+                                    lobortis.<br/><br/> Aliquam convallis risus ligula, non pellentesque dolor hendrerit
+                                    id. Nunc
+                                    facilisis
+                                    arcu nulla, nec tempus neque scelerisque vel. Donec pharetra dolor eget ullamcorper
+                                    porta.
+                                    Suspendisse
+                                    interdum diam velit, nec porta magna elementum quis. Etiam id suscipit est. Cras
+                                    rhoncus felis
+                                    tincidunt
+                                    lorem rutrum, id vehicula neque scelerisque. Fusce a tempor ipsum, quis accumsan
+                                    nisl.
+
+                                    <a href="#" className="style-6">Read More</a>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </>
             )}
@@ -152,4 +216,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Announcements;

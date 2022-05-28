@@ -3,7 +3,9 @@ import Login from '../components/auth/login';
 import CompanyForm from '../components/auth/pieces/formsForUserTypes/companyForm';
 import UniversityForm from '../components/auth/pieces/formsForUserTypes/universityForm';
 import UserForm from '../components/auth/pieces/formsForUserTypes/userForm';
+import Announcements from '../components/pages/announcements';
 import CompanyEntry from '../components/pages/companies/companyEntry';
+import Courses from '../components/pages/courses';
 import ExtendedSearch from '../components/pages/extendedSearch';
 import UserPage from '../components/pages/rolePages/user';
 import CompanyPage from '../components/pages/rolePages/company';
@@ -18,16 +20,21 @@ import Error from '../components/sharedComponents/notFound';
 import UserProfilesPages from '../components/sharedComponents/userProfilesPages';
 import {
     ABOUT,
+    ANNOUNCEMENTS_PAGE,
     COMPANIES,
+    COMPANY_NAME,
     COMPANY_PAGE,
     CONTACTS,
+    COURSES_PAGE,
     EXTENDED_SEARCH,
     HOME,
     LOGIN,
+    NOT_FOUND,
+    SHOW_PROFILE,
     SIGN_UP_COMPANY,
     SIGN_UP_UNIVERSITY,
     SIGN_UP_USER,
-    UNIVERSITIES,
+    UNIVERSITIES, UNIVERSITY_NAME,
     UNIVERSITY_PAGE, USER_PAGE
 } from '../constants/pathnames.constants';
 
@@ -85,19 +92,27 @@ export const routesConfig = [
         element: <ExtendedSearch/>,
     },
     {
-        path: '/show-profile',
+        path: SHOW_PROFILE,
         element: <UserProfilesPages/>
     },
     {
-        path: '*',
+        path: NOT_FOUND,
         element: <Error/>,
     },
     {
-        path: '/university/:universityName',
+        path: UNIVERSITY_NAME,
         element: <UniversityEntry/>,
     },
     {
-        path: '/company/:companyName',
+        path: COMPANY_NAME,
         element: <CompanyEntry />,
     },
+    {
+        path: COURSES_PAGE,
+        element: <Courses />
+    },
+    {
+        path: ANNOUNCEMENTS_PAGE,
+        element: <Announcements />,
+    }
 ];
