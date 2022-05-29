@@ -22,6 +22,8 @@ class DataService extends MakeRequest {
         this._userType = new BehaviorSubject(0);
         this._userCategory = new BehaviorSubject(null);
         this._announcement = new BehaviorSubject({});
+        this._subMenuType = new BehaviorSubject('');
+        this._courses = new BehaviorSubject({});
 
     }
 
@@ -105,6 +107,14 @@ class DataService extends MakeRequest {
 
     get getAnnouncement() {
         return this._announcement;
+    }
+
+    get getCourses() {
+        return this._courses;
+    }
+
+    get getSubMenuType() {
+        return this._subMenuType;
     }
 }
 

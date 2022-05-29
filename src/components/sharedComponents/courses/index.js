@@ -1,18 +1,17 @@
 import Button from '@mui/material/Button';
-import Data from 'bootstrap/js/src/dom/data';
 import React, { useContext, useEffect, useState } from 'react';
-import { ENDPOINT_URLS, GET_MY_ANNOUNCEMENTS } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, GET_MY_COURSES } from '../../../constants/api.constants';
 import { SubMenuTypes } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
 import DataService from '../../../services/dataService';
-import './style.css';
+// import './style.css';
 
-const Announcement = () => {
+const Courses = () => {
     const { setOpenDialog } = useContext(modalContext);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        DataService.getJson(ENDPOINT_URLS[GET_MY_ANNOUNCEMENTS]).then(val => setData(val?.data));
+        DataService.getJson(ENDPOINT_URLS[GET_MY_COURSES]).then(val => setData(val?.data));
     }, []);
 
     return (
@@ -23,10 +22,10 @@ const Announcement = () => {
                     variant="contained"
                     onClick={() => {
                         setOpenDialog(true);
-                        DataService.getSubMenuType.next(SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT);
+                        DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_ACCOUNT);
                     }}
                 >
-                    Add Announcement
+                    Add Courses
                 </Button>
             </div>
             {data?.length ? (
@@ -40,7 +39,7 @@ const Announcement = () => {
                                         {el?.content.substring(1, 300)}
                                         <p className="style-6" onClick={() => {
                                             DataService.getAnnouncement.next(el);
-                                            DataService.getSubMenuType.next(SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT);
+                                            DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_ACCOUNT);
                                             setOpenDialog(true);
                                         }}>Read More</p>
                                     </div>
@@ -51,7 +50,7 @@ const Announcement = () => {
                 </>
             ) : (
                 <>
-                    <h1>Announcements</h1>
+                    <h1>Courses</h1>
                     <div className="posts">
                         <h2 className="title-announcement">Read More</h2>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
@@ -107,4 +106,4 @@ const Announcement = () => {
     );
 };
 
-export default Announcement;
+export default Courses;

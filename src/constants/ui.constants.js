@@ -67,6 +67,13 @@ export const USER_ROLES = {
     [USER_TYPE.USER]: 3,
 };
 
+export const SubMenuTypes = {
+    ANNOUNCEMENT_FOR_PAGE: 'ANNOUNCEMENT_FOR_PAGE',
+    ANNOUNCEMENT_FOR_ACCOUNT: 'ANNOUNCEMENT_FOR_ACCOUNT',
+    COURSES_FOR_PAGE: 'COURSES_FOR_PAGE',
+    COURSES_FOR_ACCOUNT: 'COURSES_FOR_ACCOUNT',
+};
+
 export const rightSideItemsName = {
     PROFILE: 'Profile',
     MATERIALS: 'Materials',

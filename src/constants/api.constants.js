@@ -1,4 +1,4 @@
-export const LOGIN = 'LOGIN'; //POST
+export const LOGIN = 'LOGIN'; // POST
 export const REGISTRATION = 'REGISTRATION'; //POST
 export const CONFIRMED_UNIVERSITY_USER = 'CONFIRMED_UNIVERSITY_USER'; // POST
 export const CONFIRMED_COMPANY_USER = 'CONFIRMED_COMPANY_USER'; // POST
@@ -9,9 +9,11 @@ export const DELETE_FILE = 'DELETE_FILE'; // POST
 export const EDIT_FILE_NAME = 'EDIT_FILE_NAME'; // POST
 export const COMPANY_REGISTRATION = 'COMPANY_REGISTRATION'; // POST
 export const UNIVERSITY_REGISTRATION = 'UNIVERSITY_REGISTRATION'; // POST
-export const SAVE_LOGO = 'SAVE_LOGO'; //POST
-export const ADD_NEW_ANNOUNCEMENT = 'ADD_NEW_ANNOUNCEMENT'; //POST
-export const DELETE_ANNOUNCEMENT = 'DELETE_ANNOUNCEMENT'; //POST
+export const SAVE_LOGO = 'SAVE_LOGO'; // POST
+export const ADD_NEW_ANNOUNCEMENT = 'ADD_NEW_ANNOUNCEMENT'; // POST
+export const DELETE_ANNOUNCEMENT = 'DELETE_ANNOUNCEMENT'; // POST
+export const ADD_NEW_COURSES = 'ADD_NEW_COURSES'; // POST
+export const DELETE_COURSES = 'DELETE_COURSES'; // POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -31,10 +33,8 @@ export const GET_ALL_COMPANIES = 'GET_ALL_COMPANIES'; // GET
 export const GET_ALL_UNIVERSITIES = 'Profile/GetUniversityNames'; // GET
 export const EXTENDED_SEARCH_PATH = 'EXTENDED_SEARCH_PATH'; // GET
 export const GET_ALL_USER_PROFILE_DATA = 'GET_ALL_USER_PROFILE_DATA'; // GET
-
 export const GET_ANNOUNCEMENTS = 'GET_ANNOUNCEMENTS'; // GET
 export const GET_MY_ANNOUNCEMENTS = 'GET_MY_ANNOUNCEMENTS'; // GET
-
 export const GET_COURSES = 'GET_COURSES'; //GET
 export const GET_MY_COURSES = 'GET_MY_COURSES'; //GET
 
@@ -74,6 +74,8 @@ export const ENDPOINT_URLS = {
     [GET_MY_ANNOUNCEMENTS]: '/Announcements/GetMyAnnouncements',
     [GET_COURSES]: '/Courses/Get',
     [GET_MY_COURSES]: '/Courses/GetMyCourses',
+    [ADD_NEW_COURSES]: '/Courses/Add',
     [ADD_NEW_ANNOUNCEMENT]: '/Announcements/Add',
-    [DELETE_ANNOUNCEMENT]: (announcementId) => `/Announcements/Delete?id=${announcementId}`
+    [DELETE_ANNOUNCEMENT]: (announcementId) => `/Announcements/Delete?id=${announcementId}`,
+    [DELETE_COURSES]: (coursesId) => `/Courses/Delete?id=${coursesId},`
 };

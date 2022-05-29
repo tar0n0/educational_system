@@ -1,8 +1,8 @@
 import React from 'react';
 import DataService from '../../../../services/dataService';
 
-const ExtraComponent = () => {
-    const data = DataService.getAnnouncement.getValue();
+const ExtraComponent = (isCourses = false) => {
+    const data = isCourses ? DataService.getCourses.getValue() : DataService.getAnnouncement.getValue();
     if(data?.content) {
         return (
             <>

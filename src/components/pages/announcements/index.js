@@ -6,6 +6,7 @@ import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
+import { SubMenuTypes } from '../../../constants/ui.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import DataList from '../../sharedComponents/dataList';
@@ -144,6 +145,7 @@ const Announcements = () => {
                                                     {el?.content.substring(1, 300)}
                                                     <p className="style-6" onClick={() => {
                                                         DataService.getAnnouncement.next(el);
+                                                        DataService.getSubMenuType.next(SubMenuTypes.ANNOUNCEMENT_FOR_PAGE);
                                                         setOpenDialog(true);
                                                     }}>Read More</p>
                                                 </div>

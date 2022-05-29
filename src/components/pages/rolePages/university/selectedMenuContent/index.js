@@ -3,6 +3,7 @@ import { CONTENT_TYPE, MATERIALS_TYPE, rightSideItemsName, USER_TYPE } from '../
 import UserForm from '../../../../auth/pieces/formsForUserTypes/userForm';
 import MyFiles from '../../../../myFiles';
 import Announcement from '../../../../sharedComponents/Announcements';
+import Courses from '../../../../sharedComponents/courses';
 import ConfirmProfile from '../../confirmProfile';
 import Materials from '../../materials';
 import ConfirmCompanyMember from '../confirmCompanyMember';
@@ -69,6 +70,9 @@ const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setCl
         }
         case rightSideItemsName.ANNOUNCEMENTS: {
             return <Announcement />;
+        }
+        case rightSideItemsName.COURSES: {
+            return <Courses />;
         }
         default :
             return null;

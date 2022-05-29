@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { ENDPOINT_URLS, INPUT_SEARCH } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, GET_ANNOUNCEMENTS, INPUT_SEARCH } from '../../../constants/api.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,9 +21,17 @@ const Courses = () => {
     const { setOpen, setType } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
     const [searchData, setSearchData] = useState([]);
+    const [data, setData] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const ref = useRef();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        DataService.getJson(ENDPOINT_URLS[GET_ANNOUNCEMENTS]).then(val => {
+            setData(val?.data);
+        });
+    }, []);
+
 
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
