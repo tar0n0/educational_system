@@ -1,7 +1,9 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
-import Data from 'bootstrap/js/src/dom/data';
 import React, { useContext, useEffect, useState } from 'react';
-import { ENDPOINT_URLS, GET_MY_ANNOUNCEMENTS } from '../../../constants/api.constants';
+import { toast } from 'react-toastify';
+import { ENDPOINT_URLS, GET_MY_ANNOUNCEMENTS, DELETE_ANNOUNCEMENT } from '../../../constants/api.constants';
+import { DELETE_THIS_ANNOUNCEMENT } from '../../../constants/messages.constants';
 import { SubMenuTypes } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
 import DataService from '../../../services/dataService';
@@ -14,6 +16,18 @@ const Announcement = () => {
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_MY_ANNOUNCEMENTS]).then(val => setData(val?.data));
     }, []);
+
+    const handelDeleteAnnouncement = (announcementId) => {
+        DataService.postJson(ENDPOINT_URLS[DELETE_ANNOUNCEMENT](announcementId)).then(_ => {
+            toast.success(
+                DELETE_THIS_ANNOUNCEMENT, {
+                    type: toast.TYPE.SUCCESS,
+                    icon: true,
+                    theme: 'dark',
+                }
+            );
+        });
+    };
 
     return (
         <>
@@ -36,6 +50,9 @@ const Announcement = () => {
                             <>
                                 {el?.content?.length && (
                                     <div className="posts">
+                                        <p className='delete-announcement-or-course' onClick={() => handelDeleteAnnouncement(el?.id)}>
+                                            <ClearIcon color="error" fontSize={"large"} />
+                                        </p>
                                         <h2 className="title-announcement">{el?.title}</h2>
                                         {el?.content.substring(1, 300)}
                                         <p className="style-6" onClick={() => {

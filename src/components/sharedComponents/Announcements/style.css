@@ -103,3 +103,6 @@ body {
     padding-right: 20px;
 }
 
+.delete-announcement-or-course {
+    cursor: pointer;
+}

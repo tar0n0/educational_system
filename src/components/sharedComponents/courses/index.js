@@ -1,6 +1,9 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import React, { useContext, useEffect, useState } from 'react';
-import { ENDPOINT_URLS, GET_MY_COURSES } from '../../../constants/api.constants';
+import { toast } from 'react-toastify';
+import { ENDPOINT_URLS, GET_MY_COURSES, DELETE_COURSES } from '../../../constants/api.constants';
+import { DELETE_THIS_COURSE } from '../../../constants/messages.constants';
 import { SubMenuTypes } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
 import DataService from '../../../services/dataService';
@@ -13,6 +16,19 @@ const Courses = () => {
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_MY_COURSES]).then(val => setData(val?.data));
     }, []);
+
+    const handelDeleteCourse = (courseID) => {
+        DataService.postJson(ENDPOINT_URLS[DELETE_COURSES](courseID)).then(_ => {
+            toast.success(
+                DELETE_THIS_COURSE, {
+                    type: toast.TYPE.SUCCESS,
+                    icon: true,
+                    theme: 'dark',
+                }
+            );
+        });
+    };
+
 
     return (
         <>
@@ -35,6 +51,9 @@ const Courses = () => {
                             <>
                                 {el?.content?.length && (
                                     <div className="posts">
+                                        <p className='delete-announcement-or-course' onClick={() => handelDeleteCourse(el?.id)}>
+                                            <ClearIcon color="error" fontSize={"large"} />
+                                        </p>
                                         <h2 className="title-announcement">{el?.title}</h2>
                                         {el?.content.substring(1, 300)}
                                         <p className="style-6" onClick={() => {
