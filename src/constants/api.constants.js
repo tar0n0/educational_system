@@ -77,5 +77,5 @@ export const ENDPOINT_URLS = {
     [ADD_NEW_COURSES]: '/Courses/Add',
     [ADD_NEW_ANNOUNCEMENT]: '/Announcements/Add',
     [DELETE_ANNOUNCEMENT]: (announcementId) => `/Announcements/Delete?id=${announcementId}`,
-    [DELETE_COURSES]: (coursesId) => `/Courses/Delete?id=${coursesId},`
+    [DELETE_COURSES]: (coursesId) => `/Courses/Delete?id=${coursesId}`
 };
