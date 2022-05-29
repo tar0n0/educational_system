@@ -3,7 +3,7 @@ import DataService from '../../../../services/dataService';
 
 const ExtraComponent = () => {
     const data = !DataService.getAnnouncement.getValue()?.content ? DataService.getCourses.getValue() : DataService.getAnnouncement.getValue();
-    console.log(data, DataService.getAnnouncement.getValue()?.content);
+
     if (data?.content) {
         return (
             <>

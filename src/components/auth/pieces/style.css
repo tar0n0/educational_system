@@ -90,5 +90,9 @@
 
 .container-uploaded-file {
     display: flex;
+}
 
+.container-uploaded-file-for-create {
+    display: flex;
+    margin-bottom: 25px;
 }

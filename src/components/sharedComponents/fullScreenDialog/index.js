@@ -12,7 +12,8 @@ import { toast } from 'react-toastify';
 import { ENDPOINT_URLS, ADD_NEW_ANNOUNCEMENT, ADD_NEW_COURSES } from '../../../constants/api.constants';
 import {
     ANNOUNCEMENT_SUCCESS,
-    EMPTY_CONTENT_FOR_ANNOUNCEMENT,
+    COURSES_SUCCESS,
+    EMPTY_CONTENT_FOR_ANNOUNCEMENT, EMPTY_CONTENT_FOR_COURSES,
 } from '../../../constants/messages.constants';
 import { SubMenuTypes } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
@@ -21,7 +22,9 @@ import './style.css';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import { parseJwt } from '../../../utils/helpers';
+import UploadInput from '../uploadedFile';
 import ExtraComponent from './extraComponent';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -53,16 +56,20 @@ const FullScreenDialog = () => {
     };
 
     const handelCreateNewAnnouncement = (values) => {
+        console.log(values, 'values -');
         if (!values?.content) {
-            toast.info(EMPTY_CONTENT_FOR_ANNOUNCEMENT, {
+            console.log(2);
+            toast.info(DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? EMPTY_CONTENT_FOR_ANNOUNCEMENT : EMPTY_CONTENT_FOR_COURSES, {
                 type: toast.TYPE.INFO,
                 theme: "dark",
             });
         } else {
+            console.log(3);
             const url = DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? ENDPOINT_URLS[ADD_NEW_ANNOUNCEMENT] : ENDPOINT_URLS[ADD_NEW_COURSES];
+            console.log(url);
             values?.content && DataService.postJson(url, values).then((_) => {
                 toast.success(
-                    ANNOUNCEMENT_SUCCESS, {
+                    url === ENDPOINT_URLS[ADD_NEW_ANNOUNCEMENT] ? ANNOUNCEMENT_SUCCESS : COURSES_SUCCESS, {
                         type: toast.TYPE.SUCCESS,
                         icon: true,
                         theme: 'dark',
@@ -94,18 +101,18 @@ const FullScreenDialog = () => {
                             {DataService.getAnnouncement.getValue()?.content || DataService.getCourses.getValue()?.content ? 'Read all content' : DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_PAGE || DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? 'Create New Announcement' : 'Create New Courses'}
                         </Typography>
                         <Button autoFocus color="inherit" onClick={() => {
-                            !DataService.getAnnouncement.getValue()?.content || !DataService.getCourses.getValue()?.content && handelCreateNewAnnouncement(createdData);
+                            (!DataService.getAnnouncement.getValue()?.content && !DataService.getCourses.getValue()?.content) && handelCreateNewAnnouncement(createdData);
                             handelClickClose();
                             DataService.getAnnouncement.next({});
                             DataService.getCourses.next({});
                             DataService.getSubMenuType.next('');
                         }}>
-                            {DataService.getAnnouncement.getValue()?.content ? 'Close' : 'Create'}
+                            {DataService.getAnnouncement.getValue()?.content || DataService.getCourses.getValue()?.content ? 'Close' : 'Create'}
                         </Button>
                     </Toolbar>
                 </AppBar>
                 {DataService.getAnnouncement.getValue()?.content || DataService.getCourses.getValue()?.content ? (
-                    <><ExtraComponent /></>
+                    <><ExtraComponent/></>
                 ) : (
                     <>
                         <form className="form-for-entry">
@@ -122,6 +129,26 @@ const FullScreenDialog = () => {
                                     placeholder="Please write text"
                                     onChange={(e) => handelChangeCreatedData('content', e?.target?.value)}></textarea>
                             </div>
+                            {DataService.getSubMenuType.getValue() === SubMenuTypes.COURSES_FOR_ACCOUNT && (
+                                <>
+                                    <label htmlFor="exampleFormControlInput1" className="label-for-ann">Upload File </label>
+                                    <div className="container-uploaded-file">
+                                        {file ? <div className="uploaded-file"
+                                            title={file?.name}>{file?.name}</div> : (
+                                            <UploadInput
+                                                className={'pdfInput'}
+                                                accept={
+                                                    'image/*,.pdf, .word,.doc,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.documen'
+                                                }
+                                                setFile={setFile}
+                                            />
+                                        )}
+                                        <span className="uploaded-icon">{file &&
+                                            <ClearIcon color="error" fontSize={"large"}
+                                                onClick={() => setFile('')}/>}</span>
+                                    </div>
+                                </>
+                            )}
                         </form>
                     </>
                 )}
