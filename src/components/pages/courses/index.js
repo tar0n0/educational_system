@@ -1,11 +1,12 @@
 import { toast } from 'react-toastify';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { ENDPOINT_URLS, GET_ANNOUNCEMENTS, INPUT_SEARCH } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, GET_COURSES, INPUT_SEARCH } from '../../../constants/api.constants';
 import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
+import { SubMenuTypes } from '../../../constants/ui.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
 import DataList from '../../sharedComponents/dataList';
@@ -18,7 +19,7 @@ import AuthorizationService from '../../../services/authorizationService';
 // import '../home/home.css';
 
 const Courses = () => {
-    const { setOpen, setType } = useContext(modalContext);
+    const { setOpen, setType, setOpenDialog } = useContext(modalContext);
     const [isUser, setIsUser] = useState(false);
     const [searchData, setSearchData] = useState([]);
     const [data, setData] = useState([]);
@@ -27,7 +28,7 @@ const Courses = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        DataService.getJson(ENDPOINT_URLS[GET_ANNOUNCEMENTS]).then(val => {
+        DataService.getJson(ENDPOINT_URLS[GET_COURSES]).then(val => {
             setData(val?.data);
         });
     }, []);
@@ -133,7 +134,81 @@ const Courses = () => {
             ) : (
                 <>
                     <div className="content">
-                        <h1>Courses</h1>
+                        {data?.length ? (
+                            <>
+                                {data?.map(el => {
+                                    return (
+                                        <>
+                                            {el?.content?.length ? (
+                                                <div className="posts">
+                                                    <h2 className="title-announcement">{el?.title}</h2>
+                                                    {el?.content.substring(1, 300)}
+                                                    <p className="style-6" onClick={() => {
+                                                        DataService.getCourses.next(el);
+                                                        DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);
+                                                        setOpenDialog(true);
+                                                    }}>Read More</p>
+                                                </div>
+                                            ) : null}
+                                        </>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <>
+                                <h1>Courses</h1>
+                                <div className="posts">
+                                    <h2 className="title-announcement">Read More</h2>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
+                                    urna sagittis
+                                    egestas.
+                                    Mauris id bibendum purus, vestibulum tristique mauris. Nullam dapibus sem non nulla
+                                    lobortis,
+                                    vitae
+                                    blandit sem volutpat. Integer fringilla aliquet nulla eu aliquam. Donec euismod
+                                    scelerisque mi
+                                    quis
+                                    lobortis.<br/><br/> Aliquam convallis risus ligula, non pellentesque dolor hendrerit
+                                    id. Nunc
+                                    facilisis
+                                    arcu nulla, nec tempus neque scelerisque vel. Donec pharetra dolor eget ullamcorper
+                                    porta.
+                                    Suspendisse
+                                    interdum diam velit, nec porta magna elementum quis. Etiam id suscipit est. Cras
+                                    rhoncus felis
+                                    tincidunt
+                                    lorem rutrum, id vehicula neque scelerisque. Fusce a tempor ipsum, quis accumsan
+                                    nisl.
+
+                                    <a href="#" className="style-6">Read More</a>
+                                </div>
+                                <div className="posts">
+                                    <h2 className="title-announcement">Read More</h2>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
+                                    urna sagittis
+                                    egestas.
+                                    Mauris id bibendum purus, vestibulum tristique mauris. Nullam dapibus sem non nulla
+                                    lobortis,
+                                    vitae
+                                    blandit sem volutpat. Integer fringilla aliquet nulla eu aliquam. Donec euismod
+                                    scelerisque mi
+                                    quis
+                                    lobortis.<br/><br/> Aliquam convallis risus ligula, non pellentesque dolor hendrerit
+                                    id. Nunc
+                                    facilisis
+                                    arcu nulla, nec tempus neque scelerisque vel. Donec pharetra dolor eget ullamcorper
+                                    porta.
+                                    Suspendisse
+                                    interdum diam velit, nec porta magna elementum quis. Etiam id suscipit est. Cras
+                                    rhoncus felis
+                                    tincidunt
+                                    lorem rutrum, id vehicula neque scelerisque. Fusce a tempor ipsum, quis accumsan
+                                    nisl.
+
+                                    <a href="#" className="style-6">Read More</a>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </>
             )}

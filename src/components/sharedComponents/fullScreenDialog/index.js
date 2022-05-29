@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { toast } from 'react-toastify';
-import { ENDPOINT_URLS, ADD_NEW_ANNOUNCEMENT } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, ADD_NEW_ANNOUNCEMENT, ADD_NEW_COURSES } from '../../../constants/api.constants';
 import {
     ANNOUNCEMENT_SUCCESS,
     EMPTY_CONTENT_FOR_ANNOUNCEMENT,
@@ -105,7 +105,7 @@ const FullScreenDialog = () => {
                     </Toolbar>
                 </AppBar>
                 {DataService.getAnnouncement.getValue()?.content || DataService.getCourses.getValue()?.content ? (
-                    <><ExtraComponent isCourses={DataService.getAnnouncement.getValue()?.content ? true : false}/></>
+                    <><ExtraComponent /></>
                 ) : (
                     <>
                         <form className="form-for-entry">
