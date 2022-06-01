@@ -2,6 +2,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SchoolIcon from '@mui/icons-material/School';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
@@ -96,7 +97,10 @@ const UniversityPage = () => {
                     <li className={`item-for-side ${selectedItem === rightSideItemsName.ANNOUNCEMENTS ? 'active' : ''}`}
                         onClick={() => setSelectedItem(rightSideItemsName.ANNOUNCEMENTS)}>
                         <span>
-
+                            <AnnouncementIcon color={"inherit"} sx={{
+                                width: 32,
+                                height: 32
+                            }}/>
                         </span>
                         <span>Announcements</span>
                     </li>

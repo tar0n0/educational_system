@@ -11,6 +11,8 @@ const ExtraComponent = () => {
                     <h2 className="title-announcement">{data?.title}</h2>
                     {data?.content}
                     {/*<a href="#" className="style-6">Read More</a>*/}
+                    <br /><br /><br />
+                    <p>Author:: {data?.authorName} {data?.authorSurName}</p>
                 </div>
             </>
         );

@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -9,7 +10,8 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { toast } from 'react-toastify';
-import { ENDPOINT_URLS, ADD_NEW_ANNOUNCEMENT, ADD_NEW_COURSES } from '../../../constants/api.constants';
+import configs from '../../../configs/mainConfigs';
+import { ENDPOINT_URLS, ADD_NEW_ANNOUNCEMENT, ADD_NEW_COURSES, UPLOAD_FILE } from '../../../constants/api.constants';
 import {
     ANNOUNCEMENT_SUCCESS,
     COURSES_SUCCESS,
@@ -39,6 +41,20 @@ const FullScreenDialog = () => {
         file: null,
     });
     const [file, setFile] = useState('');
+    const [fileIds, setFileIds] = useState('');
+
+    useEffect(() => {
+        if (file) {
+            const formData = new FormData();
+            formData.append('files', file);
+            formData.append('FileVersion', 1);
+            DataService.postJson(ENDPOINT_URLS[UPLOAD_FILE], formData).then(val => {
+                const id = val.substring(val?.indexOf('id=') + 3);
+                console.log(id, '-------------id');
+                setFileIds(() => id);
+            });
+        }
+    }, [file]);
 
     const handelChangeCreatedData = (key = '', value = '') => {
         setCreatedData(() => ({
@@ -56,7 +72,6 @@ const FullScreenDialog = () => {
     };
 
     const handelCreateNewAnnouncement = (values) => {
-        console.log(values, 'values -');
         if (!values?.content) {
             console.log(2);
             toast.info(DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? EMPTY_CONTENT_FOR_ANNOUNCEMENT : EMPTY_CONTENT_FOR_COURSES, {
@@ -64,10 +79,11 @@ const FullScreenDialog = () => {
                 theme: "dark",
             });
         } else {
-            console.log(3);
             const url = DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? ENDPOINT_URLS[ADD_NEW_ANNOUNCEMENT] : ENDPOINT_URLS[ADD_NEW_COURSES];
-            console.log(url);
-            values?.content && DataService.postJson(url, values).then((_) => {
+            values?.content && DataService.postJson(url, {
+                ...values,
+                ...(fileIds ? { file: [fileIds] } : {}),
+            }).then((_) => {
                 toast.success(
                     url === ENDPOINT_URLS[ADD_NEW_ANNOUNCEMENT] ? ANNOUNCEMENT_SUCCESS : COURSES_SUCCESS, {
                         type: toast.TYPE.SUCCESS,
@@ -131,7 +147,8 @@ const FullScreenDialog = () => {
                             </div>
                             {DataService.getSubMenuType.getValue() === SubMenuTypes.COURSES_FOR_ACCOUNT && (
                                 <>
-                                    <label htmlFor="exampleFormControlInput1" className="label-for-ann">Upload File </label>
+                                    <label htmlFor="exampleFormControlInput1" className="label-for-ann">Upload
+                                        File </label>
                                     <div className="container-uploaded-file">
                                         {file ? <div className="uploaded-file"
                                             title={file?.name}>{file?.name}</div> : (

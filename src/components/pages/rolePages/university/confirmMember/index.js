@@ -546,11 +546,11 @@ export default function ConfirmMember() {
                         nextIconButtonProps={{
                             "aria-label": "next page",
                         }}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                        onPageChange={handleChangePage}
                     />
                 </Paper>
             </div>
         ) : <CircularProgress/>}</>
     );
 }
+

@@ -106,3 +106,9 @@ body {
 .delete-announcement-or-course {
     cursor: pointer;
 }
+
+.author-for-courses-and-announcement {
+    font-weight: bold;
+    color: #0B0E2F;
+
+}

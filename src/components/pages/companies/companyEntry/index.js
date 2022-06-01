@@ -79,7 +79,10 @@ const CompanyEntry = () => {
                         <li className={`item-for-side ${selectedItem === rightSideItemsName.ANNOUNCEMENTS ? 'active' : ''}`}
                             onClick={() => setSelectedItem(rightSideItemsName.ANNOUNCEMENTS)}>
                             <span>
-
+                                <AccountCircleIcon color={"inherit"} sx={{
+                                    width: 32,
+                                    height: 32
+                                }}/>
                             </span>
                             <span>Announcements</span>
                         </li>

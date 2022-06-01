@@ -148,6 +148,7 @@ const Courses = () => {
                                                         DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);
                                                         setOpenDialog(true);
                                                     }}>Read More</p>
+                                                    <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>
                                                 </div>
                                             ) : null}
                                         </>

@@ -51,9 +51,6 @@ const Courses = () => {
                             <>
                                 {el?.content?.length && (
                                     <div className="posts">
-                                        <p className='delete-announcement-or-course' onClick={() => handelDeleteCourse(el?.id)}>
-                                            <ClearIcon color="error" fontSize={"large"} />
-                                        </p>
                                         <h2 className="title-announcement">{el?.title}</h2>
                                         {el?.content.substring(1, 300)}
                                         <p className="style-6" onClick={() => {
@@ -61,6 +58,7 @@ const Courses = () => {
                                             DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_ACCOUNT);
                                             setOpenDialog(true);
                                         }}>Read More</p>
+                                        <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>
                                     </div>
                                 )}
                             </>

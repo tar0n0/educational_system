@@ -163,7 +163,7 @@ const ButtonWrapper = ({
                             Authorization: `Bearer ${getStorageItem('user')?.token}`
                         },
                     })
-                        .then((_) => {
+                        .then((val) => {
                             toast.success(UPLOADED_FILE, {
                                 type: toast.TYPE.SUCCESS,
                                 icon: true,
