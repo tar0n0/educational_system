@@ -141,6 +141,7 @@ const Courses = () => {
                                         <>
                                             {el?.content?.length ? (
                                                 <div className="posts">
+                                                    <p></p>
                                                     <h2 className="title-announcement">{el?.title}</h2>
                                                     {el?.content.substring(1, 300)}
                                                     <p className="style-6" onClick={() => {
@@ -148,6 +149,12 @@ const Courses = () => {
                                                         DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);
                                                         setOpenDialog(true);
                                                     }}>Read More</p>
+                                                    <p className="style-6" onClick={() => {
+                                                        DataService.getCourses.next(el);
+                                                        DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);
+                                                        DataService.getContentType.next(SubMenuTypes.CONTEnt_TYPE_FOR_COURSES);
+                                                        setOpenDialog(true);
+                                                    }}>All Contents</p>
                                                     <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>
                                                 </div>
                                             ) : null}

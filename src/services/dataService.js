@@ -22,9 +22,10 @@ class DataService extends MakeRequest {
         this._userType = new BehaviorSubject(0);
         this._userCategory = new BehaviorSubject(null);
         this._announcement = new BehaviorSubject({});
+        this._updatedData = new BehaviorSubject(false);
         this._subMenuType = new BehaviorSubject('');
         this._courses = new BehaviorSubject({});
-
+        this._contentType = new BehaviorSubject('');
     }
 
     getCities(url, name) {
@@ -115,6 +116,14 @@ class DataService extends MakeRequest {
 
     get getSubMenuType() {
         return this._subMenuType;
+    }
+
+    get getContentType() {
+        return this._contentType;
+    }
+
+    get isUpdatedData() {
+        return this._updatedData;
     }
 }
 

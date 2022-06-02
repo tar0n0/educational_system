@@ -17,6 +17,10 @@ const Announcement = () => {
         DataService.getJson(ENDPOINT_URLS[GET_MY_ANNOUNCEMENTS]).then(val => setData(val?.data));
     }, []);
 
+    useEffect(() => {
+        DataService.getJson(ENDPOINT_URLS[GET_MY_ANNOUNCEMENTS]).then(val => setData(val?.data));
+    }, [DataService.isUpdatedData.getValue()]);
+
     const handelDeleteAnnouncement = (announcementId) => {
         DataService.postJson(ENDPOINT_URLS[DELETE_ANNOUNCEMENT](announcementId)).then(_ => {
             toast.success(
@@ -54,7 +58,7 @@ const Announcement = () => {
                                         {el?.content.substring(1, 300)}
                                         <p className="style-6" onClick={() => {
                                             DataService.getAnnouncement.next(el);
-                                            DataService.getSubMenuType.next(SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT);
+                                            DataService.getSubMenuType.next(SubMenuTypes.CONTENT_TYPE_FOR_ANNOUNCEMEN);
                                             setOpenDialog(true);
                                         }}>Read More</p>
                                         <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>

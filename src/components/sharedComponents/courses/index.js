@@ -2,7 +2,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { ENDPOINT_URLS, GET_MY_COURSES, DELETE_COURSES } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, GET_MY_COURSES, DELETE_COURSES, GET_MY_ANNOUNCEMENTS } from '../../../constants/api.constants';
 import { DELETE_THIS_COURSE } from '../../../constants/messages.constants';
 import { SubMenuTypes } from '../../../constants/ui.constants';
 import { modalContext } from '../../../context/modalContext';
@@ -16,6 +16,10 @@ const Courses = () => {
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_MY_COURSES]).then(val => setData(val?.data));
     }, []);
+
+    useEffect(() => {
+        DataService.getJson(ENDPOINT_URLS[GET_MY_COURSES]).then(val => setData(val?.data));
+    }, [DataService.isUpdatedData.getValue()]);
 
     const handelDeleteCourse = (courseID) => {
         DataService.postJson(ENDPOINT_URLS[DELETE_COURSES](courseID)).then(_ => {
@@ -54,8 +58,8 @@ const Courses = () => {
                                         <h2 className="title-announcement">{el?.title}</h2>
                                         {el?.content.substring(1, 300)}
                                         <p className="style-6" onClick={() => {
-                                            DataService.getAnnouncement.next(el);
-                                            DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_ACCOUNT);
+                                            DataService.getCourses.next(el);
+                                            DataService.getSubMenuType.next(SubMenuTypes.CONTENT_TYPE_FOR_COURSES);
                                             setOpenDialog(true);
                                         }}>Read More</p>
                                         <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>

@@ -34,6 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const FullScreenDialog = () => {
     const { setOpenDialog, openDialog } = useContext(modalContext);
+    const [reRender, setReRender] = useState(false);
     const [createdData, setCreatedData] = useState({
         title: '',
         content: '',
@@ -50,7 +51,6 @@ const FullScreenDialog = () => {
             formData.append('FileVersion', 1);
             DataService.postJson(ENDPOINT_URLS[UPLOAD_FILE], formData).then(val => {
                 const id = val.substring(val?.indexOf('id=') + 3);
-                console.log(id, '-------------id');
                 setFileIds(() => id);
             });
         }
@@ -69,6 +69,8 @@ const FullScreenDialog = () => {
         DataService.getAnnouncement.next({});
         DataService.getCourses.next({});
         DataService.getSubMenuType.next('');
+        DataService.getContentType.next('');
+        DataService.isUpdatedData.next(!DataService.isUpdatedData.getValue());
     };
 
     const handelCreateNewAnnouncement = (values) => {
@@ -128,7 +130,7 @@ const FullScreenDialog = () => {
                     </Toolbar>
                 </AppBar>
                 {DataService.getAnnouncement.getValue()?.content || DataService.getCourses.getValue()?.content ? (
-                    <><ExtraComponent/></>
+                    <><ExtraComponent handelClickClose={handelClickClose}/></>
                 ) : (
                     <>
                         <form className="form-for-entry">
