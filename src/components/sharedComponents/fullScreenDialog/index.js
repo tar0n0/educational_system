@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import * as React from 'react';
 import Button from '@mui/material/Button';
@@ -10,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { toast } from 'react-toastify';
-import configs from '../../../configs/mainConfigs';
+
 import { ENDPOINT_URLS, ADD_NEW_ANNOUNCEMENT, ADD_NEW_COURSES, UPLOAD_FILE } from '../../../constants/api.constants';
 import {
     ANNOUNCEMENT_SUCCESS,
@@ -39,7 +38,7 @@ const FullScreenDialog = () => {
         title: '',
         content: '',
         userId: parseJwt(getStorageItem('user')?.token)?.UserId,
-        file: null,
+        fileIds: [],
     });
     const [file, setFile] = useState('');
     const [fileIds, setFileIds] = useState('');
@@ -64,6 +63,7 @@ const FullScreenDialog = () => {
     };
 
     const handelClickOpen = () => setOpenDialog(true);
+    
     const handelClickClose = () => {
         setOpenDialog(false);
         DataService.getAnnouncement.next({});
@@ -71,6 +71,10 @@ const FullScreenDialog = () => {
         DataService.getSubMenuType.next('');
         DataService.getContentType.next('');
         DataService.isUpdatedData.next(!DataService.isUpdatedData.getValue());
+        setReRender(!reRender);
+        DataService.getAnnouncement.next({});
+        DataService.getCourses.next({});
+        DataService.getSubMenuType.next('');
     };
 
     const handelCreateNewAnnouncement = (values) => {

@@ -15,6 +15,8 @@ export const DELETE_THIS_COURSE = 'Yous have successfully deleted this course';
 export const EDITED_YOUR_FILE = 'Yous have successfully edited your file';
 export const ANNOUNCEMENT_SUCCESS = 'New Announcement have successfully created';
 export const COURSES_SUCCESS = 'New Course have successfully created';
+export const EDITED_THIS_COURSES = 'Yous have successfully edited your course data';
+export const EDITED_THIS_ANNOUNCEMENT = 'Yous have successfully edited your course data';
 
 // INFO
 export const WAIT_ADMIN_CONFIRM = 'You have successfully submitted a request, wait while the admin confirms';

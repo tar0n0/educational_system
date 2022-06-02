@@ -21,3 +21,9 @@
     font-size: 18px;
     color: #002aff;
 }
+
+.icons-for-save-this-content {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}

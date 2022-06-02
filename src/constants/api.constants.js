@@ -14,6 +14,8 @@ export const ADD_NEW_ANNOUNCEMENT = 'ADD_NEW_ANNOUNCEMENT'; // POST
 export const DELETE_ANNOUNCEMENT = 'DELETE_ANNOUNCEMENT'; // POST
 export const ADD_NEW_COURSES = 'ADD_NEW_COURSES'; // POST
 export const DELETE_COURSES = 'DELETE_COURSES'; // POST
+export const EDIT_MY_COURSES = 'EDIT_MY_COURSES'; // POST
+export const EDIT_MY_ANNOUNCEMENT = 'EDIT_MY_ANNOUNCEMENT'; // POST
 
 export const UNIVERSITY_COUNTRIES = 'UNIVERSITY_COUNTRIES'; // GET
 export const UNIVERSITY_CITIES = 'UNIVERSITY_CITIES'; // GET
@@ -77,5 +79,7 @@ export const ENDPOINT_URLS = {
     [ADD_NEW_COURSES]: '/Courses/Add',
     [ADD_NEW_ANNOUNCEMENT]: '/Announcements/Add',
     [DELETE_ANNOUNCEMENT]: (announcementId) => `/Announcements/Delete?id=${announcementId}`,
-    [DELETE_COURSES]: (coursesId) => `/Courses/Delete?id=${coursesId}`
+    [DELETE_COURSES]: (coursesId) => `/Courses/Delete?id=${coursesId}`,
+    [EDIT_MY_COURSES]: '/Courses/Edit',
+    [EDIT_MY_ANNOUNCEMENT]: '/Announcements/Edit',
 };
