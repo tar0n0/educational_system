@@ -157,6 +157,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
         DataService.postJson(ENDPOINT_URLS[DELETE_FILE], {
             fileId: file?.fileId,
             fileName: file?.fileName,
+            fileVersion: 2,
         }).then(_ => {
             toast.success(DELETE_YOUR_FILE, {
                 type: toast.TYPE.SUCCESS,
@@ -172,12 +173,14 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
             });
         });
     };
+    
     const handelEditedUserFileName = (row = {}) => {
         const fileId = row?.id;
         const file = tableData.find(el => el?.fileName === `${fileId}${row?.fileType}`);
         DataService.postJson(ENDPOINT_URLS[EDIT_FILE_NAME], {
             fileName: `${fileId}${row.fileType}`,
             newFileName: `${row?.currentFileName}${row?.fileType}`,
+            fileVersion: 2,
         }).then(_ => {
             toast.success(EDITED_YOUR_FILE, {
                 type: toast.TYPE.SUCCESS,
@@ -254,7 +257,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                 )}
                             </TableCell>
                             <CustomTableCell {...{ row, name: "currentFileName", onChange }} />
-                            <CustomTableCell {...{ row, name: "fileType" }} disabled />
+                            <CustomTableCell {...{ row, name: "fileType" }} disabled/>
                         </TableRow>
                     ))}
                 </TableBody>
