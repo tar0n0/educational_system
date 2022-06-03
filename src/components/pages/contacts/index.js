@@ -114,7 +114,7 @@ const Contact = () => {
                     </button>
                 </div>
             </div>
-            <div className="content">
+            <div className="content ">
                 {searchData?.length ? (
                     <>
                         <div className="content">
@@ -124,7 +124,7 @@ const Contact = () => {
                 ) : (
                     <>
 
-                        <div className="profile-wrapper">
+                        <div className="profile-wrapper content-for-contacts-page">
                             <div className="profile-details">
                                 <div>
                                     <div className="profile-title">

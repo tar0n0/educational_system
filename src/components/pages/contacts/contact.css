@@ -80,6 +80,7 @@
 }
 
 .profile-wrapper {
+    margin-top: 30px;
     background: #013864;
     border-radius: 12px;
     margin: 25px;
@@ -200,6 +201,13 @@ div.profile-details > div > ul > li > div:nth-child(2) {
 }
 
 .item:hover {
+    color: #013864;
+    background: #fff;
+    box-shadow: 1px 1px 5px #000;
+}
+
+.content-for-contacts-page {
+    margin-top: 30px;
     color: #013864;
     background: #fff;
     box-shadow: 1px 1px 5px #000;

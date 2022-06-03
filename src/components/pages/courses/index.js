@@ -9,6 +9,7 @@ import { EXTENDED_SEARCH } from '../../../constants/pathnames.constants';
 import { SubMenuTypes } from '../../../constants/ui.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
+import { createGuid } from '../../../utils/helpers';
 import DataList from '../../sharedComponents/dataList';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import Footer from '../../sharedComponents/footer/footer';
@@ -137,18 +138,19 @@ const Courses = () => {
                         {data?.length ? (
                             <>
                                 {data?.map(el => {
+                                    const guid = createGuid();
                                     return (
                                         <>
                                             {el?.content?.length ? (
-                                                <div className="posts">
+                                                <div className="posts" key={guid}>
                                                     <p></p>
                                                     <h2 className="title-announcement">{el?.title}</h2>
                                                     {el?.content.substring(1, 300)}
-                                                    <p className="style-6" onClick={() => {
-                                                        DataService.getCourses.next(el);
-                                                        DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);
-                                                        setOpenDialog(true);
-                                                    }}>Read More</p>
+                                                    {/*<p className="style-6" onClick={() => {*/}
+                                                    {/*    DataService.getCourses.next(el);*/}
+                                                    {/*    DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);*/}
+                                                    {/*    setOpenDialog(true);*/}
+                                                    {/*}}>Read More</p>*/}
                                                     <p className="style-6" onClick={() => {
                                                         DataService.getCourses.next(el);
                                                         DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);

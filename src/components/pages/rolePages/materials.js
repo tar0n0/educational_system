@@ -98,10 +98,7 @@ const Materials = () => {
                                                     <ClearIcon color="error" fontSize={"large"}
                                                         onClick={() => setFile('')}/>}</span>
                                             </div>
-                                            <Checkbox
-                                                name="isFile"
-                                                label="Private File"
-                                            />
+
                                         </Grid>
 
                                         <Grid item xs={12}>

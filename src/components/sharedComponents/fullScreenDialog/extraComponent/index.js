@@ -119,19 +119,19 @@ const ExtraComponent = ({ handelClickClose }) => {
                         <div className="posts">
                             <p>{!['courses', 'announcements'].includes(window.location.pathname) && (
                                 <>
-                                    <p className="delete-announcement-or-course">
+                                    <div className="delete-announcement-or-course">
                                         <ClearIcon color="error" fontSize={"large"}
                                             onClick={() => handelDeleteFile(data?.id)}/>
                                         <EditIcon color="warning" fontSize={'large'}
                                             onClick={() => handelEditeFile()}/>
-                                    </p>
+                                    </div>
                                 </>
                             )}</p>
                             <h2 className="title-announcement">{data?.title}</h2>
                             {data?.content}
                             {/*<a href="#" className="style-6">Read More</a>*/}
                             <br/><br/><br/>
-                            <p>Author:: {data?.authorName} {data?.authorSurName}</p>
+                            <div>Author:: {data?.authorName} {data?.authorSurName}</div>
                         </div>
                         <div>
                             <FileCourses data={data?.fileIDs} />
@@ -178,11 +178,11 @@ const ExtraComponent = ({ handelClickClose }) => {
                                 </>
                             )}
                             {isEdited && (
-                                <p className='icons-for-save-this-content'>
+                                <div className='icons-for-save-this-content'>
                                     <Button variant={'contained'} onClick={() => setIsEdited(false)}>Cancel</Button>
                                     <Button variant={'contained'}
                                         onClick={() => handelSaveContent(data?.id)}>Save</Button>
-                                </p>
+                                </div>
                             )}
                         </form>
                     </>

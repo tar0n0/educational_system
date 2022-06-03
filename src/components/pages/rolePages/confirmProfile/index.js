@@ -532,8 +532,8 @@ export default function ConfirmProfile() {
                         nextIconButtonProps={{
                             "aria-label": "next page",
                         }}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
             </div>

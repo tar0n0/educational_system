@@ -173,7 +173,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
             });
         });
     };
-    
+
     const handelEditedUserFileName = (row = {}) => {
         const fileId = row?.id;
         const file = tableData.find(el => el?.fileName === `${fileId}${row?.fileType}`);
