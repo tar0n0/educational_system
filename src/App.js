@@ -5,7 +5,9 @@ import FormValuesProvider from './context/formContext';
 import ModalContentProvider from './context/modalContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+//COMPANY Uploadi jamanak filei anune, upload file poxel upload logo,  bolor texere
+//logini jamanak poxem email
+//Sign
 import './App.css';
 import UserIdProvider from './context/userIdContext';
 import 'bootstrap/dist/css/bootstrap.css';

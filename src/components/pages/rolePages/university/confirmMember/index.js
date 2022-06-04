@@ -318,47 +318,50 @@ export default function ConfirmMember() {
     useEffect(() => {
         getInitialData();
     }, []);
-
+    //TODO
     const handleConfirm = () => {
-        if (pathName.includes(UNIVERSITY.toLowerCase())) {
-            DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selected).then(_ => {
-                toast.success(
-                    CONFIRM_SUCCESS, {
-                        type: toast.TYPE.SUCCESS,
-                        icon: true,
-                        theme: 'dark'
-                    });
-                getInitialData();
-                setSelected([]);
-            }).catch(_ => {
-                toast.error(
-                    ERROR_CONFIRM, {
-                        type: toast.TYPE.ERROR,
-                        icon: true,
-                        theme: 'dark'
-                    }
-                );
-            });
-        } else {
-            DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
-                toast.success(
-                    CONFIRM_SUCCESS, {
-                        type: toast.TYPE.SUCCESS,
-                        icon: true,
-                        theme: 'dark',
-                    });
-                getInitialData();
-                setSelected([]);
-            }).catch(_ => {
-                toast.error(
-                    ERROR_CONFIRM, {
-                        type: toast.TYPE.ERROR,
-                        icon: true,
-                        theme: 'dark',
-                    }
-                );
-            });
+        for(let i = 0; i < selected?.length; i++) {
+            if (selected[i]?.userType === 'Company') {
+                DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
+                    toast.success(
+                        CONFIRM_SUCCESS, {
+                            type: toast.TYPE.SUCCESS,
+                            icon: true,
+                            theme: 'dark'
+                        });
+                    getInitialData();
+                    setSelected([]);
+                }).catch(_ => {
+                    toast.error(
+                        ERROR_CONFIRM, {
+                            type: toast.TYPE.ERROR,
+                            icon: true,
+                            theme: 'dark'
+                        }
+                    );
+                });
+            } else {
+                DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selected).then(_ => {
+                    toast.success(
+                        CONFIRM_SUCCESS, {
+                            type: toast.TYPE.SUCCESS,
+                            icon: true,
+                            theme: 'dark',
+                        });
+                    getInitialData();
+                    setSelected([]);
+                }).catch(_ => {
+                    toast.error(
+                        ERROR_CONFIRM, {
+                            type: toast.TYPE.ERROR,
+                            icon: true,
+                            theme: 'dark',
+                        }
+                    );
+                });
+            }
         }
+
     };
 
     const handleDeleteUser = () => {
