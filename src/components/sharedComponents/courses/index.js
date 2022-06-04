@@ -63,8 +63,8 @@ const Courses = () => {
                                             DataService.getCourses.next(el);
                                             DataService.getSubMenuType.next(SubMenuTypes.CONTENT_TYPE_FOR_COURSES);
                                             setOpenDialog(true);
-                                        }}>Read More</p>
-                                        <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>
+                                        }}>All Content</p>
+                                        <p className="author-for-courses-and-announcement">Author:: {el?.authorName} {el?.authorSurName}</p>
                                     </div>
                                 )}
                             </>
