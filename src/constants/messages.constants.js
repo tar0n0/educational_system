@@ -1,5 +1,5 @@
 //ERROR
-export const LOGIN_ERROR = 'Incorrect password or email address';
+export const LOGIN_ERROR = 'Incorrect password or username address';
 export const ERROR_CONFIRM = 'User confirmation could not occur due to a server issue';
 export const GLOBAL_ERROR = 'Something went wrong';
 
