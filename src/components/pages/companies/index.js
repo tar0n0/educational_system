@@ -177,7 +177,7 @@ const Companies = () => {
                                 {companies.map((card, index) => (
                                     <div className="container-with-logo-card" key={index}>
                                         <div className="block-for-image-logo" onClick={() => window.open(card?.url)}>
-                                            <img src={card?.imageSrc || polytechnic} alt=""/>
+                                            {/*<img src={card?.imageSrc || polytechnic} alt=""/>*/}
                                         </div>
                                         <div><p className="block-for-name-logo"  onClick={() => window.open(card?.url)}>{card?.title}<span
                                             className=""> </span></p></div>
