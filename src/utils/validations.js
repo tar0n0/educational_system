@@ -115,7 +115,7 @@ export const EXTENDED_SEARCH_VALIDATION = Yup.object().shape({
 
 export const USER_REGISTRATION_VALIDATION = Yup.object().shape({
     name: Yup.string()
-        .required('Username is not allowed to be empty.')
+        // .required('Username is not allowed to be empty.')
         // .min(3, 'Your username must contain at least 3 characters')
         .max(100, 'Your username must be under 100 character'),
     // .matches(/^[A-Za-z][A-Za-z0-9_.]{3,100}$/img, 'Username must start with an uppercase or lowercase character and can contain numbers, underscore and dot'),

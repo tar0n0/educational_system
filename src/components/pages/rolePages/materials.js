@@ -79,7 +79,7 @@ const Materials = () => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography>
-                                                <span className="typography-text">  Uploaded Files</span>
+                                                <span className="typography-text">  Upload Files</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>

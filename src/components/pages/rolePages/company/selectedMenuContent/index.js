@@ -2,6 +2,7 @@ import React from 'react';
 import { CONTENT_TYPE, MATERIALS_TYPE, rightSideItemsName, USER_TYPE } from '../../../../../constants/ui.constants';
 import UserForm from '../../../../auth/pieces/formsForUserTypes/userForm';
 import MyFiles from '../../../../myFiles';
+import EditProfileInfo from '../../../../sharedComponents/editProfileInfo';
 import ConfirmProfile from '../../confirmProfile';
 import Materials from '../../materials';
 
@@ -13,11 +14,7 @@ const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setCl
         case rightSideItemsName.PROFILE: {
             return (
                 <>
-                    <UserForm isAllContent={true} inUniversity={true} editUserInfo={{
-                        name: USER_TYPE?.UNIVERSITY, isEdit: true,
-                    }}
-                    setClickType={setClickType}
-                    />
+                    <EditProfileInfo />
                 </>
             );
         }

@@ -5,8 +5,8 @@ import FormValuesProvider from './context/formContext';
 import ModalContentProvider from './context/modalContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//COMPANY Uploadi jamanak filei anune, upload file poxel upload logo,  bolor texere
-//logini jamanak poxem email
+//COMPANY Uploadi jamanak filei anune, upload file poxel upload logo,  bolor texere //++
+//logini jamanak poxem username
 //Update Profile dzel
 //studente chi karox courses u announcement add anel
 //Confirmi jamanak tarberakel Confirmed i call ere

@@ -12,6 +12,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import AuthorizationService from '../../../services/authorizationService';
+import { parseJwt } from '../../../utils/helpers';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -55,7 +56,7 @@ export default function AccountMenu() {
                             width: 60,
                             height: 60,
                             backgroundColor: '#0580e8'
-                        }}></Avatar>
+                        }}>{parseJwt(getStorageItem('user')?.token)?.Name && parseJwt(getStorageItem('user')?.token)?.Surname ? parseJwt(getStorageItem('user')?.token)?.Name[0] + parseJwt(getStorageItem('user')?.token)?.Surname[0] : null}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>

@@ -1,3 +1,4 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -239,18 +240,26 @@ const CompanyForm = ({ isAllContent = true }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography>
-                                                <span className="typography-text">  Uploaded Files</span>
+                                                <span className="typography-text">  Uploaded Logo</span>
                                             </Typography>
                                         </Grid>
-                                        <Grid item xs={6}>
-                                            <UploadInput
-                                                className={'pdfInput'}
-                                                accept={
-                                                    'image/*'
-                                                }
-                                                setFile={setFile}
-                                            />
+                                        <Grid item xs={12}>
+                                            <div className="container-uploaded-file">
+                                                {file ? <div className="uploaded-file"
+                                                    title={file?.name}>{file?.name}</div> : (
+                                                    <UploadInput
+                                                        className={'pdfInput'}
+                                                        accept={
+                                                            'image/*'
+                                                        }
+                                                        setFile={setFile}
+                                                    />
+                                                )}
+                                                <span className="uploaded-icon">{file &&
+                                                        <ClearIcon color="error" fontSize={"large"}
+                                                            onClick={() => setFile('')}/>}</span>
 
+                                            </div>
                                         </Grid>
                                         <Grid item xs={12}>
                                             {isAllContent && <TextfieldWrapperWrapper

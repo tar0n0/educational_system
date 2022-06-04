@@ -5,6 +5,7 @@ import { USER_TYPES_FOR_MODAL } from '../../../constants/modals.constat';
 import useWindowResize from '../../../hooks/useWindowResize';
 import DataService from '../../../services/dataService';
 import { getStorageItem } from '../../../storage';
+import { parseJwt } from '../../../utils/helpers';
 import DataList from '../../sharedComponents/dataList';
 import AccountMenu from '../../sharedComponents/menuWithAvatar';
 import { useNavigate } from 'react-router-dom';
@@ -52,7 +53,7 @@ const Home = () => {
             getData.unsubscribe();
         };
     }, []);
-
+    console.log(parseJwt(getStorageItem('user')?.token));
     return (
         <>
             <div className="header-home">

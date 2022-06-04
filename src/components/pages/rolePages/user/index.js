@@ -2,8 +2,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SchoolIcon from '@mui/icons-material/School';
+import { parseJwt } from '../../../../utils/helpers';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getStorageItem } from '../../../../storage';
 import AccountMenu from '../../../sharedComponents/menuWithAvatar';
 import { CONTENT_TYPE, rightSideItemsName } from '../../../../constants/ui.constants';
 
@@ -16,6 +18,7 @@ const UserPage = () => {
     const [clickMaterialTYpe, setClickMaterialType] = useState('');
     const { MATERIALS, PROFILE } = CONTENT_TYPE;
     const [selectedItem, setSelectedItem] = useState('');
+    let isStudent = parseJwt(getStorageItem('user')?.token)?.userCategory === 'Student';
     // const { UPLOAD_FILE, MY_FILES } = MATERIALS_TYPE;
     // const handleClick = (type = '') => setClickType(type);
 
@@ -62,44 +65,57 @@ const UserPage = () => {
                                 Profile
                             </div>
                         </li>
-                        <li className={`item-for-side ${selectedItem === rightSideItemsName.MATERIALS ? 'active' : ''}`}
-                            onClick={() => setSelectedItem(rightSideItemsName.MATERIALS)}>
-                            <span>
-                                <LibraryBooksIcon color={"inherit"} sx={{
-                                    width: 32,
-                                    height: 32
-                                }}/>
+                        {!isStudent ? (
+                            <>
+                                <li className={`item-for-side ${selectedItem === rightSideItemsName.MATERIALS ? 'active' : ''}`}
+                                    onClick={() => setSelectedItem(rightSideItemsName.MATERIALS)}>
+                                    <span>
+                                        <LibraryBooksIcon color={"inherit"} sx={{
+                                            width: 32,
+                                            height: 32
+                                        }}/>
 
-                            </span>
-                            <span>Materials</span>
+                                    </span>
+                                    <span>Materials</span>
 
-                        </li>
-                        <li className={`item-for-side ${selectedItem === rightSideItemsName.ANNOUNCEMENTS ? 'active' : ''}`}
-                            onClick={() => setSelectedItem(rightSideItemsName.ANNOUNCEMENTS)}>
-                            <span>
-                                <AccountCircleIcon color={"inherit"} sx={{
-                                    width: 32,
-                                    height: 32
-                                }}/>
-                            </span>
-                            <span>Announcements</span>
-                        </li>
-                        <li className={`item-for-side ${selectedItem === rightSideItemsName.NEWS ? 'active' : ''}`}
-                            onClick={() => setSelectedItem(rightSideItemsName.NEWS)}>
-                            <NewspaperIcon color={"inherit"} sx={{
-                                width: 32,
-                                height: 32
-                            }}/>
-                            News
-                        </li>
-                        <li className={`item-for-side ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}
-                            onClick={() => setSelectedItem(rightSideItemsName.COURSES)}>
-                            <SchoolIcon color={"inherit"} sx={{
-                                width: 32,
-                                height: 32
-                            }}/>
-                            Courses
-                        </li>
+                                </li>
+                                <li className={`item-for-side ${selectedItem === rightSideItemsName.ANNOUNCEMENTS ? 'active' : ''}`}
+                                    onClick={() => setSelectedItem(rightSideItemsName.ANNOUNCEMENTS)}>
+                                    <span>
+                                        <AccountCircleIcon color={"inherit"} sx={{
+                                            width: 32,
+                                            height: 32
+                                        }}/>
+                                    </span>
+                                    <span>Announcements</span>
+                                </li>
+                                <li className={`item-for-side ${selectedItem === rightSideItemsName.NEWS ? 'active' : ''}`}
+                                    onClick={() => setSelectedItem(rightSideItemsName.NEWS)}>
+                                    <NewspaperIcon color={"inherit"} sx={{
+                                        width: 32,
+                                        height: 32
+                                    }}/>
+                                    News
+                                </li>
+                                <li className={`item-for-side ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}
+                                    onClick={() => setSelectedItem(rightSideItemsName.COURSES)}>
+                                    <SchoolIcon color={"inherit"} sx={{
+                                        width: 32,
+                                        height: 32
+                                    }}/>
+                                    Courses
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li className={`item-for-side-fake ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
+                                <li className={`item-for-side-fake  ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
+                                <li className={`item-for-side-fake  ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
+                                <li className={`item-for-side-fake  ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
+                                <li className={`item-for-side-fake  ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
+
+                            </>
+                        )}
                         <li className={`item-for-side-fake ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
                         <li className={`item-for-side-fake  ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>
                         <li className={`item-for-side-fake  ${selectedItem === rightSideItemsName.COURSES ? 'active' : ''}`}></li>

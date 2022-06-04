@@ -4,10 +4,11 @@ import UserForm from '../../../../auth/pieces/formsForUserTypes/userForm';
 import MyFiles from '../../../../myFiles';
 import Announcement from '../../../../sharedComponents/Announcements';
 import Courses from '../../../../sharedComponents/courses';
+import EditProfileInfo from '../../../../sharedComponents/editProfileInfo';
 import ConfirmProfile from '../../confirmProfile';
 import Materials from '../../materials';
-import ConfirmCompanyMember from '../confirmCompanyMember';
 import ConfirmMember from '../confirmMember';
+
 
 const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setClickMaterialType, clickType }) => {
     const { UPLOAD_FILE, MY_FILES } = MATERIALS_TYPE;
@@ -17,11 +18,7 @@ const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setCl
         case rightSideItemsName.PROFILE: {
             return (
                 <>
-                    <UserForm isAllContent={true} inUniversity={true} editUserInfo={{
-                        name: USER_TYPE?.UNIVERSITY, isEdit: true,
-                    }}
-                    setClickType={setClickType}
-                    />
+                    <EditProfileInfo />
                 </>
             );
         }
@@ -56,23 +53,23 @@ const SelectedMenuContent = ({ type = '', setClickType, clickMaterialTYpe, setCl
             );
         }
         case rightSideItemsName.CONFIRM_PROFILE : {
-            return <ConfirmProfile />;
+            return <ConfirmProfile/>;
         }
         case rightSideItemsName.CONFIRM_MEMBER : {
             return (
                 <>
                     <div>
                         <h1>Members</h1>
-                        <ConfirmMember />
+                        <ConfirmMember/>
                     </div>
                 </>
             );
         }
         case rightSideItemsName.ANNOUNCEMENTS: {
-            return <Announcement />;
+            return <Announcement/>;
         }
         case rightSideItemsName.COURSES: {
-            return <Courses />;
+            return <Courses/>;
         }
         default :
             return null;
