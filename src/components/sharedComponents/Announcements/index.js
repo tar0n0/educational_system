@@ -73,55 +73,6 @@ const Announcement = () => {
             ) : (
                 <>
                     <h1>Announcements</h1>
-                    <div className="posts">
-                        <h2 className="title-announcement">Read More</h2>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
-                        urna sagittis
-                        egestas.
-                        Mauris id bibendum purus, vestibulum tristique mauris. Nullam dapibus sem non nulla
-                        lobortis,
-                        vitae
-                        blandit sem volutpat. Integer fringilla aliquet nulla eu aliquam. Donec euismod
-                        scelerisque mi
-                        quis
-                        lobortis.<br/><br/> Aliquam convallis risus ligula, non pellentesque dolor hendrerit
-                        id. Nunc
-                        facilisis
-                        arcu nulla, nec tempus neque scelerisque vel. Donec pharetra dolor eget ullamcorper
-                        porta.
-                        Suspendisse
-                        interdum diam velit, nec porta magna elementum quis. Etiam id suscipit est. Cras
-                        rhoncus felis
-                        tincidunt
-                        lorem rutrum, id vehicula neque scelerisque. Fusce a tempor ipsum, quis accumsan
-                        nisl.
-
-                        <a href="#" className="style-6">Read More</a>
-                    </div>
-                    <div className="posts">
-                        <h2 className="title-announcement">Read More</h2>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar lacus id
-                        urna sagittis
-                        egestas.
-                        Mauris id bibendum purus, vestibulum tristique mauris. Nullam dapibus sem non nulla
-                        lobortis,
-                        vitae
-                        blandit sem volutpat. Integer fringilla aliquet nulla eu aliquam. Donec euismod
-                        scelerisque mi
-                        quis
-                        lobortis.<br/><br/> Aliquam convallis risus ligula, non pellentesque dolor hendrerit
-                        id. Nunc
-                        facilisis
-                        arcu nulla, nec tempus neque scelerisque vel. Donec pharetra dolor eget ullamcorper
-                        porta.
-                        Suspendisse
-                        interdum diam velit, nec porta magna elementum quis. Etiam id suscipit est. Cras
-                        rhoncus felis
-                        tincidunt
-                        lorem rutrum, id vehicula neque scelerisque. Fusce a tempor ipsum, quis accumsan
-                        nisl.
-                        <a href="#" className="style-6">Read More</a>
-                    </div>
                 </>
             )}
         </>
