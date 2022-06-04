@@ -58,7 +58,7 @@ const Login = () => {
                                             <Grid item xs={12}>
                                                 <TextfieldWrapperWrapper
                                                     name="UserName"
-                                                    label="Email"
+                                                    label="UserName"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
