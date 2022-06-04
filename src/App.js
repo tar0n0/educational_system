@@ -7,7 +7,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //COMPANY Uploadi jamanak filei anune, upload file poxel upload logo,  bolor texere
 //logini jamanak poxem email
-//Sign
+//Update Profile dzel
+//studente chi karox courses u announcement add anel
 import './App.css';
 import UserIdProvider from './context/userIdContext';
 import 'bootstrap/dist/css/bootstrap.css';
