@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -44,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const createData = (currentFileName, userId, fileType) => ({
+const createData = (currentFileName, id, userId, fileType) => ({
     id: currentFileName,
     currentFileName,
     userId,
@@ -72,7 +74,7 @@ const CustomTableCell = ({ row, name, onChange }) => {
 };
 
 const FileCourses = ({ data }) => {
-    const [rows, setRows] = React.useState(data || []);
+    const [rows, setRows] = React.useState([data] || []);
     const [previous, setPrevious] = React.useState({});
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -119,6 +121,20 @@ const FileCourses = ({ data }) => {
         });
         onToggleEditMode(id);
     };
+    //TODO backend does not send fileTYpe
+    useLayoutEffect(() => {
+        const currentData = rows.map(el => {
+            return ({
+                id: Object.keys(el)[0],
+                name: el[Object.keys(el)[0]],
+            });
+        });
+        setTableData(() => [...currentData]);
+        const newData = [...currentData].map(el => {
+            return createData(el?.name);
+        });
+        setRows(newData);
+    }, []);
 
     // const getInitialUserFiles = () => {
     //     DataService.getJson(ENDPOINT_URLS[USER_MATERIALS]).then(val => {
@@ -139,10 +155,12 @@ const FileCourses = ({ data }) => {
     // }, []);
 
     const handelDeleteFile = (row) => {
-        const file = tableData.find(el => el?.fileName === `${row?.id}${row?.fileType}`);
+        const file = tableData.find(el => {
+            return el?.name === `${row?.currentFileName}`;
+        });
         DataService.postJson(ENDPOINT_URLS[DELETE_FILE], {
-            fileId: file?.fileId,
-            fileName: file?.fileName,
+            fileId: file?.id,
+            fileName: row?.currentFileName,
             fileVersion: 2
         }).then(_ => {
             toast.success(DELETE_YOUR_FILE, {
@@ -161,10 +179,10 @@ const FileCourses = ({ data }) => {
     };
     const handelEditedUserFileName = (row = {}) => {
         const fileId = row?.id;
-        const file = tableData.find(el => el?.fileName === `${fileId}${row?.fileType}`);
+        const file = tableData.find(el => el?.currentFileName === row.id);
         DataService.postJson(ENDPOINT_URLS[EDIT_FILE_NAME], {
-            fileName: `${fileId}${row.fileType}`,
-            newFileName: `${row?.currentFileName}${row?.fileType}`,
+            fileName: fileId,
+            newFileName: `${row?.currentFileName}`,
 
         }).then(_ => {
             toast.success(EDITED_YOUR_FILE, {
@@ -191,7 +209,7 @@ const FileCourses = ({ data }) => {
                     <TableRow>
                         <TableCell align="left">Actions</TableCell>
                         <TableCell align="left">Your File names</TableCell>
-                        <TableCell align="left">File Type</TableCell>
+                        {/*<TableCell align="left">File Type</TableCell>*/}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -211,6 +229,15 @@ const FileCourses = ({ data }) => {
                                     </>
                                 ) : (
                                     <>
+                                        <>
+                                            <span className="icon-btn" onClick={() => {
+                                                onToggleEditMode(row.id);
+                                            }}><EditIcon color={'info'}/></span>
+                                            <span className="icon-btn" onClick={() => {
+                                                handelDeleteFile(row);
+                                            }}> <DeleteForeverIcon color="error"/></span>
+
+                                        </>
                                         <span className="icon-btn" onClick={() => {
                                             toast.info('Wait for download fiel', {
                                                 type: toast.TYPE.INFO,
@@ -218,7 +245,7 @@ const FileCourses = ({ data }) => {
                                                 theme: "dark",
                                             });
                                         }}>  <a
-                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType.trim()}&usrId=${row?.userId}`}
+                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType?.trim()}&usrId=${row?.userId}&FileVersion=1`}
                                                 download
                                                 target="_blank" rel="noreferrer"
                                             >

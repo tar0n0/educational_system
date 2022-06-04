@@ -134,9 +134,11 @@ const ExtraComponent = ({ handelClickClose }) => {
                             <div>Author:: {data?.authorName} {data?.authorSurName}</div>
                         </div>
                         <div>
-                            {getStorageItem('user'?.token && (
-                                <FileCourses data={data?.fileDetails} />
-                            ))}
+                            {getStorageItem('user')?.token && (
+                                <>
+                                    <FileCourses data={data?.fileDetails} isCourses={true}/>
+                                </>
+                            )}
                         </div>
                     </>
                 ) : (
@@ -180,7 +182,7 @@ const ExtraComponent = ({ handelClickClose }) => {
                                 </>
                             )}
                             {isEdited && (
-                                <div className='icons-for-save-this-content'>
+                                <div className="icons-for-save-this-content">
                                     <Button variant={'contained'} onClick={() => setIsEdited(false)}>Cancel</Button>
                                     <Button variant={'contained'}
                                         onClick={() => handelSaveContent(data?.id)}>Save</Button>

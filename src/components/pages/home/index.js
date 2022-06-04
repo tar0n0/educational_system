@@ -53,7 +53,7 @@ const Home = () => {
             getData.unsubscribe();
         };
     }, []);
-    console.log(parseJwt(getStorageItem('user')?.token));
+
     return (
         <>
             <div className="header-home">

@@ -79,7 +79,6 @@ const FullScreenDialog = () => {
 
     const handelCreateNewAnnouncement = (values) => {
         if (!values?.content) {
-            console.log(2);
             toast.info(DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? EMPTY_CONTENT_FOR_ANNOUNCEMENT : EMPTY_CONTENT_FOR_COURSES, {
                 type: toast.TYPE.INFO,
                 theme: "dark",
