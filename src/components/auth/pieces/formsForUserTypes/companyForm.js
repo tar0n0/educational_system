@@ -246,7 +246,7 @@ const CompanyForm = ({ isAllContent = true }) => {
                                             <UploadInput
                                                 className={'pdfInput'}
                                                 accept={
-                                                    'application/pdf,application/vnd.ms-excel'
+                                                    'image/*'
                                                 }
                                                 setFile={setFile}
                                             />

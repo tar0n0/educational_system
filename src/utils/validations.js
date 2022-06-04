@@ -163,6 +163,8 @@ export const USER_REGISTRATION_VALIDATION = Yup.object().shape({
         .matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, 'Phone number must be valid phone'),
     city: Yup.string()
         .required('Required'),
+    username: Yup.string()
+        .required('Required'),
     image: Yup.string()
         .required('Required'),
     file: Yup.string()

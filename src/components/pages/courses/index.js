@@ -156,7 +156,7 @@ const Courses = () => {
                                                         DataService.getSubMenuType.next(SubMenuTypes.COURSES_FOR_PAGE);
                                                         DataService.getContentType.next(SubMenuTypes.CONTEnt_TYPE_FOR_COURSES);
                                                         setOpenDialog(true);
-                                                    }}>All Contents</p>
+                                                    }}>{getStorageItem('user')?.token ? "All Content" : 'Read More'}</p>
                                                     <p className='author-for-courses-and-announcement'>Author:: {el?.authorName} {el?.authorSurName}</p>
                                                 </div>
                                             ) : null}

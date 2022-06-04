@@ -314,7 +314,7 @@ export default function ConfirmProfile() {
 
     const handleConfirm = () => {
         if (pathName.includes(UNIVERSITY.toLowerCase())) {
-            DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selected).then(_ => {
+            DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
                 toast.success(
                     CONFIRM_SUCCESS, {
                         type: toast.TYPE.SUCCESS,

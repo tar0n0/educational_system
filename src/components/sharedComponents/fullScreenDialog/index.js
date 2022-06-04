@@ -88,7 +88,7 @@ const FullScreenDialog = () => {
             const url = DataService.getSubMenuType.getValue() === SubMenuTypes.ANNOUNCEMENT_FOR_ACCOUNT ? ENDPOINT_URLS[ADD_NEW_ANNOUNCEMENT] : ENDPOINT_URLS[ADD_NEW_COURSES];
             values?.content && DataService.postJson(url, {
                 ...values,
-                ...(fileIds ? { file: [fileIds] } : {}),
+                ...(fileIds ? { fileIds: [+fileIds] } : {}),
             }).then((_) => {
                 toast.success(
                     url === ENDPOINT_URLS[ADD_NEW_ANNOUNCEMENT] ? ANNOUNCEMENT_SUCCESS : COURSES_SUCCESS, {

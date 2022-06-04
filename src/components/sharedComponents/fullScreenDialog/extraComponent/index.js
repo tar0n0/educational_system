@@ -117,7 +117,7 @@ const ExtraComponent = ({ handelClickClose }) => {
                 {!isEdited ? (
                     <>
                         <div className="posts">
-                            <p>{!['courses', 'announcements'].includes(window.location.pathname) && (
+                            <p>{!['/courses', '/announcements'].includes(window.location.pathname) && (
                                 <>
                                     <div className="delete-announcement-or-course">
                                         <ClearIcon color="error" fontSize={"large"}
@@ -134,7 +134,9 @@ const ExtraComponent = ({ handelClickClose }) => {
                             <div>Author:: {data?.authorName} {data?.authorSurName}</div>
                         </div>
                         <div>
-                            <FileCourses data={data?.fileIDs} />
+                            {getStorageItem('user'?.token && (
+                                <FileCourses data={data?.fileIDs} />
+                            ))}
                         </div>
                     </>
                 ) : (
