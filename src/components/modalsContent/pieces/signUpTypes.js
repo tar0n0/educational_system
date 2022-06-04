@@ -32,7 +32,7 @@ const UserType = ({}) => {
                             <Link className={'link'} to={'/sign-up/company'} onClick={() => {
                                 setOpen(false);
                             }}>
-                                <span className="link-btn" onClick={() => setOpen(false)}>Company</span>
+                                <span className="link-btn" onClick={() => setOpen(false)}>Enterprise</span>
                             </Link>
                         </Button>
                         <Button variant="contained" onClick={() => setUserFrom(true)}>
