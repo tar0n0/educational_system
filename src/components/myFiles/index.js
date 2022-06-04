@@ -244,7 +244,7 @@ const MyFiles = ({ isSearch = false, searchData = [], val = '' }) => {
                                                 theme: "dark",
                                             });
                                         }}>  <a
-                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType.trim()}&usrId=${row?.userId}`}
+                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType.trim()}&usrId=${row?.userId}&FileVersion=2`}
                                                 download
                                                 target="_blank" rel="noreferrer"
                                             >
