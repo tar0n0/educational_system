@@ -197,7 +197,7 @@ const EditProfileInfo = () => {
             })
             .finally(() => setLoading(false));
     };
-    console.log('user -------------------------');
+
     return (
         <>
             {loading ? (

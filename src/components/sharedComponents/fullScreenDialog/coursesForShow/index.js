@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const createData = (currentFileName, id, userId, fileType) => ({
+const createData = (currentFileName, id, fileType, userId,) => ({
     id: currentFileName,
     currentFileName,
     userId,
@@ -73,7 +73,7 @@ const CustomTableCell = ({ row, name, onChange }) => {
     );
 };
 
-const FileCourses = ({ data }) => {
+const FileCourses = ({ data, isCourses, allData }) => {
     const [rows, setRows] = React.useState([data] || []);
     const [previous, setPrevious] = React.useState({});
     const [tableData, setTableData] = useState([]);
@@ -121,17 +121,20 @@ const FileCourses = ({ data }) => {
         });
         onToggleEditMode(id);
     };
-    //TODO backend does not send fileTYpe
+
     useLayoutEffect(() => {
         const currentData = rows.map(el => {
+            const fileType = el[Object.keys(el)[0]]?.substring(el[Object.keys(el)[0]]?.lastIndexOf('.'),);
+            const fileName = el[Object.keys(el)[0]]?.substring(0, el[Object.keys(el)[0]]?.lastIndexOf('.'));
             return ({
                 id: Object.keys(el)[0],
-                name: el[Object.keys(el)[0]],
+                name: fileName,
+                fileType: fileType
             });
         });
         setTableData(() => [...currentData]);
         const newData = [...currentData].map(el => {
-            return createData(el?.name);
+            return createData(el?.name, el?.id, el?.fileType);
         });
         setRows(newData);
     }, []);
@@ -158,9 +161,11 @@ const FileCourses = ({ data }) => {
         const file = tableData.find(el => {
             return el?.name === `${row?.currentFileName}`;
         });
+
         DataService.postJson(ENDPOINT_URLS[DELETE_FILE], {
             fileId: file?.id,
-            fileName: row?.currentFileName,
+            fileName: `${row?.currentFileName}${row?.fileType}`,
+            userId: allData?.userId,
             fileVersion: 2
         }).then(_ => {
             toast.success(DELETE_YOUR_FILE, {
@@ -181,9 +186,9 @@ const FileCourses = ({ data }) => {
         const fileId = row?.id;
         const file = tableData.find(el => el?.currentFileName === row.id);
         DataService.postJson(ENDPOINT_URLS[EDIT_FILE_NAME], {
-            fileName: fileId,
-            newFileName: `${row?.currentFileName}`,
-
+            fileName: `${fileId}${row?.fileType}`,
+            newFileName: `${row?.currentFileName}${row?.fileType}`,
+            fileVersion: 2,
         }).then(_ => {
             toast.success(EDITED_YOUR_FILE, {
                 type: toast.TYPE.SUCCESS,
@@ -209,7 +214,7 @@ const FileCourses = ({ data }) => {
                     <TableRow>
                         <TableCell align="left">Actions</TableCell>
                         <TableCell align="left">Your File names</TableCell>
-                        {/*<TableCell align="left">File Type</TableCell>*/}
+                        <TableCell align="left">File Type</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -245,7 +250,7 @@ const FileCourses = ({ data }) => {
                                                 theme: "dark",
                                             });
                                         }}>  <a
-                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType?.trim()}&usrId=${row?.userId}&FileVersion=1`}
+                                                href={`http://www.taceesmplatform.com/File/DownloadFile?filename=${row?.id}${row?.fileType?.trim()}&usrId=${allData?.userId}&FileVersion=1`}
                                                 download
                                                 target="_blank" rel="noreferrer"
                                             >

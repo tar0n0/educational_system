@@ -136,7 +136,7 @@ const ExtraComponent = ({ handelClickClose }) => {
                         <div>
                             {getStorageItem('user')?.token && (
                                 <>
-                                    <FileCourses data={data?.fileDetails} isCourses={true}/>
+                                    <FileCourses data={data?.fileDetails} isCourses={true} allData={data}/>
                                 </>
                             )}
                         </div>
