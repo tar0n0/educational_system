@@ -320,7 +320,7 @@ export default function ConfirmMember() {
     useEffect(() => {
         getInitialData();
     }, []);
-    
+
     console.log(selected, selectedCompany, selectedUniversity, '-------------');
     const handleConfirm = () => {
         if (selected?.length) {

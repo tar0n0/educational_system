@@ -28,7 +28,7 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
+    console.log(avatarName, parseJwt(getStorageItem('user')?.token));
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_AVATAR_IMAGE], { userId }).then((val) => {
             const { data } = val;
@@ -68,7 +68,7 @@ export default function AccountMenu() {
                             height: 60,
                             backgroundColor: '#0580e8',
                         }}
-                        src={avatarImageLink ? avatarImageLink : ''}>{avatarName}</Avatar>
+                        >{avatarName}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>

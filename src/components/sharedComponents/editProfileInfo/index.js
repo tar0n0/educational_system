@@ -170,6 +170,7 @@ const EditProfileInfo = () => {
         DataService.postJson(ENDPOINT_URLS[EDIT_ORGANIZATION_INFO], {
             ...removeKeyFromObject({
                 ...data,
+                ...userInfo,
                 ...(DataService.getUserCategory.getValue() ? { userCategory: DataService.getUserCategory.getValue() } : {}),
                 countryId,
                 userType: DataService.getUserType.getValue(),
