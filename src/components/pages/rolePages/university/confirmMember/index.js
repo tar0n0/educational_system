@@ -321,7 +321,6 @@ export default function ConfirmMember() {
         getInitialData();
     }, []);
 
-    console.log(selected, selectedCompany, selectedUniversity, '-------------');
     const handleConfirm = () => {
         if (selected?.length) {
             selectedUniversity.length && DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selectedUniversity).then(_ => {

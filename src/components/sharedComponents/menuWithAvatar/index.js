@@ -28,7 +28,7 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    console.log(avatarName, parseJwt(getStorageItem('user')?.token));
+
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[GET_AVATAR_IMAGE], { userId }).then((val) => {
             const { data } = val;
