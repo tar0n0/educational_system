@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { ENDPOINT_URLS, USER_INFO } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, USER_INFO, GET_EDITED_PROFILE_INFO } from '../../../constants/api.constants';
 import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem, removeStorageItem } from '../../../storage';
@@ -17,6 +17,8 @@ import { parseJwt } from '../../../utils/helpers';
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [name, setName] = useState('');
+    const [avatarImageLink, setAvatarImageLink] = useState('');
+    const avatarName = parseJwt(getStorageItem('user')?.token)?.Name && parseJwt(getStorageItem('user')?.token)?.Surname ? parseJwt(getStorageItem('user')?.token)?.Name[0] + parseJwt(getStorageItem('user')?.token)?.Surname[0] : null;
 
     const navigate = useNavigate();
     const open = Boolean(anchorEl);
@@ -26,6 +28,16 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+        DataService.getJson(ENDPOINT_URLS[GET_EDITED_PROFILE_INFO]).then((val) => {
+            const { data } = val;
+            if (data?.imageSrc) {
+                setAvatarImageLink(data?.imageSrc);
+            }
+            console.log(data, 'organization info');
+        });
+    }, []);
 
     useEffect(() => {
         DataService.getJson(ENDPOINT_URLS[USER_INFO]).then(val => {
@@ -55,8 +67,9 @@ export default function AccountMenu() {
                         <Avatar sx={{
                             width: 60,
                             height: 60,
-                            backgroundColor: '#0580e8'
-                        }}>{parseJwt(getStorageItem('user')?.token)?.Name && parseJwt(getStorageItem('user')?.token)?.Surname ? parseJwt(getStorageItem('user')?.token)?.Name[0] + parseJwt(getStorageItem('user')?.token)?.Surname[0] : null}</Avatar>
+                            backgroundColor: '#0580e8',
+                        }}
+                        src={avatarImageLink ? avatarImageLink : ''}>{avatarName}</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
