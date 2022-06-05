@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import {
     COMPANY_COUNTRIES,
     ENDPOINT_URLS,
-    REGISTRATION,
+    EDIT_ORGANIZATION_INFO,
     UNIVERSITY_CITIES,
     UNIVERSITY_COUNTRIES,
     COMPANY_CITIES,
     UNIVERSITY_NAME,
     COMPANY_NAME,
     SAVE_LOGO,
-    USER_INFO
+    GET_EDITED_PROFILE_INFO,
 } from '../../../constants/api.constants';
 import { WAIT_ADMIN_CONFIRM } from '../../../constants/messages.constants';
 import { HOME } from '../../../constants/pathnames.constants';
@@ -66,7 +66,7 @@ const EditProfileInfo = () => {
     useEffect(() => {
         if (getStorageItem('user')?.token) {
             setLoading(true);
-            DataService.getJson(ENDPOINT_URLS[USER_INFO]).then(val => {
+            DataService.getJson(ENDPOINT_URLS[GET_EDITED_PROFILE_INFO]).then(val => {
                 setUserInfo(() => {
                     return {
                         ...val?.data,
@@ -166,7 +166,7 @@ const EditProfileInfo = () => {
     const handelSubmit = (data = {}) => {
         setLoading(true);
 
-        DataService.postJson(ENDPOINT_URLS[REGISTRATION], {
+        DataService.postJson(ENDPOINT_URLS[EDIT_ORGANIZATION_INFO], {
             ...removeKeyFromObject({
                 ...data,
                 ...(DataService.getUserCategory.getValue() ? { userCategory: DataService.getUserCategory.getValue() } : {}),
@@ -221,7 +221,7 @@ const EditProfileInfo = () => {
                                             isLink: userInfo?.isLink || false,
                                             file: '',
                                             username: userInfo?.username || '',
-                                            OrganizationName: userInfo?.userType || '',
+                                            OrganizationName: userInfo?.organizationName || '',
                                             // image: '',
                                             countryId: userInfo?.country?.countryId || '',
                                             password: userInfo?.password || '',
@@ -239,7 +239,7 @@ const EditProfileInfo = () => {
                                             isCV: userInfo?.isCV || false,
                                             // isImage: userInfo?.isImage || false,
                                             newPassword: '',
-                                            oldPassword: '',
+                                            // oldPassword: '',
                                         }}
                                         validateOnBlur={true}
                                         validateOnChange={true}
@@ -347,7 +347,7 @@ const EditProfileInfo = () => {
                                                 <Grid item xs={6}>
                                                     <TextfieldWrapperWrapper
                                                         type="password"
-                                                        name={'oldPassword'}
+                                                        name={'password'}
                                                         autoComplete="off"
                                                         label={'Old Password'}
                                                     />

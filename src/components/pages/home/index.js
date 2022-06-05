@@ -31,6 +31,7 @@ const Home = () => {
     const { width } = useWindowResize();
     const ref = useRef();
     const navigate = useNavigate();
+    console.log(parseJwt(getStorageItem('user')?.token), '-----------------');
     useEffect(() => {
         const subscription = AuthorizationService.isUserStatus.subscribe(setIsUser);
         return () => subscription && subscription.unsubscribe();
