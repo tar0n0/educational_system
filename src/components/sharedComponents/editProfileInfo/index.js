@@ -62,6 +62,7 @@ const EditProfileInfo = () => {
     const isToken = getStorageItem('user')?.token || '';
     const userData = getStorageItem('user')?.token && parseJwt(getStorageItem('user')?.token);
     const navigate = useNavigate();
+    const userId = parseJwt(getStorageItem('user')?.token)?.UserId;
 
     useEffect(() => {
         if (getStorageItem('user')?.token) {
@@ -172,14 +173,16 @@ const EditProfileInfo = () => {
                 ...(DataService.getUserCategory.getValue() ? { userCategory: DataService.getUserCategory.getValue() } : {}),
                 countryId,
                 userType: DataService.getUserType.getValue(),
+                userId: userId,
             }, 'confirmPassword')
         })
             .then((val) => {
-                const { userId } = val;
+                // const { userId } = val;
                 handleResponse(val);
                 const formData = new FormData();
                 formData.append('imageFile', file);
                 formData.append('userId', userId);
+                // formData.append('fileVersion', 2);
                 DataService.postJson(ENDPOINT_URLS[SAVE_LOGO], formData);
             })
             .catch((e) => {

@@ -41,6 +41,7 @@ export const GET_MY_ANNOUNCEMENTS = 'GET_MY_ANNOUNCEMENTS'; // GET
 export const GET_COURSES = 'GET_COURSES'; //GET
 export const GET_MY_COURSES = 'GET_MY_COURSES'; //GET
 export const GET_EDITED_PROFILE_INFO = 'GET_EDITED_PROFILE_INFO'; // GET
+export const GET_AVATAR_IMAGE = 'GET_AVATAR_IMAGE'; // GET
 
 
 export const ENDPOINT_URLS = {
@@ -86,4 +87,5 @@ export const ENDPOINT_URLS = {
     [EDIT_MY_ANNOUNCEMENT]: '/Announcements/Edit',
     [GET_EDITED_PROFILE_INFO]: '/Profile/GetUserProfile',
     [EDIT_ORGANIZATION_INFO]: '/profile/UpdateUserInformations',
+    [GET_AVATAR_IMAGE]: '/File/getimage',
 };

@@ -267,6 +267,8 @@ export default function ConfirmMember() {
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("calories");
     const [selected, setSelected] = useState([]);
+    const [selectedUniversity, setSelectedUniversity] = useState([]);
+    const [selectedCompany, setSelectedCompany] = useState([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -318,10 +320,11 @@ export default function ConfirmMember() {
     useEffect(() => {
         getInitialData();
     }, []);
-    //TODO
+    
+    console.log(selected, selectedCompany, selectedUniversity, '-------------');
     const handleConfirm = () => {
-        if (pathName.includes(UNIVERSITY.toLowerCase())) {
-            DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selected).then(_ => {
+        if (selected?.length) {
+            selectedUniversity.length && DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selectedUniversity).then(_ => {
                 toast.success(
                     CONFIRM_SUCCESS, {
                         type: toast.TYPE.SUCCESS,
@@ -330,6 +333,8 @@ export default function ConfirmMember() {
                     });
                 getInitialData();
                 setSelected([]);
+                setSelectedCompany([]);
+                setSelectedUniversity([]);
             }).catch(_ => {
                 toast.error(
                     ERROR_CONFIRM, {
@@ -339,8 +344,7 @@ export default function ConfirmMember() {
                     }
                 );
             });
-        } else {
-            DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
+            selectedCompany.length && DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selectedCompany).then(_ => {
                 toast.success(
                     CONFIRM_SUCCESS, {
                         type: toast.TYPE.SUCCESS,
@@ -349,6 +353,8 @@ export default function ConfirmMember() {
                     });
                 getInitialData();
                 setSelected([]);
+                setSelectedCompany([]);
+                setSelectedUniversity([]);
             }).catch(_ => {
                 toast.error(
                     ERROR_CONFIRM, {
@@ -358,7 +364,47 @@ export default function ConfirmMember() {
                     }
                 );
             });
+            
         }
+        // if (pathName.includes(UNIVERSITY.toLowerCase())) {
+        //     DataService.postJson(ENDPOINT_URLS[CONFIRMED_UNIVERSITY_USER], selected).then(_ => {
+        //         toast.success(
+        //             CONFIRM_SUCCESS, {
+        //                 type: toast.TYPE.SUCCESS,
+        //                 icon: true,
+        //                 theme: 'dark'
+        //             });
+        //         getInitialData();
+        //         setSelected([]);
+        //     }).catch(_ => {
+        //         toast.error(
+        //             ERROR_CONFIRM, {
+        //                 type: toast.TYPE.ERROR,
+        //                 icon: true,
+        //                 theme: 'dark'
+        //             }
+        //         );
+        //     });
+        // } else {
+        //     DataService.postJson(ENDPOINT_URLS[CONFIRMED_COMPANY_USER], selected).then(_ => {
+        //         toast.success(
+        //             CONFIRM_SUCCESS, {
+        //                 type: toast.TYPE.SUCCESS,
+        //                 icon: true,
+        //                 theme: 'dark',
+        //             });
+        //         getInitialData();
+        //         setSelected([]);
+        //     }).catch(_ => {
+        //         toast.error(
+        //             ERROR_CONFIRM, {
+        //                 type: toast.TYPE.ERROR,
+        //                 icon: true,
+        //                 theme: 'dark',
+        //             }
+        //         );
+        //     });
+        // }
     };
 
     const handleDeleteUser = () => {
@@ -404,7 +450,15 @@ export default function ConfirmMember() {
                 selected.slice(selectedIndex + 1)
             );
         }
-
+        for (let i = 0; i < newSelected.length; i++) {
+            const item = newSelected[i];
+            const currentItem = data.find(el => el?.email === item);
+            if (currentItem?.type === "University") {
+                setSelectedUniversity((prev) => [...prev, currentItem?.email]);
+            } else if (currentItem?.type === "Company") {
+                setSelectedCompany((prev) => [...prev, currentItem?.email]);
+            }
+        }
         setSelected(newSelected);
     };
 

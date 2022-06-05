@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { ENDPOINT_URLS, USER_INFO, GET_EDITED_PROFILE_INFO } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, USER_INFO, GET_AVATAR_IMAGE } from '../../../constants/api.constants';
 import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem, removeStorageItem } from '../../../storage';
@@ -19,7 +19,7 @@ export default function AccountMenu() {
     const [name, setName] = useState('');
     const [avatarImageLink, setAvatarImageLink] = useState('');
     const avatarName = parseJwt(getStorageItem('user')?.token)?.Name && parseJwt(getStorageItem('user')?.token)?.Surname ? parseJwt(getStorageItem('user')?.token)?.Name[0] + parseJwt(getStorageItem('user')?.token)?.Surname[0] : null;
-
+    const userId = parseJwt(getStorageItem('user')?.token)?.UserId;
     const navigate = useNavigate();
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -30,12 +30,11 @@ export default function AccountMenu() {
     };
 
     useEffect(() => {
-        DataService.getJson(ENDPOINT_URLS[GET_EDITED_PROFILE_INFO]).then((val) => {
+        DataService.getJson(ENDPOINT_URLS[GET_AVATAR_IMAGE], { userId }).then((val) => {
             const { data } = val;
             if (data?.imageSrc) {
                 setAvatarImageLink(data?.imageSrc);
             }
-            console.log(data, 'organization info');
         });
     }, []);
 
