@@ -1,40 +1,32 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 
 export const useClickOutside = () => {
-    const ref = useRef(null);
+    const ref = useRef();
     const [state, setState] = useState({
+        target: null,
         hasClickedOutside: false,
     });
 
     function handleEvent(e) {
+        const { target } = e;
+        setState({ hasClickedOutside: false, target });
         if (ref && ref.current) {
-            if (typeof ref.current.contains === 'function' && ref.current.contains(e.target)) {
-                setState({ hasClickedOutside: false });
-            } else {
-                setState({ hasClickedOutside: true });
-            }
+            setState({ hasClickedOutside: !ref.current.contains(target), target });
         }
     }
 
-    useEffect(() => {
-        if (window.PointerEvent) {
-            document.addEventListener('pointerdown', handleEvent);
-        } else {
-            document.addEventListener('mousedown', handleEvent);
-            document.addEventListener('touchstart', handleEvent);
-        }
-
-        return () => {
-            if (window.PointerEvent) {
-                document.addEventListener('pointerdown', handleEvent);
-            } else {
-                document.removeEventListener('mousedown', handleEvent);
-                document.removeEventListener('touchstart', handleEvent);
-            }
-        };
+    const currentEvent = useMemo(() => {
+        if (window.MouseEvent) return 'mousedown';
+        if (window.PointerEvent) return 'pointerdown';
+        if (window.TouchEvent) return 'touchstart';
     }, []);
 
-    return [ref, state.hasClickedOutside];
-};
+    useEffect(() => {
+        document.addEventListener(currentEvent, handleEvent);
+        return () => {
+            document.removeEventListener(currentEvent, handleEvent);
+        };
+    }, [currentEvent]);
 
-export default useClickOutside;
+    return [ref, state.hasClickedOutside, state.target];
+};
