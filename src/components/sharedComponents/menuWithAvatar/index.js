@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { ENDPOINT_URLS, USER_INFO, GET_AVATAR_IMAGE } from '../../../constants/api.constants';
+import { ENDPOINT_URLS, USER_INFO, GET_IMAGE_FOR_ME } from '../../../constants/api.constants';
 import { COMPANY_PAGE, HOME, UNIVERSITY_PAGE, USER_PAGE } from '../../../constants/pathnames.constants';
 import DataService from '../../../services/dataService';
 import { getStorageItem, removeStorageItem } from '../../../storage';
@@ -30,11 +30,8 @@ export default function AccountMenu() {
     };
 
     useEffect(() => {
-        DataService.getJson(ENDPOINT_URLS[GET_AVATAR_IMAGE], { userId }).then((val) => {
-            const { data } = val;
-            if (data?.imageSrc) {
-                setAvatarImageLink(data?.imageSrc);
-            }
+        DataService.getJson(ENDPOINT_URLS[GET_IMAGE_FOR_ME],  ).then((val) => {
+            console.log(val, 'val --------------------');
         });
     }, []);
 
@@ -68,6 +65,7 @@ export default function AccountMenu() {
                             height: 60,
                             backgroundColor: '#0580e8',
                         }}
+
                         >{avatarName}</Avatar>
                     </IconButton>
                 </Tooltip>

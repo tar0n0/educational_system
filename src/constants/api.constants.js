@@ -42,6 +42,7 @@ export const GET_COURSES = 'GET_COURSES'; //GET
 export const GET_MY_COURSES = 'GET_MY_COURSES'; //GET
 export const GET_EDITED_PROFILE_INFO = 'GET_EDITED_PROFILE_INFO'; // GET
 export const GET_AVATAR_IMAGE = 'GET_AVATAR_IMAGE'; // GET
+export const GET_IMAGE_FOR_ME = 'GET_IMAGE_FOR_ME'; // GET
 
 
 export const ENDPOINT_URLS = {
@@ -88,4 +89,5 @@ export const ENDPOINT_URLS = {
     [GET_EDITED_PROFILE_INFO]: '/Profile/GetUserProfile',
     [EDIT_ORGANIZATION_INFO]: '/profile/UpdateUserInformations',
     [GET_AVATAR_IMAGE]: '/File/getimage',
+    [GET_IMAGE_FOR_ME]: 'http://www.taceesmplatform.com/File/GetImageForMe'
 };
